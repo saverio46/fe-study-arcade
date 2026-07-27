@@ -457,6 +457,8 @@
         explanation.className = 'q-explanation';
         explanation.innerHTML = `<strong>Explanation:</strong> ${escapeHtml(q.explanation)}<div class="q-ref">${escapeHtml(q.reference || '')}</div>`;
 
+        let attempts = 0;
+
         Object.keys(q.choices).forEach((letter) => {
           const btn = document.createElement('button');
           btn.type = 'button';
@@ -464,9 +466,21 @@
           btn.textContent = `${letter}. ${q.choices[letter]}`;
           btn.addEventListener('click', () => {
             const isCorrect = letter === q.correct_answer;
-            btn.classList.add(isCorrect ? 'picked-correct' : 'picked-wrong');
-            explanation.classList.add('open');
-            Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
+            attempts += 1;
+            
+            if (isCorrect) {
+              btn.classList.add('picked-correct');
+              explanation.classList.add('open');
+              Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
+            } else {
+              btn.classList.add('picked-wrong');
+              btn.disabled = true; // Disable just this wrong choice
+              
+              if (attempts >= 2) {
+                explanation.classList.add('open');
+                Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
+              }
+            }
           });
           choicesWrap.appendChild(btn);
         });
