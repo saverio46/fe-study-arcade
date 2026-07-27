@@ -824,7 +824,7 @@
         dayTitleEl.textContent = `${item.topic.toUpperCase()}: ${item.subtopic.toUpperCase()}`;
 
         try {
-          const manifestRes = await fetch('01_FE_Practice_Questions/_manifest.json');
+          const manifestRes = await fetch('/01_FE_Practice_Questions/_manifest.json');
           const manifest = await manifestRes.json();
           const topicMeta = manifest.topics.find((t) => t.topic_name === item.topic);
 
@@ -839,7 +839,7 @@
             ? topicMeta.date_file_map[dateParam]
             : topicMeta.file;
 
-          const topicRes = await fetch(`01_FE_Practice_Questions/${dateFile}`);
+          const topicRes = await fetch(`/01_FE_Practice_Questions/${dateFile}`);
           const topicData = await topicRes.json();
 
           const targetNorm = normalize(item.subtopic);
