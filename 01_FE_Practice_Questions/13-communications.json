@@ -1,0 +1,118 @@
+{
+  "topic_number": 13,
+  "topic_name": "Communications",
+  "fe_priority": "medium",
+  "fe_exam_weight": "5-8 of 110 questions",
+  "subtopics": [
+    "Basic modulation/demodulation concepts",
+    "Fourier transforms/series",
+    "Multiplexing",
+    "Digital communications"
+  ],
+  "puzzle_slug": "cryptogram",
+  "puzzle_category": "Word & Language",
+  "questions": [
+    {
+      "id": "COMM-01",
+      "subtopic": "Basic modulation/demodulation concepts (AM, FM, PCM)",
+      "difficulty": "easy",
+      "stem": "An AM transmitter produces a modulated carrier whose envelope reaches a maximum of 12 V and a minimum of 4 V. Using the standard AM signal form x_AM(t) = A_c'[1 + a·m_n(t)]cos(2πf_c t), where m_n(t) is a normalized sinusoidal message (peak value ±1), determine the modulation index a.",
+      "choices": {
+        "A": "0.33",
+        "B": "0.50",
+        "C": "0.67",
+        "D": "3.00"
+      },
+      "correct_answer": "B",
+      "explanation": "The AM envelope peaks when m_n(t) = +1 and bottoms out when m_n(t) = -1, so:\nV_max = A_c'(1 + a) = 12 V\nV_min = A_c'(1 - a) = 4 V\n\nAdding the two equations: 2A_c' = 16 → A_c' = 8 V.\nSubtracting the two equations: 2A_c'·a = 8 → a = 8 / (2 × 8) = 0.5.\n\nCheck: A_c'(1+a) = 8(1.5) = 12 V ✓ and A_c'(1-a) = 8(0.5) = 4 V ✓. So the modulation index a = 0.50.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering — 'Amplitude Modulation (AM),' p.380"
+    },
+    {
+      "id": "COMM-02",
+      "subtopic": "Multiplexing",
+      "difficulty": "easy",
+      "stem": "A communications engineer needs to send four independent voice signals simultaneously over a single shared channel by assigning each signal its own dedicated, non-overlapping carrier frequency band (rather than dividing the channel into time slots). Which multiplexing technique is being used?",
+      "choices": {
+        "A": "Time Division Multiplexing (TDM)",
+        "B": "Frequency Division Multiplexing (FDM)",
+        "C": "Code Division Multiple Access (CDMA)",
+        "D": "Pulse-Code Modulation (PCM)"
+      },
+      "correct_answer": "B",
+      "explanation": "Multiplexing techniques share a single physical channel among multiple signals by dividing a system resource:\n- Time Division Multiplexing (TDM) divides the channel into sequential time slots, giving each signal the full channel bandwidth for a short time.\n- Frequency Division Multiplexing (FDM) divides the channel's total bandwidth into separate, non-overlapping frequency sub-bands, one per signal, so all signals transmit simultaneously and continuously.\n- Code Division Multiple Access (CDMA) lets every signal share both the same time and frequency resources but distinguishes them using orthogonal spreading codes.\n- PCM is a source-encoding/digitization method (sampling + quantizing), not a multiplexing scheme.\n\nSince each signal gets its own dedicated frequency band for simultaneous transmission, this is FDM.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering — 'Communication Theory and Concepts,' p.377 (foundational concepts underlying the NCEES FE Multiplexing subtopic: TDM, FDM, CDMA)"
+    },
+    {
+      "id": "COMM-03",
+      "subtopic": "Digital communications",
+      "difficulty": "medium",
+      "stem": "A communication channel has a bandwidth of 3 kHz and a signal-to-noise power ratio (S/N) of 1023. Using the Shannon channel capacity formula, determine the maximum theoretical channel capacity.",
+      "choices": {
+        "A": "3,000 bps",
+        "B": "30,000 bps",
+        "C": "300,000 bps",
+        "D": "3,000,000 bps"
+      },
+      "correct_answer": "B",
+      "explanation": "The Shannon channel capacity formula is:\nC = BW·log2(1 + S/N)\n\nSubstitute BW = 3000 Hz and S/N = 1023:\nC = 3000 × log2(1 + 1023) = 3000 × log2(1024)\n\nSince 2^10 = 1024, log2(1024) = 10 exactly.\n\nC = 3000 × 10 = 30,000 bps = 30 kbps.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering — 'Shannon Channel Capacity Formula,' p.384"
+    },
+    {
+      "id": "COMM-04",
+      "subtopic": "Fourier transforms/series",
+      "difficulty": "medium",
+      "stem": "A periodic signal x(t) is represented by a complex-exponential Fourier series with nonzero coefficients X0 = 2, X1 = X-1 with |X1| = 1.5, and X2 = X-2 with |X2| = 1 (all other harmonics are zero). Using Parseval's theorem for Fourier series, determine the total average power in x(t).",
+      "choices": {
+        "A": "6.50 W",
+        "B": "7.25 W",
+        "C": "10.50 W",
+        "D": "13.00 W"
+      },
+      "correct_answer": "C",
+      "explanation": "Parseval's theorem for Fourier series gives the total average power as the sum over all harmonics:\nP = Σ (n=-∞ to +∞) |Xn|^2 = X0^2 + 2·Σ(n=1 to N) |Xn|^2\n\nHere N = 2 (harmonics beyond n=2 are zero):\nP = (2)^2 + 2[(1.5)^2 + (1)^2]\nP = 4 + 2[2.25 + 1]\nP = 4 + 2(3.25)\nP = 4 + 6.5 = 10.5 W\n\n(Note: omitting the factor of 2 that accounts for both positive and negative harmonics — a common error — would incorrectly give 4 + 3.25 = 7.25 W, choice B.)",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering — 'Parseval's Theorem for Fourier Series,' p.378"
+    },
+    {
+      "id": "COMM-05",
+      "subtopic": "Basic modulation/demodulation concepts (AM, FM, PCM)",
+      "difficulty": "hard",
+      "stem": "A voice signal is bandlimited to W = 4 kHz. It is sampled at the Nyquist rate and each sample is encoded as an n = 8-bit binary word (256 quantization levels) for pulse-code modulation (PCM) transmission. Determine the minimum number of binary pulses (bits) per second required to transmit this PCM signal.",
+      "choices": {
+        "A": "32,000 bps",
+        "B": "64,000 bps",
+        "C": "128,000 bps",
+        "D": "256,000 bps"
+      },
+      "correct_answer": "B",
+      "explanation": "For an n-bit PCM word length encoding a message bandlimited to W, transmission requires at least 2nW binary pulses per second (this also equals 2W·log2(q), since q = 2^n).\n\nGiven n = 8 bits and W = 4000 Hz:\nMinimum bit rate = 2nW = 2 × 8 × 4000 = 64,000 bits/second (64 kbps).\n\n(This matches the classic 64 kbps PCM voice channel used in digital telephony: an 8 kHz sample rate — satisfying the Nyquist criterion fs > 2W = 8000 Hz — times 8 bits/sample = 64,000 bps.) Choice A (32,000) omits the factor of 2 from the Nyquist/pulse-rate relationship; choices C and D are 2× and 4× the correct value.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering — 'Pulse-Code Modulation (PCM),' p.382"
+    }
+  ],
+  "puzzle_instance": {
+    "items": [
+      {
+        "text": "In amplitude modulation, the modulation index a is found from the envelope's maximum and minimum voltages using a equals Vmax minus Vmin divided by Vmax plus Vmin.",
+        "source": "FE Reference Handbook 10.6 — Amplitude Modulation (AM), p.380"
+      },
+      {
+        "text": "Frequency division multiplexing separates multiple signals by assigning each one a unique carrier frequency band, letting them share a channel simultaneously instead of taking turns in time.",
+        "source": "FE Reference Handbook 10.6 — Communication Theory and Concepts, p.377"
+      },
+      {
+        "text": "The Shannon channel capacity formula states that the maximum data rate of a communication channel equals its bandwidth multiplied by the log base two of one plus the signal to noise ratio.",
+        "source": "FE Reference Handbook 10.6 — Shannon Channel Capacity Formula, p.384"
+      },
+      {
+        "text": "Parseval's theorem for Fourier series states that the total average power in a periodic signal equals the sum of the squared magnitudes of all its Fourier series coefficients.",
+        "source": "FE Reference Handbook 10.6 — Parseval's Theorem for Fourier Series, p.378"
+      },
+      {
+        "text": "In pulse code modulation, transmitting an n-bit encoded message bandlimited to W hertz requires a minimum bit rate of two times n times W binary pulses per second.",
+        "source": "FE Reference Handbook 10.6 — Pulse-Code Modulation (PCM), p.382"
+      }
+    ],
+    "config": {
+      "reveal_count": 2
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Discrete mathematics"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-D9-Q1",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "easy",
+      "stem": "How many different combinations are there to choose 2 items from a set of 5 distinct items?",
+      "choices": {
+        "A": "5",
+        "B": "10",
+        "C": "15",
+        "D": "20"
+      },
+      "correct_answer": "B",
+      "explanation": "The number of combinations is given by C(n, k) = n! / (k!(n-k)!). For n=5 and k=2, C(5,2) = 120 / (2*6) = 10.",
+      "reference": "FE Reference Handbook, Mathematics: Combinatorics"
+    },
+    {
+      "id": "MATH-D9-Q2",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "easy",
+      "stem": "Evaluate the Boolean algebra expression: (1 AND 0) OR (1 AND 1).",
+      "choices": {
+        "A": "0",
+        "B": "1",
+        "C": "2",
+        "D": "-1"
+      },
+      "correct_answer": "B",
+      "explanation": "Evaluating the AND operations first: (1 AND 0) = 0, and (1 AND 1) = 1. The expression becomes 0 OR 1, which evaluates to 1.",
+      "reference": "FE Reference Handbook, Mathematics: Boolean Algebra"
+    },
+    {
+      "id": "MATH-D9-Q3",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "medium",
+      "stem": "In a complete graph with 4 vertices (K4), how many edges are present?",
+      "choices": {
+        "A": "4",
+        "B": "6",
+        "C": "8",
+        "D": "12"
+      },
+      "correct_answer": "B",
+      "explanation": "The number of edges in a complete graph with n vertices is given by n(n-1)/2. For n=4, this is 4(3)/2 = 6.",
+      "reference": "FE Reference Handbook, Mathematics: Graph Theory"
+    },
+    {
+      "id": "MATH-D9-Q4",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "easy",
+      "stem": "Given Set A = {1, 2, 3} and Set B = {3, 4, 5}, what is the number of elements in their union (A \u222a B)?",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "6"
+      },
+      "correct_answer": "C",
+      "explanation": "The union of Set A and Set B is {1, 2, 3, 4, 5}. The number of distinct elements is 5.",
+      "reference": "FE Reference Handbook, Mathematics: Sets"
+    },
+    {
+      "id": "MATH-D9-Q5",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "medium",
+      "stem": "How many permutations are possible when selecting 2 ordered items from a set of 4 distinct items?",
+      "choices": {
+        "A": "6",
+        "B": "8",
+        "C": "12",
+        "D": "24"
+      },
+      "correct_answer": "C",
+      "explanation": "The number of permutations is P(n, k) = n! / (n-k)!. For n=4 and k=2, P(4,2) = 24 / 2 = 12.",
+      "reference": "FE Reference Handbook, Mathematics: Combinatorics"
+    }
+  ],
+  "puzzle_instance": {
+    "narrative": "A set of discrete network constraints yields the following system of logical node values.",
+    "facts": [
+      { "id": "F1", "label": "Number of combinations C(5,2) (Q1)", "value": 10 },
+      { "id": "F2", "label": "Value of the Boolean expression (Q2)", "value": 1 },
+      { "id": "F3", "label": "Number of edges in a complete K4 graph (Q3)", "value": 6 },
+      { "id": "F4", "label": "Number of elements in the set union (Q4)", "value": 5 },
+      { "id": "F5", "label": "Number of permutations P(4,2) (Q5)", "value": 12 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 },
+      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
+      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 },
+      { "coeffs": [0, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 17 },
+      { "coeffs": [1, 0, 0, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 22 }
+    ],
+    "presentation": "word_problem"
+  }
+}

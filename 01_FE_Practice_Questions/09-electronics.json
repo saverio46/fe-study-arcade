@@ -1,0 +1,107 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "fe_priority": "high",
+  "fe_exam_weight": "7-11 of 110 questions",
+  "subtopics": [
+    "Models, biasing, and performance of discrete devices",
+    "Amplifiers",
+    "Operational amplifiers",
+    "Instrumentation",
+    "Power electronics"
+  ],
+  "puzzle_slug": "sudoku",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "EL-01",
+      "subtopic": "Operational amplifiers",
+      "difficulty": "easy",
+      "stem": "An ideal op amp is wired as a non-inverting amplifier: the input signal v_b = 0.2 V is applied directly to the non-inverting (+) input, a 1 kΩ resistor (R1) connects the inverting (−) input to ground, and a 9 kΩ feedback resistor (R2) connects the output back to the inverting input. What is the output voltage v_0?",
+      "choices": {
+        "A": "0.2 V",
+        "B": "1.8 V",
+        "C": "2.0 V",
+        "D": "9.0 V"
+      },
+      "correct_answer": "C",
+      "explanation": "This is the two-source configuration from the handbook with v_a = 0 (no source drives R1 directly, it just ties the inverting node to ground): v_0 = -(R2/R1)v_a + (1 + R2/R1)v_b. With v_a = 0, this reduces to the standard non-inverting amplifier gain: v_0 = (1 + R2/R1)v_b = (1 + 9k/1k)(0.2 V) = (1 + 9)(0.2 V) = (10)(0.2 V) = 2.0 V. (Choice B = 1.8 V drops the '+1' term and computes only (R2/R1)v_b; Choice A repeats the input as if the circuit were a unity-gain buffer; Choice D incorrectly multiplies by R2/R1 = 9 without adding v_b's own contribution correctly.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Operational Amplifiers,\" Ideal, two-source configuration and non-inverting amplifier (p. 386)"
+    },
+    {
+      "id": "EL-02",
+      "subtopic": "Power electronics",
+      "difficulty": "easy",
+      "stem": "A single-phase full-wave bridge rectifier (n = 2 pulses per cycle) is supplied by an AC source with an RMS input voltage of 100 V, and has no output filter. Using the handbook's n-pulse rectifier relationship, what is the average (DC) output voltage?",
+      "choices": {
+        "A": "63.7 V",
+        "B": "90.0 V",
+        "C": "100 V",
+        "D": "141.4 V"
+      },
+      "correct_answer": "B",
+      "explanation": "The handbook gives the average output of an n-pulse rectifier as V_dc = V_rms × (n√2/π) sin(π/n). For a full-wave bridge, n = 2: V_dc = 100 V × (2√2/π) × sin(π/2) = 100 V × (2.8284/3.1416) × 1 = 100 V × 0.9003 = 90.0 V. (Choice A = 63.7 V results from computing 2V_rms/π and forgetting the √2 peak-conversion factor; Choice C = 100 V just restates V_rms without any rectifier conversion; Choice D = 141.4 V reports the peak voltage V_rms√2 instead of the average DC value.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Power Conversion,\" n-pulse rectifier average output voltage (p. 389)"
+    },
+    {
+      "id": "EL-03",
+      "subtopic": "Models, biasing, and performance of discrete devices",
+      "difficulty": "medium",
+      "stem": "An NPN BJT is biased in a fixed-bias configuration: V_CC = 15 V, a base resistor R_B = 430 kΩ connects V_CC to the base, and a collector resistor R_C = 2.2 kΩ connects V_CC to the collector. The emitter is grounded directly. Given β = 150 and V_BE = 0.7 V, determine the quiescent collector-emitter voltage V_CE, and confirm the transistor is in the active region.",
+      "choices": {
+        "A": "V_CE ≈ 4.03 V",
+        "B": "V_CE ≈ 7.68 V",
+        "C": "V_CE ≈ 10.97 V",
+        "D": "V_CE ≈ 14.93 V"
+      },
+      "correct_answer": "A",
+      "explanation": "Using the handbook's BJT active-region relationships (i_C = β i_B, i_E = i_B + i_C): I_B = (V_CC − V_BE)/R_B = (15 − 0.7)/430,000 = 14.3/430,000 = 33.26 µA. I_C = β I_B = 150 × 33.26 µA = 4.988 mA. Applying KVL around the collector loop: V_CE = V_CC − I_C R_C = 15 − (0.004988 A)(2200 Ω) = 15 − 10.97 = 4.03 V. Since 0 V < V_CE(4.03 V) < V_CC and V_CE is well above the ~0.2 V saturation floor, the base-emitter junction is forward-biased and the base-collector junction is reverse-biased — the transistor is in the active region, consistent with the handbook's active-region conditions. (Choice B results from mistakenly using β = 100 instead of 150; Choice C reports the resistor voltage drop I_C R_C itself rather than V_CE; Choice D results from using I_B instead of I_C when computing the drop across R_C, i.e., forgetting the current-gain multiplication.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Bipolar Junction Transistor (BJT),\" Active Region, Large-Signal (DC) Equivalent Circuit (p. 391)"
+    },
+    {
+      "id": "EL-04",
+      "subtopic": "Instrumentation",
+      "difficulty": "medium",
+      "stem": "An instrumentation amplifier conditioning a bridge-type transducer signal has a differential gain A = 2000 (66 dB) and a CMRR of 80 dB. The true differential signal from the transducer is v_id = 5 mV, and stray ground-loop pickup produces a common-mode voltage v_icm = 1 V at the inputs. Using the handbook's nonideal op-amp output relationship v_O = A·v_id + A_cm·v_icm, what is the actual output voltage?",
+      "choices": {
+        "A": "10.0 V",
+        "B": "10.2 V",
+        "C": "11.0 V",
+        "D": "90.0 V"
+      },
+      "correct_answer": "B",
+      "explanation": "First find the common-mode gain from CMRR = 20 log10(|A|/|A_cm|): 80 = 20 log10(2000/A_cm), so log10(2000/A_cm) = 4, giving 2000/A_cm = 10^4 = 10,000, so A_cm = 2000/10,000 = 0.2. Then v_O = A·v_id + A_cm·v_icm = (2000)(0.005 V) + (0.2)(1 V) = 10 V + 0.2 V = 10.2 V. (Choice A = 10.0 V is the ideal-amplifier result that ignores the common-mode term entirely; Choice C = 11.0 V incorrectly assumes A_cm = 1, i.e., adds v_icm unscaled; Choice D = 90.0 V mistakenly uses the CMRR figure of 80 directly as A_cm instead of converting from decibels.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Operational Amplifiers,\" Common Mode Rejection Ratio (CMRR) (pp. 386-387)"
+    },
+    {
+      "id": "EL-05",
+      "subtopic": "Amplifiers",
+      "difficulty": "hard",
+      "stem": "A single-stage common-emitter amplifier is biased at I_CQ = 2 mA (V_T = 0.026 V) with β = 120 and Early voltage V_A = 100 V. The collector resistor is R_C = 3 kΩ, and the amplifier drives an external load R_L = 6 kΩ through a large coupling capacitor (so at midband frequencies R_C, R_L, and the transistor's output resistance r_o all appear in parallel at the collector). Using the handbook's low-frequency small-signal BJT model, determine the midband voltage gain A_v = v_o/v_in.",
+      "choices": {
+        "A": "A_v ≈ -74 V/V",
+        "B": "A_v ≈ -148 V/V",
+        "C": "A_v ≈ -154 V/V",
+        "D": "A_v ≈ -231 V/V"
+      },
+      "correct_answer": "B",
+      "explanation": "From the handbook's low-frequency BJT small-signal model: g_m ≈ I_CQ/V_T = 0.002/0.026 = 0.07692 S, and r_o ≈ V_A/I_CQ = 100/0.002 = 50,000 Ω. The AC load seen by the collector is R_C ∥ R_L ∥ r_o. First, R_C ∥ R_L = (3k)(6k)/(3k+6k) = 18,000,000/9,000 = 2,000 Ω. Then combine with r_o: 2,000 ∥ 50,000 = (2,000)(50,000)/(2,000+50,000) = 100,000,000/52,000 = 1,923.1 Ω. For a common-emitter stage, A_v = -g_m(R_C ∥ R_L ∥ r_o) = -(0.07692)(1,923.1) = -147.9 ≈ -148 V/V. (Choice C = -154 V/V neglects r_o entirely, using only g_m(R_C∥R_L) = 0.07692 × 2000 = 153.8; Choice D = -231 V/V neglects the external load R_L, using only g_m·R_C = 0.07692 × 3000 = 230.8; Choice A = -74 V/V results from a factor-of-two error in g_m, e.g., mistakenly computing g_m = I_CQ/2V_T.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Bipolar Junction Transistor (BJT),\" Low-Frequency Small-Signal (AC) Equivalent Circuit (p. 391)"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "sudoku",
+    "gridSize": 9,
+    "boxDims": [3, 3],
+    "symbolSet": ["DIODE", "BJT", "MOSFET", "OPAMP", "RECTIFIER", "INVERTER", "BIAS", "GAIN", "THYRISTOR"],
+    "generationParams": {
+      "givenCount": 30,
+      "symmetry": "rotational180",
+      "targetDifficulty": "medium"
+    },
+    "revealOverlay": {
+      "cells": [[0, 0], [0, 1], [0, 2]],
+      "onCompleteFact": "BIAS relates to GAIN because a BJT's DC bias point (the Q-point set by I_CQ) fixes its transconductance g_m = I_CQ/V_T; that g_m, combined with the effective collector load, directly sets the small-signal voltage GAIN of a common-emitter amplifier — change the bias current and you change the gain."
+    }
+  }
+}

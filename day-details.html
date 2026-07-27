@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day Details - FE Study Arcade</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void: #0a0a12;
+      --panel: #12121f;
+      --panel-2: #1a1a2e;
+      --grid-line: #23233a;
+      --text: #eef0f7;
+      --text-dim: #8a8aa8;
+
+      --neon-cyan: #2de2ff;
+      --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e;
+      --neon-green: #3dff88;
+      --neon-orange: #ff6a1a;
+      --neon-purple: #b388ff;
+
+      --font-display: 'Press Start 2P', monospace;
+      --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--font-body);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.025) 0px,
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    }
+
+    main.main-content {
+      flex: 1;
+      padding: 24px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .back-link {
+      color: var(--neon-pink);
+      text-decoration: none;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      margin-bottom: -10px;
+    }
+
+    .marquee-banner {
+      position: relative;
+      background: var(--panel);
+      border: 3px solid var(--neon-yellow);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(45, 226, 255, 0.2), 0 0 20px rgba(249, 233, 78, 0.3);
+      overflow: hidden;
+    }
+    .marquee-banner::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background-image: radial-gradient(circle at 6px 0px, var(--void) 5px, transparent 6px);
+      background-size: 12px 12px;
+      background-repeat: repeat-x;
+    }
+    .marquee-sub {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .marquee-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--neon-yellow);
+      -webkit-text-stroke: 1px #000;
+      text-shadow: 2px 2px 0px #000, 0 0 10px var(--neon-yellow);
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .panel-card {
+      background: var(--panel);
+      border: 1px solid var(--grid-line);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-card h2 {
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-card h2::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 6px var(--neon-cyan);
+      border-radius: 50%;
+    }
+
+    .puzzle-section {
+      grid-column: 1 / -1;
+      border-color: var(--neon-pink);
+      box-shadow: inset 0 0 20px rgba(255, 61, 129, 0.05), 0 0 10px rgba(255, 61, 129, 0.1);
+    }
+    .puzzle-section h2 { color: var(--neon-pink); }
+    .puzzle-section h2::before { background: var(--neon-pink); box-shadow: 0 0 6px var(--neon-pink); }
+
+    .puzzle-container {
+      background: var(--void);
+      border: 2px dashed var(--neon-pink);
+      border-radius: 6px;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .btn-start {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: 2px solid var(--neon-pink);
+      background: rgba(255, 61, 129, 0.1);
+      color: var(--neon-pink);
+      cursor: not-allowed;
+      opacity: 0.6;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: all 120ms;
+    }
+
+    .learning-section { grid-column: 1 / 2; }
+    .learning-section h2 { color: var(--neon-cyan); }
+    .learning-content {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .learning-content p { margin-bottom: 12px; }
+    .learning-content strong { color: var(--text); font-family: var(--font-ui); }
+    .ref-list { list-style: none; margin-top: 8px; }
+    .ref-list li {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 6px 0 6px 16px;
+      border-left: 2px solid var(--neon-cyan);
+      margin-bottom: 8px;
+    }
+
+    .questions-section { grid-column: 2 / 3; }
+    .questions-section h2 { color: var(--neon-green); }
+    .questions-section h2::before { background: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
+
+    .question-item {
+      background: var(--panel-2);
+      border: 1px solid var(--grid-line);
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      transition: all 120ms;
+    }
+    .q-title { font-family: var(--font-ui); font-weight: 700; color: var(--text); margin-bottom: 4px; font-size: 0.78rem; }
+    .q-stem { color: var(--text-dim); margin-bottom: 10px; white-space: pre-wrap; }
+    .q-choices { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+    .q-choice {
+      text-align: left;
+      background: var(--void);
+      border: 1px solid var(--grid-line);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: var(--font-body);
+    }
+    .q-choice:hover { border-color: var(--neon-green); }
+    .q-choice.picked-correct { border-color: var(--neon-green); background: rgba(61,255,136,0.1); color: var(--neon-green); }
+    .q-choice.picked-wrong { border-color: var(--neon-pink); background: rgba(255,61,129,0.1); color: var(--neon-pink); }
+    .q-explanation {
+      display: none;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      background: var(--void);
+      border-left: 2px solid var(--neon-green);
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 4px;
+    }
+    .q-explanation.open { display: block; }
+    .q-ref { font-size: 0.68rem; color: var(--neon-cyan); margin-top: 6px; }
+
+    .fallback-note {
+      font-size: 0.78rem;
+      color: var(--neon-yellow);
+      background: rgba(249, 233, 78, 0.08);
+      border: 1px solid rgba(249, 233, 78, 0.3);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+    .empty-note {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .calc-section {
+      grid-column: 1 / -1;
+      border-color: var(--neon-orange);
+      background: linear-gradient(135deg, rgba(255, 106, 26, 0.05) 0%, transparent 100%);
+    }
+    .calc-section h2 { color: var(--neon-orange); }
+    .calc-section h2::before { background: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
+    .calc-text { flex: 1; font-size: 0.9rem; color: var(--text-dim); }
+
+    /* Puzzle System of Equations Styles */
+    .system-puzzle {
+      display: flex; flex-direction: column; gap: 20px; margin-top: 15px;
+    }
+    .puzzle-intro { font-size: 0.85rem; color: var(--text-dim); line-height: 1.4; }
+    .gems-bank {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+      padding: 15px; background: var(--panel-2); border: 1px solid var(--grid-line);
+      border-radius: 6px; min-height: 40px;
+    }
+    .gem-token {
+      width: 40px; height: 40px; border-radius: 8px; background: var(--void);
+      border: 2px solid var(--neon-cyan); color: var(--neon-cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1rem; cursor: grab; user-select: none;
+      box-shadow: 0 0 8px rgba(45, 226, 255, 0.3); transition: all 0.2s; position: relative; z-index: 10;
+    }
+    .gem-token.dragging { opacity: 0.5; }
+    .gem-token:hover { box-shadow: 0 0 12px var(--neon-cyan); transform: scale(1.05); }
+    
+    .vars-container {
+      display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+    }
+    .var-slot-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .var-label { font-family: var(--font-display); font-size: 0.8rem; color: var(--text-dim); }
+    .eq-slot {
+      width: 44px; height: 44px; border: 2px dashed var(--text-dim); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); position: relative;
+    }
+    .eq-slot.drag-over { border-color: var(--neon-cyan); background: rgba(45, 226, 255, 0.1); }
+    
+    .equations-board { display: flex; flex-direction: column; gap: 12px; }
+    .equation-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--panel-2); padding: 10px 15px; border-radius: 6px;
+      border: 1px solid var(--grid-line); flex-wrap: wrap; transition: all 0.3s;
+    }
+    .equation-row.correct { border-color: var(--neon-green); box-shadow: 0 0 8px rgba(61,255,136,0.2); }
+    .equation-row.incorrect { border-color: var(--neon-pink); }
+    
+    @keyframes flashPink {
+      0%, 100% { background: var(--panel-2); }
+      50% { background: rgba(255, 42, 109, 0.2); }
+    }
+    
+    .eq-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .eq-term { display: flex; align-items: center; gap: 6px; }
+    .eq-coeff { font-family: var(--font-display); font-size: 0.85rem; color: var(--neon-pink); }
+    .eq-var { 
+      font-family: var(--font-display); font-size: 0.85rem; color: var(--text-dim);
+      padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.1);
+    }
+    .eq-var.filled { color: var(--neon-cyan); background: rgba(45,226,255,0.15); border: 1px solid var(--neon-cyan); }
+    .eq-sign { font-family: var(--font-display); font-size: 0.8rem; color: var(--text-dim); margin: 0 2px; }
+    .eq-right { font-family: var(--font-display); font-size: 0.95rem; color: var(--neon-yellow); }
+    
+    .puzzle-actions { display: flex; justify-content: center; margin-top: 10px; }
+    .puzzle-victory-banner {
+      display: none; text-align: center; background: rgba(61, 255, 136, 0.1);
+      border: 2px solid var(--neon-green); color: var(--neon-green); padding: 15px; border-radius: 6px;
+      font-family: var(--font-ui); font-weight: 700; letter-spacing: 0.1em;
+      text-shadow: 0 0 6px var(--neon-green); animation: pulse 1.5s infinite alternate;
+    }
+    .facts-reveal {
+      margin-top: 15px; padding: 15px; background: rgba(61, 255, 136, 0.05);
+      border: 1px solid var(--neon-green); border-radius: 6px; font-size: 0.85rem;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .fact-item { border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 5px; }
+    .fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .neon-green { color: var(--neon-green); text-shadow: 0 0 4px var(--neon-green); }
+
+    @media (max-width: 900px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .learning-section, .questions-section { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <script src="data/cheat-codes.js"></script>
+  <script src="data/calendar-seed.js"></script>
+
+  <main class="main-content">
+    <a href="index.html" class="back-link">&lt; BACK TO CALENDAR</a>
+
+    <div class="marquee-banner">
+      <div class="marquee-sub" id="day-sub">Day —</div>
+      <h1 class="marquee-title" id="day-title">LOADING…</h1>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="panel-card puzzle-section">
+        <h2>Daily Arcade Challenge</h2>
+        <div class="puzzle-container">
+          <div style="font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-pink);" id="puzzle-slug-label">—</div>
+          <div id="puzzle-content">
+            <p style="color: var(--text-dim); font-size: 0.85rem;">Interactive puzzle rendering isn't built yet — the puzzle data for this day already exists in the question bank and is ready to wire up once a renderer for this puzzle type exists.</p>
+            <button class="btn-start" disabled>COMING SOON</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-card learning-section">
+        <h2>Theory &amp; Formulas</h2>
+        <div class="learning-content" id="theory-content">
+          <p>Loading…</p>
+        </div>
+      </div>
+
+      <div class="panel-card questions-section">
+        <h2>Practice Questions</h2>
+        <div id="questions-content">
+          <p style="color: var(--text-dim); font-size: 0.85rem;">Loading…</p>
+        </div>
+      </div>
+
+      <div class="panel-card calc-section">
+        <h2>Calculator Cheat Code</h2>
+        <div class="calc-guide">
+          <div class="calc-text">
+            <p>Calculator-specific tips (TI-36X Pro keystrokes) for this subtopic haven't been sourced and verified yet, so this section is intentionally left blank rather than guessing. Coming once we have a verified reference for it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const params = new URLSearchParams(window.location.search);
+      const dateParam = params.get('date');
+
+      const daySubEl = document.getElementById('day-sub');
+      const dayTitleEl = document.getElementById('day-title');
+      const theoryEl = document.getElementById('theory-content');
+      const questionsEl = document.getElementById('questions-content');
+      const puzzleLabelEl = document.getElementById('puzzle-slug-label');
+
+      function normalize(s) {
+        return (s || '')
+          .toLowerCase()
+          .replace(/&/g, 'and')
+          .replace(/[^a-z0-9]+/g, ' ')
+          .trim();
+      }
+
+      function escapeHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
+
+      function renderQuestion(q, container) {
+        const item = document.createElement('div');
+        item.className = 'question-item';
+
+        const title = document.createElement('div');
+        title.className = 'q-title';
+        title.textContent = `${q.id} — ${q.subtopic} (${q.difficulty})`;
+        item.appendChild(title);
+
+        const stem = document.createElement('div');
+        stem.className = 'q-stem';
+        stem.textContent = q.stem;
+        item.appendChild(stem);
+
+        const choicesWrap = document.createElement('div');
+        choicesWrap.className = 'q-choices';
+
+        const explanation = document.createElement('div');
+        explanation.className = 'q-explanation';
+        explanation.innerHTML = `<strong>Explanation:</strong> ${escapeHtml(q.explanation)}<div class="q-ref">${escapeHtml(q.reference || '')}</div>`;
+
+        Object.keys(q.choices).forEach((letter) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'q-choice';
+          btn.textContent = `${letter}. ${q.choices[letter]}`;
+          btn.addEventListener('click', () => {
+            const isCorrect = letter === q.correct_answer;
+            btn.classList.add(isCorrect ? 'picked-correct' : 'picked-wrong');
+            explanation.classList.add('open');
+            Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
+          });
+          choicesWrap.appendChild(btn);
+        });
+
+        item.appendChild(choicesWrap);
+        item.appendChild(explanation);
+        container.appendChild(item);
+      }
+
+      function renderTheory(matchedQuestions, topicData) {
+        theoryEl.innerHTML = '';
+        const intro = document.createElement('p');
+        intro.innerHTML = `<strong>${escapeHtml(topicData.topic_name)}</strong> — official NCEES weight: ${escapeHtml(topicData.fe_exam_weight)}.`;
+        theoryEl.appendChild(intro);
+
+        const refIntro = document.createElement('p');
+        refIntro.textContent = 'Grounded in the FE Reference Handbook, per the questions on the right:';
+        theoryEl.appendChild(refIntro);
+
+        const list = document.createElement('ul');
+        list.className = 'ref-list';
+        const seen = new Set();
+        matchedQuestions.forEach((q) => {
+          if (q.reference && !seen.has(q.reference)) {
+            seen.add(q.reference);
+            const li = document.createElement('li');
+            li.textContent = q.reference;
+            list.appendChild(li);
+          }
+        });
+        theoryEl.appendChild(list);
+      }
+
+      function renderSpecialDay(item) {
+        daySubEl.textContent = `Day ${item.dayNumber}`;
+        dayTitleEl.textContent = item.topic.toUpperCase();
+        theoryEl.innerHTML = `<p>${escapeHtml(item.subtopic)}</p>`;
+        questionsEl.innerHTML = `<p class="empty-note">${item.isBonus ? 'Bonus day — pick any topic you\'ve already reviewed from the calendar.' : 'This is a cumulative check spanning multiple topics — a dedicated multi-topic quiz view isn\'t built yet. Use the calendar to revisit the individual topics listed above.'}</p>`;
+        puzzleLabelEl.textContent = item.isBonus ? 'FREE CHOICE' : 'CUMULATIVE CHECK';
+      }
+
+      function renderSystemOfEquationsPuzzle(puzzleData, containerEl) {
+        containerEl.innerHTML = '';
+        
+        const intro = document.createElement('p');
+        intro.className = 'puzzle-intro';
+        intro.textContent = puzzleData.narrative || "A system of equations relates the answers to today's questions. Drag the value gems into their correct variable slots to balance the equations.";
+        containerEl.appendChild(intro);
+
+        const sysContainer = document.createElement('div');
+        sysContainer.className = 'system-puzzle';
+        containerEl.appendChild(sysContainer);
+
+        const gemsBank = document.createElement('div');
+        gemsBank.className = 'gems-bank';
+        gemsBank.id = 'gems-bank';
+        sysContainer.appendChild(gemsBank);
+
+        const varsContainer = document.createElement('div');
+        varsContainer.className = 'vars-container';
+        sysContainer.appendChild(varsContainer);
+
+        const board = document.createElement('div');
+        board.className = 'equations-board';
+        sysContainer.appendChild(board);
+        
+        const assignments = {}; 
+        
+        const gems = [...puzzleData.facts].sort(() => Math.random() - 0.5);
+        gems.forEach((fact, i) => {
+          const gem = document.createElement('div');
+          gem.className = 'gem-token';
+          gem.textContent = fact.value;
+          gem.dataset.value = fact.value;
+          gem.id = `gem-${i}`;
+          gem.draggable = true;
+          gem.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', fact.value);
+            e.dataTransfer.setData('gem-id', gem.id);
+            gem.classList.add('dragging');
+          });
+          gem.addEventListener('dragend', () => gem.classList.remove('dragging'));
+          gemsBank.appendChild(gem);
+        });
+        
+        gemsBank.addEventListener('dragover', e => e.preventDefault());
+        gemsBank.addEventListener('drop', e => {
+          e.preventDefault();
+          const gemId = e.dataTransfer.getData('gem-id');
+          const gem = document.getElementById(gemId);
+          if (!gem) return;
+          
+          Object.keys(assignments).forEach(k => {
+            if (assignments[k] === gem.dataset.value) delete assignments[k];
+          });
+          
+          gemsBank.appendChild(gem);
+          updateEquations();
+        });
+
+        puzzleData.facts.forEach(fact => {
+          const slotWrap = document.createElement('div');
+          slotWrap.className = 'var-slot-wrap';
+          
+          const label = document.createElement('div');
+          label.className = 'var-label';
+          label.textContent = fact.id;
+          slotWrap.appendChild(label);
+          
+          const slot = document.createElement('div');
+          slot.className = 'eq-slot';
+          slot.dataset.var = fact.id;
+          slotWrap.appendChild(slot);
+          
+          slot.addEventListener('dragover', e => {
+            e.preventDefault();
+            slot.classList.add('drag-over');
+          });
+          slot.addEventListener('dragleave', e => {
+            slot.classList.remove('drag-over');
+          });
+          slot.addEventListener('drop', e => {
+            e.preventDefault();
+            slot.classList.remove('drag-over');
+            
+            const gemId = e.dataTransfer.getData('gem-id');
+            const gem = document.getElementById(gemId);
+            if (!gem) return;
+            
+            if (slot.children.length > 0) {
+              gemsBank.appendChild(slot.children[0]);
+            }
+            
+            slot.appendChild(gem);
+            assignments[fact.id] = gem.dataset.value;
+            updateEquations();
+          });
+          
+          varsContainer.appendChild(slotWrap);
+        });
+
+        function updateEquations() {
+          board.innerHTML = '';
+          let allCorrect = true;
+          
+          puzzleData.equations.forEach(eq => {
+            const row = document.createElement('div');
+            row.className = 'equation-row';
+            
+            const leftSide = document.createElement('div');
+            leftSide.className = 'eq-left';
+            
+            let sum = 0;
+            let complete = true;
+            
+            eq.coeffs.forEach((coeff, i) => {
+              if (coeff === 0) return;
+              const varName = eq.vars[i];
+              
+              const term = document.createElement('div');
+              term.className = 'eq-term';
+              
+              if (leftSide.children.length > 0) {
+                const sign = document.createElement('span');
+                sign.className = 'eq-sign';
+                sign.textContent = coeff > 0 ? '+' : '-';
+                leftSide.appendChild(sign);
+              } else if (coeff < 0) {
+                const sign = document.createElement('span');
+                sign.className = 'eq-sign';
+                sign.textContent = '-';
+                leftSide.appendChild(sign);
+              }
+              
+              const absCoeff = Math.abs(coeff);
+              if (absCoeff !== 1) {
+                const cSpan = document.createElement('span');
+                cSpan.className = 'eq-coeff';
+                cSpan.textContent = absCoeff;
+                term.appendChild(cSpan);
+              }
+              
+              const vSpan = document.createElement('span');
+              vSpan.className = 'eq-var';
+              if (assignments[varName]) {
+                vSpan.textContent = assignments[varName];
+                vSpan.classList.add('filled');
+                sum += coeff * parseInt(assignments[varName], 10);
+              } else {
+                vSpan.textContent = varName;
+                complete = false;
+              }
+              term.appendChild(vSpan);
+              
+              leftSide.appendChild(term);
+            });
+            
+            row.appendChild(leftSide);
+            
+            const rightSide = document.createElement('div');
+            rightSide.className = 'eq-right';
+            rightSide.textContent = `= ${eq.result}`;
+            row.appendChild(rightSide);
+            
+            if (complete) {
+              if (sum === eq.result) {
+                row.classList.add('correct');
+              } else {
+                row.classList.add('incorrect');
+                allCorrect = false;
+              }
+            } else {
+              allCorrect = false;
+            }
+            
+            board.appendChild(row);
+          });
+          
+          if (allCorrect) {
+            victoryBanner.style.display = 'block';
+            checkBtn.style.display = 'none';
+            document.querySelectorAll('.gem-token').forEach(g => g.draggable = false);
+            
+            const factsContainer = document.createElement('div');
+            factsContainer.className = 'facts-reveal';
+            puzzleData.facts.forEach(f => {
+              const p = document.createElement('div');
+              p.className = 'fact-item';
+              p.innerHTML = `<strong>${f.id}</strong>: ${f.label} = <span class="neon-green">${f.value}</span>`;
+              factsContainer.appendChild(p);
+            });
+            sysContainer.appendChild(factsContainer);
+          }
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'puzzle-actions';
+        
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'btn-start';
+        checkBtn.textContent = 'CHECK CALIBRATION';
+        checkBtn.onclick = () => {
+          updateEquations();
+          document.querySelectorAll('.equation-row.incorrect').forEach(row => {
+            row.style.animation = 'none';
+            setTimeout(() => row.style.animation = 'flashPink 0.5s ease', 10);
+          });
+        };
+        actions.appendChild(checkBtn);
+
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'btn-start';
+        resetBtn.style.borderColor = 'var(--text-dim)';
+        resetBtn.style.color = 'var(--text-dim)';
+        resetBtn.style.background = 'transparent';
+        resetBtn.style.marginLeft = '10px';
+        resetBtn.textContent = 'RESET PUZZLE';
+        resetBtn.onclick = () => {
+          Object.keys(assignments).forEach(k => delete assignments[k]);
+          document.querySelectorAll('.gem-token').forEach(gem => {
+            gemsBank.appendChild(gem);
+          });
+          updateEquations();
+        };
+        actions.appendChild(resetBtn);
+        
+        const victoryBanner = document.createElement('div');
+        victoryBanner.className = 'puzzle-victory-banner';
+        victoryBanner.textContent = 'SYSTEM CALIBRATED: FACTS UNLOCKED';
+        
+        sysContainer.appendChild(actions);
+        sysContainer.appendChild(victoryBanner);
+        
+        updateEquations();
+      }
+      function renderCheatCodes(date) {
+        const calcSection = document.querySelector('.calc-text');
+        if (!calcSection) return;
+        
+        if (!window.CHEAT_CODES || !window.CHEAT_CODES[date]) {
+          return; // leave the default text
+        }
+        
+        const cheatData = window.CHEAT_CODES[date];
+        calcSection.innerHTML = '';
+        
+        const topicHeader = document.createElement('h3');
+        topicHeader.textContent = cheatData.topic;
+        topicHeader.style.color = 'var(--neon-green)';
+        topicHeader.style.marginBottom = '15px';
+        calcSection.appendChild(topicHeader);
+        
+        cheatData.codes.forEach(code => {
+          const block = document.createElement('div');
+          block.className = 'cheat-code-block';
+          block.style.marginBottom = '25px';
+          
+          const title = document.createElement('h4');
+          title.textContent = code.title;
+          title.style.color = 'var(--neon-blue)';
+          title.style.marginBottom = '8px';
+          title.style.fontSize = '1.1rem';
+          block.appendChild(title);
+          
+          const desc = document.createElement('p');
+          desc.textContent = code.desc;
+          desc.style.marginBottom = '10px';
+          desc.style.color = 'var(--text-main)';
+          block.appendChild(desc);
+          
+          const pre = document.createElement('pre');
+          pre.textContent = code.keys;
+          pre.style.background = '#0a0a0a';
+          pre.style.padding = '12px';
+          pre.style.borderRadius = '6px';
+          pre.style.border = '1px solid var(--border-color)';
+          pre.style.color = 'var(--neon-green)';
+          pre.style.fontFamily = 'monospace';
+          pre.style.marginBottom = '10px';
+          pre.style.whiteSpace = 'pre-wrap';
+          block.appendChild(pre);
+          
+          if (code.example) {
+            const ex = document.createElement('div');
+            ex.textContent = code.example;
+            ex.style.fontStyle = 'italic';
+            ex.style.color = 'var(--text-dim)';
+            ex.style.whiteSpace = 'pre-wrap';
+            ex.style.paddingLeft = '10px';
+            ex.style.borderLeft = '2px solid var(--border-color)';
+            block.appendChild(ex);
+          }
+          
+          calcSection.appendChild(block);
+        });
+      }
+
+      async function init() {
+        renderCheatCodes(dateParam);
+        if (!window.SEED_DATA || !dateParam || !window.SEED_DATA[dateParam]) {
+          dayTitleEl.textContent = 'DAY NOT FOUND';
+          theoryEl.innerHTML = '<p>No study day was specified, or it falls outside the seeded study plan (July 27 – October 29, 2026). Go back and pick a day from the calendar.</p>';
+          questionsEl.innerHTML = '';
+          return;
+        }
+
+        const item = window.SEED_DATA[dateParam][0];
+
+        if (item.isBonus || item.isQuiz || item.isExam) {
+          renderSpecialDay(item);
+          return;
+        }
+
+        daySubEl.textContent = `Day ${item.dayNumber}`;
+        dayTitleEl.textContent = `${item.topic.toUpperCase()}: ${item.subtopic.toUpperCase()}`;
+
+        try {
+          const manifestRes = await fetch('01_FE_Practice_Questions/_manifest.json');
+          const manifest = await manifestRes.json();
+          const topicMeta = manifest.topics.find((t) => t.topic_name === item.topic);
+
+          if (!topicMeta) {
+            throw new Error(`No question bank entry for topic "${item.topic}"`);
+          }
+
+          puzzleLabelEl.textContent = topicMeta.puzzle_slug.toUpperCase().replace(/-/g, ' ');
+
+          // Use a date-specific question file if the manifest defines one for today
+          const dateFile = (topicMeta.date_file_map && topicMeta.date_file_map[dateParam])
+            ? topicMeta.date_file_map[dateParam]
+            : topicMeta.file;
+
+          const topicRes = await fetch(`01_FE_Practice_Questions/${dateFile}`);
+          const topicData = await topicRes.json();
+
+          const targetNorm = normalize(item.subtopic);
+          let matched = topicData.questions.filter((q) => {
+            const qNorm = normalize(q.subtopic);
+            return qNorm === targetNorm || qNorm.includes(targetNorm) || targetNorm.includes(qNorm);
+          });
+
+          questionsEl.innerHTML = '';
+
+          if (matched.length === 0) {
+            const note = document.createElement('div');
+            note.className = 'fallback-note';
+            note.textContent = `No question in the bank is tagged specifically "${item.subtopic}" yet — showing the full ${item.topic} set instead.`;
+            questionsEl.appendChild(note);
+            matched = topicData.questions;
+          }
+
+          matched.forEach((q) => renderQuestion(q, questionsEl));
+          renderTheory(matched, topicData);
+
+          if (topicMeta.puzzle_slug === 'system-of-equations' && topicData.puzzle_instance) {
+            const contentEl = document.getElementById('puzzle-content');
+            renderSystemOfEquationsPuzzle(topicData.puzzle_instance, contentEl);
+          }
+        } catch (err) {
+          console.error(err);
+          theoryEl.innerHTML = `<p>Could not load question bank data (${escapeHtml(err.message)}). Make sure this page is served over http(s), not opened directly as a file.</p>`;
+          questionsEl.innerHTML = '';
+        }
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>

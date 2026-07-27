@@ -1,0 +1,143 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-01",
+      "subtopic": "Number systems",
+      "difficulty": "easy",
+      "stem": "The 8-bit binary value 11010110 is stored as a signed two's complement integer. What decimal value does it represent?",
+      "choices": {
+        "A": "-42",
+        "B": "42",
+        "C": "-106",
+        "D": "214"
+      },
+      "correct_answer": "A",
+      "explanation": "Per the FE Handbook's Binary Number System section, a signed value's MSB indicates sign, and the two's complement of an N-bit integer M is 2^N - M. Step 1: read the unsigned value of 11010110: 128+64+0+16+0+4+2+0 = 214. Step 2: since the MSB = 1, the number is negative, so its true magnitude is found by taking the two's complement (invert all bits, then add 1): invert 11010110 -> 00101001; add 1 -> 00101010. Step 3: convert 00101010 to decimal: 32+8+2 = 42. Step 4: because the original MSB was 1, the represented value is -42. Cross-check: unsigned value 214 minus 2^8 = 214 - 256 = -42, which matches. Choice D (214) is the unsigned reading with no sign correction; choice B is the magnitude without the sign; choice C incorrectly doubles a bit position.",
+      "reference": "NCEES FE Reference Handbook (10.6), Electrical and Computer Engineering section, 'Binary Number System' (two's complement), p. 394"
+    },
+    {
+      "id": "DS-02",
+      "subtopic": "Boolean logic",
+      "difficulty": "easy",
+      "stem": "Using De Morgan's theorem as stated in the FE Reference Handbook, which expression is logically equivalent to (A + B)'?",
+      "choices": {
+        "A": "A' • B'",
+        "B": "A' + B'",
+        "C": "A • B",
+        "D": "A + B"
+      },
+      "correct_answer": "A",
+      "explanation": "The FE Handbook states De Morgan's First Theorem explicitly: complement(A + B) = complement(A) • complement(B), i.e., (A+B)' = A'•B'. Verify with a truth table: at A=0,B=0: (A+B)'=(0)'=1 and A'B'=1•1=1, match. At A=0,B=1: (A+B)'=(1)'=0 and A'B'=1•0=0, match. At A=1,B=0: (A+B)'=0 and A'B'=0•1=0, match. At A=1,B=1: (A+B)'=0 and A'B'=0•0=0, match. All four rows agree, confirming A'•B' is correct. Choice B (A'+B') is instead the De Morgan equivalent of (A•B)', i.e., the NAND expansion, not the NOR expansion asked here. Choices C and D are the uncomplemented AND/OR terms and do not match the truth table.",
+      "reference": "NCEES FE Reference Handbook (10.6), Electrical and Computer Engineering section, 'Logic Operations and Boolean Algebra – De Morgan's Theorems', p. 395"
+    },
+    {
+      "id": "DS-03",
+      "subtopic": "Logic minimization",
+      "difficulty": "medium",
+      "stem": "A switching function is given in canonical sum-of-minterms form as F(A,B,C) = Σm(0,1,2,3,5,7). Using a Karnaugh map, what is the minimal sum-of-products (SOP) expression for F?",
+      "choices": {
+        "A": "F = A' + C",
+        "B": "F = A' + AC",
+        "C": "F = A + C",
+        "D": "F = AB' + A'C"
+      },
+      "correct_answer": "A",
+      "explanation": "Build the 3-variable K-map with rows AB in Gray-code order (00, 01, 11, 10) and columns C (0, 1), placing a 1 in each minterm cell listed (m0, m1, m2, m3, m5, m7) and 0 elsewhere (m4, m6). Group 1: the entire A=0 row (AB=00 and AB=01, both C columns) contains m0, m1, m2, m3, all equal to 1 — this quad eliminates B and C, leaving the term A'. Group 2: the entire C=1 column (cells m1, m3, m7, m5) is also all 1s — this quad eliminates A and B, leaving the term C. Union check: A' covers {m0,m1,m2,m3}; C covers {m1,m3,m5,m7}; the union is exactly {m0,m1,m2,m3,m5,m7}, matching the target minterm list with no 0-cells (m4, m6) included. Therefore the minimal SOP is F = A' + C. Choice B (A' + AC) is a valid but non-minimal cover of the same function (A' + AC reduces further to A' + C by the absorption/consensus identity A' + AC = A' + C). Choice C (A + C) is wrong because it would incorrectly include m4 and m6 (A=1 rows where C=0 are not all covered correctly — checking m6: A=1,C=0 gives A+C=1, but the true value is 0). Choice D does not reduce to match all six required minterms.",
+      "reference": "NCEES FE Reference Handbook (10.6), Electrical and Computer Engineering section, 'Switching Function Terminology' and Karnaugh Map figure, p. 396–397"
+    },
+    {
+      "id": "DS-04",
+      "subtopic": "Flip-flops and counters",
+      "difficulty": "medium",
+      "stem": "An SR flip-flop starts at Q0 = 0. The following (S,R) input pairs are applied on four successive active clock edges, in order: (1,0), (0,0), (0,1), (1,1). What is the flip-flop's condition immediately after the fourth clock edge?",
+      "choices": {
+        "A": "Q4 = 1",
+        "B": "Q4 = 0",
+        "C": "The flip-flop enters an invalid/undefined state because S = R = 1 is disallowed",
+        "D": "Q4 = Q3 (no change occurred)"
+      },
+      "correct_answer": "C",
+      "explanation": "Use the FE Handbook's SR flip-flop table: SR=00 gives Qn (no change); SR=01 gives Qn+1=0; SR=10 gives Qn+1=1; SR=11 is invalid. Step through each edge: Edge 1, Q0=0, (S,R)=(1,0) -> SR=10 -> Q1=1. Edge 2, Q1=1, (S,R)=(0,0) -> SR=00 -> no change -> Q2=1. Edge 3, Q2=1, (S,R)=(0,1) -> SR=01 -> Q3=0. Edge 4, Q3=0, (S,R)=(1,1) -> SR=11, which the handbook table marks 'invalid' -- both S and R are simultaneously asserted, which violates the basic SR latch/flip-flop constraint and drives the output to an indeterminate condition rather than a defined 0 or 1. Because the fourth input pair is the disallowed combination, no valid Q4 value of 0 or 1 can be assigned, making choices A, B, and D all incorrect despite the correct step-by-step trace through edges 1-3.",
+      "reference": "NCEES FE Reference Handbook (10.6), Electrical and Computer Engineering section, 'Flip-Flops – SR Flip-Flop' table, p. 396"
+    },
+    {
+      "id": "DS-05",
+      "subtopic": "State machine design",
+      "difficulty": "hard",
+      "stem": "A synchronous 2-bit binary up-counter (state sequence Q1Q0: 00 -> 01 -> 10 -> 11 -> 00, with Q1 as MSB) is implemented using two JK flip-flops. The counter is currently in state Q1Q0 = 10 and must advance to state 11 on the next clock edge. Using the composite flip-flop state-transition (excitation) table, what J and K inputs must be applied to flip-flop Q1 and flip-flop Q0 to produce this transition?",
+      "choices": {
+        "A": "J1 = X (don't care), K1 = 0, J0 = 1, K0 = X (don't care)",
+        "B": "J1 = 0, K1 = 1, J0 = 0, K0 = 1",
+        "C": "J1 = 1, K1 = 1, J0 = 1, K0 = 1",
+        "D": "J1 = 0, K1 = 0, J0 = 0, K0 = 0"
+      },
+      "correct_answer": "A",
+      "explanation": "The transition 10 -> 11 requires Q1 to hold at 1 (Qn=1 to Qn+1=1) while Q0 changes from 0 to 1 (Qn=0 to Qn+1=1). The FE Handbook's Composite Flip-Flop State Transition Table gives the required J,K for each Qn->Qn+1 case: for Qn=1, Qn+1=1, the table specifies J=X (don't care), K=0. For Qn=0, Qn+1=1, the table specifies J=1, K=X (don't care). Applying these rows: flip-flop Q1 (1->1) needs J1=X, K1=0; flip-flop Q0 (0->1) needs J0=1, K0=X. This matches choice A exactly. Checking the distractors against the JK truth table (00=hold, 01=reset to 0, 10=set to 1, 11=toggle) confirms they fail: choice B (J1=0,K1=1 -> forces Q1 to reset to 0, but Q1 must stay 1 -- wrong; also J0=0,K0=1 forces Q0 to 0, but Q0 must become 1 -- wrong). Choice C (J=K=1 on both, i.e., toggle-both) would flip Q1 from 1 to 0, which is wrong since Q1 must remain 1. Choice D (J=K=0 on both, hold-both) would leave Q0 at 0 forever, but Q0 must become 1 -- wrong. Only choice A satisfies both required next-state values for every valid assignment of its don't-care bits.",
+      "reference": "NCEES FE Reference Handbook (10.6), Electrical and Computer Engineering section, 'Composite Flip-Flop State Transition Table' (JK excitation), p. 396"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Gate Type",
+        "items": ["NAND", "NOR", "XOR"]
+      },
+      {
+        "name": "Boolean Expression",
+        "items": ["A' + B'", "A' • B'", "AB' + A'B"]
+      },
+      {
+        "name": "Truth-Table Output Count",
+        "items": ["One 1-output", "Two 1-outputs", "Three 1-outputs"]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "NAND",
+        "categoryB": "A' + B'",
+        "categoryC": "Three 1-outputs"
+      },
+      {
+        "categoryA": "NOR",
+        "categoryB": "A' • B'",
+        "categoryC": "One 1-output"
+      },
+      {
+        "categoryA": "XOR",
+        "categoryB": "AB' + A'B",
+        "categoryC": "Two 1-outputs"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "The gate whose De Morgan equivalent is 'A' + B'' (per the FE Handbook's De Morgan's First Theorem, applied to (AB)') is NAND."
+      },
+      {
+        "type": "negative",
+        "text": "NOR does not go with 'Two 1-outputs' in its 2-input truth table."
+      },
+      {
+        "type": "sameAs",
+        "text": "Whoever has the Boolean expression 'AB' + A'B' also has 'Two 1-outputs' in its truth table."
+      }
+    ]
+  }
+}

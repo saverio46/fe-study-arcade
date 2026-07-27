@@ -1,0 +1,97 @@
+{
+  "topic_number": 4,
+  "topic_name": "Engineering Economics",
+  "fe_priority": "medium",
+  "fe_exam_weight": "5-8 of 110 questions",
+  "subtopics": ["Time value of money", "Cost estimation", "Risk identification", "Analysis"],
+  "puzzle_slug": "coin-breakdown",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "ee-01",
+      "subtopic": "Time value of money",
+      "difficulty": "easy",
+      "stem": "An engineer deposits $10,000 today into an account earning 8% annual interest, compounded annually. What is the value of this investment after 5 years?",
+      "choices": {
+        "A": "$13,382",
+        "B": "$14,000",
+        "C": "$14,693",
+        "D": "$6,806"
+      },
+      "correct_answer": "C",
+      "explanation": "This is a single-payment compound-amount problem: F = P(F/P, i%, n). Using the FE Reference Handbook interest tables at i = 8%, n = 5, the factor is (F/P, 8%, 5) = 1.4693. F = $10,000 x 1.4693 = $14,693. Distractor A uses the wrong interest rate (6% instead of 8%): 10,000 x 1.3382 = $13,382. Distractor B applies simple interest instead of compounding: 10,000 x (1 + 0.08 x 5) = $14,000. Distractor D incorrectly applies the present-worth factor (P/F, 8%, 5) = 0.6806 instead of the compound-amount factor: 10,000 x 0.6806 = $6,806.",
+      "reference": "NCEES FE Reference Handbook 10.6, Engineering Economics, p. 235 (Single Payment Compound Amount factor, F/P) and p. 241 (8.00% Interest Rate Table)."
+    },
+    {
+      "id": "ee-02",
+      "subtopic": "Time value of money",
+      "difficulty": "easy",
+      "stem": "A piece of test equipment is expected to require a $20,000 replacement in 10 years. Using an interest rate of 10% per year, what is the present worth of this future cost?",
+      "choices": {
+        "A": "$7,710",
+        "B": "$9,264",
+        "C": "$12,418",
+        "D": "$20,000"
+      },
+      "correct_answer": "A",
+      "explanation": "This is a single-payment present-worth problem: P = F(P/F, i%, n). From the FE Reference Handbook interest table at i = 10%, n = 10, the factor is (P/F, 10%, 10) = 0.3855. P = $20,000 x 0.3855 = $7,710. Distractor B uses the wrong rate (8% instead of 10%): 20,000 x 0.4632 = $9,264. Distractor C uses the wrong period (n = 5 instead of n = 10): 20,000 x 0.6209 = $12,418. Distractor D ignores the time value of money entirely.",
+      "reference": "NCEES FE Reference Handbook 10.6, Engineering Economics, p. 235 (Single Payment Present Worth factor, P/F) and p. 241 (10.00% Interest Rate Table)."
+    },
+    {
+      "id": "ee-03",
+      "subtopic": "Risk identification",
+      "difficulty": "medium",
+      "stem": "Before committing to full-scale production, an engineer compares two designs using a decision tree. Design A has a 70% probability of yielding a $200,000 profit and a 30% probability of a $50,000 loss. Design B is guaranteed to yield a $120,000 profit. Based on expected value analysis, which design has the higher expected value, and what is that value?",
+      "choices": {
+        "A": "Design A, with an expected value of $125,000",
+        "B": "Design A, with an expected value of $140,000",
+        "C": "Design B, with Design A's expected value equal to $110,000",
+        "D": "Design B, with Design A's expected value equal to $75,000"
+      },
+      "correct_answer": "A",
+      "explanation": "The FE Reference Handbook defines expected value for a chance node as EV = (C1)(p1) + (C2)(p2) + .... For Design A: EV_A = (0.70)($200,000) + (0.30)(-$50,000) = $140,000 - $15,000 = $125,000. Design B's outcome is certain, so EV_B = $120,000. Since $125,000 > $120,000, Design A has the higher expected value and is the preferred choice given a risk-neutral decision maker. Distractor B omits the loss branch entirely (only 0.70 x 200,000). Distractor C reflects doubling the loss magnitude by mistake (0.70 x 200,000 - 0.30 x 100,000 = 110,000). Distractor D incorrectly applies even 50/50 odds instead of the given 70/30 split (0.5 x 200,000 + 0.5 x -50,000 = 75,000), which would wrongly favor Design B.",
+      "reference": "NCEES FE Reference Handbook 10.6, Engineering Economics, p. 237 (Economic Decision Trees; Chance Node; Expected Value formula)."
+    },
+    {
+      "id": "ee-04",
+      "subtopic": "Analysis",
+      "difficulty": "medium",
+      "stem": "A company can purchase a component from a supplier for $18 per unit, with no fixed cost. Alternatively, it can manufacture the component in-house, incurring a fixed annual equipment cost of $45,000 plus a variable cost of $10 per unit. At what annual production volume are the two alternatives equally economical (the break-even quantity)?",
+      "choices": {
+        "A": "5,625 units",
+        "B": "2,500 units",
+        "C": "4,500 units",
+        "D": "1,607 units"
+      },
+      "correct_answer": "A",
+      "explanation": "Breakeven analysis finds the value of a variable that makes two alternatives equally economical. Let Q be the annual quantity. Buy cost: C_buy = 18Q. Make cost: C_make = 45,000 + 10Q. Setting them equal: 18Q = 45,000 + 10Q, so 8Q = 45,000, giving Q = 5,625 units. Distractor B incorrectly divides the fixed cost by the buy price alone (45,000 / 18 = 2,500). Distractor C incorrectly divides the fixed cost by the variable make cost alone (45,000 / 10 = 4,500). Distractor D incorrectly adds the two per-unit costs instead of subtracting them (45,000 / (18 + 10) = 1,607).",
+      "reference": "NCEES FE Reference Handbook 10.6, Engineering Economics, p. 236 (Breakeven Analysis)."
+    },
+    {
+      "id": "ee-05",
+      "subtopic": "Analysis",
+      "difficulty": "hard",
+      "stem": "A firm invests $50,000 today in new production equipment. The equipment is expected to generate uniform annual savings of $9,000 at the end of each year for 10 years and can be sold for an $8,000 salvage value at the end of year 10. Using an interest rate of 8% per year, what is the net present worth of this investment, and is it economically justified?",
+      "choices": {
+        "A": "+$14,097; economically justified",
+        "B": "+$10,391; economically justified",
+        "C": "+$64,097; economically justified",
+        "D": "-$46,294; not economically justified"
+      },
+      "correct_answer": "A",
+      "explanation": "Net present worth combines the uniform-series present-worth factor for the annual savings and the single-payment present-worth factor for the salvage value, minus the initial cost: PW = -P_initial + A(P/A, i%, n) + S(P/F, i%, n). At i = 8%, n = 10: (P/A, 8%, 10) = 6.7101 and (P/F, 8%, 10) = 0.4632. PW of savings = $9,000 x 6.7101 = $60,390.90. PW of salvage = $8,000 x 0.4632 = $3,705.60. Total PW of benefits = $60,390.90 + $3,705.60 = $64,096.50. Net PW = $64,096.50 - $50,000 = $14,096.50, which rounds to $14,097. Since PW > 0, the investment is economically justified. Distractor B omits the salvage value ($60,390.90 - $50,000 = $10,391). Distractor C forgets to subtract the initial investment, reporting only total benefits. Distractor D incorrectly excludes the annual savings stream, counting only the discounted salvage value against the initial cost (-$50,000 + $3,705.60 = -$46,294), wrongly concluding the project is not justified.",
+      "reference": "NCEES FE Reference Handbook 10.6, Engineering Economics, p. 235 (Uniform Series Present Worth factor, P/A, and Single Payment Present Worth factor, P/F) and p. 241 (8.00% Interest Rate Table); p. 237 (Benefit-Cost Analysis, B - C >= 0)."
+    }
+  ],
+  "puzzle_instance": {
+    "denominations": [
+      { "label": "Q2 future replacement cost ($20K, /1000)", "value": 20 },
+      { "label": "Q1 initial deposit ($10K, /1000)", "value": 10 },
+      { "label": "Q5 annual savings ($9K, /1000)", "value": 9 },
+      { "label": "Q5 salvage value ($8K, /1000)", "value": 8 }
+    ],
+    "target": 50,
+    "mode": "min_count",
+    "supply_per_denomination": "unlimited"
+  }
+}

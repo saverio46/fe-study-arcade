@@ -1,0 +1,134 @@
+{
+  "topic_number": 6,
+  "topic_name": "Circuit Analysis",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "KCL, KVL",
+    "Series/parallel equivalent circuits",
+    "Thevenin and Norton theorems",
+    "Node and loop analysis",
+    "Waveform analysis",
+    "Phasors",
+    "Impedance"
+  ],
+  "puzzle_slug": "flow",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CA-01",
+      "subtopic": "Series/parallel equivalent circuits",
+      "difficulty": "easy",
+      "stem": "A 12 V ideal DC source is connected in series with a 4 Ω resistor (R1). The output of that series combination feeds a parallel combination of a 6 Ω resistor (R2) and a 12 Ω resistor (R3), and the parallel combination returns to the source's negative terminal, completing the circuit. What is the total current supplied by the source?",
+      "choices": {
+        "A": "1.0 A",
+        "B": "1.5 A",
+        "C": "2.0 A",
+        "D": "3.0 A"
+      },
+      "correct_answer": "B",
+      "explanation": "First reduce the parallel pair: R23 = (R2 R3)/(R2 + R3) = (6)(12)/(6+12) = 72/18 = 4 Ω. This combines in series with R1: R_eq = R1 + R23 = 4 + 4 = 8 Ω. By Ohm's law, I = V/R_eq = 12 V / 8 Ω = 1.5 A. (Choice D results from ignoring R1 and using only R23; choice A and C do not satisfy Ohm's law for this network.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Resistors in Series and Parallel\" (p. 363)"
+    },
+    {
+      "id": "CA-02",
+      "subtopic": "Waveform analysis",
+      "difficulty": "easy",
+      "stem": "The current through a circuit element is given by i(t) = 14.14 cos(377t + 30°) A. What are the RMS value of the current and the frequency of the waveform?",
+      "choices": {
+        "A": "I_rms = 14.14 A, f = 60 Hz",
+        "B": "I_rms = 10.0 A, f = 60 Hz",
+        "C": "I_rms = 10.0 A, f = 377 Hz",
+        "D": "I_rms = 7.07 A, f = 60 Hz"
+      },
+      "correct_answer": "B",
+      "explanation": "For a sinusoid, X_rms = X_max/√2. Here I_max = 14.14 A, so I_rms = 14.14/√2 = 10.0 A. The angular frequency is ω = 377 rad/s, and f = ω/(2π) = 377/6.2832 = 60.0 Hz. (Choice A confuses peak with RMS; choice C mistakes ω for f; choice D incorrectly halves the peak value as for a half-wave rectified signal.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"AC Circuits\": Average Value and Effective or RMS Values (p. 365)"
+    },
+    {
+      "id": "CA-03",
+      "subtopic": "KCL, KVL",
+      "difficulty": "medium",
+      "stem": "At node A of a resistive DC circuit, a 3 A ideal current source injects current into the node. Node A is also connected to a 24 V source through a 6 Ω resistor (R1), to ground through a 12 Ω resistor (R2), and to ground through a 4 Ω resistor (R3). Using Kirchhoff's current law (KCL) at node A, determine the node voltage V_A.",
+      "choices": {
+        "A": "8.0 V",
+        "B": "12.0 V",
+        "C": "14.0 V",
+        "D": "18.0 V"
+      },
+      "correct_answer": "C",
+      "explanation": "Sum currents entering node A and set equal to currents leaving: 3 + (24 − V_A)/6 = V_A/12 + V_A/4. Multiply through by 12: 36 + 2(24 − V_A) = V_A + 3V_A, so 36 + 48 − 2V_A = 4V_A, giving 84 = 6V_A, so V_A = 14.0 V. Check: current in = 3 + (24−14)/6 = 3 + 1.667 = 4.667 A; current out = 14/12 + 14/4 = 1.167 + 3.5 = 4.667 A. KCL balances.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Kirchhoff's Laws\" (p. 363)"
+    },
+    {
+      "id": "CA-04",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "A 30 V ideal DC source is connected in series with a 6 Ω resistor (R1) to node a. From node a, a 12 Ω resistor (R2) and a 4 Ω resistor (R3) each connect back to the source's negative terminal, which is node b (R2 and R3 are in parallel with each other between nodes a and b). A load will be attached across terminals a-b. Determine the Thévenin equivalent voltage V_oc and equivalent resistance R_eq seen by the load.",
+      "choices": {
+        "A": "V_oc = 10 V, R_eq = 2 Ω",
+        "B": "V_oc = 30 V, R_eq = 6 Ω",
+        "C": "V_oc = 15 V, R_eq = 3 Ω",
+        "D": "V_oc = 10 V, R_eq = 9 Ω"
+      },
+      "correct_answer": "A",
+      "explanation": "With the load removed, node a is a voltage divider: R2 ∥ R3 = (12)(4)/(12+4) = 48/16 = 3 Ω. V_oc = 30 V × 3/(6+3) = 30 × 1/3 = 10 V. To find R_eq, deactivate the source (short it), which places R1, R2, and R3 all in parallel between a and b: R_eq = 1/(1/6 + 1/12 + 1/4) = 1/(2/12 + 1/12 + 3/12) = 1/(6/12) = 2 Ω. (Choice D incorrectly adds R1 in series with R2∥R3 = 6+3 = 9 Ω instead of placing all three in parallel after deactivation.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Source Equivalents\" (p. 363)"
+    },
+    {
+      "id": "CA-05",
+      "subtopic": "Phasors",
+      "difficulty": "hard",
+      "stem": "A series RLC circuit consists of a 30 Ω resistor, a 106.1 mH inductor, and a 33.2 µF capacitor, all in series across an AC source v(t) = 120√2 cos(377t) V (i.e., V_rms = 120∠ 0° V at f = 60 Hz). Determine the RMS magnitude and phase angle of the current phasor, and state whether the current leads or lags the source voltage.",
+      "choices": {
+        "A": "I = 2.4 A∠ 53.13°, current leads the voltage",
+        "B": "I = 2.4 A∠ −53.13°, current lags the voltage",
+        "C": "I = 4.0 A∠ 36.87°, current leads the voltage",
+        "D": "I = 1.5 A∠ 53.13°, current leads the voltage"
+      },
+      "correct_answer": "A",
+      "explanation": "At ω = 2π(60) = 377 rad/s: X_L = ωL = 377(0.1061) = 40.0 Ω, and X_C = 1/(ωC) = 1/[377(33.2×10⁻⁶)] = 80.0 Ω. The series impedance is Z = R + j(X_L − X_C) = 30 + j(40 − 80) = 30 − j40 Ω = 50∠−53.13° Ω. Since X_C > X_L, the circuit is net capacitive, and Z has a negative angle. The current phasor is I = V/Z = 120∠0° / 50∠−53.13° = 2.4∠+53.13° A rms. Because the impedance angle is negative (capacitive), the current phasor leads the voltage phasor by 53.13°.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Phasor Transforms of Sinusoids\" and Impedance table (p. 366)"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "flow",
+    "gridSize": {
+      "rows": 8,
+      "cols": 8
+    },
+    "requireFullCoverage": true,
+    "pairs": [
+      {
+        "id": "pairA",
+        "labelA": "V_source_12V",
+        "labelB": "R_eq_8ohm",
+        "endpoints": [[0, 0], [7, 7]]
+      },
+      {
+        "id": "pairB",
+        "labelA": "f_60Hz",
+        "labelB": "I_rms_10A",
+        "endpoints": [[0, 7], [7, 0]]
+      },
+      {
+        "id": "pairC",
+        "labelA": "I_source_3A",
+        "labelB": "V_nodeA_14V",
+        "endpoints": [[3, 0], [3, 7]]
+      },
+      {
+        "id": "pairD",
+        "labelA": "V_oc_10V",
+        "labelB": "R_th_2ohm",
+        "endpoints": [[0, 3], [7, 3]]
+      },
+      {
+        "id": "pairE",
+        "labelA": "V_source_120V",
+        "labelB": "I_rms_2p4A_53deg",
+        "endpoints": [[2, 2], [5, 5]]
+      }
+    ]
+  }
+}

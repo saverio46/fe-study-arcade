@@ -1,0 +1,101 @@
+{
+  "topic_number": 16,
+  "topic_name": "Computer Systems",
+  "fe_priority": "medium",
+  "fe_exam_weight": "5-8 of 110 questions",
+  "subtopics": ["Microprocessors", "Memory technology and systems", "Interfacing"],
+  "puzzle_slug": "sudoku",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CS-16-01",
+      "subtopic": "Microprocessors",
+      "difficulty": "easy",
+      "stem": "A microprocessor architecture uses physically separate memories and separate buses for program instructions and data, so that an instruction fetch and a data access can occur in the same clock cycle. Which architecture does this describe?",
+      "choices": {
+        "A": "Von Neumann architecture",
+        "B": "Harvard architecture",
+        "C": "RISC architecture",
+        "D": "CISC architecture"
+      },
+      "correct_answer": "B",
+      "explanation": "The FE Reference Handbook's 'Microprocessor Architecture – Harvard' diagram shows a control unit with separate, independent connections to 'Instruction Memory' and 'Data Memory' (plus the ALU and I/O). Because the instruction and data paths are physically distinct, the CPU can fetch an instruction and read/write data simultaneously – the defining feature of the Harvard architecture. A von Neumann machine instead uses one shared memory and one shared bus for both instructions and data, forcing fetch and access to compete for the same path. RISC and CISC (reduced/complex instruction set computing) describe the complexity and style of the instruction set itself, not how memory is physically organized, so they do not answer the question.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering – Computer Systems – Microprocessor Architecture – Harvard, p. 414."
+    },
+    {
+      "id": "CS-16-02",
+      "subtopic": "Memory technology and systems",
+      "difficulty": "easy",
+      "stem": "Which statement correctly describes the RAM and ROM memory types as defined in the FE Reference Handbook?",
+      "choices": {
+        "A": "RAM is nonvolatile primary memory; ROM is volatile memory that holds constant data.",
+        "B": "RAM is volatile primary memory; ROM is nonvolatile memory that holds system instructions or constant data.",
+        "C": "Both RAM and ROM are volatile, but only ROM can be written to during normal operation.",
+        "D": "Both RAM and ROM are nonvolatile, differing only in access speed."
+      },
+      "correct_answer": "B",
+      "explanation": "The Handbook's 'Memory/Storage Types' section states: 'RAM – Primary memory system in computing systems, volatile' and 'ROM – nonvolatile. Contains system instructions or constant data for the system.' RAM (random-access memory) loses its contents when power is removed and is used for the system's working/primary memory, while ROM (read-only memory) retains its contents without power and typically stores firmware/boot instructions or fixed data. Choices A, C, and D reverse or misstate these volatility properties.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering – Computer Systems – Memory/Storage Types, p. 413."
+    },
+    {
+      "id": "CS-16-03",
+      "subtopic": "Memory technology and systems",
+      "difficulty": "medium",
+      "stem": "A set-associative cache has S = 256 sets, a set associativity of A = 4, and a block size of B = 64 bytes. Using the Handbook relation for cache size, C = S × A × B, what is the total data capacity of the cache?",
+      "choices": {
+        "A": "16 KB",
+        "B": "32 KB",
+        "C": "64 KB",
+        "D": "128 KB"
+      },
+      "correct_answer": "C",
+      "explanation": "Apply C = S × A × B directly: number of blocks in the cache = S × A = 256 × 4 = 1,024 blocks. Total capacity in bytes = 1,024 blocks × 64 bytes/block = 65,536 bytes. Converting to kilobytes: 65,536 bytes ÷ 1,024 bytes/KB = 64 KB. (Choice A, 16 KB, results from omitting the associativity factor – i.e., computing S × B only. Choice B, 32 KB, results from using A = 2 instead of 4. Choice D, 128 KB, results from doubling the correct answer, e.g., by mistakenly doubling the block size.)",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering – Computer Systems – Memory/Storage Types – Cache Size (C = S×A×B), p. 413."
+    },
+    {
+      "id": "CS-16-04",
+      "subtopic": "Interfacing",
+      "difficulty": "medium",
+      "stem": "The FE Reference Handbook illustrates a generic dual-core processor in which each core has its own local L1 caches, and both cores share a single on-die L2 cache accessed through a shared bus interface. Two labeled buses appear in the diagram. Which statement best describes how these buses interface the cores, the shared cache, and the rest of the system?",
+      "choices": {
+        "A": "The front side bus connects each core to its own L1 cache; the back side bus connects the two L1 caches directly to each other.",
+        "B": "The back side bus connects the CPU cores to the shared bus interface/L2 cache; the front side bus connects that bus interface onward to the rest of the system (e.g., main memory).",
+        "C": "The front side bus and back side bus both connect the two CPU cores directly to main memory, bypassing the shared cache entirely.",
+        "D": "The back side bus carries only interrupt signals, while the front side bus carries only data signals."
+      },
+      "correct_answer": "B",
+      "explanation": "In the Handbook's dual-core figure, the 'BACK SIDE' bus arrow sits between the two 'CPU CORE AND L1 CACHES' blocks and the shared 'BUS INTERFACE AND L2 CACHES' block – this is the internal interconnect each core uses to reach the shared, on-die L2 cache. The 'FRONT SIDE' bus arrow sits below the bus interface block, carrying traffic from that shared interface out to the rest of the system (main memory and other components off-chip). This two-tier interfacing scheme lets both cores share L2 and system-memory bandwidth through a common gateway rather than each core wiring directly to memory. Options A, C, and D mischaracterize which components each labeled bus actually connects.",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering – Computer Systems – Multicore, 'Generic dual-core processor...' figure, p. 414."
+    },
+    {
+      "id": "CS-16-05",
+      "subtopic": "Memory technology and systems",
+      "difficulty": "hard",
+      "stem": "A processor uses a 32-bit address bus and a 2-way set-associative cache with a total data capacity of 32 KB and a block size of 32 bytes. Using the Handbook's address-partition relations (# index bits = log2(S), # block offset bits = log2(B), # tag bits = # address bits − # index bits − # block offset bits), how many bits are allocated to the tag field?",
+      "choices": {
+        "A": "15 bits",
+        "B": "17 bits",
+        "C": "18 bits",
+        "D": "20 bits"
+      },
+      "correct_answer": "C",
+      "explanation": "Step 1 – total blocks in the cache: capacity ÷ block size = 32,768 bytes ÷ 32 bytes/block = 1,024 blocks. Step 2 – number of sets: since the cache is 2-way associative, S = total blocks ÷ A = 1,024 ÷ 2 = 512 sets. Step 3 – index bits: log2(S) = log2(512) = 9 bits. Step 4 – block offset bits: log2(B) = log2(32) = 5 bits. Step 5 – tag bits: # address bits − # index bits − # block offset bits = 32 − 9 − 5 = 18 bits. (Choice B, 17 bits, results from forgetting to divide by the associativity when finding S – treating all 1,024 blocks as sets gives index = log2(1024) = 10, and 32 − 10 − 5 = 17. Choices A and D correspond to other index/offset miscalculations.)",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering – Computer Systems – Memory/Storage Types – Cache Size and address Tag/Index/Block Offset relations, p. 413."
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "sudoku",
+    "gridSize": 9,
+    "boxDims": [3, 3],
+    "symbolSet": ["CACHE", "RAM", "ROM", "ALU", "BUS", "REGISTER", "DMA", "ISA", "PIPELINE"],
+    "generationParams": {
+      "givenCount": 30,
+      "symmetry": "rotational180",
+      "targetDifficulty": "medium"
+    },
+    "revealOverlay": {
+      "cells": [[0, 0], [0, 1], [0, 2]],
+      "onCompleteFact": "CACHE is a small, fast memory that buffers frequently used data from the larger, slower RAM (C = S x A x B, where S = sets, A = associativity, B = block size) so the CPU avoids a full-speed round trip to main memory on every access."
+    }
+  }
+}

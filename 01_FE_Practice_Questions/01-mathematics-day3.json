@@ -1,0 +1,113 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Algebra and trigonometry",
+    "Complex numbers",
+    "Discrete mathematics",
+    "Analytic geometry",
+    "Calculus",
+    "Ordinary differential equations",
+    "Linear algebra",
+    "Vector analysis"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-D3-Q1",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "What is the radius of the circle defined by the equation x^2 + y^2 - 4x + 6y - 12 = 0?",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "6"
+      },
+      "correct_answer": "C",
+      "explanation": "Complete the square for x and y: (x^2 - 4x + 4) + (y^2 + 6y + 9) = 12 + 4 + 9. This simplifies to (x - 2)^2 + (y + 3)^2 = 25. The standard form is (x - h)^2 + (y - k)^2 = r^2, so r^2 = 25, giving a radius r = 5.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Circle"
+    },
+    {
+      "id": "MATH-D3-Q2",
+      "subtopic": "Calculus",
+      "difficulty": "easy",
+      "stem": "What is the first derivative with respect to x of f(x) = ln(x^2 + 1)?",
+      "choices": {
+        "A": "2x / (x^2 + 1)",
+        "B": "1 / (x^2 + 1)",
+        "C": "2x ln(x^2 + 1)",
+        "D": "x / (x^2 + 1)"
+      },
+      "correct_answer": "A",
+      "explanation": "Using the chain rule, the derivative of ln(u) is (1/u) * u'. Here, u = x^2 + 1, and u' = 2x. Thus, f'(x) = (1 / (x^2 + 1)) * 2x = 2x / (x^2 + 1).",
+      "reference": "FE Reference Handbook, Mathematics: Differential Calculus - Derivatives"
+    },
+    {
+      "id": "MATH-D3-Q3",
+      "subtopic": "Linear algebra",
+      "difficulty": "hard",
+      "stem": "Find the eigenvalues of the matrix A = [[3, 1], [1, 3]].",
+      "choices": {
+        "A": "λ = 3, λ = 1",
+        "B": "λ = 2, λ = 4",
+        "C": "λ = -2, λ = -4",
+        "D": "λ = 1, λ = 4"
+      },
+      "correct_answer": "B",
+      "explanation": "To find the eigenvalues, solve det(A - λI) = 0. The matrix is [[3-λ, 1], [1, 3-λ]]. The determinant is (3-λ)(3-λ) - 1 = λ^2 - 6λ + 9 - 1 = λ^2 - 6λ + 8 = 0. Factoring yields (λ - 4)(λ - 2) = 0, so the eigenvalues are 4 and 2.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Eigenvalues"
+    },
+    {
+      "id": "MATH-D3-Q4",
+      "subtopic": "Vector analysis",
+      "difficulty": "medium",
+      "stem": "Find the cross product A x B of vectors A = 2i + j - k and B = i - j + 2k.",
+      "choices": {
+        "A": "i - 5j - 3k",
+        "B": "3i - 5j - 3k",
+        "C": "i - 5j + 3k",
+        "D": "-i + 5j - 3k"
+      },
+      "correct_answer": "A",
+      "explanation": "Set up the determinant: i(2 - 1) - j(4 - (-1)) + k(-2 - 1) = 1i - 5j - 3k.",
+      "reference": "FE Reference Handbook, Mathematics: Vector Analysis - Cross Product"
+    },
+    {
+      "id": "MATH-D3-Q5",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "medium",
+      "stem": "How many distinct ways can a committee of 3 people be chosen from a group of 7 people?",
+      "choices": {
+        "A": "21",
+        "B": "35",
+        "C": "210",
+        "D": "343"
+      },
+      "correct_answer": "B",
+      "explanation": "This is a combinations problem because order does not matter. C(n, k) = n! / (k!(n-k)!). For C(7, 3) = 7! / (3!4!) = (7*6*5) / (3*2*1) = 35.",
+      "reference": "FE Reference Handbook, Mathematics: Discrete Mathematics - Combinations"
+    }
+  ],
+  "puzzle_instance": {
+    "facts": [
+      { "id": "F1", "label": "Radius of the circle (Q1)", "value": 5 },
+      { "id": "F2", "label": "Numerator coefficient of x in the derivative (Q2)", "value": 2 },
+      { "id": "F3", "label": "Smaller eigenvalue of the matrix A (Q3)", "value": 2 },
+      { "id": "F4", "label": "Absolute value of the j-component of the cross product (Q4)", "value": 5 },
+      { "id": "F5", "label": "Number of ways to choose the committee (Q5)", "value": 35 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
+      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 4 },
+      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
+      { "coeffs": [1, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 45 },
+      { "coeffs": [0, -1, -1, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 36 }
+    ],
+    "presentation": "word_problem"
+  }
+}

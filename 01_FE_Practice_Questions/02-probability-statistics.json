@@ -1,0 +1,101 @@
+{
+  "topic_number": 2,
+  "topic_name": "Probability & Statistics",
+  "fe_priority": "medium",
+  "fe_exam_weight": "4-6 of 110 questions",
+  "subtopics": [
+    "Measures of central tendencies and dispersions",
+    "Probability distributions",
+    "Expected value"
+  ],
+  "puzzle_slug": "coin-breakdown",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "PS-1",
+      "subtopic": "Measures of central tendencies and dispersions",
+      "difficulty": "easy",
+      "stem": "A quality-control engineer measures the propagation delay (in ns) of 7 logic gates pulled from the same production lot: 12, 14, 14, 15, 16, 14, 18. What are the sample mean and the mode of this data set?",
+      "choices": {
+        "A": "Mean = 14.71 ns, Mode = 14 ns",
+        "B": "Mean = 15.00 ns, Mode = 14 ns",
+        "C": "Mean = 14.71 ns, Mode = 15 ns",
+        "D": "Mean = 14.00 ns, Mode = 18 ns"
+      },
+      "correct_answer": "A",
+      "explanation": "The arithmetic mean of a sample is X̄ = (1/n)ΣXi. Summing the 7 readings: 12 + 14 + 14 + 15 + 16 + 14 + 18 = 103. Dividing by n = 7 gives X̄ = 103/7 = 14.714... ≈ 14.71 ns. The mode is the value that occurs with the greatest frequency; here 14 ns appears three times (positions 2, 3, and 6), more than any other value (12, 15, 16, and 18 each appear once), so the mode is 14 ns. Choice A is correct. B uses an incorrect sum/rounding, C mis-identifies the mode as a value that occurs only once, and D confuses the mean with a rounded value and the mode with the maximum reading.",
+      "reference": "FE Reference Handbook (NCEES), Engineering Probability and Statistics — 'Dispersion, Mean, Median, and Mode Values,' p. 64 (arithmetic mean X̄ = (1/n)ΣXi; mode definition)"
+    },
+    {
+      "id": "PS-2",
+      "subtopic": "Expected value",
+      "difficulty": "easy",
+      "stem": "During automated optical inspection, the number of rejected surface-mount resistors per reel, X, is a discrete random variable with the probability mass function below. Compute the expected value E[X].\n\nx:      0     1     2     3\nf(x):  0.50  0.30  0.15  0.05",
+      "choices": {
+        "A": "E[X] = 0.75 rejected resistors per reel",
+        "B": "E[X] = 1.00 rejected resistors per reel",
+        "C": "E[X] = 0.65 rejected resistors per reel",
+        "D": "E[X] = 1.50 rejected resistors per reel"
+      },
+      "correct_answer": "A",
+      "explanation": "First confirm f(x) is a valid PMF: 0.50 + 0.30 + 0.15 + 0.05 = 1.00. The expected value (weighted average) of a discrete random variable is μ = E[X] = Σ xk f(xk). Computing term by term: (0)(0.50) + (1)(0.30) + (2)(0.15) + (3)(0.05) = 0 + 0.30 + 0.30 + 0.15 = 0.75. So E[X] = 0.75 rejects per reel. B, C, and D result from arithmetic slips (e.g., omitting a term or mis-weighting the x = 2 or x = 3 term).",
+      "reference": "FE Reference Handbook (NCEES), Engineering Probability and Statistics — 'Expected Values,' p. 66 (μ = E[X] = Σ xk f(xk))"
+    },
+    {
+      "id": "PS-3",
+      "subtopic": "Probability distributions",
+      "difficulty": "medium",
+      "stem": "A large batch of voltage regulators has a known defect rate of 10%. If 6 regulators are selected at random from the batch (independent trials), what is the probability that exactly 2 of the 6 are defective?",
+      "choices": {
+        "A": "0.0984",
+        "B": "0.1968",
+        "C": "0.3543",
+        "D": "0.0146"
+      },
+      "correct_answer": "A",
+      "explanation": "This is a binomial distribution with n = 6 trials, p = 0.10 (probability of 'success' = defective), q = 1 − p = 0.90, and x = 2. The binomial probability mass function is Pn(x) = C(n,x) p^x q^(n−x). Here C(6,2) = 6!/(2!4!) = 15. Then P(2) = 15(0.10)^2(0.90)^4 = 15(0.01)(0.6561) = 0.098415 ≈ 0.0984. This agrees with the handbook's cumulative binomial table for n = 6, p = 0.10: P(X≤2) − P(X≤1) = 0.984 − 0.886 = 0.098. C (0.3543) is the probability of exactly 1 defective [C(6,1)(0.1)^1(0.9)^5], and D (0.0146) is the probability of exactly 3 defective [C(6,3)(0.1)^3(0.9)^3] — both are off-by-one errors in x. B is simply double the correct value.",
+      "reference": "FE Reference Handbook (NCEES), Engineering Probability and Statistics — 'Binomial Distribution,' p. 67, Pn(x) = C(n,x)p^x q^(n−x); cross-checked against the 'Cumulative Binomial Probabilities' table, p. 81"
+    },
+    {
+      "id": "PS-4",
+      "subtopic": "Probability distributions",
+      "difficulty": "medium",
+      "stem": "The output voltage of a regulated DC power supply is normally distributed with mean μ = 12.00 V and standard deviation σ = 0.25 V. What is the probability that a randomly selected unit has an output voltage between 11.75 V and 12.50 V?",
+      "choices": {
+        "A": "0.8185",
+        "B": "0.9772",
+        "C": "0.1359",
+        "D": "0.1587"
+      },
+      "correct_answer": "A",
+      "explanation": "Standardize using z = (x − μ)/σ. For x = 11.75 V: z1 = (11.75 − 12.00)/0.25 = −1.00. For x = 12.50 V: z2 = (12.50 − 12.00)/0.25 = 2.00. From the handbook's unit normal table, F(2.00) = 0.9772 and F(1.00) = 0.8413, so F(−1.00) = 1 − F(1.00) = 1 − 0.8413 = 0.1587. The requested probability is P(−1.00 ≤ Z ≤ 2.00) = F(2.00) − F(−1.00) = 0.9772 − 0.1587 = 0.8185. B is the mistake of reporting F(2.00) alone (forgetting to subtract the lower tail). C results from a sign error, using F(2.00) − F(1.00) = 0.9772 − 0.8413 = 0.1359. D is just F(−1.00), the area below the lower bound.",
+      "reference": "FE Reference Handbook (NCEES), Engineering Probability and Statistics — 'Normal Distribution (Gaussian Distribution),' p. 68 (z = (x−μ)/σ); 'Unit Normal Distribution' table, p. 77"
+    },
+    {
+      "id": "PS-5",
+      "subtopic": "Probability distributions",
+      "difficulty": "hard",
+      "stem": "Two automated test stations screen microcontroller units before shipment. Station A tests 60% of daily production and Station B tests the remaining 40%. Station A has a 2% defect-escape rate (probability a defective unit passes as good), while Station B has a 5% defect-escape rate. A unit is pulled at random from finished goods and found to be a defect escape. What is the probability that it was screened by Station B?",
+      "choices": {
+        "A": "0.625",
+        "B": "0.375",
+        "C": "0.050",
+        "D": "0.032"
+      },
+      "correct_answer": "A",
+      "explanation": "Let A and B denote the events that a unit was screened by Station A or Station B, and let E denote 'defect escape.' Given: P(A) = 0.60, P(B) = 0.40, P(E|A) = 0.02, P(E|B) = 0.05. By the law of compound probability, the joint probabilities are P(A,E) = P(A)P(E|A) = 0.60(0.02) = 0.012 and P(B,E) = P(B)P(E|B) = 0.40(0.05) = 0.020. By the law of total probability, P(E) = P(A,E) + P(B,E) = 0.012 + 0.020 = 0.032. Bayes' Theorem gives P(B|E) = P(B)P(E|B) / P(E) = 0.020/0.032 = 0.625. B (0.375) is the complementary result P(A|E) = 0.012/0.032; C (0.050) is just the raw conditional P(E|B) with no Bayes update; D (0.032) is the total probability P(E), mistakenly reported as the final answer instead of used as the denominator.",
+      "reference": "FE Reference Handbook (NCEES), Engineering Probability and Statistics — 'Bayes' Theorem' and 'Property 3. Law of Compound or Joint Probability,' p. 66"
+    }
+  ],
+  "puzzle_instance": {
+    "denominations": [
+      {"label": "Station B joint defect-escape weight — P(B)×P(escape|B), in per-mille (from PS-5)", "value": 20},
+      {"label": "Station A joint defect-escape weight — P(A)×P(escape|A), in per-mille (from PS-5)", "value": 12},
+      {"label": "Regulators sampled in the binomial trial, n (from PS-3)", "value": 6},
+      {"label": "Defect-level outcomes in the resistor-reject PMF, x = 0-3 (from PS-2)", "value": 4}
+    ],
+    "target": 32,
+    "mode": "min_count",
+    "supply_per_denomination": "unlimited"
+  }
+}

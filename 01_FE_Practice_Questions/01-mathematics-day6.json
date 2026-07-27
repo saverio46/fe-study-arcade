@@ -1,0 +1,113 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Algebra and trigonometry",
+    "Complex numbers",
+    "Discrete mathematics",
+    "Analytic geometry",
+    "Calculus",
+    "Ordinary differential equations",
+    "Linear algebra",
+    "Vector analysis"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-D6-Q1",
+      "subtopic": "Complex numbers",
+      "difficulty": "medium",
+      "stem": "Convert the complex number z = -3 + 4i to polar form (r∠θ). What is the magnitude r?",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "7"
+      },
+      "correct_answer": "C",
+      "explanation": "The magnitude of a complex number z = x + yi is given by r = sqrt(x^2 + y^2). Here, r = sqrt((-3)^2 + 4^2) = sqrt(9 + 16) = sqrt(25) = 5.",
+      "reference": "FE Reference Handbook, Mathematics: Complex Numbers - Polar Form"
+    },
+    {
+      "id": "MATH-D6-Q2",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "easy",
+      "stem": "Simplify the expression log_10(100) + log_10(0.1).",
+      "choices": {
+        "A": "1",
+        "B": "1.1",
+        "C": "3",
+        "D": "0.9"
+      },
+      "correct_answer": "A",
+      "explanation": "log_10(100) = 2 because 10^2 = 100. log_10(0.1) = -1 because 10^-1 = 0.1. Adding them gives 2 + (-1) = 1.",
+      "reference": "FE Reference Handbook, Mathematics: Algebra - Logarithms"
+    },
+    {
+      "id": "MATH-D6-Q3",
+      "subtopic": "Calculus",
+      "difficulty": "hard",
+      "stem": "Evaluate the second derivative of y = x^3 - 6x^2 + 9x at x = 1.",
+      "choices": {
+        "A": "-6",
+        "B": "0",
+        "C": "6",
+        "D": "12"
+      },
+      "correct_answer": "A",
+      "explanation": "First derivative: y' = 3x^2 - 12x + 9. Second derivative: y'' = 6x - 12. Evaluate at x = 1: y''(1) = 6(1) - 12 = -6.",
+      "reference": "FE Reference Handbook, Mathematics: Differential Calculus - Higher Order Derivatives"
+    },
+    {
+      "id": "MATH-D6-Q4",
+      "subtopic": "Linear algebra",
+      "difficulty": "medium",
+      "stem": "What is the trace of the matrix [[1, 2, 3], [4, 5, 6], [7, 8, 9]]?",
+      "choices": {
+        "A": "15",
+        "B": "12",
+        "C": "45",
+        "D": "0"
+      },
+      "correct_answer": "A",
+      "explanation": "The trace of a square matrix is the sum of its main diagonal elements. For this matrix, the diagonal elements are 1, 5, and 9. Trace = 1 + 5 + 9 = 15.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Trace"
+    },
+    {
+      "id": "MATH-D6-Q5",
+      "subtopic": "Vector analysis",
+      "difficulty": "hard",
+      "stem": "Given the scalar field f(x,y,z) = x^2 * y + z^3, evaluate the gradient at the point (1, 2, 1). What is the x-component of the gradient vector?",
+      "choices": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "D",
+      "explanation": "The gradient of f is (df/dx)i + (df/dy)j + (df/dz)k. df/dx = 2xy. Evaluating at (1, 2, 1), the x-component is 2(1)(2) = 4.",
+      "reference": "FE Reference Handbook, Mathematics: Vector Analysis - Gradient"
+    }
+  ],
+  "puzzle_instance": {
+    "facts": [
+      { "id": "F1", "label": "Magnitude of the complex number (Q1)", "value": 5 },
+      { "id": "F2", "label": "Simplified log expression result (Q2)", "value": 1 },
+      { "id": "F3", "label": "Absolute value of the second derivative (Q3)", "value": 6 },
+      { "id": "F4", "label": "Trace of the matrix divided by 3 (Q4)", "value": 5 },
+      { "id": "F5", "label": "x-component of the gradient vector (Q5)", "value": 4 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
+      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
+      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 },
+      { "coeffs": [0, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 9 },
+      { "coeffs": [1, 0, 0, 0, -1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 1 }
+    ],
+    "presentation": "word_problem"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "topic_number": 5,
+  "topic_name": "Properties of Electrical Materials",
+  "fe_priority": "low",
+  "fe_exam_weight": "4-6 of 110 questions",
+  "subtopics": ["Semiconductor materials", "Electrical", "Thermal"],
+  "puzzle_slug": "connections",
+  "puzzle_category": "Deduction & Social",
+  "questions": [
+    {
+      "id": "PEM-1",
+      "subtopic": "Semiconductor materials",
+      "difficulty": "easy",
+      "stem": "The FE Reference Handbook's table of impurity energy levels for extrinsic semiconductors lists phosphorus (P), a Group VA element, as a dopant for silicon (Si, Group IVA) with an energy level (Eg − Ed) = 0.044 eV, measured down from the conduction band edge. When phosphorus atoms substitute for silicon atoms in the crystal lattice, what results?",
+      "choices": {
+        "A": "An n-type semiconductor, because each P atom's fifth valence electron is only weakly bound and is easily promoted into the conduction band",
+        "B": "A p-type semiconductor, because P has one fewer valence electron than Si, leaving a hole in the bonding structure",
+        "C": "An intrinsic (undoped) semiconductor, because Group VA elements do not alter Si's carrier concentration",
+        "D": "An n-type semiconductor, but conduction still occurs primarily through holes generated in the valence band"
+      },
+      "correct_answer": "A",
+      "explanation": "Silicon (Group IVA) has four valence electrons and forms four covalent bonds per atom in the diamond cubic lattice. Phosphorus (Group VA) has five valence electrons; when substituted into the lattice, four of its electrons complete the required covalent bonds and the fifth occupies a shallow, hydrogen-like donor state just below the conduction band. The Handbook's tabulated (Eg − Ed) = 0.044 eV for P in Si is small compared to typical bandgaps, so this donor level is easily ionized at room temperature, releasing free electrons into the conduction band. This makes P a donor dopant and Si:P an n-type semiconductor with electrons as the majority carrier. (B) describes a Group IIIA acceptor, not a Group VA donor. (C) is wrong because introducing shallow donor/acceptor states is precisely what makes a semiconductor extrinsic. (D) is wrong because n-type conduction is dominated by electrons, not holes.",
+      "reference": "NCEES FE Reference Handbook 10.6, Materials Science/Structure of Matter — 'Some Extrinsic, Elemental Semiconductors' and 'Impurity Energy Levels for Extrinsic Semiconductors' tables, p. 121"
+    },
+    {
+      "id": "PEM-2",
+      "subtopic": "Electrical",
+      "difficulty": "easy",
+      "stem": "The FE Reference Handbook's Properties of Metals table lists the electrical resistivity of copper at 0°C as 1.55 × 10⁻⁸ Ω·m. Given that conductivity is defined as the reciprocal of resistivity, what is the electrical conductivity of copper at this temperature?",
+      "choices": {
+        "A": "6.45 × 10⁷ S/m",
+        "B": "1.55 × 10⁷ S/m",
+        "C": "6.45 × 10⁻⁷ S/m",
+        "D": "1.55 × 10⁸ S/m"
+      },
+      "correct_answer": "A",
+      "explanation": "The Handbook states 'Conductivity is the reciprocal of the resistivity,' i.e., σ = 1/ρ. Using ρ = 1.55 × 10⁻⁸ Ω·m from the Properties of Metals table: σ = 1/(1.55 × 10⁻⁸) = 6.4516 × 10⁷ S/m ≈ 6.45 × 10⁷ S/m. (B) mistakenly keeps the 1.55 coefficient without inverting it. (C) inverts the exponent sign incorrectly. (D) confuses the reciprocal operation with simply flipping the sign of the exponent while keeping the same mantissa.",
+      "reference": "NCEES FE Reference Handbook 10.6, Materials Science/Structure of Matter — Properties of Materials: Electrical (resistivity/conductivity), p. 118; Properties of Metals table, p. 120"
+    },
+    {
+      "id": "PEM-3",
+      "subtopic": "Electrical",
+      "difficulty": "medium",
+      "stem": "A cylindrical resistive element has a measured resistance R = 4 Ω, a cross-sectional area A = 2 × 10⁻⁶ m² (2 mm²), and a length L = 0.01 m (1 cm). Using the Handbook's relationship between resistance and material resistivity, what is the resistivity of the element's material?",
+      "choices": {
+        "A": "8.00 × 10⁻⁴ Ω·m",
+        "B": "8.00 × 10⁻⁶ Ω·m",
+        "C": "8.00 × 10⁻¹ Ω·m",
+        "D": "1.25 × 10³ Ω·m"
+      },
+      "correct_answer": "A",
+      "explanation": "The Handbook gives resistivity of a resistor as ρ = RA/L. Substituting: ρ = (4 Ω)(2 × 10⁻⁶ m²)/(0.01 m) = (8 × 10⁻⁶)/(0.01) = 8.00 × 10⁻⁴ Ω·m. (B) results from forgetting to convert the length from centimeters to meters (dividing by 1 instead of 0.01). (C) results from forgetting to convert the area from mm² to m² (using 2 × 10⁻³ instead of 2 × 10⁻⁶). (D) incorrectly computes L/(RA), i.e., inverts the formula and mixes up resistivity with a conductance-like quantity.",
+      "reference": "NCEES FE Reference Handbook 10.6, Materials Science/Structure of Matter — Properties of Materials: Electrical, Resistivity equation ρ = RA/L, p. 118"
+    },
+    {
+      "id": "PEM-4",
+      "subtopic": "Semiconductor materials",
+      "difficulty": "medium",
+      "stem": "Silicon is doped with gallium (Ga), a Group IIIA element. The Handbook's impurity energy level table lists an acceptor level for Ga in Si at Ea = 0.065 eV above the valence band edge (with no corresponding Eg − Ed value, since Ga does not act as a donor in Si). Which statement best describes the resulting material?",
+      "choices": {
+        "A": "A p-type semiconductor, because each Ga atom has one fewer valence electron than Si and readily accepts an electron from a neighboring Si–Si bond, leaving a mobile hole in the valence band",
+        "B": "An n-type semiconductor, because Ga's extra valence electron is donated to the conduction band",
+        "C": "An insulator, because Ga creates a deep trap far from both band edges that immobilizes all carriers",
+        "D": "An intrinsic semiconductor, because Ga is isoelectronic with Si and does not change the carrier population"
+      },
+      "correct_answer": "A",
+      "explanation": "Gallium (Group IIIA) has only three valence electrons, one fewer than silicon (Group IVA) needs to complete its four covalent bonds in the lattice. When Ga substitutes for a Si atom, it captures an electron from an adjacent Si–Si bond to complete its own bonding, leaving behind a mobile hole in the valence band. The Handbook's shallow acceptor level (Ea = 0.065 eV above the valence band) means this electron capture is easily thermally activated at room temperature, generating a significant hole population and making Si:Ga a p-type semiconductor with holes as the majority carrier. (B) describes Group VA donor behavior, the opposite dopant type. (C) misinterprets a shallow acceptor level as a deep trap. (D) is incorrect because Ga has a different valence electron count than Si, so it is not isoelectronic and does change carrier concentration.",
+      "reference": "NCEES FE Reference Handbook 10.6, Materials Science/Structure of Matter — 'Impurity Energy Levels for Extrinsic Semiconductors' table (Ga acceptor in Si), p. 121"
+    },
+    {
+      "id": "PEM-5",
+      "subtopic": "Thermal",
+      "difficulty": "hard",
+      "stem": "An overhead power conductor has a length L₀ = 500.0 m at its installation temperature of 15°C. The conductor material has a linear thermal expansion coefficient α = 23.6 × 10⁻⁶ /°C. During peak summer loading, resistive (I²R) self-heating raises the conductor's temperature to 65°C. Using the Handbook's definition of the thermal expansion coefficient, determine the increase in conductor length, ΔL.",
+      "choices": {
+        "A": "0.59 m",
+        "B": "0.059 m",
+        "C": "1.18 m",
+        "D": "5.9 m"
+      },
+      "correct_answer": "A",
+      "explanation": "The Handbook defines the thermal expansion coefficient as α = ε/ΔT, where ε = ΔL/L₀ is engineering strain. Solving for strain: ε = α·ΔT. First, ΔT = 65°C − 15°C = 50°C. Then ε = (23.6 × 10⁻⁶ /°C)(50°C) = 1.18 × 10⁻³. Finally, ΔL = ε·L₀ = (1.18 × 10⁻³)(500.0 m) = 0.59 m. This ~0.6 m elongation over a 500 m span is physically consistent with why overhead conductors are strung with deliberate sag margin, since thermal cycling can noticeably change span length. (B) is off by a factor of 10 (arithmetic/decimal-placement error). (C) mistakenly reports the strain-scaled term without correctly multiplying by L₀ (uses 2× the correct value). (D) is off by a factor of 10 in the other direction.",
+      "reference": "NCEES FE Reference Handbook 10.6, Materials Science/Structure of Matter — Thermal Properties, thermal expansion coefficient α = ε/ΔT, p. 127"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "connections",
+    "gridSize": 16,
+    "categories": [
+      {
+        "id": "categoryA",
+        "theme": "Group VA dopants that turn silicon n-type (donors)",
+        "difficulty": 1,
+        "items": ["Phosphorus", "Arsenic", "Antimony", "Bismuth"]
+      },
+      {
+        "id": "categoryB",
+        "theme": "Group IIIA dopants that turn silicon p-type (acceptors)",
+        "difficulty": 2,
+        "items": ["Boron", "Gallium", "Indium", "Thallium"]
+      },
+      {
+        "id": "categoryC",
+        "theme": "Electrical material properties defined in the Handbook",
+        "difficulty": 3,
+        "items": ["Resistivity", "Conductivity", "Permittivity", "Capacitance"]
+      },
+      {
+        "id": "categoryD",
+        "theme": "Lowest-resistivity (best-conducting) elemental metals in the Handbook's table",
+        "difficulty": 4,
+        "items": ["Silver", "Copper", "Gold", "Aluminum"]
+      }
+    ],
+    "displayGrid": ["Gold", "Phosphorus", "Permittivity", "Indium", "Copper", "Boron", "Antimony", "Capacitance", "Thallium", "Silver", "Conductivity", "Arsenic", "Aluminum", "Gallium", "Resistivity", "Bismuth"]
+  }
+}

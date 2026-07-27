@@ -1,0 +1,106 @@
+{
+  "topic_number": 12,
+  "topic_name": "Control Systems",
+  "fe_priority": "medium",
+  "fe_exam_weight": "6-9 of 110 questions",
+  "subtopics": [
+    "Block diagrams",
+    "Bode plots",
+    "Closed-loop response, open-loop response, and stability",
+    "Controller performance"
+  ],
+  "puzzle_slug": "maze",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CS-01",
+      "subtopic": "Block diagrams",
+      "difficulty": "easy",
+      "stem": "A unity-feedback control system has forward-path transfer function G(s) = 10/(s + 2). Using block-diagram reduction, what is the closed-loop transfer function Y(s)/R(s)?",
+      "choices": {
+        "A": "10/(s + 12)",
+        "B": "10/(s + 2)",
+        "C": "10/(s - 8)",
+        "D": "10/(s + 22)"
+      },
+      "correct_answer": "A",
+      "explanation": "For a unity-feedback loop, H(s) = 1, so the closed-loop transfer function reduces to Y(s)/R(s) = G(s)/[1 + G(s)], the standard feedback-reduction rule given in the FE Handbook's block-diagram model (Y(s) = G1G2/(1+G1G2H) R(s), with G1G2 = G and H = 1 here). Substituting G(s) = 10/(s+2): 1 + G(s) = 1 + 10/(s+2) = [(s+2) + 10]/(s+2) = (s+12)/(s+2). Then Y(s)/R(s) = [10/(s+2)] ÷ [(s+12)/(s+2)] = 10/(s+12). The pole moves from s = -2 (open loop) to s = -12 (closed loop), showing feedback speeds up the response, which is the qualitative check that this answer is reasonable.",
+      "reference": "FE Reference Handbook, Instrumentation, Measurement, and Control — Control Systems, closed-loop block-diagram model and Y(s)/R(s) reduction formula, p. 231."
+    },
+    {
+      "id": "CS-02",
+      "subtopic": "Controller performance",
+      "difficulty": "easy",
+      "stem": "A unity-feedback system has open-loop transfer function G(s) = 50/[s(s+5)]. What is the steady-state error of the closed-loop system to a unit-ramp input?",
+      "choices": {
+        "A": "0",
+        "B": "0.1",
+        "C": "1/50",
+        "D": "Infinite"
+      },
+      "correct_answer": "B",
+      "explanation": "First put G(s) into the FE Handbook's standard form G(s) = (K_B/s^T) x [products of (1+s/omega)]. Factor the (s+5) term: s(s+5) = 5s(1+s/5), so G(s) = 50/[5s(1+s/5)] = 10/[s(1+s/5)]. This is Type 1 (T=1) with K_B = 10. From the Handbook's steady-state error table, for a Ramp input with T = 1, e_ss = 1/K_B. Therefore e_ss = 1/10 = 0.1. (Sanity check: a Type-0 system would give infinite ramp error, and a Type-2 system would give zero — since this system has exactly one free integrator, a nonzero finite error of 0.1 is exactly what the table predicts.)",
+      "reference": "FE Reference Handbook, Instrumentation, Measurement, and Control — Control Systems, open-loop standard form G(s) = K_B/s^T x ... and Steady-State Error table, p. 232."
+    },
+    {
+      "id": "CS-03",
+      "subtopic": "Bode plots",
+      "difficulty": "medium",
+      "stem": "The Bode plots for the open-loop transfer function of a unity-feedback system show that the phase crosses -180 degrees at omega = omega_180, where the magnitude plot reads -6 dB. What is the gain margin of the system, and is the system stable at this nominal gain?",
+      "choices": {
+        "A": "GM = 6 dB; stable",
+        "B": "GM = -6 dB; unstable",
+        "C": "GM = 6 dB; unstable",
+        "D": "GM = 0 dB; marginally stable"
+      },
+      "correct_answer": "A",
+      "explanation": "The FE Handbook defines gain margin as GM = -20 log10(|G(j*omega_180)|), evaluated where angle G(j*omega_180) = -180 degrees. A magnitude reading of -6 dB means 20 log10(|G(j*omega_180)|) = -6 dB, i.e., |G(j*omega_180)| = 10^(-6/20) = 0.501. Then GM = -20 log10(0.501) = -(-6.0 dB) = +6.0 dB. Because GM is positive, the loop gain can be increased by roughly a factor of 2 (about 6 dB) before the closed-loop system reaches the instability boundary, so the system is stable at its current (nominal) gain. A negative GM would indicate the nominal gain already exceeds the stability limit.",
+      "reference": "FE Reference Handbook, Instrumentation, Measurement, and Control — Control Systems, Gain Margin (GM) definition, p. 232."
+    },
+    {
+      "id": "CS-04",
+      "subtopic": "Controller performance",
+      "difficulty": "medium",
+      "stem": "A closed-loop control system has the second-order transfer function Y(s)/R(s) = 100/(s^2 + 8s + 100). What is the percent overshoot of the system's response to a unit-step input?",
+      "choices": {
+        "A": "25.4%",
+        "B": "16.3%",
+        "C": "40.0%",
+        "D": "8.0%"
+      },
+      "correct_answer": "A",
+      "explanation": "Compare to the FE Handbook's standard second-order form Y(s)/R(s) = K*omega_n^2/(s^2 + 2*zeta*omega_n*s + omega_n^2). Matching denominators: omega_n^2 = 100, so omega_n = 10 rad/s; and 2*zeta*omega_n = 8, so zeta = 8/(2x10) = 0.4. Since zeta < 1, the system is underdamped, and the Handbook's percent-overshoot formula gives %OS = 100 x e^(-pi*zeta/sqrt(1-zeta^2)) = 100 x e^(-pi(0.4)/sqrt(1-0.16)) = 100 x e^(-1.2566/0.9165) = 100 x e^(-1.371) = 100 x 0.2538 = 25.4%. (As a bonus check, the 2% settling time would be Ts = 4/(zeta*omega_n) = 4/(0.4x10) = 1.0 s.)",
+      "reference": "FE Reference Handbook, Instrumentation, Measurement, and Control — Control Systems, Second-Order Control System Models, percent overshoot formula, p. 233."
+    },
+    {
+      "id": "CS-05",
+      "subtopic": "Closed-loop response, open-loop response, and stability",
+      "difficulty": "hard",
+      "stem": "A unity-feedback system has open-loop transfer function G(s) = K/[s(s+2)(s+4)]. Using the closed-loop characteristic equation and the Routh-Hurwitz stability criterion, determine the range of positive gain K for which the closed-loop system is stable.",
+      "choices": {
+        "A": "0 < K < 48",
+        "B": "0 < K < 8",
+        "C": "K > 48",
+        "D": "All K > 0 (always stable)"
+      },
+      "correct_answer": "A",
+      "explanation": "The closed-loop characteristic equation is 1 + G(s)H(s) = 0 with H(s)=1: 1 + K/[s(s+2)(s+4)] = 0, i.e., s(s+2)(s+4) + K = 0. Expanding s(s+2)(s+4) = s(s^2+6s+8) = s^3+6s^2+8s, the characteristic polynomial is s^3 + 6s^2 + 8s + K = 0. Build the Routh array:\nRow s^3: 1, 8\nRow s^2: 6, K\nRow s^1: (6x8 - 1xK)/6 = (48-K)/6\nRow s^0: K\nStability (all closed-loop poles in the open left half-plane) requires every entry in the first column to be positive: 1 > 0 (always true), 6 > 0 (always true), (48-K)/6 > 0 which gives K < 48, and K > 0 from the last row. Combining these: 0 < K < 48. Outside this range the polynomial has a root with nonnegative real part (K=48 places a pair of poles on the imaginary axis, producing sustained oscillation — the classic marginal-stability boundary), confirming the closed-loop system is stable only for 0 < K < 48.",
+      "reference": "FE Reference Handbook, Instrumentation, Measurement, and Control — Control Systems, closed-loop characteristic equation 1 + G1(s)G2(s)H(s) = 0, p. 232 (Routh-Hurwitz array applied as standard stability analysis of the resulting polynomial)."
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "maze",
+    "gridSize": { "rows": 20, "cols": 20 },
+    "algorithm": "recursiveBacktracker",
+    "braidFactor": 0.0,
+    "start": [0, 0],
+    "end": [19, 19],
+    "waypointItems": [
+      { "cell": [3, 4], "content": "closed-loop transfer function" },
+      { "cell": [7, 8], "content": "steady-state error" },
+      { "cell": [10, 13], "content": "gain margin" },
+      { "cell": [14, 16], "content": "percent overshoot" },
+      { "cell": [17, 18], "content": "Routh-Hurwitz stability" }
+    ]
+  }
+}

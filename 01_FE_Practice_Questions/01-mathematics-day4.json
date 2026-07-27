@@ -1,0 +1,113 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Algebra and trigonometry",
+    "Complex numbers",
+    "Discrete mathematics",
+    "Analytic geometry",
+    "Calculus",
+    "Ordinary differential equations",
+    "Linear algebra",
+    "Vector analysis"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-D4-Q1",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "medium",
+      "stem": "Determine the partial fraction expansion of f(x) = (2x + 3) / ((x - 1)(x + 2)). What is the coefficient of the 1/(x - 1) term?",
+      "choices": {
+        "A": "1/3",
+        "B": "5/3",
+        "C": "-1/3",
+        "D": "1"
+      },
+      "correct_answer": "B",
+      "explanation": "Let (2x + 3) / ((x - 1)(x + 2)) = A/(x - 1) + B/(x + 2). Multiply both sides by the denominator: 2x + 3 = A(x + 2) + B(x - 1). Let x = 1: 5 = A(3), so A = 5/3.",
+      "reference": "FE Reference Handbook, Mathematics: Algebra - Partial Fractions"
+    },
+    {
+      "id": "MATH-D4-Q2",
+      "subtopic": "Complex numbers",
+      "difficulty": "easy",
+      "stem": "Evaluate the complex expression e^(iπ).",
+      "choices": {
+        "A": "1",
+        "B": "-1",
+        "C": "i",
+        "D": "-i"
+      },
+      "correct_answer": "B",
+      "explanation": "Euler's formula states that e^(iθ) = cos(θ) + i sin(θ). For θ = π, e^(iπ) = cos(π) + i sin(π) = -1 + i(0) = -1.",
+      "reference": "FE Reference Handbook, Mathematics: Complex Numbers - Euler's Identity"
+    },
+    {
+      "id": "MATH-D4-Q3",
+      "subtopic": "Ordinary differential equations",
+      "difficulty": "medium",
+      "stem": "Find the roots of the characteristic equation for the differential equation y'' - 5y' + 6y = 0.",
+      "choices": {
+        "A": "r = 2, r = 3",
+        "B": "r = -2, r = -3",
+        "C": "r = -1, r = 6",
+        "D": "r = 1, r = -6"
+      },
+      "correct_answer": "A",
+      "explanation": "The characteristic equation is r^2 - 5r + 6 = 0. Factoring yields (r - 2)(r - 3) = 0, so the roots are r = 2 and r = 3.",
+      "reference": "FE Reference Handbook, Mathematics: Differential Equations - Second-Order Linear Homogeneous"
+    },
+    {
+      "id": "MATH-D4-Q4",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Calculate the area bound by the curve y = 3x^2, the x-axis, and the lines x = 1 and x = 2.",
+      "choices": {
+        "A": "7",
+        "B": "8",
+        "C": "9",
+        "D": "21"
+      },
+      "correct_answer": "A",
+      "explanation": "The area is the definite integral of 3x^2 from x=1 to x=2. The antiderivative is x^3. Evaluating at the bounds: (2)^3 - (1)^3 = 8 - 1 = 7.",
+      "reference": "FE Reference Handbook, Mathematics: Integral Calculus - Definite Integral and Area"
+    },
+    {
+      "id": "MATH-D4-Q5",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "What is the x-coordinate of the vertex of the parabola defined by y = 2x^2 - 8x + 5?",
+      "choices": {
+        "A": "2",
+        "B": "-2",
+        "C": "4",
+        "D": "-4"
+      },
+      "correct_answer": "A",
+      "explanation": "For a parabola in the form y = ax^2 + bx + c, the x-coordinate of the vertex is given by x = -b / (2a). Here, a = 2 and b = -8, so x = -(-8) / (2 * 2) = 8 / 4 = 2.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Conic Sections (Parabola)"
+    }
+  ],
+  "puzzle_instance": {
+    "facts": [
+      { "id": "F1", "label": "Numerator of the coefficient A (from 5/3) (Q1)", "value": 5 },
+      { "id": "F2", "label": "Magnitude of the complex expression e^(iπ) (Q2)", "value": 1 },
+      { "id": "F3", "label": "Sum of the roots of the characteristic equation (Q3)", "value": 5 },
+      { "id": "F4", "label": "Area bound by the curve (Q4)", "value": 7 },
+      { "id": "F5", "label": "x-coordinate of the vertex of the parabola (Q5)", "value": 2 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
+      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
+      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 12 },
+      { "coeffs": [0, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 9 },
+      { "coeffs": [1, 0, 0, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 }
+    ],
+    "presentation": "word_problem"
+  }
+}

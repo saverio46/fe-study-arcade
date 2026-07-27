@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Engine Reference - FE Study Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #0a0a12; --panel: #12121f; --panel-2: #1a1a2e; --grid-line: #23233a;
+      --text: #eef0f7; --text-dim: #8a8aa8; --neon-cyan: #2de2ff; --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e; --neon-green: #3dff88; --neon-orange: #ff6a1a; --neon-purple: #b388ff;
+      --font-display: 'Press Start 2P', monospace; --font-ui: 'Orbitron', sans-serif; --font-body: 'Inter', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--font-body); display: flex; min-height: 100vh; }
+    nav.sidebar { width: 280px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--grid-line); padding: 22px 18px; position: sticky; top: 0; height: 100vh; }
+    nav.sidebar .brand { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-yellow); margin-bottom: 24px; }
+    nav.sidebar .nav-header { font-family: var(--font-ui); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--neon-cyan); margin-bottom: 8px; }
+    nav.sidebar ul { list-style: none; margin-bottom: 20px; }
+    nav.sidebar li a { display: block; padding: 8px 10px; border-radius: 4px; text-decoration: none; color: var(--text); font-family: var(--font-ui); font-size: 0.82rem; }
+    nav.sidebar li a:hover, nav.sidebar li a.active { background: var(--panel-2); color: #fff; border-left: 3px solid var(--neon-cyan); }
+    main { flex: 1; padding: 32px; max-width: 900px; }
+    h1 { font-family: var(--font-display); color: var(--neon-orange); font-size: 1.4rem; margin-bottom: 12px; }
+    .card { background: var(--panel); border: 1px solid var(--grid-line); border-radius: 8px; padding: 20px; margin-top: 20px; }
+    a { color: var(--neon-cyan); }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="brand">FE STUDY ARCADE</div>
+    <div class="nav-header">Foundations</div>
+    <ul>
+      <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
+      <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
+    </ul>
+    <div class="nav-header">Study Content</div>
+    <ul>
+      <li><a href="notebook.html">Study Notebook</a></li>
+      <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+      <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
+    </ul>
+    <div class="nav-header">Puzzle Engine</div>
+    <ul>
+      <li><a href="puzzle-engine-reference.html" class="active">Puzzle Engine Reference</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Puzzle Engine Reference</h1>
+    <p>Architecture and logic specs for interactive FE practice puzzle mechanics.</p>
+    <div class="card">
+      <h2 style="font-family:var(--font-ui); color:var(--neon-cyan); margin-bottom:10px;">Engine Specifications</h2>
+      <p style="color:var(--text-dim); margin-bottom:12px;">The puzzle engine generates timed problem sets, tracks response latencies, and calculates streak scoring.</p>
+      <p><a href="index.html">← Return to Pac-Man Study Calendar</a></p>
+    </div>
+  </main>
+</body>
+</html>

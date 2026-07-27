@@ -1,0 +1,191 @@
+{
+  "_meta": {
+    "purpose": "Index of the FE Electrical & Computer practice-question bank: 17 topics x 5 questions each, plus one puzzle_instance per topic mapped from the puzzle-templates.json dataTemplate for that topic's assigned slug.",
+    "source_grounding": "NCEES FE Electrical and Computer CBT Exam Specifications and FE Reference Handbook 10.6 (both in ../NCEES references/)",
+    "total_questions": 85,
+    "created": "2026-07-26"
+  },
+  "topics": [
+    {
+      "topic_number": 1,
+      "topic_name": "Mathematics",
+      "fe_priority": "high",
+      "fe_exam_weight": "11-17 of 110 questions",
+      "file": "01-mathematics.json",
+      "question_count": 5,
+      "puzzle_slug": "system-of-equations",
+      "puzzle_category": "Math & Physical",
+      "date_file_map": {
+        "2026-07-27": "01-mathematics-algebra-trig.json",
+        "2026-07-28": "01-mathematics.json",
+        "2026-07-29": "01-mathematics-day9.json",
+        "2026-07-30": "01-mathematics-analytic-geometry.json",
+        "2026-07-31": "01-mathematics-day7.json",
+        "2026-08-01": "01-mathematics-day8.json",
+        "2026-08-03": "01-mathematics-linear-algebra.json",
+        "2026-08-04": "01-mathematics-day10.json",
+        "2026-08-05": "01-mathematics-full-review.json"
+      }
+    },
+    {
+      "topic_number": 2,
+      "topic_name": "Probability & Statistics",
+      "fe_priority": "medium",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "02-probability-statistics.json",
+      "question_count": 5,
+      "puzzle_slug": "coin-breakdown",
+      "puzzle_category": "Math & Physical"
+    },
+    {
+      "topic_number": 3,
+      "topic_name": "Ethics & Professional Practice",
+      "fe_priority": "medium",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "03-ethics-professional-practice.json",
+      "question_count": 5,
+      "puzzle_slug": "spot-the-liar",
+      "puzzle_category": "Deduction & Social"
+    },
+    {
+      "topic_number": 4,
+      "topic_name": "Engineering Economics",
+      "fe_priority": "medium",
+      "fe_exam_weight": "5-8 of 110 questions",
+      "file": "04-engineering-economics.json",
+      "question_count": 5,
+      "puzzle_slug": "coin-breakdown",
+      "puzzle_category": "Math & Physical"
+    },
+    {
+      "topic_number": 5,
+      "topic_name": "Properties of Electrical Materials",
+      "fe_priority": "low",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "05-properties-electrical-materials.json",
+      "question_count": 5,
+      "puzzle_slug": "connections",
+      "puzzle_category": "Deduction & Social"
+    },
+    {
+      "topic_number": 6,
+      "topic_name": "Circuit Analysis",
+      "fe_priority": "high",
+      "fe_exam_weight": "11-17 of 110 questions",
+      "file": "06-circuit-analysis.json",
+      "question_count": 5,
+      "puzzle_slug": "flow",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 7,
+      "topic_name": "Linear Systems",
+      "fe_priority": "medium",
+      "fe_exam_weight": "5-8 of 110 questions",
+      "file": "07-linear-systems.json",
+      "question_count": 5,
+      "puzzle_slug": "system-of-equations",
+      "puzzle_category": "Math & Physical"
+    },
+    {
+      "topic_number": 8,
+      "topic_name": "Signal Processing",
+      "fe_priority": "low",
+      "fe_exam_weight": "5-8 of 110 questions",
+      "file": "08-signal-processing.json",
+      "question_count": 5,
+      "puzzle_slug": "word-tetris",
+      "puzzle_category": "Math & Physical"
+    },
+    {
+      "topic_number": 9,
+      "topic_name": "Electronics",
+      "fe_priority": "high",
+      "fe_exam_weight": "7-11 of 110 questions",
+      "file": "09-electronics.json",
+      "question_count": 5,
+      "puzzle_slug": "sudoku",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 10,
+      "topic_name": "Power Systems",
+      "fe_priority": "high",
+      "fe_exam_weight": "8-12 of 110 questions",
+      "file": "10-power-systems.json",
+      "question_count": 5,
+      "puzzle_slug": "pips",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 11,
+      "topic_name": "Electromagnetics",
+      "fe_priority": "medium",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "11-electromagnetics.json",
+      "question_count": 5,
+      "puzzle_slug": "flow",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 12,
+      "topic_name": "Control Systems",
+      "fe_priority": "medium",
+      "fe_exam_weight": "6-9 of 110 questions",
+      "file": "12-control-systems.json",
+      "question_count": 5,
+      "puzzle_slug": "maze",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 13,
+      "topic_name": "Communications",
+      "fe_priority": "medium",
+      "fe_exam_weight": "5-8 of 110 questions",
+      "file": "13-communications.json",
+      "question_count": 5,
+      "puzzle_slug": "cryptogram",
+      "puzzle_category": "Word & Language"
+    },
+    {
+      "topic_number": 14,
+      "topic_name": "Computer Networks",
+      "fe_priority": "low",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "14-computer-networks.json",
+      "question_count": 5,
+      "puzzle_slug": "maze",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 15,
+      "topic_name": "Digital Systems",
+      "fe_priority": "high",
+      "fe_exam_weight": "8-12 of 110 questions",
+      "file": "15-digital-systems.json",
+      "question_count": 5,
+      "puzzle_slug": "logic-grid-puzzle",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 16,
+      "topic_name": "Computer Systems",
+      "fe_priority": "medium",
+      "fe_exam_weight": "5-8 of 110 questions",
+      "file": "16-computer-systems.json",
+      "question_count": 5,
+      "puzzle_slug": "sudoku",
+      "puzzle_category": "Grid & Spatial Logic"
+    },
+    {
+      "topic_number": 17,
+      "topic_name": "Software Engineering",
+      "fe_priority": "low",
+      "fe_exam_weight": "4-6 of 110 questions",
+      "file": "17-software-engineering.json",
+      "question_count": 5,
+      "puzzle_slug": "word-snake",
+      "puzzle_category": "Word & Language"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "topic_number": 10,
+  "topic_name": "Power Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Power theory",
+    "Transmission and distribution",
+    "Transformers",
+    "Motors and generators"
+  ],
+  "puzzle_slug": "pips",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "PS-01",
+      "subtopic": "Power theory (power factor, single and three phase, voltage regulation)",
+      "difficulty": "easy",
+      "stem": "A single-phase load draws 12 kW at a lagging power factor of 0.8 from a 240 V, 60 Hz ac source. What is the reactive power absorbed by the load?",
+      "choices": {
+        "A": "6.75 kvar",
+        "B": "9.00 kvar",
+        "C": "12.00 kvar",
+        "D": "15.00 kvar"
+      },
+      "correct_answer": "B",
+      "explanation": "pf = cos θ = 0.8, so the apparent power is S = P/pf = 12 kW / 0.8 = 15 kVA. Since S² = P² + Q², the reactive power is Q = √(S² − P²) = √(15² − 12²) = √(225 − 144) = √81 = 9.0 kvar (lagging, since the load is inductive). Equivalently, θ = cos⁻¹(0.8) = 36.87°, tan θ = 0.75, and Q = P·tan θ = 12 × 0.75 = 9.0 kvar. (Choice C mistakenly reports P as Q; choice D reports S instead of Q; choice A results from squaring pf incorrectly.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"AC Power\": Complex Power (p. 368)"
+    },
+    {
+      "id": "PS-02",
+      "subtopic": "Transformers (single-phase and three-phase connections, reflected impedance)",
+      "difficulty": "easy",
+      "stem": "An ideal single-phase transformer has a primary-to-secondary turns ratio of a = N₁/N₂ = 5. A purely resistive load of Z_S = 8 Ω is connected across the secondary winding. What impedance is seen looking into the primary terminals?",
+      "choices": {
+        "A": "1.6 Ω",
+        "B": "8 Ω",
+        "C": "40 Ω",
+        "D": "200 Ω"
+      },
+      "correct_answer": "D",
+      "explanation": "For an ideal transformer, the impedance seen at the primary is the secondary impedance reflected through the square of the turns ratio: Z_P = a²·Z_S. With a = 5 and Z_S = 8 Ω, Z_P = (5)² × 8 = 25 × 8 = 200 Ω. (Choice C results from using a instead of a², i.e., Z_P = a·Z_S; choice A incorrectly divides by a², Z_S/a²; choice B ignores the reflection entirely.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Transformers (Ideal)\": Turns Ratio (p. 369)"
+    },
+    {
+      "id": "PS-03",
+      "subtopic": "Transmission and distribution (real and reactive losses, efficiency, voltage drop, delta and wye connections)",
+      "difficulty": "medium",
+      "stem": "A balanced three-phase, delta-connected load has a per-branch impedance of 45∠30° Ω and is supplied by a 480 V (line-to-line), three-phase source. To simplify a per-phase line-current calculation, the delta load is first converted to an equivalent wye connection. What is the magnitude of the line current supplied to the load?",
+      "choices": {
+        "A": "6.16 A",
+        "B": "10.67 A",
+        "C": "18.48 A",
+        "D": "32.00 A"
+      },
+      "correct_answer": "C",
+      "explanation": "Convert the delta load to an equivalent wye: Z_Y = Z_Δ/3 = 45∠30° / 3 = 15∠30° Ω per phase. For a wye connection, the line-to-neutral voltage is V_LN = V_L/√3 = 480/√3 = 277.13 V, and the line current equals the phase current: I_L = I_P = V_LN/|Z_Y| = 277.13/15 = 18.48 A. (Choice A incorrectly divides V_LN by the original delta impedance, 277.13/45 = 6.16 A; choice B divides the line-to-line voltage by the delta impedance, 480/45 = 10.67 A, mixing delta and wye quantities; choice D results from using V_L instead of V_LN with the wye impedance, 480/15 = 32.0 A.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"Balanced Three-Phase (3-φ) Systems\": Z_Δ = 3Z_Y and line-phase relations (p. 368–369)"
+    },
+    {
+      "id": "PS-04",
+      "subtopic": "Motors and generators (synchronous, induction, dc)",
+      "difficulty": "medium",
+      "stem": "A three-phase, 60 Hz induction motor is wound for 6 poles and operates at a rotor speed of 1,140 rpm. What is the slip of the motor?",
+      "choices": {
+        "A": "5%",
+        "B": "8%",
+        "C": "10%",
+        "D": "12%"
+      },
+      "correct_answer": "A",
+      "explanation": "The synchronous speed is n_s = 120f/p = 120(60)/6 = 1,200 rpm. Slip is defined as s = (n_s − n)/n_s = (1,200 − 1,140)/1,200 = 60/1,200 = 0.05 = 5%. (Choice C, 10%, results from doubling the speed difference; choices B and D are plausible-magnitude distractors that do not satisfy the slip formula for these values.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"AC Machines\": Synchronous Speed and Induction Machines / Slip (p. 371)"
+    },
+    {
+      "id": "PS-05",
+      "subtopic": "Power theory (power factor, single and three phase, voltage regulation)",
+      "difficulty": "hard",
+      "stem": "A balanced three-phase, 480 V (line-to-line), 60 Hz industrial load draws 150 kW at a lagging power factor of 0.75. A delta-connected capacitor bank is to be installed at the load terminals to raise the system power factor to 0.95 lagging. What total three-phase reactive power must the capacitor bank supply?",
+      "choices": {
+        "A": "49.3 kvar",
+        "B": "83.0 kvar",
+        "C": "132.3 kvar",
+        "D": "181.6 kvar"
+      },
+      "correct_answer": "B",
+      "explanation": "At the original power factor, θ₁ = cos⁻¹(0.75) = 41.41°, and tan θ₁ = 0.8819, so the existing reactive power is Q₁ = P·tan θ₁ = 150 × 0.8819 = 132.3 kvar. At the target power factor, θ₂ = cos⁻¹(0.95) = 18.19°, and tan θ₂ = 0.3287, so the required reactive power is Q₂ = P·tan θ₂ = 150 × 0.3287 = 49.3 kvar. Real power P is unchanged by capacitor correction, so the capacitor bank must supply the difference: Q_C = Q₁ − Q₂ = 132.3 − 49.3 = 83.0 kvar (capacitive, i.e., negative/leading vars injected to cancel lagging vars). (Choice C is Q₁ alone; choice A is Q₂ alone; choice D incorrectly sums Q₁ + Q₂ instead of subtracting.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering — \"AC Power\": Complex Power, and \"Balanced Three-Phase (3-φ) Systems\" (p. 368–369)"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "pips",
+    "boardCells": [
+      {"coord": [0, 0], "regionId": "R1"},
+      {"coord": [0, 1], "regionId": "R1"},
+      {"coord": [0, 2], "regionId": "R2"},
+      {"coord": [0, 3], "regionId": "R2"},
+      {"coord": [1, 0], "regionId": "R3"},
+      {"coord": [1, 1], "regionId": "R3"},
+      {"coord": [1, 2], "regionId": "R3"},
+      {"coord": [1, 3], "regionId": "R4"},
+      {"coord": [2, 0], "regionId": "R5"},
+      {"coord": [2, 1], "regionId": "R5"},
+      {"coord": [2, 2], "regionId": "R6"},
+      {"coord": [2, 3], "regionId": "R4"},
+      {"coord": [3, 0], "regionId": "blank"},
+      {"coord": [3, 1], "regionId": "blank"},
+      {"coord": [3, 2], "regionId": "R6"},
+      {"coord": [3, 3], "regionId": "blank"}
+    ],
+    "regions": [
+      {"id": "R1", "rule": "sum", "target": 9},
+      {"id": "R2", "rule": "sum", "target": 5},
+      {"id": "R3", "rule": "sum", "target": 15},
+      {"id": "R4", "rule": "sum", "target": 6},
+      {"id": "R5", "rule": "sum", "target": 8},
+      {"id": "R6", "rule": "notEqual"}
+    ],
+    "dominoSet": "double-six-full",
+    "regionFacts": {
+      "R1": "Reactive power Q corresponds to 9 kvar — the vars absorbed by a 12 kW load at 0.8 lagging power factor (Q = P·tan θ = 12 × 0.75), from PS-01",
+      "R2": "Turns ratio a corresponds to 5 — the primary-to-secondary turns ratio N1/N2 that reflects an 8 Ω secondary load to 200 Ω at the primary (Z_P = a²Z_S), from PS-02",
+      "R3": "Equivalent wye impedance magnitude corresponds to 15 — the |Z_Y| in ohms from converting a 45 Ω delta load (Z_Y = Z_Delta/3), which yields an 18.48 A line current on a 480 V source, from PS-03",
+      "R4": "Pole count corresponds to 6 — the stator pole count of a 60 Hz induction motor whose synchronous speed is 1,200 rpm (n_s = 120f/p), giving 5% slip at 1,140 rpm rotor speed, from PS-04",
+      "R5": "Capacitor bank reactive power corresponds to 8 — the leading (tens) digit of the 83.0 kvar capacitor bank required to correct a 150 kW, 0.75 pf lagging load to 0.95 pf lagging, from PS-05",
+      "R6": "Line and phase quantities must differ in a wye connection (V_L = sqrt(3)*V_P, so V_L != V_P) — adjacent cells in this region cannot share the same pip value, echoing the delta line-phase relation V_L = V_P used across PS-03"
+    }
+  }
+}

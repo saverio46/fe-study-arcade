@@ -1,0 +1,105 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": ["Linear algebra"],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-LA-Q1",
+      "subtopic": "Linear algebra",
+      "difficulty": "easy",
+      "stem": "What is the determinant of the 2x2 matrix A = [[4, 1], [2, 3]]?",
+      "choices": {
+        "A": "7",
+        "B": "10",
+        "C": "12",
+        "D": "14"
+      },
+      "correct_answer": "B",
+      "explanation": "For a 2x2 matrix [[a, b], [c, d]], the determinant is ad - bc. Here det(A) = (4)(3) - (1)(2) = 12 - 2 = 10.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices / Determinants"
+    },
+    {
+      "id": "MATH-LA-Q2",
+      "subtopic": "Linear algebra",
+      "difficulty": "easy",
+      "stem": "Given A = [[2, 4], [1, 3]] and B = [[1, 0], [0, 1]], what is the product A × B?",
+      "choices": {
+        "A": "[[2, 4], [1, 3]]",
+        "B": "[[3, 4], [1, 4]]",
+        "C": "[[1, 0], [0, 1]]",
+        "D": "[[2, 0], [0, 3]]"
+      },
+      "correct_answer": "A",
+      "explanation": "B is the identity matrix. Any matrix multiplied by the identity matrix equals itself. Therefore A × I = A = [[2, 4], [1, 3]].",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Identity Matrix"
+    },
+    {
+      "id": "MATH-LA-Q3",
+      "subtopic": "Linear algebra",
+      "difficulty": "medium",
+      "stem": "Find the inverse of the matrix A = [[1, 2], [3, 4]].",
+      "choices": {
+        "A": "[[-2, 1], [1.5, -0.5]]",
+        "B": "[[4, -2], [-3, 1]]",
+        "C": "[[-4, 2], [3, -1]]",
+        "D": "[[1, -2], [-3, 4]]"
+      },
+      "correct_answer": "A",
+      "explanation": "The inverse of a 2x2 matrix [[a, b], [c, d]] is (1/det) * [[d, -b], [-c, a]]. det(A) = (1)(4) - (2)(3) = -2. A^(-1) = (1/-2) * [[4, -2], [-3, 1]] = [[-2, 1], [1.5, -0.5]].",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Inverse"
+    },
+    {
+      "id": "MATH-LA-Q4",
+      "subtopic": "Linear algebra",
+      "difficulty": "medium",
+      "stem": "Solve the system of equations: x + y = 7 and 2x - y = 2. What is the value of x?",
+      "choices": {
+        "A": "2",
+        "B": "3",
+        "C": "4",
+        "D": "5"
+      },
+      "correct_answer": "B",
+      "explanation": "Adding the two equations: (x + y) + (2x - y) = 7 + 2 → 3x = 9 → x = 3. Substituting back: y = 7 - 3 = 4.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Solving Simultaneous Linear Equations"
+    },
+    {
+      "id": "MATH-LA-Q5",
+      "subtopic": "Linear algebra",
+      "difficulty": "hard",
+      "stem": "Find the eigenvalues of the matrix B = [[5, 4], [1, 2]].",
+      "choices": {
+        "A": "λ = 1, λ = 6",
+        "B": "λ = 2, λ = 5",
+        "C": "λ = 3, λ = 4",
+        "D": "λ = -1, λ = 8"
+      },
+      "correct_answer": "A",
+      "explanation": "The characteristic equation is det(B - λI) = 0. (5-λ)(2-λ) - (4)(1) = 0 → λ^2 - 7λ + 10 - 4 = 0 → λ^2 - 7λ + 6 = 0 → (λ - 1)(λ - 6) = 0. The eigenvalues are λ = 1 and λ = 6.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices - Eigenvalues"
+    }
+  ],
+  "puzzle_instance": {
+    "narrative": "A set of matrix equation constraints yields the following linear system.",
+    "facts": [
+      { "id": "F1", "label": "Determinant of A = [[4,1],[2,3]] (Q1 answer)", "value": 10 },
+      { "id": "F2", "label": "Absolute value of det(A) for the inverse of [[1,2],[3,4]] (Q3 answer)", "value": 2 },
+      { "id": "F3", "label": "Value of x in the simultaneous equations (Q4 answer)", "value": 3 },
+      { "id": "F4", "label": "Smaller eigenvalue of matrix B (Q5 answer, λ=1)", "value": 1 },
+      { "id": "F5", "label": "Larger eigenvalue of matrix B (Q5 answer, λ=6)", "value": 6 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 12 },
+      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 5 },
+      { "coeffs": [0, 0, 1, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 10 },
+      { "coeffs": [1, 0, -1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 8 },
+      { "coeffs": [0, 1, 1, -1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 10 }
+    ],
+    "presentation": "word_problem"
+  }
+}

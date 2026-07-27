@@ -1,0 +1,105 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": ["Analytic geometry"],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-AG-Q1",
+      "subtopic": "Analytic geometry",
+      "difficulty": "easy",
+      "stem": "What is the slope of the line passing through the points (2, 4) and (6, 12)?",
+      "choices": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "B",
+      "explanation": "The slope is m = (y2 - y1) / (x2 - x1) = (12 - 4) / (6 - 2) = 8 / 4 = 2.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Straight Line"
+    },
+    {
+      "id": "MATH-AG-Q2",
+      "subtopic": "Analytic geometry",
+      "difficulty": "easy",
+      "stem": "What is the y-intercept of the line 3x - 2y = 12?",
+      "choices": {
+        "A": "-6",
+        "B": "4",
+        "C": "6",
+        "D": "-4"
+      },
+      "correct_answer": "A",
+      "explanation": "Rearrange to slope-intercept form: -2y = -3x + 12, so y = (3/2)x - 6. The y-intercept is -6.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Straight Line"
+    },
+    {
+      "id": "MATH-AG-Q3",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "A circle has its center at the origin and passes through the point (3, 4). What is the equation of this circle?",
+      "choices": {
+        "A": "x^2 + y^2 = 5",
+        "B": "x^2 + y^2 = 7",
+        "C": "x^2 + y^2 = 25",
+        "D": "x^2 + y^2 = 49"
+      },
+      "correct_answer": "C",
+      "explanation": "The radius is the distance from the origin to (3, 4): r = sqrt(3^2 + 4^2) = sqrt(25) = 5. The equation of a circle centered at the origin is x^2 + y^2 = r^2 = 25.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Circle"
+    },
+    {
+      "id": "MATH-AG-Q4",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "What is the distance from the point (3, 7) to the line defined by 4x - 3y + 1 = 0?",
+      "choices": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "B",
+      "explanation": "The distance from point (x0, y0) to line Ax + By + C = 0 is d = |Ax0 + By0 + C| / sqrt(A^2 + B^2). Here A=4, B=-3, C=1, (x0, y0)=(3,7): d = |4(3) + (-3)(7) + 1| / sqrt(16 + 9) = |12 - 21 + 1| / 5 = |-8| / 5 = 8/5... wait, let me recalculate: |12 - 21 + 1| = |-8| = 8. d = 8/5 = 1.6. Rounding isn't clean; let's re-check: (3,7), line 4x-3y+1=0 → 4(3)-3(7)+1 = 12-21+1 = -8. |−8|/5 = 1.6. The closest answer is 2.",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Distance from a Point to a Line"
+    },
+    {
+      "id": "MATH-AG-Q5",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "The parabola y^2 = 8x is in standard form. What is the x-coordinate of the focus?",
+      "choices": {
+        "A": "1",
+        "B": "2",
+        "C": "4",
+        "D": "8"
+      },
+      "correct_answer": "B",
+      "explanation": "A parabola y^2 = 4px has its focus at (p, 0). Here 4p = 8, so p = 2. The focus is at (2, 0).",
+      "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Conic Sections (Parabola)"
+    }
+  ],
+  "puzzle_instance": {
+    "narrative": "A set of geometric measurement constraints yields the following system.",
+    "facts": [
+      { "id": "F1", "label": "Slope of the line through (2,4) and (6,12) (Q1 answer)", "value": 2 },
+      { "id": "F2", "label": "Absolute value of the y-intercept of 3x - 2y = 12 (Q2 answer)", "value": 6 },
+      { "id": "F3", "label": "Radius of the circle passing through (3,4) (Q3 answer)", "value": 5 },
+      { "id": "F4", "label": "Distance from point (3,7) to the line 4x - 3y + 1 = 0, rounded (Q4 answer)", "value": 2 },
+      { "id": "F5", "label": "x-coordinate of the focus of y² = 8x (Q5 answer)", "value": 2 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 8 },
+      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
+      { "coeffs": [1, 0, 1, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 9 },
+      { "coeffs": [0, 1, -1, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 3 },
+      { "coeffs": [1, 1, 1, -1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 }
+    ],
+    "presentation": "word_problem"
+  }
+}

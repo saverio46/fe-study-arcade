@@ -1,0 +1,117 @@
+{
+  "topic_number": 3,
+  "topic_name": "Ethics & Professional Practice",
+  "fe_priority": "medium",
+  "fe_exam_weight": "4-6 of 110 questions",
+  "subtopics": ["Codes of ethics", "Intellectual property", "Safety"],
+  "puzzle_slug": "spot-the-liar",
+  "puzzle_category": "Deduction & Social",
+  "questions": [
+    {
+      "id": "eth-01",
+      "subtopic": "Codes of ethics",
+      "difficulty": "easy",
+      "stem": "A licensed engineer working on a bridge retrofit determines that a proposed cost-cutting change to the design would endanger public safety. The engineer's supervisor, also a licensee, overrules the objection and directs the drawings to be issued as revised. According to the NCEES Model Rules of Professional Conduct, what must the engineer do?",
+      "choices": {
+        "A": "Sign and seal the drawings as directed, since the supervisor has final authority over the project.",
+        "B": "Notify the employer and such other authority as may be appropriate, since the engineer's professional judgment on a public safety matter has been overruled.",
+        "C": "Say nothing further, since raising the issue once satisfies the engineer's ethical obligation.",
+        "D": "Resign from the firm immediately without further comment, since remaining involved would make the engineer complicit."
+      },
+      "correct_answer": "B",
+      "explanation": "Rules of Professional Conduct, Section 240.15(A)(3) (Obligations of Licensees to the Public) states: 'Licensees shall notify their employer or client and such other authority as may be appropriate when their professional judgment is overruled when the health, safety, or welfare of the public is endangered.' The engineer's first and foremost responsibility is to safeguard public health, safety, and welfare (240.15(A)(1)), so silence (C) or quiet compliance (A) both violate the code, and unexplained resignation (D) does not fulfill the affirmative duty to notify. The engineer must escalate through the employer and, if warranted, an appropriate outside authority.",
+      "reference": "NCEES FE Reference Handbook, Ethics and Professional Practice — 2025-26 Model Rules, Section 240.15, Rules of Professional Conduct, A. Obligations of Licensees to the Public, item 3."
+    },
+    {
+      "id": "eth-02",
+      "subtopic": "Safety",
+      "difficulty": "easy",
+      "stem": "A technician contacts an energized 120 V circuit and experiences a shock in the 6 mA to 16 mA range. Based on the FE Reference Handbook's electrical safety data, what is the most likely physiological effect?",
+      "choices": {
+        "A": "No perceptible sensation at all.",
+        "B": "A painful shock with beginning loss of muscular control, commonly called the 'freezing current' or 'let-go' range.",
+        "C": "Immediate ventricular fibrillation and probable death.",
+        "D": "Cardiac arrest and severe internal burns."
+      },
+      "correct_answer": "B",
+      "explanation": "The Handbook's Electrical Safety table lists 6 mA-16 mA as producing a 'Painful shock, begin to lose muscular control. Commonly referred to as the freezing current or \"let-go\" range.' Lower currents (around 1 mA) are only at the perception level, while much higher currents (100 mA-2,000 mA) cause ventricular fibrillation and currents above 2,000 mA cause cardiac arrest and severe burns — those effects require far more current than 6-16 mA.",
+      "reference": "FE Reference Handbook, Safety — Electrical Safety, 'Current Level (Milliamperes) / Probable Effect on Human Body' table."
+    },
+    {
+      "id": "eth-03",
+      "subtopic": "Intellectual property",
+      "difficulty": "medium",
+      "stem": "An electrical engineer at a small firm develops a novel signal-filtering algorithm embedded in production firmware. The firm wants protection that could, in principle, last indefinitely and does not want to publicly disclose how the algorithm works. Which form of intellectual property protection best fits this goal, and what is its key limitation?",
+      "choices": {
+        "A": "A utility patent, because it never expires as long as maintenance fees are paid.",
+        "B": "A trade secret, because it can protect the algorithm as long as the firm keeps it confidential, but it offers no protection if a competitor independently develops or lawfully reverse-engineers the same method.",
+        "C": "A trademark, because it protects any proprietary process used in commerce.",
+        "D": "A copyright, because copyright automatically prevents anyone else from using the same underlying algorithm or method."
+      },
+      "correct_answer": "B",
+      "explanation": "Per the Handbook's Intellectual Property section, a trade secret 'applies to a formula, pattern, compilation, program, device, method, technique, or process' and 'offer[s] little protection without a written agreement between the involved parties' — its protection lasts only as long as secrecy is maintained, and it does not stop independent discovery or lawful reverse engineering. Choice A is wrong because a utility patent's term is 20 years from filing, not indefinite, and it requires public disclosure of the invention. Choice C is wrong because a trademark protects a word/name/symbol/device used to identify the source of goods, not a process. Choice D is wrong because copyright protects the particular expression (e.g., the source code as written), not the underlying algorithm or method itself.",
+      "reference": "FE Reference Handbook, Ethics and Professional Practice — Intellectual Property, 'Trade Secrets,' 'Patents,' 'Trademarks,' and 'Copyrights' subsections."
+    },
+    {
+      "id": "eth-04",
+      "subtopic": "Safety",
+      "difficulty": "medium",
+      "stem": "A plant safety officer needs to find the recommended personal protective equipment (PPE) and OSHA permissible exposure limits (PELs) for a solvent used in a manufacturing process. Per the standardized 16-section Safety Data Sheet (SDS) format required by the Hazard Communication Standard, in which section should this information appear?",
+      "choices": {
+        "A": "Section 2, Hazard(s) identification.",
+        "B": "Section 8, Exposure controls/personal protection.",
+        "C": "Section 11, Toxicological information.",
+        "D": "Section 15, Regulatory information."
+      },
+      "correct_answer": "B",
+      "explanation": "The Handbook's SDS outline states that 'Section 8, Exposure controls/personal protection: Lists OSHA's Permissible Exposure Limits (PELs); Threshold Limit Values (TLVs); appropriate engineering controls; personal protective equipment (PPE).' Section 2 covers hazard identification and required label elements (not PPE/PELs specifically), Section 11 covers toxicological routes of exposure and numerical toxicity measures, and Section 15 is a regulatory-information section that OSHA does not enforce (per 29 CFR 1910.1200(g)(2)).",
+      "reference": "FE Reference Handbook, Safety — Safety Data Sheet (SDS), Section 8, Exposure controls/personal protection."
+    },
+    {
+      "id": "eth-05",
+      "subtopic": "Codes of ethics",
+      "difficulty": "hard",
+      "stem": "A licensed electrical engineer is retained as a subconsultant to review the protective-relay coordination study prepared and sealed by another licensee (the prime engineer) on a substation project. While reviewing the study, the subconsultant (1) discovers a coordination error that could allow a fault to persist long enough to damage equipment and endanger workers, and (2) realizes she holds an undisclosed minority equity stake in the client's company that could appear to influence her judgment. Per the NCEES Model Rules of Professional Conduct, what is the most complete and correct course of action?",
+      "choices": {
+        "A": "Correct the coordination error quietly in her own deliverable without contacting the prime engineer or the client, since re-sealing someone else's work is never permitted.",
+        "B": "Disclose the equity stake to her employer/client, make a reasonable effort to inform the prime engineer of the material discrepancy, and if the danger to safety is not addressed, notify the employer/client and appropriate authority and report the matter to the board.",
+        "C": "Say nothing about the equity stake because it is a personal financial matter unrelated to engineering judgment, but quietly fix the drawings herself.",
+        "D": "Report the coordination error directly to the licensing board first, without ever raising it with the prime engineer or disclosing her financial interest."
+      },
+      "correct_answer": "B",
+      "explanation": "Several Model Rules provisions apply simultaneously. Section 240.15(B)(6) (Obligations to Employer and Clients) requires licensees to 'disclose to their employers or clients all known or potential conflicts of interest ... that could influence or appear to influence their judgment' — the equity stake must be disclosed. Section 240.15(C)(4) (Obligations to Other Licensees) requires a licensee to 'make a reasonable effort to inform another licensee whose work is believed to contain a material discrepancy, error, or omission that may impact the health, safety, or welfare of the public, unless such reporting is legally prohibited' — so the prime engineer must be given the chance to correct the work. If the hazard remains unaddressed, Section 240.15(A)(3) requires notifying the employer/client and appropriate authority, and Section 240.15(A)(8) requires reporting known violations to the board. Choice A ignores both the conflict-of-interest disclosure duty and the duty to inform the other licensee (and improperly bypasses the prime engineer entirely). Choice C ignores the explicit conflict-of-interest disclosure obligation. Choice D skips the required step of first informing the other licensee and omits the conflict-of-interest disclosure, jumping straight to the board.",
+      "reference": "NCEES FE Reference Handbook, Ethics and Professional Practice — 2025-26 Model Rules, Section 240.15, Rules of Professional Conduct, A.3, A.8, B.6, and C.4."
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "spotTheLiar",
+    "groundTruth": {
+      "field": "requiredEthicsAction",
+      "value": "notifyEmployerAndReportViolation"
+    },
+    "speakers": [
+      {
+        "id": "speakerA",
+        "statement": "If my professional judgment on a public safety issue gets overruled, the Model Rules say I have to notify my employer or client, and other authorities if needed — staying quiet isn't an option.",
+        "truthValue": true
+      },
+      {
+        "id": "speakerB",
+        "statement": "As long as I don't personally sign and seal it, I'm free to let a design that endangers the public go out under someone else's stamp without saying a word.",
+        "truthValue": false
+      },
+      {
+        "id": "speakerC",
+        "statement": "Before continuing my review of the client's project, I disclosed my equity stake in their company, since the Model Rules require disclosing anything that could influence or appear to influence my judgment.",
+        "truthValue": true
+      },
+      {
+        "id": "speakerD",
+        "statement": "My manufacturing process is protected as a trade secret — that protection lasts only as long as I keep it confidential, and it wouldn't stop a competitor who independently discovers the same method.",
+        "truthValue": true
+      }
+    ],
+    "liarCount": 1,
+    "solution": "speakerB"
+  }
+}

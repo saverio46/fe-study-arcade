@@ -1,0 +1,113 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Algebra and trigonometry",
+    "Complex numbers",
+    "Discrete mathematics",
+    "Analytic geometry",
+    "Calculus",
+    "Ordinary differential equations",
+    "Linear algebra",
+    "Vector analysis"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-D2-Q1",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Evaluate the limit as x approaches 0 of sin(3x)/x.",
+      "choices": {
+        "A": "0",
+        "B": "1",
+        "C": "3",
+        "D": "infinity"
+      },
+      "correct_answer": "C",
+      "explanation": "Using L'Hopital's rule, since both numerator and denominator approach 0: limit x->0 of (d/dx sin(3x)) / (d/dx x) = lim x->0 (3 cos(3x))/1 = 3*cos(0) = 3.",
+      "reference": "FE Reference Handbook, Mathematics: Differential Calculus - L'Hopital's Rule"
+    },
+    {
+      "id": "MATH-D2-Q2",
+      "subtopic": "Ordinary differential equations",
+      "difficulty": "medium",
+      "stem": "What is the general solution to the differential equation dy/dx + 2y = 0?",
+      "choices": {
+        "A": "y = C e^(2x)",
+        "B": "y = C e^(-2x)",
+        "C": "y = C x^2",
+        "D": "y = C sin(2x)"
+      },
+      "correct_answer": "B",
+      "explanation": "This is a first-order linear homogeneous differential equation. The characteristic equation is r + 2 = 0, so r = -2. The general solution is y = C e^(-2x). Alternatively, separating variables: dy/y = -2 dx, then integrate to get ln|y| = -2x + C, so y = C e^(-2x).",
+      "reference": "FE Reference Handbook, Mathematics: Differential Equations - First-Order Linear Homogeneous"
+    },
+    {
+      "id": "MATH-D2-Q3",
+      "subtopic": "Linear algebra",
+      "difficulty": "medium",
+      "stem": "Given matrix A = [[2, 1], [3, 4]], what is the determinant of A?",
+      "choices": {
+        "A": "5",
+        "B": "8",
+        "C": "11",
+        "D": "2"
+      },
+      "correct_answer": "A",
+      "explanation": "The determinant of a 2x2 matrix [[a, b], [c, d]] is ad - bc. For matrix A, det(A) = (2)(4) - (1)(3) = 8 - 3 = 5.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices / Determinants"
+    },
+    {
+      "id": "MATH-D2-Q4",
+      "subtopic": "Vector analysis",
+      "difficulty": "medium",
+      "stem": "Given vectors U = 2i - j + k and V = i + 3j - 2k, calculate the dot product U • V.",
+      "choices": {
+        "A": "-3",
+        "B": "0",
+        "C": "3",
+        "D": "5"
+      },
+      "correct_answer": "A",
+      "explanation": "The dot product of two vectors is the sum of the products of their corresponding components: U • V = (2)(1) + (-1)(3) + (1)(-2) = 2 - 3 - 2 = -3.",
+      "reference": "FE Reference Handbook, Mathematics: Vector Analysis - Dot Product"
+    },
+    {
+      "id": "MATH-D2-Q5",
+      "subtopic": "Discrete mathematics",
+      "difficulty": "easy",
+      "stem": "In Boolean algebra, what is the equivalent of the expression A + A'B?",
+      "choices": {
+        "A": "A",
+        "B": "B",
+        "C": "A + B",
+        "D": "A' + B"
+      },
+      "correct_answer": "C",
+      "explanation": "Using Boolean algebra rules, A + A'B can be expanded using the distributive law (A + A')(A + B). Since A + A' = 1, this simplifies to 1 * (A + B) = A + B.",
+      "reference": "FE Reference Handbook, Mathematics: Discrete Mathematics - Boolean Algebra"
+    }
+  ],
+  "puzzle_instance": {
+    "facts": [
+      { "id": "F1", "label": "Limit of sin(3x)/x as x->0 (Q1 answer)", "value": 3 },
+      { "id": "F2", "label": "Coefficient of x in exponential of ODE solution (absolute value) (Q2 answer)", "value": 2 },
+      { "id": "F3", "label": "Determinant of matrix A (Q3 answer)", "value": 5 },
+      { "id": "F4", "label": "Absolute value of the dot product U • V (Q4 answer)", "value": 3 },
+      { "id": "F5", "label": "Number of terms in the simplified Boolean expression (A+B) (Q5 answer)", "value": 2 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 10 },
+      { "coeffs": [0, 1, -1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 0 },
+      { "coeffs": [1, 0, 0, -1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 2 },
+      { "coeffs": [0, -1, 1, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 8 },
+      { "coeffs": [1, 1, 0, 1, -1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 }
+    ],
+    "presentation": "word_problem"
+  }
+}

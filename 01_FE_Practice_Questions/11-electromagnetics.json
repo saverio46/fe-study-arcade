@@ -1,0 +1,123 @@
+{
+  "topic_number": 11,
+  "topic_name": "Electromagnetics",
+  "fe_priority": "medium",
+  "fe_exam_weight": "4-6 of 110 questions",
+  "subtopics": ["Electrostatics/magnetostatics", "Electrodynamics", "Transmission lines"],
+  "puzzle_slug": "flow",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "EM-01",
+      "subtopic": "Electrostatics/magnetostatics",
+      "difficulty": "easy",
+      "stem": "A point charge Q1 = +2 nC is located at the origin. A second point charge Q2 = +3 nC is located 30 cm away along the x-axis, in free space. What is the magnitude and nature of the force exerted on Q2?",
+      "choices": {
+        "A": "0.6 µN, repulsive",
+        "B": "0.6 µN, attractive",
+        "C": "6.0 µN, repulsive",
+        "D": "60 nN, attractive"
+      },
+      "correct_answer": "A",
+      "explanation": "Use Coulomb's law: F2 = Q1Q2 / (4πεr²) a_r12, with ε = ε0 = 8.85×10⁻¹² F/m for free space.\n\nStep 1 - Distance: r = 0.3 m, so r² = 0.09 m².\nStep 2 - Denominator: 4πε0 = 4π(8.85×10⁻¹²) = 1.1127×10⁻¹⁰; multiplied by r² gives 1.1127×10⁻¹⁰ × 0.09 = 1.0014×10⁻¹¹.\nStep 3 - Numerator: Q1Q2 = (2×10⁻⁹)(3×10⁻⁹) = 6×10⁻¹⁸ C².\nStep 4 - Force magnitude: F = 6×10⁻¹⁸ / 1.0014×10⁻¹¹ = 5.99×10⁻⁷ N ≈ 0.6 µN.\nStep 5 - Direction: Both charges are positive, so the Coulomb force is repulsive — it pushes Q2 further away from Q1 along +a_r12.\n\nAnswer: A (0.6 µN, repulsive).",
+      "reference": "NCEES FE Reference Handbook, Electrical and Computer Engineering — 'Electrostatics' (Coulomb's Law), p. 361"
+    },
+    {
+      "id": "EM-02",
+      "subtopic": "Electrostatics/magnetostatics",
+      "difficulty": "easy",
+      "stem": "A long, straight wire on the z-axis carries a steady current I = 10 A in air. What is the magnetic flux density B at a radial distance r = 5 cm from the wire?",
+      "choices": {
+        "A": "20 µT",
+        "B": "40 µT",
+        "C": "80 µT",
+        "D": "400 µT"
+      },
+      "correct_answer": "B",
+      "explanation": "For a current-carrying wire on the z-axis, the handbook gives H = (I·a_φ)/(2πr), and B = μH with μ = μ0 = 4π×10⁻⁷ H/m in air.\n\nStep 1 - Field intensity: H = I/(2πr) = 10/(2π×0.05) = 10/0.31416 = 31.83 A/m.\nStep 2 - Flux density: B = μ0·H = (4π×10⁻⁷)(31.83) = 4.0×10⁻⁵ T = 40 µT.\n(Equivalently, B = μ0I/(2πr) = (2×10⁻⁷)(10)/0.05 = 4×10⁻⁵ T directly.)\nStep 3 - Direction: B circles the wire in the a_φ direction per the right-hand rule.\n\nAnswer: B (40 µT).",
+      "reference": "NCEES FE Reference Handbook, Electrical and Computer Engineering — 'Magnetic Fields', p. 362"
+    },
+    {
+      "id": "EM-03",
+      "subtopic": "Electrodynamics",
+      "difficulty": "medium",
+      "stem": "Which point-form Maxwell's equation correctly expresses Faraday's law, showing that a time-varying magnetic field produces a circulating (non-conservative) electric field?",
+      "choices": {
+        "A": "∇ × H = J + ∂D/∂t",
+        "B": "∇ × E = −∂B/∂t",
+        "C": "∇ · D = ρ",
+        "D": "∇ · B = 0"
+      },
+      "correct_answer": "B",
+      "explanation": "The four point-form Maxwell's equations listed in the handbook are:\n∇×E = −∂B/∂t (Faraday's law)\n∇×H = J + ∂D/∂t (Ampère's law with displacement current)\n∇·D = ρ (Gauss's law for electric fields)\n∇·B = 0 (no magnetic monopoles / Gauss's law for magnetism)\n\nFaraday's law states that a time-changing magnetic flux density B induces a curling electric field E, which in integral form is ∮E·dl = −∬(∂B/∂t)·dS. Taking the curl (Stokes' theorem) form gives the point equation ∇×E = −∂B/∂t.\n\nOption A is Ampère's law (source term is current + displacement current, not induction by B). Option C is Gauss's law for E-fields (charge as source of divergence of D). Option D states magnetic field lines have no sources/sinks (no monopoles) — it is not about induction.\n\nAnswer: B.",
+      "reference": "NCEES FE Reference Handbook, Electrical and Computer Engineering — 'Electromagnetic Dynamic Fields' (Maxwell's Equations), p. 373"
+    },
+    {
+      "id": "EM-04",
+      "subtopic": "Transmission lines",
+      "difficulty": "medium",
+      "stem": "A lossless transmission line has a per-unit-length inductance L = 250 nH/m and a per-unit-length capacitance C = 100 pF/m. What is the characteristic impedance Z0 of this line?",
+      "choices": {
+        "A": "25 Ω",
+        "B": "50 Ω",
+        "C": "100 Ω",
+        "D": "200 Ω"
+      },
+      "correct_answer": "B",
+      "explanation": "The handbook defines the characteristic impedance of a lossless line as Z0 = √(L/C), where L and C are the per-unit-length inductance and capacitance.\n\nStep 1: L/C = (250×10⁻⁹ H/m)/(100×10⁻¹² F/m) = 2500 (Ω²).\nStep 2: Z0 = √2500 = 50 Ω.\n\n(As a side note using the same L and C, the propagation velocity would be U = 1/√(LC) = 1/√(250×10⁻⁹ × 100×10⁻¹²) = 1/√(2.5×10⁻¹⁷) = 2×10⁸ m/s — about 0.67c, a typical velocity factor for a coaxial-type line — though this was not required to answer the question.)\n\nAnswer: B (50 Ω).",
+      "reference": "NCEES FE Reference Handbook, Electrical and Computer Engineering — 'Lossless Transmission Lines' (Characteristic Impedance), p. 374"
+    },
+    {
+      "id": "EM-05",
+      "subtopic": "Transmission lines",
+      "difficulty": "hard",
+      "stem": "A lossless transmission line with characteristic impedance Z0 = 50 Ω is terminated in a load ZL = 100 + j50 Ω. What is the resulting standing wave ratio (SWR) on the line?",
+      "choices": {
+        "A": "1.45",
+        "B": "2.00",
+        "C": "2.62",
+        "D": "4.24"
+      },
+      "correct_answer": "C",
+      "explanation": "The handbook gives the reflection coefficient at the load as Γ = (ZL − Z0)/(ZL + Z0), and the standing wave ratio as SWR = (1 + |Γ|)/(1 − |Γ|).\n\nStep 1 - Numerator: ZL − Z0 = (100 + j50) − 50 = 50 + j50, with magnitude |50+j50| = √(50² + 50²) = √5000 = 70.71.\nStep 2 - Denominator: ZL + Z0 = (100 + j50) + 50 = 150 + j50, with magnitude |150+j50| = √(150² + 50²) = √25000 = 158.11.\nStep 3 - Reflection coefficient magnitude: |Γ| = 70.71/158.11 = 0.4472.\nStep 4 - SWR: SWR = (1 + 0.4472)/(1 − 0.4472) = 1.4472/0.5528 = 2.618 ≈ 2.62.\n\n(Note: dividing only the real parts, 50/150 = 0.333, gives the common error SWR = 1.333/0.667 = 2.00 — choice B — which incorrectly ignores the reactive component of ZL and understates the mismatch.)\n\nAnswer: C (SWR ≈ 2.62).",
+      "reference": "NCEES FE Reference Handbook, Electrical and Computer Engineering — 'Lossless Transmission Lines' (Reflection Coefficient and SWR), p. 374"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "flow",
+    "gridSize": { "rows": 8, "cols": 8 },
+    "requireFullCoverage": true,
+    "pairs": [
+      {
+        "id": "pairA",
+        "labelA": "Source charge Q1 (+2 nC)",
+        "labelB": "Test charge Q2 (+3 nC)",
+        "endpoints": [[0, 0], [2, 3]]
+      },
+      {
+        "id": "pairB",
+        "labelA": "Current-carrying wire (I = 10 A)",
+        "labelB": "Field point (r = 5 cm, a_phi)",
+        "endpoints": [[0, 7], [3, 4]]
+      },
+      {
+        "id": "pairC",
+        "labelA": "Time-varying B-field",
+        "labelB": "Induced circulating E-field",
+        "endpoints": [[7, 0], [4, 2]]
+      },
+      {
+        "id": "pairD",
+        "labelA": "Source end (incident wave)",
+        "labelB": "Characteristic impedance Z0 = 50 ohm",
+        "endpoints": [[7, 7], [5, 5]]
+      },
+      {
+        "id": "pairE",
+        "labelA": "Incident wave V+",
+        "labelB": "Reflected wave V- at load ZL",
+        "endpoints": [[3, 7], [6, 1]]
+      }
+    ]
+  }
+}

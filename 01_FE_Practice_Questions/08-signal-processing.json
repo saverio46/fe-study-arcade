@@ -1,0 +1,122 @@
+{
+  "topic_number": 8,
+  "topic_name": "Signal Processing",
+  "fe_priority": "low",
+  "fe_exam_weight": "5-8 of 110 questions",
+  "subtopics": ["Sampling", "Analog filters", "Digital filters"],
+  "puzzle_slug": "word-tetris",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "SP-01",
+      "subtopic": "Sampling",
+      "difficulty": "easy",
+      "stem": "A continuous-time audio signal is band-limited so that it contains no frequency content above 8 kHz. According to the sampling theorem, what is the minimum sampling frequency required to allow the original signal to be exactly reconstructed from its samples?",
+      "choices": {
+        "A": "4 kHz",
+        "B": "8 kHz",
+        "C": "16 kHz",
+        "D": "32 kHz"
+      },
+      "correct_answer": "C",
+      "explanation": "The FE Reference Handbook states that a low-pass message m(t), band-limited so that M(f) = 0 for f > W, can be exactly reconstructed from uniformly spaced samples taken at a sampling frequency f_s = 1/T_s satisfying f_s > 2W. The quantity 2W is called the Nyquist frequency (Nyquist rate). Here W = 8 kHz, so the minimum sampling frequency is 2W = 2(8 kHz) = 16 kHz. Sampling at 4 kHz or 8 kHz would violate f_s > 2W and cause aliasing; 32 kHz is a valid (oversampled) rate but is not the minimum required.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering, 'Sampled Messages' (p. 381)"
+    },
+    {
+      "id": "SP-02",
+      "subtopic": "Sampling",
+      "difficulty": "easy",
+      "stem": "A signal containing a pure 6 kHz sinusoidal component is sampled at f_s = 8 kHz. At what apparent (aliased) frequency will this component appear after reconstruction?",
+      "choices": {
+        "A": "2 kHz",
+        "B": "4 kHz",
+        "C": "6 kHz",
+        "D": "8 kHz"
+      },
+      "correct_answer": "A",
+      "explanation": "First check the Nyquist condition: the handbook requires f_s > 2W for exact reconstruction. Here the component frequency is 6 kHz, so the Nyquist rate needed would be 2(6 kHz) = 12 kHz. Since f_s = 8 kHz < 12 kHz, the sampling rate is insufficient and aliasing occurs. For a sampling rate f_s, frequencies fold about multiples of f_s/2 = 4 kHz (the folding/Nyquist frequency for this f_s). The apparent frequency is found from f_alias = |f - k f_s|, choosing the integer k that brings the result into [0, f_s/2]. With f = 6 kHz, f_s = 8 kHz, and k = 1: f_alias = |6 - 8| = 2 kHz, which lies within [0, 4 kHz], so it is valid. The 6 kHz tone will be indistinguishable from a 2 kHz tone in the sampled data — the signature of aliasing.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering, 'Sampled Messages' / Nyquist frequency concept (p. 381)"
+    },
+    {
+      "id": "SP-03",
+      "subtopic": "Digital filters",
+      "difficulty": "medium",
+      "stem": "A discrete-time system is described by the first-order linear difference equation y[k] + a1*y[k-1] = x[k], with a1 = -0.5. The input is a unit step, x[k] = 1 for k >= 0, and the system starts at rest, y[-1] = 0. What is y[2]?",
+      "choices": {
+        "A": "1.25",
+        "B": "1.50",
+        "C": "1.75",
+        "D": "2.00"
+      },
+      "correct_answer": "C",
+      "explanation": "The handbook's first-order difference equation form is y[k] + a1*y[k-1] = x[k]. Solving recursively for y[k]: y[k] = x[k] - a1*y[k-1] = x[k] + 0.5*y[k-1] (since a1 = -0.5). Step 1: y[0] = x[0] - a1*y[-1] = 1 - (-0.5)(0) = 1. Step 2: y[1] = x[1] - a1*y[0] = 1 - (-0.5)(1) = 1 + 0.5 = 1.5. Step 3: y[2] = x[2] - a1*y[1] = 1 - (-0.5)(1.5) = 1 + 0.75 = 1.75. Therefore y[2] = 1.75.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering, 'Difference Equations' — First-Order Linear Difference Equation (p. 374)"
+    },
+    {
+      "id": "SP-04",
+      "subtopic": "Analog filters",
+      "difficulty": "medium",
+      "stem": "A first-order analog filter is built as: input v1 connects through resistor R1 = 1 kOhm in series with capacitor C = 0.1 microF, and the output v2 is taken across resistor R2 = 2 kOhm connected to ground at the far end (the handbook's first-order high-pass topology, R_S = R1 + R2, omega_c = 1/(R_S*C)). Classify the filter and compute its cutoff frequency f_c in Hz.",
+      "choices": {
+        "A": "Low-pass, f_c = 530 Hz",
+        "B": "High-pass, f_c = 531 Hz",
+        "C": "High-pass, f_c = 3333 Hz",
+        "D": "Low-pass, f_c = 3333 Hz"
+      },
+      "correct_answer": "B",
+      "explanation": "This R1-C-R2 topology (series R then series C, output taken across the grounded R2) matches the handbook's first-order high-pass filter circuit, whose transfer function magnitude rises from 0 at DC toward a constant value at high frequency — a high-pass response. The handbook gives R_S = R1 + R2 and omega_c = 1/(R_S*C). Step 1: R_S = R1 + R2 = 1000 Ohm + 2000 Ohm = 3000 Ohm. Step 2: omega_c = 1/(R_S*C) = 1/(3000 * 0.1e-6) = 1/(3e-4) = 3333.3 rad/s. Step 3: convert to Hz: f_c = omega_c/(2*pi) = 3333.3/6.2832 = 530.5 Hz ≈ 531 Hz. So the filter is high-pass with a cutoff near 531 Hz, not 3333 Hz (which is the angular frequency in rad/s, not Hz).",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering, 'Analog Filter Circuits' — First-Order High-Pass Filters (p. 384)"
+    },
+    {
+      "id": "SP-05",
+      "subtopic": "Digital filters",
+      "difficulty": "hard",
+      "stem": "A digital filter is described by the difference equation y[n] + 0.25*y[n-1] = x[n] + 0.5*x[n-1], with zero initial conditions. Using the z-transform pairs y[n-1] <-> z^-1*Y(z) and x[n-1] <-> z^-1*X(z), find the filter's DC gain, defined as |H(z)| evaluated at z = 1 (i.e., omega = 0).",
+      "choices": {
+        "A": "0.83",
+        "B": "1.00",
+        "C": "1.20",
+        "D": "2.00"
+      },
+      "correct_answer": "C",
+      "explanation": "Take the z-transform of both sides with zero initial conditions: Y(z) + 0.25*z^-1*Y(z) = X(z) + 0.5*z^-1*X(z). Factor: Y(z)[1 + 0.25*z^-1] = X(z)[1 + 0.5*z^-1]. The transfer function is H(z) = Y(z)/X(z) = (1 + 0.5*z^-1)/(1 + 0.25*z^-1). Because the denominator is not a constant (there is a feedback term 0.25*y[n-1]), the impulse response has infinitely many nonzero samples, making this an IIR filter (as opposed to an FIR filter, whose h[n] is limited to a finite number of points). Evaluating the DC gain at z = 1: H(1) = (1 + 0.5)/(1 + 0.25) = 1.5/1.25 = 1.2. So the filter passes a constant (DC) input with a gain of 1.2.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering, 'Digital Signal Processing' and 'z-Transforms' (pp. 375-376)"
+    }
+  ],
+  "puzzle_instance": {
+    "word_bank": [
+      {
+        "word": "NYQUIST",
+        "hint": "The sampling theorem requires f_s > 2W, where W is the highest frequency in a band-limited signal, to allow perfect reconstruction; 2W is called this frequency."
+      },
+      {
+        "word": "ALIASING",
+        "hint": "When a signal is undersampled below the Nyquist rate, high-frequency content folds down and reappears as a false lower frequency in the reconstructed signal."
+      },
+      {
+        "word": "DIFFERENCE",
+        "hint": "A first-order equation y[k] + a1*y[k-1] = x[k] models a discrete-time system's output recursively from past outputs and the current input."
+      },
+      {
+        "word": "HIGHPASS",
+        "hint": "An analog RC circuit with R1 and C in series in the signal path and R2 to ground (output across R2) attenuates frequencies below its cutoff, omega_c = 1/(R_S*C)."
+      },
+      {
+        "word": "IIR",
+        "hint": "A digital filter whose difference equation includes feedback (past-output) terms has an impulse response of infinite duration, unlike a finite-length FIR filter."
+      }
+    ],
+    "magic_word": "NYQUIST",
+    "grid": {
+      "width": 9,
+      "height": 10,
+      "water_rows": 5
+    },
+    "fall_speed": "level-dependent",
+    "special_tile_rates": {
+      "wildcard": 0.05,
+      "eraser": 0.03
+    },
+    "min_clear_length": 3
+  }
+}

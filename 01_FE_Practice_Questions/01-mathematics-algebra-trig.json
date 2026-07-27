@@ -1,0 +1,105 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": ["Algebra and trigonometry"],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-ALG-Q1",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "easy",
+      "stem": "What is sin(30°)?",
+      "choices": {
+        "A": "0",
+        "B": "0.5",
+        "C": "√2/2",
+        "D": "√3/2"
+      },
+      "correct_answer": "B",
+      "explanation": "sin(30°) = 1/2 = 0.5. This is one of the standard angle values from the unit circle that should be memorized for the FE exam.",
+      "reference": "FE Reference Handbook, Mathematics: Trigonometry - Common Angles"
+    },
+    {
+      "id": "MATH-ALG-Q2",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "easy",
+      "stem": "Solve for x: 2x + 6 = 14.",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "10"
+      },
+      "correct_answer": "B",
+      "explanation": "Subtract 6 from both sides: 2x = 8. Divide by 2: x = 4.",
+      "reference": "FE Reference Handbook, Mathematics: Algebra - Linear Equations"
+    },
+    {
+      "id": "MATH-ALG-Q3",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "medium",
+      "stem": "A right triangle has legs of length 5 and 12. What is the length of the hypotenuse?",
+      "choices": {
+        "A": "11",
+        "B": "12",
+        "C": "13",
+        "D": "17"
+      },
+      "correct_answer": "C",
+      "explanation": "Using the Pythagorean theorem: c = sqrt(a^2 + b^2) = sqrt(5^2 + 12^2) = sqrt(25 + 144) = sqrt(169) = 13.",
+      "reference": "FE Reference Handbook, Mathematics: Trigonometry - Pythagorean Theorem"
+    },
+    {
+      "id": "MATH-ALG-Q4",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "medium",
+      "stem": "Solve the quadratic equation x^2 - 5x + 6 = 0. What are the roots?",
+      "choices": {
+        "A": "x = 1, x = 6",
+        "B": "x = 2, x = 3",
+        "C": "x = -2, x = -3",
+        "D": "x = 2, x = -3"
+      },
+      "correct_answer": "B",
+      "explanation": "Factor the quadratic: (x - 2)(x - 3) = 0. Setting each factor to zero gives x = 2 and x = 3. Verification: 2^2 - 5(2) + 6 = 4 - 10 + 6 = 0 ✓",
+      "reference": "FE Reference Handbook, Mathematics: Algebra - Quadratic Formula"
+    },
+    {
+      "id": "MATH-ALG-Q5",
+      "subtopic": "Algebra and trigonometry",
+      "difficulty": "medium",
+      "stem": "Using the identity cos(A + B) = cos(A)cos(B) - sin(A)sin(B), simplify cos(75°) by writing it as cos(45° + 30°). What is the exact value?",
+      "choices": {
+        "A": "(√6 - √2) / 4",
+        "B": "(√6 + √2) / 4",
+        "C": "√3/2",
+        "D": "0.5"
+      },
+      "correct_answer": "A",
+      "explanation": "cos(75°) = cos(45° + 30°) = cos(45°)cos(30°) - sin(45°)sin(30°) = (√2/2)(√3/2) - (√2/2)(1/2) = √6/4 - √2/4 = (√6 - √2)/4.",
+      "reference": "FE Reference Handbook, Mathematics: Trigonometry - Sum and Difference Formulas"
+    }
+  ],
+  "puzzle_instance": {
+    "narrative": "A set of algebraic and trigonometric parameter constraints yields the following system.",
+    "facts": [
+      { "id": "F1", "label": "sin(30°) expressed as a fraction with denominator 2 — the numerator (Q1)", "value": 1 },
+      { "id": "F2", "label": "Value of x in the linear equation (Q2)", "value": 4 },
+      { "id": "F3", "label": "Length of the hypotenuse (Q3)", "value": 13 },
+      { "id": "F4", "label": "Smaller root of the quadratic equation (Q4)", "value": 2 },
+      { "id": "F5", "label": "Larger root of the quadratic equation (Q4)", "value": 3 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 5 },
+      { "coeffs": [0, 1, 0, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
+      { "coeffs": [0, 0, 1, -1, -1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 8 },
+      { "coeffs": [1, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
+      { "coeffs": [0, 1, 0, -1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 5 }
+    ],
+    "presentation": "word_problem"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "topic_number": 1,
+  "topic_name": "Mathematics",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "Algebra and trigonometry",
+    "Complex numbers",
+    "Discrete mathematics",
+    "Analytic geometry",
+    "Calculus",
+    "Ordinary differential equations",
+    "Linear algebra",
+    "Vector analysis"
+  ],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "MATH-Q1",
+      "subtopic": "Analytic geometry",
+      "difficulty": "easy",
+      "stem": "A site plan places a junction box at coordinates (1, 2) and a transformer at coordinates (4, 6), with all coordinates measured in kilometers. What is the straight-line distance between the junction box and the transformer?",
+      "choices": {
+        "A": "3 km",
+        "B": "4 km",
+        "C": "5 km",
+        "D": "7 km"
+      },
+      "correct_answer": "C",
+      "explanation": "The distance between two points (x1, y1) and (x2, y2) is d = sqrt[(x2 - x1)^2 + (y2 - y1)^2]. Substituting (1, 2) and (4, 6): d = sqrt[(4 - 1)^2 + (6 - 2)^2] = sqrt[3^2 + 4^2] = sqrt[9 + 16] = sqrt(25) = 5 km. This is the classic 3-4-5 right triangle.",
+      "reference": "FE Reference Handbook, Mathematics: Straight Line (distance between two points)"
+    },
+    {
+      "id": "MATH-Q2",
+      "subtopic": "Complex numbers",
+      "difficulty": "easy",
+      "stem": "Two impedance phasors in an AC circuit are given in polar form as Z1 = 4∠30° and Z2 = 2∠60°. What is the product Z1 × Z2, expressed in polar form?",
+      "choices": {
+        "A": "6∠90°",
+        "B": "8∠90°",
+        "C": "8∠30°",
+        "D": "2∠90°"
+      },
+      "correct_answer": "B",
+      "explanation": "For two complex numbers in polar form, z1 = c1∠θ1 and z2 = c2∠θ2, the product is z1 × z2 = (c1 × c2)∠(θ1 + θ2). Here c1 = 4, θ1 = 30°, c2 = 2, θ2 = 60°. Magnitude: 4 × 2 = 8. Angle: 30° + 60° = 90°. Therefore Z1 × Z2 = 8∠90°.",
+      "reference": "FE Reference Handbook, Mathematics: Algebra of Complex Numbers / Polar Coordinate System"
+    },
+    {
+      "id": "MATH-Q3",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "A projectile's trajectory profile is modeled by h(x) = -x^2 + 12x - 20, where h is height in meters and x is horizontal distance in meters. At what horizontal distance x does the profile reach its maximum height?",
+      "choices": {
+        "A": "x = 4 m",
+        "B": "x = 6 m",
+        "C": "x = 8 m",
+        "D": "x = 12 m"
+      },
+      "correct_answer": "B",
+      "explanation": "For y = f(x), a maximum occurs at x = a if f'(a) = 0 and f''(a) < 0. Differentiate: h'(x) = -2x + 12. Setting h'(x) = 0 gives -2x + 12 = 0, so x = 6. Checking the second derivative: h''(x) = -2, which is negative for all x, confirming x = 6 is a maximum.",
+      "reference": "FE Reference Handbook, Mathematics: Differential Calculus - Test for a Maximum"
+    },
+    {
+      "id": "MATH-Q4",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Evaluate the definite integral: the integral from x = 0 to x = pi/2 of x*sin(x) dx.",
+      "choices": {
+        "A": "0",
+        "B": "1",
+        "C": "pi/2",
+        "D": "2"
+      },
+      "correct_answer": "B",
+      "explanation": "The indefinite integral of x*sin(x) dx is sin(x) - x*cos(x). Evaluate at the bounds: at x = pi/2, sin(pi/2) - (pi/2)*cos(pi/2) = 1 - 0 = 1. At x = 0, sin(0) - 0*cos(0) = 0. Therefore the definite integral equals 1 - 0 = 1.",
+      "reference": "FE Reference Handbook, Mathematics: Integral Calculus - Indefinite Integrals"
+    },
+    {
+      "id": "MATH-Q5",
+      "subtopic": "Linear algebra",
+      "difficulty": "hard",
+      "stem": "Three branch currents I1, I2, and I3 (in amps) in a DC network satisfy: I1 + I2 + I3 = 20; 2*I1 - I2 + I3 = 12; I1 - I2 + 2*I3 = 18. Using matrix/determinant methods, determine I3.",
+      "choices": {
+        "A": "4 A",
+        "B": "6 A",
+        "C": "8 A",
+        "D": "10 A"
+      },
+      "correct_answer": "D",
+      "explanation": "Eliminating I1: (Eq2 - 2*Eq1) → 3*I2 + I3 = 28. (Eq3 - Eq1) → -2*I2 + I3 = -2 → I3 = 2*I2 - 2. Substituting: 3*I2 + 2*I2 - 2 = 28 → I2 = 6. Then I3 = 2(6) - 2 = 10. Back-check in Eq1: I1 = 20 - 6 - 10 = 4. Verified in Eq2: 2(4) - 6 + 10 = 12 ✓.",
+      "reference": "FE Reference Handbook, Mathematics: Matrices / Determinants"
+    }
+  ],
+  "puzzle_instance": {
+    "narrative": "Full Mathematics review — five key facts drawn from each major subtopic. Drag the value gems into their correct variable slots to balance the equations.",
+    "facts": [
+      { "id": "F1", "label": "Straight-line distance (km) between junction box and transformer — Analytic Geometry (Q1)", "value": 5 },
+      { "id": "F2", "label": "Magnitude of the product phasor Z1 × Z2 — Complex Numbers (Q2)", "value": 8 },
+      { "id": "F3", "label": "Horizontal distance x (m) at maximum trajectory height — Calculus (Q3)", "value": 6 },
+      { "id": "F4", "label": "Value of the definite integral of x·sin(x) dx from 0 to π/2 — Calculus (Q4)", "value": 1 },
+      { "id": "F5", "label": "Branch current I3 (A) from the DC network system — Linear Algebra (Q5)", "value": 10 }
+    ],
+    "num_unknowns": 5,
+    "equations": [
+      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 13 },
+      { "coeffs": [2, 0, -1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 5 },
+      { "coeffs": [0, 1, 0, -1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 17 },
+      { "coeffs": [1, -1, 1, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 13 },
+      { "coeffs": [-1, 0, 1, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 12 }
+    ],
+    "presentation": "word_problem"
+  }
+}

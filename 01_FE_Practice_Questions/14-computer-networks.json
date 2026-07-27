@@ -1,0 +1,108 @@
+{
+  "topic_number": 14,
+  "topic_name": "Computer Networks",
+  "fe_priority": "low",
+  "fe_exam_weight": "4-6 of 110 questions",
+  "subtopics": [
+    "Routing and switching",
+    "Network topologies",
+    "Network types",
+    "Network models",
+    "Network intrusion detection and prevention",
+    "Security"
+  ],
+  "puzzle_slug": "maze",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CN-01",
+      "subtopic": "Network models",
+      "difficulty": "easy",
+      "stem": "In the four-layer TCP/IP protocol stack (Network Interface, Internet, Transport, Application), a router receives a frame, strips the frame header, and examines the header that provides end-to-end logical addressing so it can determine where to forward the packet. Which layer's header is the router examining?",
+      "choices": {
+        "A": "Application layer",
+        "B": "Transport layer",
+        "C": "Internet layer",
+        "D": "Network Interface layer"
+      },
+      "correct_answer": "C",
+      "explanation": "The FE Handbook's encapsulation diagram shows a MESSAGE becoming a SEGMENT (Transport, TCP/UDP header added), then a PACKET (Internet layer, IP header added), then a FRAME (Network Interface layer, frame header added). A router's job is to route packets, so it operates at the Internet layer, reading the IP header that was added when the segment became a packet. The IP header carries the source and destination IP addresses -- the end-to-end logical addressing used to decide the next hop. The Transport layer (B) handles port-level, host-to-host delivery (TCP/UDP), not routing decisions. The Application layer (A) is where the original message/data originates. The Network Interface layer (D) header (the frame header) only has link-local significance and is stripped and rebuilt at every hop, so it cannot be used for end-to-end forwarding decisions. Therefore C is correct.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering section -- 'Network Models' / four-layer TCP/IP protocol stack encapsulation diagram and Protocol Definitions (Internet Protocol), p. 398."
+    },
+    {
+      "id": "CN-02",
+      "subtopic": "Network topologies",
+      "difficulty": "easy",
+      "stem": "A network designer wants a LAN topology in which the failure of any single link between two stations does not interrupt communication between any of the other stations, and there is no central hub or switch whose failure could take down the whole network. Which topology satisfies this requirement?",
+      "choices": {
+        "A": "Bus topology",
+        "B": "Star topology",
+        "C": "Mesh topology",
+        "D": "Token ring topology"
+      },
+      "correct_answer": "C",
+      "explanation": "In a mesh topology, every station has a direct link to every other station, so there are multiple redundant paths between any two nodes; if one link fails, traffic can still reach its destination over another link, and no single device failure isolates the rest of the network. A bus topology (A) uses one shared backbone cable -- a break anywhere on the bus disrupts communication for stations on the far side of the break. A star topology (B) routes all traffic through a central hub or switch; while a single station's link failing only affects that station, failure of the central hub or switch disables the entire network, violating the 'no central point of failure' requirement. A token ring (D) connects each station to exactly two neighbors in a closed loop; a single broken link or failed station can interrupt the ring unless a secondary counter-rotating ring is added. Only the mesh topology (C) provides redundancy without relying on a central device.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering section -- 'Network Topologies,' Star, Mesh, and Bus diagrams, p. 410-411."
+    },
+    {
+      "id": "CN-03",
+      "subtopic": "Routing and switching",
+      "difficulty": "medium",
+      "stem": "A network administrator is given the IPv4 block 192.168.10.0/24 and must subdivide it into equally sized subnets, each able to support up to 30 host addresses. What CIDR subnet mask should be used, and how many usable host addresses does each resulting subnet provide?",
+      "choices": {
+        "A": "/25, providing 126 usable host addresses",
+        "B": "/26, providing 62 usable host addresses",
+        "C": "/27, providing 30 usable host addresses",
+        "D": "/28, providing 14 usable host addresses"
+      },
+      "correct_answer": "C",
+      "explanation": "For a subnet with h host bits, the number of usable host addresses is 2^h - 2 (subtracting the all-zeros network address and the all-ones broadcast address). We need 2^h - 2 >= 30. Testing h = 5: 2^5 - 2 = 32 - 2 = 30, which exactly meets the requirement. Testing h = 4: 2^4 - 2 = 14, which is insufficient. So 5 host bits are required. Since IPv4 addresses are 32 bits total, the number of network bits (the CIDR prefix) is 32 - 5 = 27, giving a /27 mask (255.255.255.224). Each /27 subnet therefore provides 2^5 - 2 = 30 usable host addresses, exactly matching the requirement. Option A (/25) wastes far more addresses per subnet than needed (126 hosts), option B (/26) also over-allocates (62 hosts), and option D (/28) under-allocates (only 14 hosts, insufficient for 30).",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering section -- 'Internet Protocol Addressing,' CIDR (Classless Inter-Domain Routing) notation, p. 399."
+    },
+    {
+      "id": "CN-04",
+      "subtopic": "Security",
+      "difficulty": "medium",
+      "stem": "A hospital's patient-records server is hit by a ransomware attack that encrypts all files, blocking clinicians from opening patient charts during business hours. A forensic review afterward confirms that no data was copied off the server and no records were altered -- the data itself remains completely intact once decrypted. Which leg of the security triad (AIC/CIA) was most directly violated by this attack?",
+      "choices": {
+        "A": "Confidentiality",
+        "B": "Integrity",
+        "C": "Availability",
+        "D": "Authentication"
+      },
+      "correct_answer": "C",
+      "explanation": "The FE Handbook defines the Security Triad (AIC, also called the CIA Triad) as Availability, Integrity, and Confidentiality. Availability is the guarantee of reliable access to information by authorized entities. In this scenario, clinicians (authorized users) were unable to access patient charts during business hours -- a direct loss of availability -- even though the underlying data was never viewed by unauthorized parties (confidentiality intact) and was not altered, only encrypted and later recoverable (integrity intact). Confidentiality (A) would be violated if the attacker had stolen or viewed the data. Integrity (B) would be violated if the data were modified or corrupted such that it was no longer trustworthy/accurate; the problem states the data was unaltered. Authentication (D) is not one of the three legs of the security triad -- it is a separate control (verifying identity via something you know/have/are) and was not the mechanism of this attack. Therefore, Availability (C) is the correct answer.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering section -- 'Security Triad' (AIC -- Availability, Integrity, Confidentiality), p. 421 (printed handbook page)."
+    },
+    {
+      "id": "CN-05",
+      "subtopic": "Network intrusion detection and prevention",
+      "difficulty": "hard",
+      "stem": "A host transmits a UDP datagram with the IPv4 Time to Live (TTL) field set to 4. The destination is 6 router hops away. Per the standard TTL/hop-count rule, each router along the path decrements the TTL by 1 before deciding whether to forward the packet, discarding it if the field reaches zero. At which router hop is the packet discarded, and what ICMP message is sent back to the source as a result?",
+      "choices": {
+        "A": "The 3rd router; ICMP Type 3, Code 0 (Destination Unreachable, net unreachable)",
+        "B": "The 4th router; ICMP Type 11, Code 0 (Time Exceeded, TTL expired in transit)",
+        "C": "The 4th router; ICMP Type 3, Code 1 (Destination Unreachable, host unreachable)",
+        "D": "The 6th router; ICMP Type 11, Code 1 (Time Exceeded, fragment reassembly time exceeded)"
+      },
+      "correct_answer": "B",
+      "explanation": "The IPv4 TTL field is an 8-bit hop count: when a datagram arrives at a router, the router decrements the TTL by one before forwarding it; when the TTL reaches zero, the router discards the packet and sends an ICMP Time Exceeded message back to the sender rather than forwarding it further. Tracing the packet with an initial TTL of 4: at router 1, TTL is decremented from 4 to 3 (still > 0, so the packet is forwarded); at router 2, TTL goes from 3 to 2 (forwarded); at router 3, TTL goes from 2 to 1 (forwarded); at router 4, TTL goes from 1 to 0. Because the TTL has now reached zero, router 4 discards the packet instead of forwarding it toward routers 5 and 6. Per the ICMP Type/Code table, a discard due to TTL reaching zero in transit (not during fragment reassembly) corresponds to ICMP Type 11 (Time Exceeded), Code 0 ('TTL expired in transit'). Option A misidentifies both the hop count and the ICMP type (Destination Unreachable is used for unreachable networks/hosts/protocols, not TTL expiry). Option C uses the wrong ICMP type for the right hop. Option D has the wrong hop (the packet never reaches routers 5 or 6) and the wrong code (Code 1 applies to fragment reassembly timeouts at the destination host, not in-transit hop-count expiry at a router). This mechanism is exactly how the traceroute utility maps a path, incrementing TTL by one on successive probes to elicit a Time Exceeded message from each router in turn.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering section -- Internet Protocol version 4 Header, 'Time To Live (TTL)' field description, p. 403; and Internet Control Message Protocol (ICMP) Type/Code table (IPv4), Type 11 = Time Exceeded, p. 408."
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "maze",
+    "gridSize": {"rows": 20, "cols": 20},
+    "algorithm": "recursiveBacktracker",
+    "braidFactor": 0.0,
+    "start": [0, 0],
+    "end": [19, 19],
+    "waypointItems": [
+      {"cell": [2, 3], "content": "TTL decrement at each router hop (IPv4 header, hop count reduced by 1 per router)"},
+      {"cell": [6, 8], "content": "Internet layer / IP addressing (TCP/IP stack layer that routes the packet)"},
+      {"cell": [10, 10], "content": "Subnet mask /27 applied (30 usable host addresses per subnet)"},
+      {"cell": [14, 13], "content": "Firewall / port-scan inspection at the network boundary"},
+      {"cell": [17, 17], "content": "Security Triad check: Availability (authorized access must remain reliable)"}
+    ]
+  }
+}

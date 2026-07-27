@@ -1,0 +1,112 @@
+{
+  "topic_number": 7,
+  "topic_name": "Linear Systems",
+  "fe_priority": "medium",
+  "fe_exam_weight": "5-8 of 110 questions",
+  "subtopics": ["Frequency/transient response", "Resonance", "Laplace transforms", "Transfer functions"],
+  "puzzle_slug": "system-of-equations",
+  "puzzle_category": "Math & Physical",
+  "questions": [
+    {
+      "id": "LS-01",
+      "subtopic": "Laplace transforms",
+      "difficulty": "easy",
+      "stem": "A time-domain signal is given by f(t) = e^(-3t) cos(4t), for t >= 0. Using the Laplace transform pairs in the FE Reference Handbook, determine F(s) = L{f(t)}.",
+      "choices": {
+        "A": "F(s) = (s + 3) / (s^2 + 6s + 25)",
+        "B": "F(s) = (s - 3) / (s^2 - 6s + 25)",
+        "C": "F(s) = 4 / (s^2 + 6s + 25)",
+        "D": "F(s) = (s + 3) / (s^2 + 6s + 16)"
+      },
+      "correct_answer": "A",
+      "explanation": "The FE Reference Handbook Laplace Transform Pairs table gives the pair e^(-at) cos(Bt)  <->  (s + a) / [(s + a)^2 + B^2]. Matching f(t) = e^(-3t) cos(4t) to this form gives a = 3 and B = 4. Substituting: F(s) = (s + 3) / [(s + 3)^2 + 4^2]. Expanding the denominator: (s + 3)^2 + 16 = s^2 + 6s + 9 + 16 = s^2 + 6s + 25. Therefore F(s) = (s + 3) / (s^2 + 6s + 25), which is choice A. Choice B incorrectly flips the sign of the shift; choice C drops the numerator's (s+3) term (confusing this with the sine pair, whose numerator is B); choice D fails to add a^2 = 9 to B^2 = 16 when expanding the denominator (16 instead of 25).",
+      "reference": "NCEES FE Reference Handbook 10.6, Mathematics section, \"Laplace Transforms\" (Laplace Transform Pairs table), p. 58"
+    },
+    {
+      "id": "LS-02",
+      "subtopic": "Resonance",
+      "difficulty": "easy",
+      "stem": "A series RLC circuit has an inductance L = 25 mH and a capacitance C = 10 uF. Using the resonance relationship in the FE Reference Handbook, determine the resonant frequency f0 in Hz (nearest whole number).",
+      "choices": {
+        "A": "f0 = 318 Hz",
+        "B": "f0 = 2000 Hz",
+        "C": "f0 = 1000 Hz",
+        "D": "f0 = 636 Hz"
+      },
+      "correct_answer": "A",
+      "explanation": "The Handbook gives the resonant radian frequency as w0 = 1/sqrt(LC) = 2*pi*f0, valid for both series and parallel resonance. First compute LC: LC = (25x10^-3 H)(10x10^-6 F) = 250x10^-9 = 2.5x10^-7 (H)(F). Then w0 = 1/sqrt(2.5x10^-7). Since 2.5x10^-7 = 25x10^-8, sqrt(25x10^-8) = 5x10^-4, so w0 = 1/(5x10^-4) = 2000 rad/s. Converting to Hz: f0 = w0/(2*pi) = 2000/6.2832 = 318.3 Hz, which rounds to 318 Hz (choice A). Choice B is the radian frequency w0 mistaken for f0 (forgetting to divide by 2*pi). Choice C and D are arithmetic slips (roughly half of, or twice, the correct value).",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering section, \"Resonance\" / \"Series Resonance,\" p. 367"
+    },
+    {
+      "id": "LS-03",
+      "subtopic": "Transfer functions",
+      "difficulty": "medium",
+      "stem": "A linear time-invariant system is described by the differential equation d^2y/dt^2 + 6(dy/dt) + 25y = 25x(t). Taking the Laplace transform of both sides with zero initial conditions, determine the transfer function H(s) = Y(s)/X(s) and the location of its poles.",
+      "choices": {
+        "A": "H(s) = 25 / (s^2 + 6s + 25); poles at s = -3 +/- j4",
+        "B": "H(s) = 25 / (s^2 + 6s + 25); poles at s = -6 +/- j8",
+        "C": "H(s) = 25 / (s^2 + 6s + 25); poles at s = -3, -25 (both real)",
+        "D": "H(s) = 25 / (s^2 + 6s + 25); poles at s = 3 +/- j4"
+      },
+      "correct_answer": "A",
+      "explanation": "Applying the Laplace derivative property s^n F(s) with zero initial conditions to each term: s^2 Y(s) + 6s Y(s) + 25 Y(s) = 25 X(s), so H(s) = Y(s)/X(s) = 25/(s^2 + 6s + 25). The poles are the roots of the characteristic equation s^2 + 6s + 25 = 0, which the Handbook's Second-Order Linear Homogeneous Differential Equation section gives as r(1,2) = [-a +/- sqrt(a^2 - 4b)]/2 with a = 6, b = 25. The discriminant is a^2 - 4b = 36 - 100 = -64, which is negative, so the roots are complex: r = [-6 +/- sqrt(-64)]/2 = [-6 +/- j8]/2 = -3 +/- j4. Because a^2 < 4b, the system is underdamped with complex-conjugate poles, matching choice A. Choice B forgets to divide by 2. Choice C incorrectly assumes real (overdamped) roots when the discriminant is actually negative. Choice D has the wrong sign on the real part.",
+      "reference": "NCEES FE Reference Handbook 10.6, Mathematics section, \"Second-Order Linear Homogeneous Differential Equations with Constant Coefficients,\" p. 54; Electrical and Computer Engineering section, \"Digital Signal Processing\" (transfer function H(s)/H(z) concept), p. 376"
+    },
+    {
+      "id": "LS-04",
+      "subtopic": "Resonance",
+      "difficulty": "medium",
+      "stem": "A series RLC circuit has R = 8 ohm, L = 2 mH, and C = 0.5 uF. Using the FE Reference Handbook series-resonance relationships, determine the bandwidth BW of the circuit in rad/s.",
+      "choices": {
+        "A": "BW = 4000 rad/s",
+        "B": "BW = 31,623 rad/s",
+        "C": "BW = 7.91 rad/s",
+        "D": "BW = 2000 rad/s"
+      },
+      "correct_answer": "A",
+      "explanation": "For series resonance, the Handbook gives w0 = 1/sqrt(LC), Q = w0*L/R, and BW = w0/Q rad/s. First, LC = (2x10^-3)(0.5x10^-6) = 1x10^-9, so w0 = 1/sqrt(1x10^-9) = 1/(3.1623x10^-5) = 31,623 rad/s. Next, Q = w0*L/R = (31,623)(2x10^-3)/8 = 63.25/8 = 7.906. Finally, BW = w0/Q = 31,623/7.906 = 4000 rad/s. (As a check, substituting Q = w0L/R into BW = w0/Q algebraically simplifies to BW = R/L = 8/0.002 = 4000 rad/s exactly, confirming choice A.) Choice B is w0 itself, choice C is Q itself, and choice D is an arithmetic slip (half the correct bandwidth).",
+      "reference": "NCEES FE Reference Handbook 10.6, Electrical and Computer Engineering section, \"Resonance\" / \"Series Resonance\" (Q and BW formulas), p. 367"
+    },
+    {
+      "id": "LS-05",
+      "subtopic": "Laplace transforms",
+      "difficulty": "hard",
+      "stem": "A series RL circuit is described by L(di/dt) + Ri = V for t >= 0, with L = 0.5 H, R = 10 ohm, a step input V = 20 V applied at t = 0 (so the Laplace transform of the right-hand side is V/s = 20/s), and a nonzero initial condition i(0) = 1 A. Taking the Laplace transform of both sides using the derivative property from the FE Reference Handbook, determine I(s).",
+      "choices": {
+        "A": "I(s) = (s + 40) / [s(s + 20)]",
+        "B": "I(s) = (s + 20) / [s(s + 40)]",
+        "C": "I(s) = 40 / [s(s + 20)]",
+        "D": "I(s) = (s - 40) / [s(s + 20)]"
+      },
+      "correct_answer": "A",
+      "explanation": "The Handbook's Laplace transform derivative property gives L{di/dt} = sI(s) - i(0). Substituting into L(di/dt) + Ri = V: L[sI(s) - i(0)] + R*I(s) = V/s. With L = 0.5, R = 10, V = 20, i(0) = 1: 0.5[sI(s) - 1] + 10 I(s) = 20/s, which expands to 0.5s*I(s) - 0.5 + 10 I(s) = 20/s. Collecting I(s) terms: I(s)(0.5s + 10) = 20/s + 0.5. Multiplying both sides by 2 to clear the fraction: I(s)(s + 20) = 40/s + 1 = (40 + s)/s. Solving for I(s): I(s) = (s + 40) / [s(s + 20)], which is choice A. Choice B swaps the numerator and pole terms; choice C omits the contribution of the nonzero initial condition i(0) = 1 (the '+1' term); choice D has a sign error in the numerator.",
+      "reference": "NCEES FE Reference Handbook 10.6, Mathematics section, \"Laplace Transforms\" (derivative property and transform pairs), p. 58; Electrical and Computer Engineering section, \"RC and RL Transients,\" p. 367"
+    }
+  ],
+  "puzzle_instance": {
+    "facts": [
+      {
+        "id": "F1",
+        "label": "Damping coefficient a in the characteristic equation s^2 + a*s + 25 = 0 (from the transfer function H(s) = 25/(s^2 + 6s + 25) in question LS-03)",
+        "value": 6
+      },
+      {
+        "id": "F2",
+        "label": "Real-part magnitude |sigma| of the system's complex-conjugate poles, where sigma = -a/2",
+        "value": 3
+      },
+      {
+        "id": "F3",
+        "label": "Damped natural frequency omega_d (rad/s) — the imaginary part of the poles s = -3 +/- j4",
+        "value": 4
+      }
+    ],
+    "num_unknowns": 3,
+    "equations": [
+      {"coeffs": [1, -2, 0], "vars": ["F1", "F2", "F3"], "result": 0},
+      {"coeffs": [1, 1, 1], "vars": ["F1", "F2", "F3"], "result": 13},
+      {"coeffs": [1, -1, 2], "vars": ["F1", "F2", "F3"], "result": 11}
+    ],
+    "presentation": "word_problem"
+  }
+}

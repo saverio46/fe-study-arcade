@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FE Study Arcade - Pac-Man Calendar</title>
+  
+  <!-- External Font Link (Only allowed network resource) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       SECTION 3 — NEUTRAL & PAC-MAN DESIGN SYSTEM TOKENS & COMPONENTS
+       ========================================================================== */
+    :root {
+      --void: #0a0a12;
+      --panel: #12121f;
+      --panel-2: #1a1a2e;
+      --grid-line: #23233a;
+      --text: #eef0f7;
+      --text-dim: #8a8aa8;
+
+      --neon-cyan: #2de2ff;
+      --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e;
+      --neon-green: #3dff88;
+      --neon-orange: #ff6a1a;
+      --neon-purple: #b388ff;
+
+      --success: var(--neon-green);
+      --danger: var(--neon-pink);
+      --warning: var(--neon-yellow);
+
+      --font-display: 'Press Start 2P', monospace;
+      --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--font-body);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Scanlines effect overlay */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.025) 0px,
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    }
+
+    /* Sidebar Navigation */
+    nav.sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--panel);
+      border-right: 1px solid var(--grid-line);
+      padding: 22px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    nav.sidebar .brand {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--neon-yellow);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    nav.sidebar .nav-group {
+      margin-bottom: 20px;
+    }
+
+    nav.sidebar .nav-header {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+      padding-left: 6px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar li a {
+      display: block;
+      padding: 8px 10px;
+      margin-bottom: 3px;
+      border-radius: 4px;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      transition: background 120ms var(--ease-out), border-color 120ms var(--ease-out), color 120ms var(--ease-out);
+    }
+
+    nav.sidebar li a:hover, nav.sidebar li a.active {
+      background: var(--panel-2);
+      border-left-color: var(--neon-cyan);
+      color: #ffffff;
+    }
+
+    /* Main Area Layout */
+    main.main-content {
+      flex: 1;
+      padding: 24px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* SECTION 2 item 5 — Marquee Title Banner */
+    .marquee-banner {
+      position: relative;
+      background: var(--panel);
+      border: 3px solid var(--neon-yellow);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(45, 226, 255, 0.2), 0 0 20px rgba(249, 233, 78, 0.3);
+      overflow: hidden;
+    }
+
+    .marquee-banner::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background-image: radial-gradient(circle at 6px 0px, var(--void) 5px, transparent 6px);
+      background-size: 12px 12px;
+      background-repeat: repeat-x;
+    }
+
+    .marquee-sub {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .marquee-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--neon-yellow);
+      -webkit-text-stroke: 1.5px #000;
+      text-shadow: 2px 2px 0px #000, 0 0 10px var(--neon-yellow);
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .intro-crosslinks {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: -8px;
+    }
+
+    .intro-crosslinks a {
+      color: var(--neon-cyan);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .intro-crosslinks a:hover {
+      color: var(--neon-yellow);
+    }
+
+    /* SECTION 3 — HUD Component */
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--grid-line);
+      border-radius: 6px;
+      padding: 14px 24px;
+      font-family: var(--font-ui);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hud .stat { text-align: center; }
+    .hud .stat .k { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); display: block; margin-bottom: 4px; }
+    .hud .stat .v { font-family: var(--font-display); font-size: 0.95rem; color: var(--neon-yellow); text-shadow: 0 0 4px var(--neon-yellow); }
+    .hud .lives { display: flex; gap: 8px; align-items: center; justify-content: center; min-height: 20px; }
+    .hud .lives .pip { width: 12px; height: 12px; border-radius: 50%; background: var(--neon-pink); box-shadow: 0 0 4px var(--neon-pink); transition: all 150ms var(--ease-out); }
+    .hud .lives .pip.spent { background: #2a2a3a; box-shadow: none; opacity: 0.4; }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: 2px solid var(--neon-cyan);
+      background: rgba(45, 226, 255, 0.08);
+      color: var(--neon-cyan);
+      cursor: pointer;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: background 120ms var(--ease-out), box-shadow 120ms var(--ease-out), transform 80ms var(--ease-out);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      background: rgba(45, 226, 255, 0.18);
+      box-shadow: 0 0 4px var(--neon-cyan), 0 0 18px rgba(45, 226, 255, 0.5);
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn.secondary { border-color: var(--text-dim); color: var(--text-dim); background: transparent; }
+    .btn[disabled] { border-color: #3a3a4a; color: #4a4a5a; background: transparent; cursor: not-allowed; clip-path: none; box-shadow: none; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 4px currentColor; flex-shrink: 0; }
+    .badge.high { color: var(--neon-pink); background: rgba(255, 61, 129, 0.08); }
+    .badge.medium { color: var(--neon-yellow); background: rgba(249, 233, 78, 0.08); }
+    .badge.low { color: var(--neon-green); background: rgba(61, 255, 136, 0.08); }
+
+    /* Pure CSS Ghost Glyph Shape (Section 2 Item 3) */
+    .ghost-glyph {
+      width: 14px;
+      height: 16px;
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      color: currentColor;
+    }
+
+    .ghost-body {
+      width: 100%;
+      height: 100%;
+      background: currentColor;
+      border-radius: 7px 7px 0 0;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 80% 85%, 60% 100%, 40% 85%, 20% 100%, 0 85%);
+    }
+
+    .ghost-eyes {
+      position: absolute;
+      top: 3px;
+      left: 2px;
+      width: 10px;
+      height: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ghost-eye {
+      width: 4px;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .ghost-eye::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #0000aa;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+    }
+
+    /* Ghost Color Mappings */
+    .ghost-blinky { color: var(--neon-pink); }
+    .ghost-pinky { color: var(--neon-purple); }
+    .ghost-inky { color: var(--neon-cyan); }
+    .ghost-clyde { color: var(--neon-orange); }
+
+    /* Ghost Activity Badge */
+    .ghost-activity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--panel-2);
+      border: 1px solid var(--grid-line);
+    }
+
+    /* Legend Row */
+    .legend-card {
+      background: var(--panel);
+      border: 1px solid var(--grid-line);
+      border-radius: 6px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.78rem;
+    }
+
+    .legend-title {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      color: var(--neon-cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px 16px;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-dim);
+    }
+
+    .legend-item strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Calendar Controls & Warp Tunnels */
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--grid-line);
+      border-radius: 6px;
+      padding: 12px 18px;
+    }
+
+    .calendar-title {
+      font-family: var(--font-ui);
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--neon-yellow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-shadow: 0 0 6px var(--neon-yellow);
+    }
+
+    /* Calendar Grid */
+    .calendar-wrapper {
+      background: var(--panel);
+      border: 2px solid var(--grid-line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    #calendar-grid-container {
+      width: 100%;
+      box-sizing: border-box;
+      overflow-x: auto;
+    }
+
+    .weekdays-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .weekday-cell {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-align: center;
+      padding: 8px 2px;
+      letter-spacing: 0.05em;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* SECTION 2 Item 1 — Calendar Day Cell (Maze Chrome Style) */
+    .day-cell {
+      background: var(--panel);
+      border: 1.5px solid var(--neon-cyan);
+      border-radius: 6px;
+      padding: 6px;
+      min-height: 98px;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 0 2px var(--neon-cyan), 0 0 10px rgba(45, 226, 255, 0.12);
+      cursor: pointer;
+      transition: transform 120ms var(--ease-out), box-shadow 120ms var(--ease-out), background 120ms var(--ease-out);
+      outline: none;
+      overflow: hidden;
+    }
+
+    .day-cell:hover, .day-cell:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 0 6px var(--neon-cyan), 0 0 20px rgba(45, 226, 255, 0.35);
+      background: var(--panel-2);
+      z-index: 2;
+    }
+
+    .day-cell:focus-visible {
+      outline: 2px solid var(--neon-yellow);
+      outline-offset: 2px;
+    }
+
+    .day-cell.other-month {
+      opacity: 0.35;
+      border-color: var(--grid-line);
+      box-shadow: none;
+      cursor: default;
+    }
+
+    /* TODAY Cell & Power Pellet */
+    .day-cell.today {
+      border-color: var(--neon-yellow);
+      box-shadow: 0 0 6px var(--neon-yellow), 0 0 20px rgba(249, 233, 78, 0.35);
+    }
+
+    .day-cell.today .day-number {
+      color: var(--neon-yellow);
+      font-weight: 900;
+    }
+
+    /* Today's Power Pellet Marker (Only element allowed to pulse) */
+    .power-pellet {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon-yellow);
+      box-shadow: 0 0 6px var(--neon-yellow), 0 0 14px var(--neon-yellow);
+      animation: attractPulse 1.2s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes attractPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    /* Empty Day Pellet */
+    .ordinary-pellet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      box-shadow: 0 0 4px var(--text-dim);
+      margin: auto;
+      opacity: 0.6;
+    }
+
+    /* SECTION 2 Item 4 — Bonus Day Style */
+    .day-cell.bonus-day {
+      background: rgba(45, 226, 255, 0.12);
+      border: 2px dashed var(--neon-cyan);
+      box-shadow: inset 0 0 12px rgba(45, 226, 255, 0.2), 0 0 8px rgba(45, 226, 255, 0.2);
+    }
+
+    .bonus-tag {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      color: var(--neon-yellow);
+      background: rgba(45, 226, 255, 0.2);
+      padding: 2px 3px;
+      border-radius: 3px;
+      border: 1px solid var(--neon-cyan);
+      text-transform: uppercase;
+      text-shadow: 0 0 4px var(--neon-yellow);
+      flex-shrink: 0;
+    }
+
+    .day-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .day-number {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    .day-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      justify-content: flex-start;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .day-topic-chip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 4px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .day-topic-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .payoff-badge {
+      font-family: var(--font-ui);
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: var(--neon-purple);
+      border: 1px solid var(--neon-purple);
+      background: rgba(179, 136, 255, 0.15);
+      padding: 1px 3px;
+      border-radius: 3px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .overflow-chip {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      color: var(--neon-cyan);
+      padding: 1px 3px;
+      border-radius: 3px;
+      background: rgba(45, 226, 255, 0.1);
+      text-align: center;
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    /* Day Complete Checkmark Stamp */
+    .completed-stamp {
+      font-family: var(--font-ui);
+      font-size: 0.55rem;
+      color: var(--neon-green);
+      background: rgba(61, 255, 136, 0.12);
+      border: 1px solid var(--neon-green);
+      padding: 1px 3px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    /* SECTION 2 Item 6 — Flourish Overlay Banner */
+    .flourish-overlay {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50px);
+      background: var(--panel-2);
+      border: 2px solid var(--neon-yellow);
+      box-shadow: 0 0 10px var(--neon-yellow), 0 0 30px rgba(249, 233, 78, 0.4);
+      padding: 12px 28px;
+      border-radius: 8px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 300ms var(--ease-out), opacity 300ms var(--ease-out);
+    }
+
+    .flourish-overlay.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .flourish-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
+      text-align: center;
+    }
+
+    /* SECTION 3 — Dialog Components */
+    .dialog-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 10, 0.82);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .dialog-overlay.open { display: flex; }
+
+    .dialog-box {
+      background: var(--panel-2);
+      border: 2px solid var(--neon-cyan);
+      box-shadow: 0 0 4px var(--neon-cyan), 0 0 30px rgba(45, 226, 255, 0.3);
+      padding: 28px 32px;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      transform: scale(0.92);
+      opacity: 0;
+      transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .dialog-overlay.open .dialog-box { transform: scale(1); opacity: 1; }
+    .dialog-box::before, .dialog-box::after { content: ""; position: absolute; width: 16px; height: 16px; border-color: var(--neon-cyan); border-style: solid; }
+    .dialog-box::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+    .dialog-box::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--grid-line);
+      padding-bottom: 12px;
+    }
+
+    .dialog-date {
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--neon-yellow);
+    }
+
+    .dialog-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .dialog-close-btn:hover { color: var(--neon-pink); }
+
+    .dialog-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .dialog-topic-card {
+      background: var(--panel);
+      border: 1px solid var(--grid-line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dialog-topic-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .dialog-topic-title {
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--neon-cyan);
+      border-radius: 3px;
+      background: var(--void);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .checklist-item input[type="checkbox"]:checked {
+      background: var(--neon-cyan);
+    }
+
+    .checklist-item input[type="checkbox"]:checked::after {
+      content: "✓";
+      position: absolute;
+      color: var(--void);
+      font-size: 11px;
+      font-weight: bold;
+      top: -2px;
+      left: 2px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Accessibility / Reduced Motion Override */
+    @media (prefers-reduced-motion: reduce) {
+      .power-pellet { animation: none !important; }
+      .flourish-overlay { transition: none !important; }
+      .dialog-box { transition: none !important; }
+      .btn { transition: none !important; }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 860px) {
+      body { flex-direction: column; }
+      nav.sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--grid-line); }
+      main.main-content { padding: 12px; }
+      .calendar-wrapper { padding: 10px; }
+      .weekdays-grid { gap: 4px; }
+      .days-grid { gap: 4px; }
+      .day-cell { min-height: 75px; padding: 4px; }
+      .day-number { font-size: 0.78rem; }
+      .day-topic-chip { font-size: 0.58rem; padding: 2px 3px; }
+      .hud { padding: 10px 14px; gap: 10px; }
+    }
+
+    @media (max-width: 560px) {
+      .weekday-cell { font-size: 0.65rem; padding: 4px 1px; letter-spacing: 0; }
+      .day-cell { min-height: 60px; padding: 3px; }
+      .day-number { font-size: 0.72rem; }
+      .day-topic-chip { font-size: 0.52rem; gap: 2px; }
+      .payoff-badge, .bonus-tag, .completed-stamp { font-size: 0.5rem; padding: 0 2px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scanline Screen Effect -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- SECTION 4 — Sticky Sidebar Nav -->
+  <nav class="sidebar" aria-label="Main Navigation">
+    <div class="brand">
+      <span class="power-pellet" style="animation: none;"></span>
+      FE STUDY ARCADE
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-header">Foundations</div>
+      <ul>
+        <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
+        <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-header">Study Content</div>
+      <ul>
+        <li><a href="notebook.html">Study Notebook</a></li>
+        <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+        <li><a href="#" class="active" aria-current="page">Pac-Man Calendar (Home)</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-header">Puzzle Engine</div>
+      <ul>
+        <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Column -->
+  <main class="main-content">
+    <!-- Item 5: Marquee Title Banner -->
+    <header class="marquee-banner">
+      <div class="marquee-sub">FUNDAMENTALS OF ENGINEERING</div>
+      <h1 class="marquee-title">FE STUDY ARCADE</h1>
+    </header>
+
+    <p class="intro-crosslinks">
+      Electrical Engineering FE Exam Preparation Calendar • Crosslinks: 
+      <a href="00_Generic_Templates/neo-arcade-design-system.html">Design System</a> | 
+      <a href="fe-arcade-adaptation-map.html">Adaptation Map</a> | 
+      <a href="notebook.html">Study Notebook</a>
+    </p>
+
+    <!-- Item 7: HUD Score Strip -->
+    <section class="hud" aria-label="Arcade HUD Stats">
+      <div class="stat">
+        <span class="k">1UP</span>
+        <span class="v" id="hud-score">0000</span>
+      </div>
+      <div class="stat">
+        <span class="k">HIGH SCORE</span>
+        <span class="v" id="hud-highscore">0000</span>
+      </div>
+      <div class="stat">
+        <span class="k">STREAK</span>
+        <span class="v" id="hud-streak">x0</span>
+      </div>
+      <div class="stat">
+        <span class="k">LEVEL</span>
+        <span class="v" id="hud-level" style="font-size: 0.72rem; font-family: var(--font-ui);">Microprocessors</span>
+      </div>
+      <div class="stat">
+        <span class="k">DAILY LIVES</span>
+        <div class="lives" id="hud-lives" aria-label="3 completions remaining today">
+          <div class="pip" id="pip-1" title="Life Pip 1"></div>
+          <div class="pip" id="pip-2" title="Life Pip 2"></div>
+          <div class="pip" id="pip-3" title="Life Pip 3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Item c: Compact Legend Row -->
+    <section class="legend-card" aria-label="Calendar Legend">
+      <div class="legend-title">PAC-MAN ARCADE CALENDAR LEGEND</div>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="ghost-glyph ghost-blinky"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>
+          <strong>Blinky (Pink):</strong> New Topic
+        </div>
+        <div class="legend-item">
+          <span class="ghost-glyph ghost-pinky"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>
+          <strong>Pinky (Purple):</strong> Deadline / Exam
+        </div>
+        <div class="legend-item">
+          <span class="ghost-glyph ghost-inky"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>
+          <strong>Inky (Cyan):</strong> Topic Review
+        </div>
+        <div class="legend-item">
+          <span class="ghost-glyph ghost-clyde"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>
+          <strong>Clyde (Orange):</strong> Light Review
+        </div>
+        <div class="legend-item">
+          <span class="badge high"><span class="dot"></span> High</span>
+          <span class="badge medium"><span class="dot"></span> Med</span>
+          <span class="badge low"><span class="dot"></span> Low</span>
+        </div>
+        <div class="legend-item">
+          <span class="power-pellet" style="animation: none;"></span>
+          <strong>Power Pellet:</strong> Today's Cell
+        </div>
+        <div class="legend-item">
+          <span class="bonus-tag">BONUS</span>
+          <strong>Bonus Day:</strong> Student Choice (2x Credit)
+        </div>
+        <div class="legend-item">
+          <span class="payoff-badge">×3 / ×4</span>
+          <strong>Multi-Target:</strong> Covers Multiple Topics
+        </div>
+      </div>
+    </section>
+
+    <!-- Item d: Calendar Grid -->
+    <section class="calendar-wrapper" aria-label="Study Calendar Month View">
+      <!-- Header with Warp Tunnels -->
+      <div class="calendar-header">
+        <button class="btn" id="prev-month-btn" aria-label="Previous Month (Warp Left)">◄ PREV</button>
+        <div class="calendar-title" id="calendar-month-year">JULY 2026</div>
+        <button class="btn" id="next-month-btn" aria-label="Next Month (Warp Right)">NEXT ►</button>
+      </div>
+
+      <div style="margin-top: 14px;" role="grid" id="calendar-grid-container" aria-label="Calendar Grid">
+        <!-- Weekday Labels -->
+        <div class="weekdays-grid" role="row">
+          <div class="weekday-cell" role="columnheader">SUN</div>
+          <div class="weekday-cell" role="columnheader">MON</div>
+          <div class="weekday-cell" role="columnheader">TUE</div>
+          <div class="weekday-cell" role="columnheader">WED</div>
+          <div class="weekday-cell" role="columnheader">THU</div>
+          <div class="weekday-cell" role="columnheader">FRI</div>
+          <div class="weekday-cell" role="columnheader">SAT</div>
+        </div>
+
+        <!-- Dynamic Days Grid -->
+        <div class="days-grid" id="days-container"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Flourish Banner (READY! / NICE!) -->
+  <div id="flourish-overlay" class="flourish-overlay" aria-live="polite">
+    <div class="flourish-text" id="flourish-text">READY!</div>
+  </div>
+
+  <!-- Day Detail Dialog -->
+  <div class="dialog-overlay" id="dialog-overlay" role="dialog" aria-modal="true" aria-labelledby="dialog-date">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <div class="dialog-date" id="dialog-date">July 26, 2026</div>
+        <button class="dialog-close-btn" id="dialog-close-btn" aria-label="Close Dialog">&times;</button>
+      </div>
+      <div class="dialog-body" id="dialog-body">
+        <!-- Content injected dynamically -->
+      </div>
+      <div class="dialog-actions">
+        <button class="btn secondary" id="dialog-cancel-btn">Close</button>
+        <a class="btn secondary" id="dialog-study-link" href="#" style="text-decoration:none; display:inline-flex; align-items:center;">Study This Day →</a>
+        <button class="btn" id="dialog-complete-btn">Mark Day Complete (+100 PTS)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared calendar data (also used by day-details.html) -->
+  <script src="data/calendar-seed.js"></script>
+
+  <!-- Inline Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      // SECTION 6 — SEED DATA (full ~13-week study plan, starts Monday July 27 2026)
+      // Loaded from data/calendar-seed.js (shared with day-details.html), keyed by full
+      // ISO date so it spans multiple real calendar months, not just July.
+      const SEED_DATA = window.SEED_DATA;
+
+      // APP STATE & LOCALSTORAGE PERSISTENCE
+      const STORAGE_KEY = 'fe-arcade-calendar-state';
+      
+      let appState = {
+        score: 0,
+        highScore: 1200,
+        streak: 3,
+        lastCompletedDate: null,
+        dailyCompletions: {}, // { 'YYYY-MM-DD': count }
+        completedDays: {},    // { 'YYYY-MM-DD': true }
+        currentDate: new Date(2026, 6, 26) // Default to July 26, 2026 as reference
+      };
+
+      function loadState() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            appState = { ...appState, ...parsed };
+          }
+        } catch (e) {
+          console.warn('localStorage unavailable, using in-memory state');
+        }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            score: appState.score,
+            highScore: appState.highScore,
+            streak: appState.streak,
+            lastCompletedDate: appState.lastCompletedDate,
+            dailyCompletions: appState.dailyCompletions,
+            completedDays: appState.completedDays
+          }));
+        } catch (e) {
+          // Graceful fallback
+        }
+      }
+
+      // REAL TODAY CONTEXT (July 26, 2026 or real system date if in July 2026)
+      const REAL_TODAY = new Date();
+      // If running inside the seeded context, ensure today defaults to July 26, 2026 or system date
+      const TODAY_YEAR = 2026;
+      const TODAY_MONTH = 6; // 0-indexed (July)
+      const TODAY_DATE = 26;
+
+      function isToday(y, m, d) {
+        // If current calendar matches system real date, or July 26, 2026
+        if (y === TODAY_YEAR && m === TODAY_MONTH && d === TODAY_DATE) return true;
+        return REAL_TODAY.getFullYear() === y && REAL_TODAY.getMonth() === m && REAL_TODAY.getDate() === d;
+      }
+
+      function formatDateKey(y, m, d) {
+        const mm = String(m + 1).padStart(2, '0');
+        const dd = String(d).padStart(2, '0');
+        return `${y}-${mm}-${dd}`;
+      }
+
+      // HUD DOM RENDERING
+      function updateHUD() {
+        document.getElementById('hud-score').textContent = String(appState.score).padStart(4, '0');
+        document.getElementById('hud-highscore').textContent = String(appState.highScore).padStart(4, '0');
+        document.getElementById('hud-streak').textContent = `x${appState.streak}`;
+
+        // Get completions used today
+        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
+        const usedToday = appState.dailyCompletions[todayKey] || 0;
+        const livesLeft = Math.max(0, 3 - usedToday);
+
+        for (let i = 1; i <= 3; i++) {
+          const pip = document.getElementById(`pip-${i}`);
+          if (pip) {
+            if (i <= livesLeft) {
+              pip.classList.remove('spent');
+            } else {
+              pip.classList.add('spent');
+            }
+          }
+        }
+      }
+
+      // FLOURISH BANNER
+      function showFlourish(message) {
+        const overlay = document.getElementById('flourish-overlay');
+        const textEl = document.getElementById('flourish-text');
+        textEl.textContent = message;
+        overlay.classList.add('active');
+
+        setTimeout(() => {
+          overlay.classList.remove('active');
+        }, 1600);
+      }
+
+      // CALENDAR GRID RENDERER
+      let activeFocusedCell = null;
+      let activeDateObj = null;
+
+      function renderCalendar(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+
+        const monthNames = [
+          'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+          'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+        ];
+
+        document.getElementById('calendar-month-year').textContent = `${monthNames[month]} ${year}`;
+
+        const daysContainer = document.getElementById('days-container');
+        daysContainer.innerHTML = '';
+
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+        const totalCells = Math.ceil((firstDayOfMonth + daysInMonth) / 7) * 7;
+
+        let cellIndex = 0;
+        let dayCells = [];
+
+        for (let i = 0; i < totalCells; i++) {
+          let cellYear = year;
+          let cellMonth = month;
+          let cellDay = 0;
+          let isCurrentMonth = true;
+
+          if (i < firstDayOfMonth) {
+            isCurrentMonth = false;
+            cellMonth = month - 1;
+            if (cellMonth < 0) { cellMonth = 11; cellYear--; }
+            cellDay = daysInPrevMonth - (firstDayOfMonth - 1 - i);
+          } else if (i >= firstDayOfMonth + daysInMonth) {
+            isCurrentMonth = false;
+            cellMonth = month + 1;
+            if (cellMonth > 11) { cellMonth = 0; cellYear++; }
+            cellDay = i - (firstDayOfMonth + daysInMonth) + 1;
+          } else {
+            cellDay = i - firstDayOfMonth + 1;
+          }
+
+          const dateKey = formatDateKey(cellYear, cellMonth, cellDay);
+          const isTodayCell = isToday(cellYear, cellMonth, cellDay);
+
+          // Get seed items for this date — SEED_DATA is keyed by full ISO date so it
+          // naturally spans the whole multi-month plan, not just one seed month.
+          let items = SEED_DATA[dateKey] || [];
+
+          const cellEl = document.createElement('div');
+          cellEl.className = 'day-cell';
+          cellEl.setAttribute('role', 'gridcell');
+          cellEl.setAttribute('tabindex', '-1');
+          cellEl.dataset.dateKey = dateKey;
+          cellEl.dataset.year = cellYear;
+          cellEl.dataset.month = cellMonth;
+          cellEl.dataset.day = cellDay;
+          cellEl.dataset.isCurrentMonth = isCurrentMonth;
+
+          if (!isCurrentMonth) {
+            cellEl.classList.add('other-month');
+          }
+
+          if (isTodayCell && isCurrentMonth) {
+            cellEl.classList.add('today');
+            cellEl.setAttribute('aria-current', 'date');
+          }
+
+          const isBonus = items.some(item => item.isBonus);
+          if (isBonus) {
+            cellEl.classList.add('bonus-day');
+          }
+
+          const isCompleted = !!appState.completedDays[dateKey];
+
+          // Construct ARIA label for accessibility (Section 7)
+          let ariaLabelText = `${monthNames[cellMonth]} ${cellDay}, ${cellYear}`;
+          if (isTodayCell) ariaLabelText += `, Today`;
+          if (isBonus) ariaLabelText += `, Bonus Day double credit`;
+          if (items.length > 0) {
+            items.forEach(it => {
+              ariaLabelText += `, Topic: ${it.topic}, ${it.activityLabel}, Priority ${it.priority}`;
+            });
+          } else {
+            ariaLabelText += `, No scheduled events`;
+          }
+          if (isCompleted) ariaLabelText += `, Completed`;
+
+          cellEl.setAttribute('aria-label', ariaLabelText);
+
+          // Header row of cell (Day number + today marker / bonus tag / checkmark)
+          const headerRow = document.createElement('div');
+          headerRow.className = 'day-header-row';
+
+          const numEl = document.createElement('span');
+          numEl.className = 'day-number';
+          numEl.textContent = cellDay;
+          headerRow.appendChild(numEl);
+
+          if (isTodayCell && isCurrentMonth) {
+            const pellet = document.createElement('span');
+            pellet.className = 'power-pellet';
+            pellet.title = "Today's Power Pellet";
+            headerRow.appendChild(pellet);
+          } else if (isBonus) {
+            const btag = document.createElement('span');
+            btag.className = 'bonus-tag';
+            btag.textContent = 'BONUS';
+            headerRow.appendChild(btag);
+          } else if (isCompleted) {
+            const stamp = document.createElement('span');
+            stamp.className = 'completed-stamp';
+            stamp.innerHTML = '✓ DONE';
+            headerRow.appendChild(stamp);
+          }
+
+          cellEl.appendChild(headerRow);
+
+          // Content of cell
+          const contentEl = document.createElement('div');
+          contentEl.className = 'day-content';
+
+          if (items.length === 0) {
+            // Ordinary Pellet Day
+            const ordPellet = document.createElement('span');
+            ordPellet.className = 'ordinary-pellet';
+            contentEl.appendChild(ordPellet);
+          } else {
+            // Render up to 2 items
+            const displayItems = items.slice(0, 2);
+            displayItems.forEach(item => {
+              const chip = document.createElement('div');
+              chip.className = 'day-topic-chip';
+
+              // Ghost Glyph
+              const ghostHtml = `<span class="ghost-glyph ghost-${item.activity}"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>`;
+              
+              chip.innerHTML = `${ghostHtml} <span class="day-topic-name">${item.topic}</span>`;
+
+              if (item.payoff) {
+                const pbadge = document.createElement('span');
+                pbadge.className = 'payoff-badge';
+                pbadge.textContent = `×${item.payoff}`;
+                chip.appendChild(pbadge);
+              }
+
+              contentEl.appendChild(chip);
+            });
+
+            if (items.length > 2) {
+              const overflow = document.createElement('div');
+              overflow.className = 'overflow-chip';
+              overflow.textContent = `+${items.length - 2} more`;
+              contentEl.appendChild(overflow);
+            }
+          }
+
+          cellEl.appendChild(contentEl);
+
+          // Click Handler
+          cellEl.addEventListener('click', () => {
+            openDayDialog(cellYear, cellMonth, cellDay, items, dateKey);
+          });
+
+          daysContainer.appendChild(cellEl);
+          dayCells.push(cellEl);
+        }
+
+        // Setup roving tabindex
+        if (dayCells.length > 0) {
+          // Find today cell or 1st day of month
+          let focusTarget = dayCells.find(c => c.dataset.year == TODAY_YEAR && c.dataset.month == TODAY_MONTH && c.dataset.day == TODAY_DATE) ||
+                            dayCells.find(c => c.dataset.isCurrentMonth === 'true') ||
+                            dayCells[0];
+          
+          focusTarget.setAttribute('tabindex', '0');
+          activeFocusedCell = focusTarget;
+        }
+
+        setupRovingKeyboard(dayCells);
+      }
+
+      // KEYBOARD NAVIGATION (Section 7)
+      function setupRovingKeyboard(cells) {
+        cells.forEach((cell, idx) => {
+          cell.addEventListener('keydown', (e) => {
+            let nextIndex = null;
+
+            switch (e.key) {
+              case 'ArrowRight':
+                nextIndex = (idx + 1) % cells.length;
+                break;
+              case 'ArrowLeft':
+                nextIndex = (idx - 1 + cells.length) % cells.length;
+                break;
+              case 'ArrowDown':
+                nextIndex = idx + 7 < cells.length ? idx + 7 : idx;
+                break;
+              case 'ArrowUp':
+                nextIndex = idx - 7 >= 0 ? idx - 7 : idx;
+                break;
+              case 'Home':
+                nextIndex = Math.floor(idx / 7) * 7;
+                break;
+              case 'End':
+                nextIndex = Math.min(Math.floor(idx / 7) * 7 + 6, cells.length - 1);
+                break;
+              case 'PageUp':
+                e.preventDefault();
+                navigateMonth(-1);
+                return;
+              case 'PageDown':
+                e.preventDefault();
+                navigateMonth(1);
+                return;
+              case 'Enter':
+              case ' ':
+                e.preventDefault();
+                cell.click();
+                return;
+              default:
+                return;
+            }
+
+            if (nextIndex !== null) {
+              e.preventDefault();
+              cells[idx].setAttribute('tabindex', '-1');
+              cells[nextIndex].setAttribute('tabindex', '0');
+              cells[nextIndex].focus();
+              activeFocusedCell = cells[nextIndex];
+            }
+          });
+        });
+      }
+
+      // MONTH NAV (Warp Tunnels)
+      function navigateMonth(direction) {
+        appState.currentDate.setMonth(appState.currentDate.getMonth() + direction);
+        renderCalendar(appState.currentDate);
+      }
+
+      document.getElementById('prev-month-btn').addEventListener('click', () => navigateMonth(-1));
+      document.getElementById('next-month-btn').addEventListener('click', () => navigateMonth(1));
+
+      // DAY DETAIL DIALOG
+      const overlay = document.getElementById('dialog-overlay');
+      const dialogBody = document.getElementById('dialog-body');
+      const dialogDate = document.getElementById('dialog-date');
+      const completeBtn = document.getElementById('dialog-complete-btn');
+      const studyLink = document.getElementById('dialog-study-link');
+
+      let currentDialogDateKey = null;
+      let currentDialogItems = [];
+      let currentDialogIsBonus = false;
+
+      function openDayDialog(y, m, d, items, dateKey) {
+        currentDialogDateKey = dateKey;
+        currentDialogItems = items;
+
+        const dateObj = new Date(y, m, d);
+        const dateStr = dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        dialogDate.textContent = dateStr;
+
+        dialogBody.innerHTML = '';
+
+        // Wire up the "Study This Day" link — only meaningful for actual study days.
+        if (items && items.length > 0) {
+          studyLink.href = `day-details.html?date=${dateKey}`;
+          studyLink.style.display = '';
+        } else {
+          studyLink.style.display = 'none';
+        }
+
+        if (!items || items.length === 0) {
+          dialogBody.innerHTML = `
+            <div style="text-align: center; color: var(--text-dim); padding: 20px 0;">
+              <span class="ordinary-pellet" style="display:inline-block; margin-bottom: 8px;"></span>
+              <p>No formal study topics scheduled for this day.</p>
+              <p style="font-size:0.8rem; margin-top:4px;">Use this time for general problem solving or resting!</p>
+            </div>
+          `;
+        } else {
+          items.forEach(item => {
+            currentDialogIsBonus = !!item.isBonus;
+
+            const card = document.createElement('div');
+            card.className = 'dialog-topic-card';
+
+            const ghostHtml = `<span class="ghost-glyph ghost-${item.activity}"><span class="ghost-body"><span class="ghost-eyes"><span class="ghost-eye"></span><span class="ghost-eye"></span></span></span></span>`;
+
+            card.innerHTML = `
+              <div class="dialog-topic-meta">
+                <span class="badge ${item.priority}"><span class="dot"></span> ${item.priority.toUpperCase()} PRIORITY</span>
+                <span class="ghost-activity-badge">${ghostHtml} ${item.activityLabel}</span>
+                ${item.payoff ? `<span class="payoff-badge">Multi-Target Payoff (×${item.payoff})</span>` : ''}
+              </div>
+              <div class="dialog-topic-title">${item.topic}</div>
+              <ul class="checklist">
+                <li class="checklist-item">
+                  <input type="checkbox" checked id="check-${dateKey}">
+                  <label for="check-${dateKey}">${item.subtopic}</label>
+                </li>
+              </ul>
+            `;
+            dialogBody.appendChild(card);
+          });
+        }
+
+        // Check completion limits & completed status
+        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
+        const usedToday = appState.dailyCompletions[todayKey] || 0;
+        const isAlreadyCompleted = !!appState.completedDays[dateKey];
+
+        if (isAlreadyCompleted) {
+          completeBtn.disabled = true;
+          completeBtn.textContent = 'DAY COMPLETED ✓';
+        } else if (usedToday >= 3) {
+          completeBtn.disabled = true;
+          completeBtn.textContent = 'DAILY LIVES EXHAUSTED (3/3)';
+        } else {
+          completeBtn.disabled = false;
+          completeBtn.textContent = currentDialogIsBonus ? 'COMPLETE BONUS DAY (+200 PTS)' : 'MARK DAY COMPLETE (+100 PTS)';
+        }
+
+        overlay.classList.add('open');
+
+        // Accessibility focus shift
+        const closeBtn = document.getElementById('dialog-close-btn');
+        closeBtn.focus();
+      }
+
+      function closeDayDialog() {
+        overlay.classList.remove('open');
+        if (activeFocusedCell) {
+          activeFocusedCell.focus();
+        }
+      }
+
+      document.getElementById('dialog-close-btn').addEventListener('click', closeDayDialog);
+      document.getElementById('dialog-cancel-btn').addEventListener('click', closeDayDialog);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeDayDialog();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          closeDayDialog();
+        }
+      });
+
+      // MARK DAY COMPLETE LOGIC (Section 5)
+      completeBtn.addEventListener('click', () => {
+        if (!currentDialogDateKey || appState.completedDays[currentDialogDateKey]) return;
+
+        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
+        const usedToday = appState.dailyCompletions[todayKey] || 0;
+
+        if (usedToday >= 3) return;
+
+        // Mark completed
+        appState.completedDays[currentDialogDateKey] = true;
+        appState.dailyCompletions[todayKey] = usedToday + 1;
+
+        // Score Calculation
+        const pointsAdded = currentDialogIsBonus ? 200 : 100;
+        appState.score += pointsAdded;
+        if (appState.score > appState.highScore) {
+          appState.highScore = appState.score;
+        }
+
+        // Streak Calculation
+        if (appState.lastCompletedDate) {
+          const lastDate = new Date(appState.lastCompletedDate);
+          const currentDate = new Date(currentDialogDateKey);
+          const diffDays = Math.round((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+
+          if (diffDays === 1) {
+            appState.streak += 1;
+          } else if (diffDays > 1) {
+            appState.streak = 1;
+          }
+        } else {
+          appState.streak = 1;
+        }
+
+        appState.lastCompletedDate = currentDialogDateKey;
+
+        // Update active level if item topic exists
+        if (currentDialogItems && currentDialogItems.length > 0) {
+          document.getElementById('hud-level').textContent = currentDialogItems[0].topic;
+        }
+
+        saveState();
+        updateHUD();
+        renderCalendar(appState.currentDate);
+
+        closeDayDialog();
+
+        // Flourish
+        const celebrateMsg = currentDialogIsBonus ? 'LEVEL UP! DOUBLE CREDIT!' : 'NICE! DAY COMPLETE!';
+        showFlourish(celebrateMsg);
+      });
+
+      // INITIALIZATION
+      loadState();
+      updateHUD();
+      renderCalendar(appState.currentDate);
+
+      // SECTION 2 Item 6 — Initial READY! flourish
+      setTimeout(() => {
+        showFlourish('READY!');
+      }, 300);
+
+    })();
+  </script>
+</body>
+</html>
