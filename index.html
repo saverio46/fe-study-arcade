@@ -1554,19 +1554,25 @@
       // Firebase Integration hook
       window.syncFirestoreProgress = function(daysData) {
         // daysData is Record<string, DayProgress> from Firestore
-        let score = 0;
-        const newCompletedDays = {};
+        if (!daysData) return;
+        
+        let hasCloudData = Object.keys(daysData).length > 0;
+        if (!hasCloudData) return; // Do not overwrite local progress if cloud is empty
+        
+        const newCompletedDays = { ...appState.completedDays };
         
         for (const [dayId, progress] of Object.entries(daysData)) {
           if (progress.status === 'completed') {
             newCompletedDays[dayId] = true;
-            score += 100; // arbitrary score per completed day
           }
         }
+        
+        let score = Object.keys(newCompletedDays).length * 100;
         
         appState.completedDays = newCompletedDays;
         appState.score = score;
         if (score > appState.highScore) appState.highScore = score;
+        
         
         saveState();
         updateHUD();

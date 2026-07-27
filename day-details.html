@@ -422,6 +422,27 @@
       const questionsEl = document.getElementById('questions-content');
       const puzzleLabelEl = document.getElementById('puzzle-slug-label');
 
+      const DAY_STORAGE_KEY = `fe-arcade-day-${dateParam}`;
+      let dayState = {
+        questions: {}, // qId -> { picked: string[], correct: boolean, complete: boolean }
+        puzzleAssignments: {}, // varName -> value
+        puzzleSolved: false
+      };
+
+      try {
+        const stored = localStorage.getItem(DAY_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          dayState = { ...dayState, ...parsed };
+        }
+      } catch (e) {}
+
+      function saveDayState() {
+        try {
+          localStorage.setItem(DAY_STORAGE_KEY, JSON.stringify(dayState));
+        } catch (e) {}
+      }
+
       function normalize(s) {
         return (s || '')
           .toLowerCase()
@@ -457,30 +478,57 @@
         explanation.className = 'q-explanation';
         explanation.innerHTML = `<strong>Explanation:</strong> ${escapeHtml(q.explanation)}<div class="q-ref">${escapeHtml(q.reference || '')}</div>`;
 
-        let attempts = 0;
+        let qState = dayState.questions[q.id] || { picked: [], correct: false, complete: false };
+        
+        // Restore explanation visibility
+        if (qState.complete) {
+          explanation.classList.add('open');
+        }
 
         Object.keys(q.choices).forEach((letter) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'q-choice';
           btn.textContent = `${letter}. ${q.choices[letter]}`;
+          
+          // Restore visual state
+          if (qState.picked.includes(letter)) {
+            if (letter === q.correct_answer) {
+              btn.classList.add('picked-correct');
+            } else {
+              btn.classList.add('picked-wrong');
+              btn.disabled = true;
+            }
+          }
+          if (qState.complete) {
+            btn.disabled = true;
+          }
+
           btn.addEventListener('click', () => {
             const isCorrect = letter === q.correct_answer;
-            attempts += 1;
+            if (!qState.picked.includes(letter)) {
+              qState.picked.push(letter);
+            }
             
             if (isCorrect) {
               btn.classList.add('picked-correct');
               explanation.classList.add('open');
+              qState.correct = true;
+              qState.complete = true;
               Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
             } else {
               btn.classList.add('picked-wrong');
               btn.disabled = true; // Disable just this wrong choice
               
-              if (attempts >= 2) {
+              if (qState.picked.length >= 2) {
                 explanation.classList.add('open');
+                qState.complete = true;
                 Array.from(choicesWrap.children).forEach((c) => (c.disabled = true));
               }
             }
+            
+            dayState.questions[q.id] = qState;
+            saveDayState();
           });
           choicesWrap.appendChild(btn);
         });
@@ -546,8 +594,7 @@
         const board = document.createElement('div');
         board.className = 'equations-board';
         sysContainer.appendChild(board);
-        
-        const assignments = {}; 
+        const assignments = dayState.puzzleAssignments || {}; 
         
         const gems = [...puzzleData.facts].sort(() => Math.random() - 0.5);
         gems.forEach((fact, i) => {
@@ -576,6 +623,8 @@
           Object.keys(assignments).forEach(k => {
             if (assignments[k] === gem.dataset.value) delete assignments[k];
           });
+          dayState.puzzleAssignments = assignments;
+          saveDayState();
           
           gemsBank.appendChild(gem);
           updateEquations();
@@ -616,6 +665,8 @@
             
             slot.appendChild(gem);
             assignments[fact.id] = gem.dataset.value;
+            dayState.puzzleAssignments = assignments;
+            saveDayState();
             updateEquations();
           });
           
@@ -700,6 +751,8 @@
           });
           
           if (allCorrect) {
+            dayState.puzzleSolved = true;
+            saveDayState();
             victoryBanner.style.display = 'block';
             checkBtn.style.display = 'none';
             document.querySelectorAll('.gem-token').forEach(g => g.draggable = false);
@@ -740,6 +793,9 @@
         resetBtn.textContent = 'RESET PUZZLE';
         resetBtn.onclick = () => {
           Object.keys(assignments).forEach(k => delete assignments[k]);
+          dayState.puzzleAssignments = assignments;
+          dayState.puzzleSolved = false;
+          saveDayState();
           document.querySelectorAll('.gem-token').forEach(gem => {
             gemsBank.appendChild(gem);
           });
@@ -753,6 +809,16 @@
         
         sysContainer.appendChild(actions);
         sysContainer.appendChild(victoryBanner);
+        
+        // Restore placed gems based on loaded state
+        Object.keys(assignments).forEach(varName => {
+          const val = assignments[varName];
+          const slot = varsContainer.querySelector(`[data-var="${varName}"]`);
+          const gem = Array.from(gemsBank.children).find(g => g.dataset.value === val);
+          if (slot && gem) {
+            slot.appendChild(gem);
+          }
+        });
         
         updateEquations();
       }
