@@ -180,3 +180,31 @@ export async function getDayProgress(uid: string, dayId: string) {
 
   return { ...data, puzzles };
 }
+
+/** 
+ * New Sync Hooks for full local storage migration
+ */
+
+export function subscribeCalendarState(uid: string, onUpdate: (data: any) => void) {
+  const ref = doc(db, `users/${uid}/calendarState/main`);
+  return onSnapshot(ref, (snap) => {
+    if (snap.exists()) onUpdate(snap.data());
+  });
+}
+
+export async function updateCalendarState(uid: string, data: any) {
+  const ref = doc(db, `users/${uid}/calendarState/main`);
+  await setDoc(ref, { ...data, updatedAt: serverTimestamp() }, { merge: true });
+}
+
+export function subscribeDayState(uid: string, dayId: string, onUpdate: (data: any) => void) {
+  const ref = doc(db, `users/${uid}/daysState/${dayId}`);
+  return onSnapshot(ref, (snap) => {
+    if (snap.exists()) onUpdate(snap.data());
+  });
+}
+
+export async function updateDayState(uid: string, dayId: string, data: any) {
+  const ref = doc(db, `users/${uid}/daysState/${dayId}`);
+  await setDoc(ref, { ...data, updatedAt: serverTimestamp() }, { merge: true });
+}

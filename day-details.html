@@ -359,12 +359,15 @@
   </style>
 </head>
 <body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  
   <div class="scanlines"></div>
 
   <script src="/data/cheat-codes.js"></script>
   <script src="/data/calendar-seed.js"></script>
 
-  <main class="main-content">
+  <main id="day-details-app" class="main-content">
     <a href="index.html" class="back-link">&lt; BACK TO CALENDAR</a>
 
     <div class="marquee-banner">
@@ -437,12 +440,37 @@
         }
       } catch (e) {}
 
-      function saveDayState() {
+      window.currentDayId = dateParam;
+
+      function saveDayState(pushToCloud = true) {
         try {
           localStorage.setItem(DAY_STORAGE_KEY, JSON.stringify(dayState));
+          if (pushToCloud && window.saveDayStateToCloud && dateParam) {
+            window.saveDayStateToCloud(dateParam, dayState);
+          }
         } catch (e) {}
       }
 
+      window.loadCloudDayState = function(dayId, cloudState) {
+        if (dayId !== dateParam || !cloudState) return;
+        
+        const stringifiedLocal = JSON.stringify(dayState);
+        const stringifiedCloud = JSON.stringify({
+           questions: cloudState.questions || {},
+           puzzleAssignments: cloudState.puzzleAssignments || {},
+           puzzleSolved: cloudState.puzzleSolved || false
+        });
+
+        if (stringifiedLocal !== stringifiedCloud) {
+          dayState.questions = cloudState.questions || {};
+          dayState.puzzleAssignments = cloudState.puzzleAssignments || {};
+          dayState.puzzleSolved = cloudState.puzzleSolved || false;
+          saveDayState(false);
+          
+          // Re-fetch puzzle logic by re-calling init (init checks SEED_DATA and re-renders)
+          init();
+        }
+      };
       function normalize(s) {
         return (s || '')
           .toLowerCase()

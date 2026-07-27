@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import { AuthButton } from './components/AuthButton';
 import { LoginScreen } from './components/LoginScreen';
 import { useAuth } from './hooks/useAuth';
-import { subscribeUserProgress, DayProgress } from './lib/progress';
+import { subscribeUserProgress, DayProgress, subscribeCalendarState, updateCalendarState, subscribeDayState, updateDayState } from './lib/progress';
 
 declare global {
   interface Window {
-    syncFirestoreProgress: (data: Record<string, DayProgress>) => void;
+    syncFirestoreProgress?: (data: Record<string, DayProgress>) => void;
+    currentDayId?: string;
+    loadCloudCalendarState?: (state: any) => void;
+    saveCalendarStateToCloud?: (state: any) => void;
+    loadCloudDayState?: (dayId: string, state: any) => void;
+    saveDayStateToCloud?: (dayId: string, state: any) => void;
   }
 }
 
@@ -15,29 +20,47 @@ export default function App() {
 
   useEffect(() => {
     const arcadeApp = document.getElementById('arcade-app');
+    const dayDetailsApp = document.getElementById('day-details-app');
     
     if (user) {
-      // User logged in: subscribe to their progress
-      const unsubscribe = subscribeUserProgress(user.uid, (data) => {
-        if (window.syncFirestoreProgress) {
-          window.syncFirestoreProgress(data);
-        }
+      // Expose save hooks to Vanilla JS
+      window.saveCalendarStateToCloud = (state) => updateCalendarState(user.uid, state);
+      window.saveDayStateToCloud = (dayId, state) => updateDayState(user.uid, dayId, state);
+
+      // Old compatibility hook
+      const unsubscribeOld = subscribeUserProgress(user.uid, (data) => {
+        if (window.syncFirestoreProgress) window.syncFirestoreProgress(data);
       });
-      
-      // Reveal the calendar HTML
-      if (arcadeApp) arcadeApp.style.display = 'flex';
-      
-      return () => {
-        unsubscribe();
-      };
-    } else {
-      // User logged out: clear calendar progress
-      if (window.syncFirestoreProgress) {
-        window.syncFirestoreProgress({});
+
+      // New Calendar hook
+      const unsubCalendar = subscribeCalendarState(user.uid, (data) => {
+        if (window.loadCloudCalendarState) window.loadCloudCalendarState(data);
+      });
+
+      // New Day hook (only if on a day page)
+      let unsubDay: any = null;
+      if (window.currentDayId) {
+        unsubDay = subscribeDayState(user.uid, window.currentDayId, (data) => {
+          if (window.loadCloudDayState) window.loadCloudDayState(window.currentDayId!, data);
+        });
       }
       
-      // Hide the calendar HTML
+      // Reveal the main HTML
+      if (arcadeApp) arcadeApp.style.display = 'flex';
+      if (dayDetailsApp) dayDetailsApp.style.display = 'flex';
+      
+      return () => {
+        unsubscribeOld();
+        unsubCalendar();
+        if (unsubDay) unsubDay();
+      };
+    } else {
+      // User logged out: clear progress
+      if (window.syncFirestoreProgress) window.syncFirestoreProgress({});
+      
+      // Hide the main HTML
       if (arcadeApp) arcadeApp.style.display = 'none';
+      if (dayDetailsApp) dayDetailsApp.style.display = 'none';
     }
   }, [user]);
 

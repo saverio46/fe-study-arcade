@@ -1064,7 +1064,7 @@
         }
       }
 
-      function saveState() {
+      function saveState(pushToCloud = true) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify({
             score: appState.score,
@@ -1074,6 +1074,10 @@
             dailyCompletions: appState.dailyCompletions,
             completedDays: appState.completedDays
           }));
+          
+          if (pushToCloud && window.saveCalendarStateToCloud) {
+            window.saveCalendarStateToCloud(appState);
+          }
         } catch (e) {
           // Graceful fallback
         }
@@ -1552,29 +1556,19 @@
       }, 300);
 
       // Firebase Integration hook
-      window.syncFirestoreProgress = function(daysData) {
-        // daysData is Record<string, DayProgress> from Firestore
-        if (!daysData) return;
+      window.loadCloudCalendarState = function(cloudState) {
+        if (!cloudState) return;
         
-        let hasCloudData = Object.keys(daysData).length > 0;
-        if (!hasCloudData) return; // Do not overwrite local progress if cloud is empty
+        // Merge cloud state into local appState
+        appState.score = cloudState.score ?? appState.score;
+        appState.highScore = cloudState.highScore ?? appState.highScore;
+        appState.streak = cloudState.streak ?? appState.streak;
+        appState.completedDays = cloudState.completedDays ?? appState.completedDays;
+        appState.lastCompletedDate = cloudState.lastCompletedDate ?? appState.lastCompletedDate;
+        appState.dailyCompletions = cloudState.dailyCompletions ?? appState.dailyCompletions;
         
-        const newCompletedDays = { ...appState.completedDays };
-        
-        for (const [dayId, progress] of Object.entries(daysData)) {
-          if (progress.status === 'completed') {
-            newCompletedDays[dayId] = true;
-          }
-        }
-        
-        let score = Object.keys(newCompletedDays).length * 100;
-        
-        appState.completedDays = newCompletedDays;
-        appState.score = score;
-        if (score > appState.highScore) appState.highScore = score;
-        
-        
-        saveState();
+        // Save locally without pushing back to the cloud to avoid loops
+        saveState(false);
         updateHUD();
         renderCalendar(appState.currentDate);
       };

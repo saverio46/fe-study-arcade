@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "fe-study-arcade-prod",
     "public": "dist",
     "ignore": [
       "firebase.json",
