@@ -500,6 +500,16 @@
       font-weight: 900;
     }
 
+    /* Completed Cell Override */
+    .day-cell.completed {
+      border-color: var(--neon-green) !important;
+      box-shadow: 0 0 6px var(--neon-green), 0 0 20px rgba(61, 255, 136, 0.25) !important;
+    }
+    
+    .day-cell.completed .day-number {
+      color: var(--neon-green);
+    }
+
     /* Today's Power Pellet Marker (Only element allowed to pulse) */
     .power-pellet {
       width: 10px;
@@ -1241,21 +1251,33 @@
           numEl.textContent = cellDay;
           headerRow.appendChild(numEl);
 
-          if (isTodayCell && isCurrentMonth) {
-            const pellet = document.createElement('span');
-            pellet.className = 'power-pellet';
-            pellet.title = "Today's Power Pellet";
-            headerRow.appendChild(pellet);
-          } else if (isBonus) {
-            const btag = document.createElement('span');
-            btag.className = 'bonus-tag';
-            btag.textContent = 'BONUS';
-            headerRow.appendChild(btag);
-          } else if (isCompleted) {
+          const rightDiv = document.createElement('div');
+          rightDiv.style.display = 'flex';
+          rightDiv.style.alignItems = 'center';
+          rightDiv.style.gap = '4px';
+
+          if (isCompleted) {
+            cellEl.classList.add('completed');
             const stamp = document.createElement('span');
             stamp.className = 'completed-stamp';
-            stamp.innerHTML = '✓ DONE';
-            headerRow.appendChild(stamp);
+            stamp.innerHTML = 'COMPLETE ✓';
+            rightDiv.appendChild(stamp);
+          } else {
+            if (isTodayCell && isCurrentMonth) {
+              const pellet = document.createElement('span');
+              pellet.className = 'power-pellet';
+              pellet.title = "Today's Power Pellet";
+              rightDiv.appendChild(pellet);
+            } else if (isBonus) {
+              const btag = document.createElement('span');
+              btag.className = 'bonus-tag';
+              btag.textContent = 'BONUS';
+              rightDiv.appendChild(btag);
+            } 
+          }
+
+          if (rightDiv.hasChildNodes()) {
+            headerRow.appendChild(rightDiv);
           }
 
           cellEl.appendChild(headerRow);
