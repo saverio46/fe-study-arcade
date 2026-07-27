@@ -851,6 +851,12 @@
   </style>
 </head>
 <body>
+  <!-- React Root (Full Screen Overlay or Floating Auth Button) -->
+  <div id="root"></div>
+
+  <!-- Arcade App wrapper (hidden until authenticated) -->
+  <div id="arcade-app" style="display: none;">
+
   <!-- Scanline Screen Effect -->
   <div class="scanlines" aria-hidden="true"></div>
 
@@ -892,7 +898,6 @@
     <header class="marquee-banner" style="position: relative;">
       <div class="marquee-sub">FUNDAMENTALS OF ENGINEERING</div>
       <h1 class="marquee-title">FE STUDY ARCADE</h1>
-      <div id="root" style="position: absolute; top: 1rem; right: 1rem; z-index: 50;"></div>
     </header>
 
     <p class="intro-crosslinks">
@@ -996,6 +1001,7 @@
       </div>
     </section>
   </main>
+  </div> <!-- /#arcade-app -->
 
   <!-- Flourish Banner (READY! / NICE!) -->
   <div id="flourish-overlay" class="flourish-overlay" aria-live="polite">
