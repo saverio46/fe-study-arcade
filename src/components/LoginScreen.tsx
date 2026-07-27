@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
+import { PacmanGame } from './PacmanGame';
 
 export function LoginScreen() {
   const [error, setError] = useState<string | null>(null);
@@ -24,9 +25,7 @@ export function LoginScreen() {
       height: '100vh',
       backgroundColor: 'var(--void, #0a0a12)',
       display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: 'row',
       color: 'var(--text, #eef0f7)',
       fontFamily: '"Press Start 2P", "Orbitron", monospace',
       zIndex: 9999
@@ -45,7 +44,30 @@ export function LoginScreen() {
         zIndex: 1
       }}></div>
 
-      <div style={{ zIndex: 10, textAlign: 'center', padding: '2rem' }}>
+      {/* Left side: Pacman Game */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRight: '2px dashed var(--neon-cyan, #2de2ff)',
+        zIndex: 10,
+        padding: '2rem'
+      }}>
+        <PacmanGame />
+      </div>
+
+      {/* Right side: Login Panel */}
+      <div style={{ 
+        flex: 1, 
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10, 
+        textAlign: 'center', 
+        padding: '2rem' 
+      }}>
         <h1 style={{
           fontSize: '3rem',
           margin: '0 0 1rem 0',
