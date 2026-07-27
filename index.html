@@ -8,6 +8,7 @@
   <!-- External Font Link (Only allowed network resource) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.tsx"></script>
 
   <style>
     /* ==========================================================================
@@ -888,9 +889,10 @@
   <!-- Main Content Column -->
   <main class="main-content">
     <!-- Item 5: Marquee Title Banner -->
-    <header class="marquee-banner">
+    <header class="marquee-banner" style="position: relative;">
       <div class="marquee-sub">FUNDAMENTALS OF ENGINEERING</div>
       <h1 class="marquee-title">FE STUDY ARCADE</h1>
+      <div id="root" style="position: absolute; top: 1rem; right: 1rem; z-index: 50;"></div>
     </header>
 
     <p class="intro-crosslinks">
@@ -1019,7 +1021,7 @@
   </div>
 
   <!-- Shared calendar data (also used by day-details.html) -->
-  <script src="data/calendar-seed.js"></script>
+  <script src="/data/calendar-seed.js"></script>
 
   <!-- Inline Script -->
   <script>
@@ -1542,6 +1544,28 @@
       setTimeout(() => {
         showFlourish('READY!');
       }, 300);
+
+      // Firebase Integration hook
+      window.syncFirestoreProgress = function(daysData) {
+        // daysData is Record<string, DayProgress> from Firestore
+        let score = 0;
+        const newCompletedDays = {};
+        
+        for (const [dayId, progress] of Object.entries(daysData)) {
+          if (progress.status === 'completed') {
+            newCompletedDays[dayId] = true;
+            score += 100; // arbitrary score per completed day
+          }
+        }
+        
+        appState.completedDays = newCompletedDays;
+        appState.score = score;
+        if (score > appState.highScore) appState.highScore = score;
+        
+        saveState();
+        updateHUD();
+        renderCalendar(appState.currentDate);
+      };
 
     })();
   </script>
