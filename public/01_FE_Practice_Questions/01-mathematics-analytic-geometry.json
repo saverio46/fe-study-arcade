@@ -3,7 +3,9 @@
   "topic_name": "Mathematics",
   "fe_priority": "high",
   "fe_exam_weight": "11-17 of 110 questions",
-  "subtopics": ["Analytic geometry"],
+  "subtopics": [
+    "Analytic geometry"
+  ],
   "puzzle_slug": "system-of-equations",
   "puzzle_category": "Math & Physical",
   "questions": [
@@ -81,24 +83,244 @@
       "correct_answer": "B",
       "explanation": "A parabola y^2 = 4px has its focus at (p, 0). Here 4p = 8, so p = 2. The focus is at (2, 0).",
       "reference": "FE Reference Handbook, Mathematics: Analytic Geometry - Conic Sections (Parabola)"
+    },
+    {
+      "id": "MATH-AG-EXTRA-6",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "The equation y = a₁ + a₂x describes which of the following?",
+      "choices": {
+        "A": "a cosine expansion series",
+        "B": "projectile motion",
+        "C": "a circle in polar form",
+        "D": "a straight line"
+      },
+      "correct_answer": "D",
+      "explanation": "y = mx + b is the slope-intercept form of a straight line.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-7",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "A pipe with 20 cm inner diameter filled to 1/3 of its diameter. What is the approximate area in flow?",
+      "choices": {
+        "A": "33 cm²",
+        "B": "60 cm²",
+        "C": "92 cm²",
+        "D": "100 cm²"
+      },
+      "correct_answer": "C",
+      "explanation": "d = 6.67 cm, r = 10 cm. φ = 2·arccos(3.33/10) = 2.46 rad. A = r²(φ−sin φ)/2 ≈ 92 cm²",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-8",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "What is the area of the circular segment with r = s and central angle 150°?",
+      "choices": {
+        "A": "5π − 1",
+        "B": "(s²/2)(5π − 3)",
+        "C": "50π/3",
+        "D": "49π − √3"
+      },
+      "correct_answer": "B",
+      "explanation": "φ = 5π/6 rad. A = r²(φ − sin φ)/2 = (s²/2)(5π/6 − 1/2)",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-9",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "Which statement is FALSE for all noncircular ellipses?",
+      "choices": {
+        "A": "The eccentricity e < 1.",
+        "B": "The ellipse has two foci.",
+        "C": "The sum of distances from foci to any point is 2a.",
+        "D": "The coefficients A and C of x² and y² are equal."
+      },
+      "correct_answer": "D",
+      "explanation": "For a noncircular ellipse, A ≠ C. Equal coefficients define a circle.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-10",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "The equation −3x² − 4y² = 1 defines",
+      "choices": {
+        "A": "a circle",
+        "B": "an ellipse",
+        "C": "a hyperbola",
+        "D": "a parabola"
+      },
+      "correct_answer": "B",
+      "explanation": "A = −3, C = −4 (different). B²−4AC = −48 < 0 → ellipse.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-11",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "Surface area of a 4 m high right circular cone with base 3 m diameter?",
+      "choices": {
+        "A": "24 m²",
+        "B": "27 m²",
+        "C": "32 m²",
+        "D": "36 m²"
+      },
+      "correct_answer": "B",
+      "explanation": "r = 1.5 m. A = πr(r + √(r²+h²)) = π(1.5)(1.5 + √(2.25+16)) = 27.2 m²",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-12",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "A circular sector has radius 8 cm and arc length 13 cm. What is its area?",
+      "choices": {
+        "A": "48 cm²",
+        "B": "50 cm²",
+        "C": "52 cm²",
+        "D": "60 cm²"
+      },
+      "correct_answer": "C",
+      "explanation": "A = sr/2 = (13)(8)/2 = 52 cm²",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-AG-EXTRA-13",
+      "subtopic": "Analytic geometry",
+      "difficulty": "medium",
+      "stem": "The equation x² + 4x + y² + 8y = 0. What are the coordinates of the circle's center?",
+      "choices": {
+        "A": "(−4, −8)",
+        "B": "(−4, −2)",
+        "C": "(−2, −4)",
+        "D": "(2, −4)"
+      },
+      "correct_answer": "C",
+      "explanation": "Complete the square: (x+2)² + (y+4)² = 20. Center: (−2, −4)",
+      "reference": "FE Reference Handbook, Mathematics"
     }
   ],
   "puzzle_instance": {
     "narrative": "A set of geometric measurement constraints yields the following system.",
     "facts": [
-      { "id": "F1", "label": "Slope of the line through (2,4) and (6,12) (Q1 answer)", "value": 2 },
-      { "id": "F2", "label": "Absolute value of the y-intercept of 3x - 2y = 12 (Q2 answer)", "value": 6 },
-      { "id": "F3", "label": "Radius of the circle passing through (3,4) (Q3 answer)", "value": 5 },
-      { "id": "F4", "label": "Distance from point (3,7) to the line 4x - 3y + 1 = 0, rounded (Q4 answer)", "value": 2 },
-      { "id": "F5", "label": "x-coordinate of the focus of y² = 8x (Q5 answer)", "value": 2 }
+      {
+        "id": "F1",
+        "label": "Slope of the line through (2,4) and (6,12) (Q1 answer)",
+        "value": 2
+      },
+      {
+        "id": "F2",
+        "label": "Absolute value of the y-intercept of 3x - 2y = 12 (Q2 answer)",
+        "value": 6
+      },
+      {
+        "id": "F3",
+        "label": "Radius of the circle passing through (3,4) (Q3 answer)",
+        "value": 5
+      },
+      {
+        "id": "F4",
+        "label": "Distance from point (3,7) to the line 4x - 3y + 1 = 0, rounded (Q4 answer)",
+        "value": 2
+      },
+      {
+        "id": "F5",
+        "label": "x-coordinate of the focus of y² = 8x (Q5 answer)",
+        "value": 2
+      }
     ],
     "num_unknowns": 5,
     "equations": [
-      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 8 },
-      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
-      { "coeffs": [1, 0, 1, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 9 },
-      { "coeffs": [0, 1, -1, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 3 },
-      { "coeffs": [1, 1, 1, -1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 }
+      {
+        "coeffs": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 8
+      },
+      {
+        "coeffs": [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 7
+      },
+      {
+        "coeffs": [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 9
+      },
+      {
+        "coeffs": [
+          0,
+          1,
+          -1,
+          0,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 3
+      },
+      {
+        "coeffs": [
+          1,
+          1,
+          1,
+          -1,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 11
+      }
     ],
     "presentation": "word_problem"
   }

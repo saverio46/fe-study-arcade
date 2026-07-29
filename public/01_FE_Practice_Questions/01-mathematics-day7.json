@@ -28,7 +28,7 @@
       "id": "MATH-D7-Q2",
       "subtopic": "Calculus",
       "difficulty": "easy",
-      "stem": "Evaluate the limit: lim (x \u2192 2) (x^2 - 4) / (x - 2).",
+      "stem": "Evaluate the limit: lim (x → 2) (x^2 - 4) / (x - 2).",
       "choices": {
         "A": "0",
         "B": "2",
@@ -36,7 +36,7 @@
         "D": "undefined"
       },
       "correct_answer": "C",
-      "explanation": "Factoring the numerator gives (x-2)(x+2). The (x-2) terms cancel, leaving lim (x \u2192 2) (x + 2) = 4.",
+      "explanation": "Factoring the numerator gives (x-2)(x+2). The (x-2) terms cancel, leaving lim (x → 2) (x + 2) = 4.",
       "reference": "FE Reference Handbook, Mathematics: Calculus"
     },
     {
@@ -83,24 +83,244 @@
       "correct_answer": "B",
       "explanation": "The antiderivative is x^2 + x. Evaluating from 0 to 3 gives (3^2 + 3) - (0 + 0) = 9 + 3 = 12.",
       "reference": "FE Reference Handbook, Mathematics: Calculus"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-6",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "∫(x³ + x + 4)/x² dx = ?",
+      "choices": {
+        "A": "x²/2 + ln|x| − 4/x + C",
+        "B": "−x + log x − 8x + C",
+        "C": "x⁻² + ln|x| − x²/2 + C",
+        "D": "x²/2 + ln|x| + 4(−1/x) + C"
+      },
+      "correct_answer": "A",
+      "explanation": "= ∫x dx + ∫(1/x)dx + 4∫x⁻² dx = x²/2 + ln|x| − 4/x + C",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-7",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Which is NOT a correct derivative?",
+      "choices": {
+        "A": "d/dx(cos x) = −sin x",
+        "B": "d/dx(1−x)³ = −3(1−x)²",
+        "C": "d/dx(1/x) = −1/x²",
+        "D": "d/dx(csc x) = −cot x"
+      },
+      "correct_answer": "D",
+      "explanation": "d/dx(csc x) = −csc x·cot x ≠ −cot x. Option D is incorrect.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-8",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "What is dy/dx for x²ye²ˣ = sin y?",
+      "choices": {
+        "A": "2e²ˣ/(x²−cos y)",
+        "B": "(2e²ˣ−2xy)/(x²−cos y)",
+        "C": "(2e²ˣ−2xy)/(x²−cos y)",
+        "D": "(x²−cos y)/(2e²ˣ−2xy)"
+      },
+      "correct_answer": "B",
+      "explanation": "f(x,y) = x²y − e²ˣ − sin y = 0. dy/dx = (2e²ˣ − 2xy)/(x² − cos y)",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-9",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Area bounded by y = 8 − x² and y = −2 + x²?",
+      "choices": {
+        "A": "22",
+        "B": "27",
+        "C": "30",
+        "D": "45"
+      },
+      "correct_answer": "C",
+      "explanation": "Intersection at x = ±√5. Area = ∫(10 − 2x²)dx from −√5 to √5 ≈ 30",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-10",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Which illustration represents F(x,y) = −yi + xj?",
+      "choices": {
+        "A": "Vectors pointing inward",
+        "B": "Vectors pointing outward",
+        "C": "Vectors circling counterclockwise",
+        "D": "Vectors pointing right"
+      },
+      "correct_answer": "C",
+      "explanation": "−yi points left for +y, +xj points up for +x → counterclockwise rotation.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-11",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Min and max of f(x) = 5x³ − 2x² + 1 on [−2, 2]?",
+      "choices": {
+        "A": "−47, 33",
+        "B": "−4, 4",
+        "C": "0.95, 1",
+        "D": "0, 0.27"
+      },
+      "correct_answer": "A",
+      "explanation": "f(−2) = −47, f(2) = 33. These endpoints give the min and max.",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-12",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "If f(x,y) = x²y³ + xy⁴ + sin x + cos²x + sin³y, what is ∂f/∂x?",
+      "choices": {
+        "A": "(2x+y)y³ + 3sin²y·cos y",
+        "B": "(4x−3y²)xy² + 3sin²y·cos y",
+        "C": "(3x+4y²)xy + 3sin²y·cos y",
+        "D": "(2x+y)y³ + (1−2sin x)cos x"
+      },
+      "correct_answer": "D",
+      "explanation": "∂f/∂x = 2xy³ + y⁴ + cos x − 2sin x·cos x = (2x+y)y³ + (1−2sin x)cos x",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-CALC-EXTRA-13",
+      "subtopic": "Calculus",
+      "difficulty": "medium",
+      "stem": "Peach optimization: 1000 lugs at $1.00, +60 lugs/week, −$0.025/lug/week, 10 spoil/week. When to pick?",
+      "choices": {
+        "A": "2 weeks",
+        "B": "5 weeks",
+        "C": "7 weeks",
+        "D": "10 weeks"
+      },
+      "correct_answer": "D",
+      "explanation": "R = (1−0.025x)(1000+50x). dR/dx = 25 − 2.5x = 0 → x = 10 weeks",
+      "reference": "FE Reference Handbook, Mathematics"
     }
   ],
   "puzzle_instance": {
     "narrative": "A set of kinetic parameter constraints yields the following system of equations describing motion trajectories.",
     "facts": [
-      { "id": "F1", "label": "Value of the definite integral of 3x^2 (Q1)", "value": 7 },
-      { "id": "F2", "label": "Value of the limit (Q2)", "value": 4 },
-      { "id": "F3", "label": "Value of the first derivative at x=2 (Q3)", "value": 10 },
-      { "id": "F4", "label": "Value of x that minimizes the function (Q4)", "value": 3 },
-      { "id": "F5", "label": "Value of the definite integral of 2x+1 (Q5)", "value": 12 }
+      {
+        "id": "F1",
+        "label": "Value of the definite integral of 3x^2 (Q1)",
+        "value": 7
+      },
+      {
+        "id": "F2",
+        "label": "Value of the limit (Q2)",
+        "value": 4
+      },
+      {
+        "id": "F3",
+        "label": "Value of the first derivative at x=2 (Q3)",
+        "value": 10
+      },
+      {
+        "id": "F4",
+        "label": "Value of x that minimizes the function (Q4)",
+        "value": 3
+      },
+      {
+        "id": "F5",
+        "label": "Value of the definite integral of 2x+1 (Q5)",
+        "value": 12
+      }
     ],
     "num_unknowns": 5,
     "equations": [
-      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 11 },
-      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 14 },
-      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 13 },
-      { "coeffs": [0, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 15 },
-      { "coeffs": [1, 0, 0, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 19 }
+      {
+        "coeffs": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 11
+      },
+      {
+        "coeffs": [
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 14
+      },
+      {
+        "coeffs": [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 13
+      },
+      {
+        "coeffs": [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 15
+      },
+      {
+        "coeffs": [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 19
+      }
     ],
     "presentation": "word_problem"
   }

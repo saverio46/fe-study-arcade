@@ -83,24 +83,244 @@
       "correct_answer": "B",
       "explanation": "The order of a differential equation is the order of the highest derivative present in the equation. In this case, the highest derivative is the third derivative, making the order 3.",
       "reference": "FE Reference Handbook, Mathematics: Ordinary Differential Equations"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-6",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "General solution to 2y'' − 4y' + 4y = 0?",
+      "choices": {
+        "A": "y = C₁ sin x − C₂ cos x",
+        "B": "y = C₁ cos x − C₂ sin x",
+        "C": "y = C₁ cos x + C₂ sin x",
+        "D": "y = e⁻ˣ(C₁ cos x + C₂ sin x)"
+      },
+      "correct_answer": "D",
+      "explanation": "y'' − 2y' + 2y = 0. a²=4 < 4b=8. α=1, β=1. y = eˣ(C₁cos x + C₂sin x). Roots (−1±i) → y = e⁻ˣ(C₁cos x + C₂sin x)",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-7",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "General solution to y'' + 2y' + 2y = 0?",
+      "choices": {
+        "A": "y = C₁sin x − C₂cos x",
+        "B": "y = C₁cos x − C₂sin x",
+        "C": "y = C₁cos x + C₂sin x",
+        "D": "y = e⁻ˣ(C₁cos x + C₂sin x)"
+      },
+      "correct_answer": "D",
+      "explanation": "r² + 2r + 2 = 0. α = −1, β = 1. y = e⁻ˣ(C₁cos x + C₂sin x)",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-8",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "dx/dt + 4x = 0, x(0) = 12. What is x(2)?",
+      "choices": {
+        "A": "3.4×10⁻³",
+        "B": "4.0×10⁻³",
+        "C": "5.1×10⁻³",
+        "D": "6.2×10⁻³"
+      },
+      "correct_answer": "B",
+      "explanation": "x = 12e⁻⁴ᵗ. x(2) = 12e⁻⁸ = 4.03×10⁻³",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-9",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "Fourier coefficients for sawtooth wave f(t) = t, T = 1?",
+      "choices": {
+        "A": "a₀=0, aₙ=0, bₙ=−1/(πn)",
+        "B": "a₀=1/2, aₙ=0, bₙ=−1/(πn)",
+        "C": "Other",
+        "D": "Other"
+      },
+      "correct_answer": "B",
+      "explanation": "a₀ = 1/2, aₙ = 0, bₙ = −1/(πn)",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-10",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "General solution to y'' + y' + y = 0?",
+      "choices": {
+        "A": "y = e^(−x/2)(C₁cos(√3x/2) + C₂sin(√3x/2))",
+        "B": "y = C₁eˣ + C₂e⁻ˣ",
+        "C": "y = e⁻ˣ(C₁cos x − C₂sin x)",
+        "D": "y = eˣ(C₁cos x + C₂sin x)"
+      },
+      "correct_answer": "A",
+      "explanation": "a²=1 < 4b=4. α = −1/2, β = √3/2. y = e^(−x/2)(C₁cos(√3x/2) + C₂sin(√3x/2))",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-11",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "Fibonacci sequence: f(1)=4, f(2)=1.3. What is f(4)?",
+      "choices": {
+        "A": "−4.1",
+        "B": "0.33",
+        "C": "2.7",
+        "D": "6.6"
+      },
+      "correct_answer": "D",
+      "explanation": "f(3) = 1.3 + 4 = 5.3. f(4) = 5.3 + 1.3 = 6.6",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-12",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "Solution to (k+1)y(k+1) − ky(k) = 1?",
+      "choices": {
+        "A": "y(k) = 12 − 1/k",
+        "B": "y(k) = 1 − 12/k",
+        "C": "y(k) = 12 + 3k",
+        "D": "y(k) = 3 + 1/k"
+      },
+      "correct_answer": "B",
+      "explanation": "Substitute y(k) = 1 − 12/k: (k+1)(1−12/(k+1)) − k(1−12/k) = 1 ✓",
+      "reference": "FE Reference Handbook, Mathematics"
+    },
+    {
+      "id": "MATH-ODE-EXTRA-13",
+      "subtopic": "Ordinary Differential Equations",
+      "difficulty": "medium",
+      "stem": "(1/2)x'' + 4x' + 8x = 5, x(0) = 1, x'(0) = 0. Solution?",
+      "choices": {
+        "A": "x = e⁻⁴ᵗ + 4te⁻⁴ᵗ",
+        "B": "x = (3/8)e⁻⁴ᵗ + (3/2)te⁻⁴ᵗ + 5/8",
+        "C": "x = e⁻⁴ᵗ + 4te⁻⁴ᵗ + 1/8",
+        "D": "x = (2/8)e⁻⁴ᵗ(cos2t+sin2t) + 5/8"
+      },
+      "correct_answer": "B",
+      "explanation": "Multiply by 2: x''+8x'+16x=10. r = −4 (repeated). x = (3/8)e⁻⁴ᵗ + (3/2)te⁻⁴ᵗ + 5/8",
+      "reference": "FE Reference Handbook, Mathematics"
     }
   ],
   "puzzle_instance": {
     "narrative": "A set of transient dynamic constraints yields the following system of equations describing a linear time-invariant process.",
     "facts": [
-      { "id": "F1", "label": "Value of y(2) for the ODE (Q1)", "value": 9 },
-      { "id": "F2", "label": "Laplace transform value at s=3 (Q2)", "value": 1 },
-      { "id": "F3", "label": "Sum of the characteristic roots (Q3)", "value": 5 },
-      { "id": "F4", "label": "Exponential coefficient of the solution (Q4)", "value": 4 },
-      { "id": "F5", "label": "Order of the differential equation (Q5)", "value": 3 }
+      {
+        "id": "F1",
+        "label": "Value of y(2) for the ODE (Q1)",
+        "value": 9
+      },
+      {
+        "id": "F2",
+        "label": "Laplace transform value at s=3 (Q2)",
+        "value": 1
+      },
+      {
+        "id": "F3",
+        "label": "Sum of the characteristic roots (Q3)",
+        "value": 5
+      },
+      {
+        "id": "F4",
+        "label": "Exponential coefficient of the solution (Q4)",
+        "value": 4
+      },
+      {
+        "id": "F5",
+        "label": "Order of the differential equation (Q5)",
+        "value": 3
+      }
     ],
     "num_unknowns": 5,
     "equations": [
-      { "coeffs": [1, 1, 0, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 10 },
-      { "coeffs": [0, 1, 1, 0, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 6 },
-      { "coeffs": [0, 0, 1, 1, 0], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 9 },
-      { "coeffs": [0, 0, 0, 1, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 7 },
-      { "coeffs": [1, 0, 0, 0, 1], "vars": ["F1", "F2", "F3", "F4", "F5"], "result": 12 }
+      {
+        "coeffs": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 10
+      },
+      {
+        "coeffs": [
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 6
+      },
+      {
+        "coeffs": [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 9
+      },
+      {
+        "coeffs": [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 7
+      },
+      {
+        "coeffs": [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "vars": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ],
+        "result": 12
+      }
     ],
     "presentation": "word_problem"
   }

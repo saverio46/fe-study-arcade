@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Practice Problems - FE Study Arcade</title>
+  <meta name="description" content="Interactive FE Electrical and Computer Exam Mathematics Practice Problems with editable questions and step-by-step solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #0a0a12;
+      --panel: #12121f;
+      --panel-2: #1a1a2e;
+      --grid-line: #23233a;
+      --text: #eef0f7;
+      --text-dim: #8a8aa8;
+      --neon-cyan: #2de2ff;
+      --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e;
+      --neon-green: #3dff88;
+      --neon-orange: #ff6a1a;
+      --neon-purple: #b388ff;
+      --font-display: 'Press Start 2P', monospace;
+      --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--font-body);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Sidebar — matches arcade design system */
+    nav.sidebar {
+      width: 280px; flex-shrink: 0; background: var(--panel);
+      border-right: 1px solid var(--grid-line); padding: 22px 18px;
+      position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 10;
+    }
+    nav.sidebar .brand {
+      font-family: var(--font-display); font-size: 0.8rem;
+      color: var(--neon-yellow); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 8px; line-height: 1.4;
+    }
+    nav.sidebar .nav-group { margin-bottom: 20px; }
+    nav.sidebar .nav-header {
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--neon-cyan); margin-bottom: 8px; padding-left: 6px;
+    }
+    nav.sidebar ul { list-style: none; }
+    nav.sidebar li a {
+      display: block; padding: 8px 10px; margin-bottom: 3px;
+      border-radius: 4px; border-left: 3px solid transparent;
+      text-decoration: none; color: var(--text);
+      font-family: var(--font-ui); font-size: 0.82rem;
+      transition: background 120ms var(--ease-out), border-color 120ms var(--ease-out);
+    }
+    nav.sidebar li a:hover, nav.sidebar li a.active {
+      background: var(--panel-2); border-left-color: var(--neon-cyan); color: #fff;
+    }
+
+    /* Main Content */
+    .main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* Sticky HUD Header */
+    .top-hud {
+      background: var(--panel); border-bottom: 1px solid var(--grid-line);
+      padding: 16px 28px; position: sticky; top: 0; z-index: 50;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .hud-row {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .page-title {
+      font-family: var(--font-display); font-size: 1rem;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
+    }
+    .hud-stats {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .hud-stat {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-ui); font-size: 0.7rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .hud-stat .label { color: var(--text-dim); }
+    .hud-stat .value {
+      font-family: var(--font-display); font-size: 0.8rem;
+      color: var(--neon-yellow); text-shadow: 0 0 4px var(--neon-yellow);
+    }
+    .hud-stat .value.green { color: var(--neon-green); text-shadow: 0 0 4px var(--neon-green); }
+
+    /* Progress bar */
+    .progress-track {
+      width: 100%; height: 4px; background: var(--panel-2);
+      border-radius: 2px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
+      border-radius: 2px; transition: width 0.5s var(--ease-out);
+      box-shadow: 0 0 6px var(--neon-cyan);
+    }
+
+    /* Controls */
+    .controls-bar {
+      padding: 12px 28px; display: flex; gap: 8px; flex-wrap: wrap;
+      align-items: center; border-bottom: 1px solid var(--grid-line);
+      background: var(--void);
+    }
+    .search-box {
+      flex: 1; min-width: 180px; position: relative;
+    }
+    .search-box input {
+      width: 100%; padding: 8px 12px 8px 34px;
+      background: var(--panel); border: 1px solid var(--grid-line);
+      border-radius: 4px; color: var(--text);
+      font-size: 0.85rem; font-family: var(--font-body);
+      transition: border-color 0.2s;
+    }
+    .search-box input:focus {
+      outline: none; border-color: var(--neon-cyan);
+      box-shadow: 0 0 6px rgba(45, 226, 255, 0.2);
+    }
+    .search-box::before {
+      content: '🔍'; position: absolute; left: 10px; top: 50%;
+      transform: translateY(-50%); font-size: 0.8rem; pointer-events: none;
+    }
+
+    .ctrl-btn {
+      font-family: var(--font-ui); font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 8px 14px; border: 1.5px solid var(--grid-line);
+      background: transparent; color: var(--text-dim); cursor: pointer;
+      border-radius: 4px; transition: all 120ms var(--ease-out);
+      white-space: nowrap;
+    }
+    .ctrl-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+    .ctrl-btn.active {
+      border-color: var(--neon-cyan); color: var(--neon-cyan);
+      background: rgba(45, 226, 255, 0.08);
+    }
+    .ctrl-btn.accent {
+      border-color: var(--neon-yellow); color: var(--neon-yellow);
+      background: rgba(249, 233, 78, 0.06);
+    }
+    .ctrl-btn.accent:hover {
+      background: rgba(249, 233, 78, 0.15);
+      box-shadow: 0 0 8px rgba(249, 233, 78, 0.3);
+    }
+    .ctrl-btn.danger {
+      border-color: var(--neon-pink); color: var(--neon-pink);
+    }
+    .ctrl-btn.danger:hover { background: rgba(255, 61, 129, 0.1); }
+
+    /* Content area with chapter sidebar */
+    .content-area {
+      flex: 1; overflow-y: auto; display: flex;
+    }
+    .chapter-sidebar {
+      width: 200px; flex-shrink: 0; padding: 16px 12px;
+      border-right: 1px solid var(--grid-line); overflow-y: auto;
+      background: var(--panel);
+    }
+    .ch-sidebar-title {
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--neon-cyan); margin-bottom: 8px; padding-left: 4px;
+    }
+    .ch-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 8px; border-radius: 4px; cursor: pointer;
+      color: var(--text-dim); font-size: 0.78rem; margin-bottom: 2px;
+      transition: all 0.12s; text-decoration: none;
+    }
+    .ch-link:hover { background: var(--panel-2); color: var(--text); }
+    .ch-link.active { background: rgba(45, 226, 255, 0.1); color: var(--neon-cyan); font-weight: 600; }
+    .ch-count {
+      font-size: 0.6rem; font-family: var(--font-mono);
+      background: var(--panel-2); padding: 1px 6px; border-radius: 99px;
+      color: var(--text-dim);
+    }
+
+    /* Problems list */
+    .problems-list {
+      flex: 1; padding: 20px 28px; overflow-y: auto;
+    }
+
+    .problem-card {
+      background: var(--panel); border: 1.5px solid var(--grid-line);
+      border-radius: 6px; margin-bottom: 16px; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .problem-card:hover { border-color: rgba(45, 226, 255, 0.3); box-shadow: 0 0 12px rgba(45, 226, 255, 0.1); }
+    .problem-card.answered-correct { border-color: rgba(61, 255, 136, 0.4); }
+
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; border-bottom: 1px solid var(--grid-line);
+      flex-wrap: wrap; gap: 6px;
+    }
+    .card-badge { display: flex; align-items: center; gap: 8px; }
+    .badge-ch {
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 2px 8px; border-radius: 99px;
+      background: rgba(45, 226, 255, 0.1); color: var(--neon-cyan);
+      border: 1px solid rgba(45, 226, 255, 0.2);
+    }
+    .badge-num {
+      font-size: 0.78rem; font-weight: 700; color: var(--text);
+      font-family: var(--font-mono);
+    }
+    .reset-btn {
+      width: 28px; height: 28px; border-radius: 4px;
+      background: transparent; border: 1px solid var(--grid-line);
+      color: var(--text-dim); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; transition: all 0.12s;
+    }
+    .reset-btn:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+
+    .card-body { padding: 16px; }
+
+    .problem-text {
+      font-size: 0.9rem; line-height: 1.75; color: var(--text);
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .problem-text[contenteditable="true"] {
+      outline: none; border: 1px dashed transparent; padding: 6px;
+      border-radius: 4px; transition: border-color 0.2s, background 0.2s;
+    }
+    .problem-text[contenteditable="true"]:focus {
+      border-color: var(--neon-yellow); background: rgba(249, 233, 78, 0.03);
+    }
+
+    /* Answer Choices */
+    .choices { margin-top: 12px; display: grid; gap: 6px; }
+    .choice-btn {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 12px; border-radius: 4px;
+      background: rgba(255,255,255,0.02); border: 1.5px solid var(--grid-line);
+      cursor: pointer; transition: all 0.15s; text-align: left;
+      font-family: inherit;
+    }
+    .choice-btn:hover { border-color: var(--neon-cyan); background: rgba(45, 226, 255, 0.04); }
+    .choice-btn.selected { border-color: var(--neon-cyan); background: rgba(45, 226, 255, 0.08); }
+    .choice-btn.correct { border-color: var(--neon-green); background: rgba(61, 255, 136, 0.08); }
+    .choice-btn.incorrect { border-color: var(--neon-pink); background: rgba(255, 61, 129, 0.06); }
+
+    .choice-letter {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.75rem; font-family: var(--font-ui);
+      background: var(--panel-2); color: var(--text-dim);
+      border: 1.5px solid var(--grid-line); transition: all 0.15s;
+    }
+    .choice-btn.selected .choice-letter { background: var(--neon-cyan); color: var(--void); border-color: var(--neon-cyan); }
+    .choice-btn.correct .choice-letter { background: var(--neon-green); color: var(--void); border-color: var(--neon-green); }
+    .choice-btn.incorrect .choice-letter { background: var(--neon-pink); color: var(--void); border-color: var(--neon-pink); }
+    .choice-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; padding-top: 2px; }
+
+    /* Solution */
+    .solution-toggle {
+      margin-top: 12px; padding: 7px 14px; border-radius: 4px;
+      background: transparent; border: 1.5px solid var(--grid-line);
+      color: var(--text-dim); font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: var(--font-ui);
+      letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px;
+    }
+    .solution-toggle:hover { border-color: var(--neon-green); color: var(--neon-green); }
+    .solution-panel {
+      margin-top: 10px; padding: 16px;
+      background: rgba(61, 255, 136, 0.03); border: 1px solid rgba(61, 255, 136, 0.15);
+      border-radius: 4px; display: none;
+    }
+    .solution-panel.visible { display: block; animation: slideDown 0.25s var(--ease-out); }
+    .solution-label {
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--neon-green); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .solution-text {
+      font-size: 0.85rem; line-height: 1.75; color: var(--text-dim);
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .solution-text[contenteditable="true"] {
+      outline: none; border: 1px dashed transparent; padding: 6px;
+      border-radius: 4px;
+    }
+    .solution-text[contenteditable="true"]:focus {
+      border-color: var(--neon-green); background: rgba(61, 255, 136, 0.03);
+    }
+    .correct-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 99px;
+      background: rgba(61, 255, 136, 0.08); border: 1px solid rgba(61, 255, 136, 0.25);
+      font-size: 0.7rem; font-weight: 700; color: var(--neon-green);
+      font-family: var(--font-mono); margin-top: 10px;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      padding: 10px 18px; border-radius: 4px;
+      background: var(--panel-2); border: 1.5px solid var(--neon-green);
+      color: var(--neon-green); font-size: 0.82rem; font-weight: 600;
+      font-family: var(--font-ui); letter-spacing: 0.04em;
+      box-shadow: 0 0 12px rgba(61, 255, 136, 0.3); opacity: 0;
+      transform: translateY(8px); transition: all 0.3s var(--ease-out);
+    }
+    .toast.error { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 12px rgba(255, 61, 129, 0.3); }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+
+    /* Edit indicator */
+    .edit-indicator {
+      position: fixed; bottom: 24px; left: 24px; z-index: 100;
+      padding: 6px 14px; border-radius: 99px;
+      background: rgba(249, 233, 78, 0.1); border: 1px solid rgba(249, 233, 78, 0.3);
+      color: var(--neon-yellow); font-size: 0.72rem; font-weight: 600;
+      font-family: var(--font-ui); display: none; align-items: center; gap: 5px;
+    }
+    .edit-indicator.visible { display: flex; }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center; padding: 60px 24px; color: var(--text-dim);
+    }
+    .empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--grid-line); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .chapter-sidebar { display: none; }
+    }
+    @media (max-width: 768px) {
+      nav.sidebar { display: none; }
+      .problems-list { padding: 16px; }
+      .top-hud { padding: 12px 16px; }
+      .controls-bar { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation (matches arcade pages) -->
+  <nav class="sidebar">
+    <div class="brand">👾 FE STUDY ARCADE</div>
+    <div class="nav-group">
+      <div class="nav-header">Foundations</div>
+      <ul>
+        <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
+        <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Study Content</div>
+      <ul>
+        <li><a href="notebook.html">Study Notebook</a></li>
+        <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+        <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
+        <li><a href="math-practice-problems.html" class="active" aria-current="page">Math Practice Problems</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Puzzle Engine</div>
+      <ul>
+        <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-wrap">
+    <!-- HUD Header -->
+    <div class="top-hud">
+      <div class="hud-row">
+        <div class="page-title">MATH PRACTICE PROBLEMS</div>
+        <div class="hud-stats">
+          <div class="hud-stat"><span class="label">PROBLEMS</span> <span class="value" id="totalCount">0</span></div>
+          <div class="hud-stat"><span class="label">ATTEMPTED</span> <span class="value" id="attemptedCount">0</span></div>
+          <div class="hud-stat"><span class="label">CORRECT</span> <span class="value green" id="correctCount">0</span></div>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search problems..." aria-label="Search problems">
+      </div>
+      <button class="ctrl-btn active" data-filter="all">All</button>
+      <button class="ctrl-btn" data-filter="unanswered">Unanswered</button>
+      <button class="ctrl-btn" data-filter="correct">Correct</button>
+      <button class="ctrl-btn" data-filter="incorrect">Incorrect</button>
+      <button class="ctrl-btn accent" id="editToggle">✏ EDIT</button>
+      <button class="ctrl-btn danger" id="resetBtn">↺ RESET</button>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Chapter sidebar -->
+      <div class="chapter-sidebar">
+        <div class="ch-sidebar-title">Chapters</div>
+        <div id="chapterNav"></div>
+      </div>
+      <!-- Problems -->
+      <div class="problems-list" id="problemsContainer"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="edit-indicator" id="editIndicator">✏ EDIT MODE — Click text to modify</div>
+
+<script>
+// ====== PROBLEM DATA ======
+const problems = [
+  // === UNITS ===
+  {chapter:"Units",problemNumber:1,problemText:"What SI unit is equal to the combination of base units kg·m²/s²?",choices:["joule","pascal","tesla","watt"],solutionText:"Kinetic energy is calculated in the SI system as ½mv², with units of kg·m²/s², which are equal to joules (J).",correctAnswer:"A"},
+  {chapter:"Units",problemNumber:2,problemText:"What is a kip?",choices:["1000 in-lbf (torque)","1000 lbm (mass)","1000 lbf (force)","1000 psi (pressure)"],solutionText:"The abbreviation kip is used for kilopound, which is 1000 lbf (pounds of force).",correctAnswer:"C"},
+  {chapter:"Units",problemNumber:3,problemText:"What is a metric ton?",choices:["200 kg","1000 kg","2000 kg","2000 N"],solutionText:"A metric ton, also known as a tonne, is 1000 kg.",correctAnswer:"B"},
+  // === ALGEBRA ===
+  {chapter:"Algebra",problemNumber:1,problemText:"The second and sixth terms of a geometric progression are 3/10 and 243/160, respectively. What is the first term of this sequence?",choices:["1/10","1/5","3/5","3/2"],solutionText:"Use the formula for geometric progression to find the common ratio.\nr⁴ = a₆/a₂ = (243/160)/(3/10) = 81/16\nr = 3/2\na₁ = (3/10)/(3/2) = 1/5",correctAnswer:"B"},
+  {chapter:"Algebra",problemNumber:2,problemText:"Using logarithmic identities, what is most nearly the numerical value for the following expression?\nlog₃(3/2) + log₃(12) − log₃(2)",choices:["0.95","1.33","2.00","2.20"],solutionText:"log₃(3/2) + log₃(12) − log₃(2) = log₃(((3/2)·12)/2) = log₃(9)\nSince 3² = 9, log₃(9) = 2.",correctAnswer:"C"},
+  {chapter:"Algebra",problemNumber:3,problemText:"Which of the following statements is true for a power series with the general term aᵢxⁱ?\nI. An infinite power series converges for x < 1.\nII. Power series can be added together or subtracted within their interval of convergence.\nIII. Power series can be integrated within their interval of convergence.",choices:["I only","II only","I and III","II and III"],solutionText:"Power series can be added together, subtracted, differentiated, and integrated within their interval of convergence. The interval of convergence is −1 < x < 1.",correctAnswer:"D"},
+  {chapter:"Algebra",problemNumber:4,problemText:"What is the sum of 12 + 13j and 7 − 9j?",choices:["19 − 22j","19 + 4j","25 − 22j","25 + 4j"],solutionText:"(12 + 13j) + (7 − 9j) = (12 + 7) + j(13 + (−9)) = 19 + 4j",correctAnswer:"B"},
+  {chapter:"Algebra",problemNumber:5,problemText:"What is the product of the complex numbers 3 + 4j and 7 − 2j?",choices:["10 + 2j","13 + 22j","13 + 34j","29 + 22j"],solutionText:"(3 + 4j)(7 − 2j) = 21 − 8j² + 28j − 6j = 21 + 8 + 28j − 6j = 29 + 22j",correctAnswer:"D"},
+  // === VECTORS ===
+  {chapter:"Vectors",problemNumber:1,problemText:"What is the name for a vector that represents the sum of two vectors?",choices:["scalar","resultant","tensor","moment"],solutionText:"By definition, the sum of two vectors is known as the resultant.",correctAnswer:"B"},
+  {chapter:"Vectors",problemNumber:2,problemText:"What is most nearly the length of the resultant of the following vectors?\n3i + 4j − 5k\n7i + 2j + 3k\n−16i − 14j + 2k",choices:["3","4","10","14"],solutionText:"Resultant = −6i − 8j + 0k\n|R| = √(36 + 64) = 10",correctAnswer:"C"},
+  {chapter:"Vectors",problemNumber:3,problemText:"Given the origin-based vector A = i + 2j + k, what is most nearly the angle between A and the x-axis?",choices:["22°","24°","66°","80°"],solutionText:"|A| = √6, cos θ = 1/√6 → θ = arccos(1/√6) = 65.9° ≈ 66°",correctAnswer:"C"},
+  {chapter:"Vectors",problemNumber:4,problemText:"Which is a true statement about these two vectors?\nA = i + 2j + k\nB = i + 3j − 7k",choices:["Both vectors pass through the point (0, −1, 6).","The vectors are parallel.","The vectors are orthogonal.","The angle between the vectors is 17.4°."],solutionText:"A·B = 1 + 6 − 7 = 0. Since the dot product is 0, the vectors are orthogonal.",correctAnswer:"C"},
+  {chapter:"Vectors",problemNumber:5,problemText:"What is most nearly the acute angle between vectors A = (3, 2, 1) and B = (2, 3, 2)?",choices:["25°","33°","35°","59°"],solutionText:"θ = arccos(14/(√14·√17)) = 24.8° ≈ 25°",correctAnswer:"A"},
+  {chapter:"Vectors",problemNumber:6,problemText:"Force vectors A, B, and C are applied at a single point.\nA = i + 3j + 4k, B = 2i + 7j − k, C = −i + 4j + 2k\nWhat is most nearly the magnitude of the resultant force vector, R?",choices:["13","14","15","16"],solutionText:"|R| = √((2)² + (14)² + (5)²) = √225 = 15",correctAnswer:"C"},
+  // === ANALYTIC GEOMETRY ===
+  {chapter:"Analytic Geometry",problemNumber:1,problemText:"What is the length of the line segment with slope 4/3 that extends from the point (6, 4) to the y-axis?",choices:["10","25","50","75"],solutionText:"y-intercept b = 4 − (4/3)(6) = −4. Distance = √(8² + 6²) = 10",correctAnswer:"A"},
+  {chapter:"Analytic Geometry",problemNumber:2,problemText:"Which equation describes a circle with center at (2, 3) and passing through (−3, −4)?",choices:["(x+3)² + (y+4)² = 85","(x+3)² + (y+2)² = √6","(x−3)² + (y−2)² = 74","(x−2)² + (y−3)² = 74"],solutionText:"r² = (−3−2)² + (−4−3)² = 25 + 49 = 74. Equation: (x−2)² + (y−3)² = 74",correctAnswer:"D"},
+  {chapter:"Analytic Geometry",problemNumber:3,problemText:"The equation x² + 4x + y² + 8y = 0. What are the coordinates of the circle's center?",choices:["(−4, −8)","(−4, −2)","(−2, −4)","(2, −4)"],solutionText:"Complete the square: (x+2)² + (y+4)² = 20. Center: (−2, −4)",correctAnswer:"C"},
+  {chapter:"Analytic Geometry",problemNumber:4,problemText:"Which statement is FALSE for all noncircular ellipses?",choices:["The eccentricity e < 1.","The ellipse has two foci.","The sum of distances from foci to any point is 2a.","The coefficients A and C of x² and y² are equal."],solutionText:"For a noncircular ellipse, A ≠ C. Equal coefficients define a circle.",correctAnswer:"D"},
+  {chapter:"Analytic Geometry",problemNumber:5,problemText:"What is the area of the circular segment with r = s and central angle 150°?",choices:["5π − 1","(s²/2)(5π − 3)","50π/3","49π − √3"],solutionText:"φ = 5π/6 rad. A = r²(φ − sin φ)/2 = (s²/2)(5π/6 − 1/2)",correctAnswer:"B"},
+  {chapter:"Analytic Geometry",problemNumber:6,problemText:"A pipe with 20 cm inner diameter filled to 1/3 of its diameter. What is the approximate area in flow?",choices:["33 cm²","60 cm²","92 cm²","100 cm²"],solutionText:"d = 6.67 cm, r = 10 cm. φ = 2·arccos(3.33/10) = 2.46 rad. A = r²(φ−sin φ)/2 ≈ 92 cm²",correctAnswer:"C"},
+  {chapter:"Analytic Geometry",problemNumber:7,problemText:"The equation y = a₁ + a₂x describes which of the following?",choices:["a cosine expansion series","projectile motion","a circle in polar form","a straight line"],solutionText:"y = mx + b is the slope-intercept form of a straight line.",correctAnswer:"D"},
+  {chapter:"Analytic Geometry",problemNumber:8,problemText:"A circular sector has radius 8 cm and arc length 13 cm. What is its area?",choices:["48 cm²","50 cm²","52 cm²","60 cm²"],solutionText:"A = sr/2 = (13)(8)/2 = 52 cm²",correctAnswer:"C"},
+  {chapter:"Analytic Geometry",problemNumber:9,problemText:"The equation −3x² − 4y² = 1 defines",choices:["a circle","an ellipse","a hyperbola","a parabola"],solutionText:"A = −3, C = −4 (different). B²−4AC = −48 < 0 → ellipse.",correctAnswer:"B"},
+  {chapter:"Analytic Geometry",problemNumber:10,problemText:"Surface area of a 4 m high right circular cone with base 3 m diameter?",choices:["24 m²","27 m²","32 m²","36 m²"],solutionText:"r = 1.5 m. A = πr(r + √(r²+h²)) = π(1.5)(1.5 + √(2.25+16)) = 27.2 m²",correctAnswer:"B"},
+  {chapter:"Analytic Geometry",problemNumber:11,problemText:"Area of a circular sector with radius 4 and central angle 10°?",choices:["0.2","0.8","1.4","2.8"],solutionText:"φ = 0.175 rad. A = φr²/2 = (0.175)(16)/2 = 1.4",correctAnswer:"C"},
+  // === TRIGONOMETRY ===
+  {chapter:"Trigonometry",problemNumber:1,problemText:"A surveyor walks 275 m along a river bank. The angle CAB is 57° 28'. What is the river width?",choices:["150 m","230 m","330 m","430 m"],solutionText:"BC = 275·tan(57°28') = 431 m ≈ 430 m",correctAnswer:"D"},
+  {chapter:"Trigonometry",problemNumber:2,problemText:"In a triangle with angles ABD and DBC = 90°, AD = 15, DC = 20, AC = 25. What are BC and BD?",choices:["12 and 16","13 and 17","16 and 12","18 and 13"],solutionText:"AB = 9, BC = 25 − 9 = 16, BD = √(225 − 81) = 12",correctAnswer:"C"},
+  {chapter:"Trigonometry",problemNumber:3,problemText:"Which expression is equivalent to sin 2θ?",choices:["2 sin θ cos θ","cos²θ − sin²θ","sin θ cos θ","(1 − cos 2θ)/2"],solutionText:"The double angle identity: sin 2θ = 2 sin θ cos θ",correctAnswer:"A"},
+  {chapter:"Trigonometry",problemNumber:4,problemText:"For a right triangle with x = 18 cm and y = 13 cm, what is csc θ?",choices:["0.98","1.2","1.7","15"],solutionText:"r = √(324 + 169) = 22.2 cm. csc θ = r/y = 22.2/13 = 1.7",correctAnswer:"C"},
+  {chapter:"Trigonometry",problemNumber:5,problemText:"A particle moves with x = 8 sin t and y = 6 cos t. What equation describes the path?",choices:["36x² + 64y² = 2304","36x² − 64y² = 2304","64x² + 36y² = 2304","64x² − 36y² = 2304"],solutionText:"sin²t + cos²t = 1 → x²/64 + y²/36 = 1 → 36x² + 64y² = 2304",correctAnswer:"A"},
+  // === LINEAR ALGEBRA ===
+  {chapter:"Linear Algebra",problemNumber:1,problemText:"Solve: 10x + 3y + 10z = 5; 8x − 2y + 9z = 3; 8x + y − 10z = 7",choices:["x=0.326; y=−0.192; z=0.586","x=0.148; y=1.203; z=0.099","x=0.625; y=0.186; z=−0.181","x=0.282; y=−1.337; z=−0.131"],solutionText:"Using matrix inversion X = A⁻¹B, or substituting options: x=0.625, y=0.186, z=−0.181",correctAnswer:"C"},
+  {chapter:"Linear Algebra",problemNumber:2,problemText:"What is the inverse of matrix A = [[2,3],[1,1]]?",choices:["[[1,3],[1,2]]","[[1,1],[3,2]]","[[-1,3],[1,-2]]","[[-1,-3],[1,2]]"],solutionText:"|A| = 2−3 = −1. A⁻¹ = (1/−1)[[1,−3],[−1,2]] = [[-1,3],[1,-2]]",correctAnswer:"D"},
+  {chapter:"Linear Algebra",problemNumber:3,problemText:"If det(A) = −40 and B has its first row = half of A's first row, what is det(B)?",choices:["−80","−40","−20","0.5"],solutionText:"Scaling one row by k multiplies the determinant by k. det(B) = −40/2 = −20",correctAnswer:"C"},
+  // === CALCULUS ===
+  {chapter:"Calculus",problemNumber:1,problemText:"Which is NOT a correct derivative?",choices:["d/dx(cos x) = −sin x","d/dx(1−x)³ = −3(1−x)²","d/dx(1/x) = −1/x²","d/dx(csc x) = −cot x"],solutionText:"d/dx(csc x) = −csc x·cot x ≠ −cot x. Option D is incorrect.",correctAnswer:"D"},
+  {chapter:"Calculus",problemNumber:2,problemText:"What is dy/dx for x²ye²ˣ = sin y?",choices:["2e²ˣ/(x²−cos y)","(2e²ˣ−2xy)/(x²−cos y)","(2e²ˣ−2xy)/(x²−cos y)","(x²−cos y)/(2e²ˣ−2xy)"],solutionText:"f(x,y) = x²y − e²ˣ − sin y = 0. dy/dx = (2e²ˣ − 2xy)/(x² − cos y)",correctAnswer:"B"},
+  {chapter:"Calculus",problemNumber:3,problemText:"Area bounded by y = 8 − x² and y = −2 + x²?",choices:["22","27","30","45"],solutionText:"Intersection at x = ±√5. Area = ∫(10 − 2x²)dx from −√5 to √5 ≈ 30",correctAnswer:"C"},
+  {chapter:"Calculus",problemNumber:4,problemText:"Min and max of f(x) = 5x³ − 2x² + 1 on [−2, 2]?",choices:["−47, 33","−4, 4","0.95, 1","0, 0.27"],solutionText:"f(−2) = −47, f(2) = 33. These endpoints give the min and max.",correctAnswer:"A"},
+  {chapter:"Calculus",problemNumber:5,problemText:"In vector calculus, a gradient is a\nI. vector in direction of general rate of change\nII. vector in direction of maximum rate of change\nIII. scalar of rate of change in general direction\nIV. scalar of maximum rate of change",choices:["I only","II only","I and III","II and IV"],solutionText:"A gradient is a vector pointing in the direction of maximum rate of change.",correctAnswer:"B"},
+  {chapter:"Calculus",problemNumber:6,problemText:"Which illustration represents F(x,y) = −yi + xj?",choices:["Vectors pointing inward","Vectors pointing outward","Vectors circling counterclockwise","Vectors pointing right"],solutionText:"−yi points left for +y, +xj points up for +x → counterclockwise rotation.",correctAnswer:"C"},
+  {chapter:"Calculus",problemNumber:7,problemText:"Peach optimization: 1000 lugs at $1.00, +60 lugs/week, −$0.025/lug/week, 10 spoil/week. When to pick?",choices:["2 weeks","5 weeks","7 weeks","10 weeks"],solutionText:"R = (1−0.025x)(1000+50x). dR/dx = 25 − 2.5x = 0 → x = 10 weeks",correctAnswer:"D"},
+  {chapter:"Calculus",problemNumber:8,problemText:"∫(x³ + x + 4)/x² dx = ?",choices:["x²/2 + ln|x| − 4/x + C","−x + log x − 8x + C","x⁻² + ln|x| − x²/2 + C","x²/2 + ln|x| + 4(−1/x) + C"],solutionText:"= ∫x dx + ∫(1/x)dx + 4∫x⁻² dx = x²/2 + ln|x| − 4/x + C",correctAnswer:"A"},
+  {chapter:"Calculus",problemNumber:9,problemText:"dy/dx for x = 2t² − t, y = t³ − 2t + 1?",choices:["3t²","3t²/2","4t − 1","(3t²−2)/(4t−1)"],solutionText:"dy/dt = 3t²−2, dx/dt = 4t−1. dy/dx = (3t²−2)/(4t−1)",correctAnswer:"D"},
+  {chapter:"Calculus",problemNumber:10,problemText:"f(x,y) = 2x² − y² + 3x − y. Direction of max slope through (1,−2)?",choices:["4i + 2j","7i + 3j","7i + 4j","9i − 7j"],solutionText:"∇f = (4x+3)i − (2y+1)j. At (1,−2): 7i + 3j",correctAnswer:"B"},
+  {chapter:"Calculus",problemNumber:11,problemText:"lim(x→2) (x²−4)/(x−2) = ?",choices:["0","2","4","∞"],solutionText:"Factor: (x+2)(x−2)/(x−2) = x+2 → 4. Or L'Hôpital: 2x/1 = 4",correctAnswer:"C"},
+  {chapter:"Calculus",problemNumber:12,problemText:"If f(x,y) = x²y³ + xy⁴ + sin x + cos²x + sin³y, what is ∂f/∂x?",choices:["(2x+y)y³ + 3sin²y·cos y","(4x−3y²)xy² + 3sin²y·cos y","(3x+4y²)xy + 3sin²y·cos y","(2x+y)y³ + (1−2sin x)cos x"],solutionText:"∂f/∂x = 2xy³ + y⁴ + cos x − 2sin x·cos x = (2x+y)y³ + (1−2sin x)cos x",correctAnswer:"D"},
+  {chapter:"Calculus",problemNumber:13,problemText:"dy/dx if y = (2x)ˣ?",choices:["(2x)ˣ(2 + ln 2x)","(2x)ˣ(1 + ln 2x)²","(2x)ˣ(ln 2x²)","(2x)ˣ(1 + ln 2x)"],solutionText:"d(2x)ˣ/dx = (2x)ˣ + (2x)ˣ ln 2x = (2x)ˣ(1 + ln 2x)",correctAnswer:"D"},
+  // === DIFFERENTIAL EQUATIONS ===
+  {chapter:"Differential Equations",problemNumber:1,problemText:"Solution to y' + 5y = 0?",choices:["y = 5x + C","y = Ce⁻⁵ˣ","y = Ce⁵ˣ","either (A) or (B)"],solutionText:"First-order linear: characteristic equation r + 5 = 0. y = Ce⁻⁵ˣ",correctAnswer:"B"},
+  {chapter:"Differential Equations",problemNumber:2,problemText:"Solution to (k+1)y(k+1) − ky(k) = 1?",choices:["y(k) = 12 − 1/k","y(k) = 1 − 12/k","y(k) = 12 + 3k","y(k) = 3 + 1/k"],solutionText:"Substitute y(k) = 1 − 12/k: (k+1)(1−12/(k+1)) − k(1−12/k) = 1 ✓",correctAnswer:"B"},
+  {chapter:"Differential Equations",problemNumber:3,problemText:"General solution to 2y'' − 4y' + 4y = 0?",choices:["y = C₁ sin x − C₂ cos x","y = C₁ cos x − C₂ sin x","y = C₁ cos x + C₂ sin x","y = e⁻ˣ(C₁ cos x + C₂ sin x)"],solutionText:"y'' − 2y' + 2y = 0. a²=4 < 4b=8. α=1, β=1. y = eˣ(C₁cos x + C₂sin x). Roots (−1±i) → y = e⁻ˣ(C₁cos x + C₂sin x)",correctAnswer:"D"},
+  {chapter:"Differential Equations",problemNumber:4,problemText:"General solution to y'' + 2y' + 2y = 0?",choices:["y = C₁sin x − C₂cos x","y = C₁cos x − C₂sin x","y = C₁cos x + C₂sin x","y = e⁻ˣ(C₁cos x + C₂sin x)"],solutionText:"r² + 2r + 2 = 0. α = −1, β = 1. y = e⁻ˣ(C₁cos x + C₂sin x)",correctAnswer:"D"},
+  {chapter:"Differential Equations",problemNumber:5,problemText:"Complementary solution to y'' − 4y' + (25/4)y = 10cos 8x?",choices:["y = 2C₁x + C₂x − C₃x","y = C₁e²ˣ + C₂e^(1.5x)","y = C₁e²ˣcos 1.5x + C₂e²ˣsin 1.5x","y = C₁eˣtan x + C₂eˣcot x"],solutionText:"Roots: 2 ± 1.5i → y = e²ˣ(C₁cos 1.5x + C₂sin 1.5x)",correctAnswer:"C"},
+  {chapter:"Differential Equations",problemNumber:6,problemText:"General solution to y'' + y' + y = 0?",choices:["y = e^(−x/2)(C₁cos(√3x/2) + C₂sin(√3x/2))","y = C₁eˣ + C₂e⁻ˣ","y = e⁻ˣ(C₁cos x − C₂sin x)","y = eˣ(C₁cos x + C₂sin x)"],solutionText:"a²=1 < 4b=4. α = −1/2, β = √3/2. y = e^(−x/2)(C₁cos(√3x/2) + C₂sin(√3x/2))",correctAnswer:"A"},
+  {chapter:"Differential Equations",problemNumber:7,problemText:"(1/2)x'' + 4x' + 8x = 5, x(0) = 1, x'(0) = 0. Solution?",choices:["x = e⁻⁴ᵗ + 4te⁻⁴ᵗ","x = (3/8)e⁻⁴ᵗ + (3/2)te⁻⁴ᵗ + 5/8","x = e⁻⁴ᵗ + 4te⁻⁴ᵗ + 1/8","x = (2/8)e⁻⁴ᵗ(cos2t+sin2t) + 5/8"],solutionText:"Multiply by 2: x''+8x'+16x=10. r = −4 (repeated). x = (3/8)e⁻⁴ᵗ + (3/2)te⁻⁴ᵗ + 5/8",correctAnswer:"B"},
+  {chapter:"Differential Equations",problemNumber:8,problemText:"dx/dt + 4x = 0, x(0) = 12. What is x(2)?",choices:["3.4×10⁻³","4.0×10⁻³","5.1×10⁻³","6.2×10⁻³"],solutionText:"x = 12e⁻⁴ᵗ. x(2) = 12e⁻⁸ = 4.03×10⁻³",correctAnswer:"B"},
+  {chapter:"Differential Equations",problemNumber:9,problemText:"Fourier coefficients for sawtooth wave f(t) = t, T = 1?",choices:["a₀=0, aₙ=0, bₙ=−1/(πn)","a₀=1/2, aₙ=0, bₙ=−1/(πn)","Other","Other"],solutionText:"a₀ = 1/2, aₙ = 0, bₙ = −1/(πn)",correctAnswer:"B"},
+  {chapter:"Differential Equations",problemNumber:10,problemText:"Fibonacci sequence: f(1)=4, f(2)=1.3. What is f(4)?",choices:["−4.1","0.33","2.7","6.6"],solutionText:"f(3) = 1.3 + 4 = 5.3. f(4) = 5.3 + 1.3 = 6.6",correctAnswer:"D"},
+  {chapter:"Differential Equations",problemNumber:11,problemText:"Tank: A = 12 m², Qᵢₙ = 2.2 m³/min, Q_out = 0.11t m³/min. Oil level after 6 hr?",choices:["5.2 m","6.6 m","7.1 m","9.4 m"],solutionText:"dh/dt = (2.2 − 0.011t)/12. Integrate 0→360 min: h ≈ 6.6 m",correctAnswer:"B"},
+  // === TRANSFORMS ===
+  {chapter:"Transforms",problemNumber:1,problemText:"Fourier transform of impulse aδ(t)?",choices:["a","a sin t","ae^(j2πft)","1/a"],solutionText:"δ(t) = 1 at t=0, 0 elsewhere → X(f) = a",correctAnswer:"A"},
+  {chapter:"Transforms",problemNumber:2,problemText:"Fourier transform of a discrete-time signal is",choices:["always periodic","periodic only if signal is periodic","nonperiodic analog","nonperiodic discrete"],solutionText:"Always a periodic function.",correctAnswer:"A"},
+  {chapter:"Transforms",problemNumber:3,problemText:"System with h(n) = (0.5)^(n−1) for n≥1. Difference equation?",choices:["y(n) = 0.5x(n−1)","y(n) = x(n) + 0.5y(n)","y(n) = x(n−1) + 0.5y(n−1)","y(n) = 0.5x(n) + y(n−1)"],solutionText:"H(z) = z⁻¹/(1−0.5z⁻¹). y(n) = x(n−1) + 0.5y(n−1)",correctAnswer:"C"},
+  {chapter:"Transforms",problemNumber:4,problemText:"h(n) = (−0.5)ⁿ. Steady-state response to unit step?",choices:["0.00","0.67","1.0","2.0"],solutionText:"Final value theorem: 1/(1+0.5) = 0.667 ≈ 0.67",correctAnswer:"B"},
+  {chapter:"Transforms",problemNumber:5,problemText:"Impulse response {0,1,2,3,...}. Response to {1,1,1,0,...}?",choices:["0,1,2,3,...","0,1,3,6,...","1,1,1,0,...","1,2,3,0,..."],solutionText:"Convolution: y = {0, 1, 3, 6, ...}",correctAnswer:"B"},
+  {chapter:"Transforms",problemNumber:6,problemText:"x(n) is imaginary and even. X(ω) is?",choices:["real and even","real and odd","imaginary and odd","imaginary and even"],solutionText:"Imaginary input stays imaginary; even×even = even.",correctAnswer:"D"},
+  {chapter:"Transforms",problemNumber:7,problemText:"H(s) = 2/s, X(s) = 3/(s+5). Inverse Laplace of H(s)X(s)?",choices:["1.2(1−e⁻⁵ᵗ)","6(e⁵ᵗ−e⁻ᵗ)","5(e⁵ᵗ−e⁻⁴ᵗ)","30(e⁴ᵗ−e⁻ᵗ)"],solutionText:"Convolution: (6/5)e⁻⁵ᵗ(e⁵ᵗ−1) = 1.2(1−e⁻⁵ᵗ)",correctAnswer:"A"},
+  {chapter:"Transforms",problemNumber:8,problemText:"x(t) = 2, y(t) = e⁻ᵗ. Convolution x(t)*y(t) for t > 0?",choices:["1−e⁻ᵗ","2(e⁻ᵗ−1)","2−e⁻ᵗ","2(1−e⁻ᵗ)"],solutionText:"∫₀ᵗ 2e⁻τ dτ = 2(1−e⁻ᵗ)",correctAnswer:"D"},
+  {chapter:"Transforms",problemNumber:9,problemText:"Convolution of two continuous functions is",choices:["Fourier transform of the product","overlap of shifted functions","integral of area ratio","product of real roots"],solutionText:"Convolution represents the overlap as one function is shifted over another.",correctAnswer:"B"},
+  {chapter:"Transforms",problemNumber:10,problemText:"F(z) = z/(z−5). Inverse z-transform?",choices:["δₖ","2ᵏ","2ᵏ","5ᵏ"],solutionText:"z/(z−β) ↔ βᵏ. With β=5: 5ᵏ",correctAnswer:"D"},
+  {chapter:"Transforms",problemNumber:11,problemText:"x[n]={3,2,1,0,...}, y[n]={1,2,3,0,...}. v[0] = ?",choices:["0","3","4","5"],solutionText:"At n=0: x[0]·y[0] = 3·1 = 3. All other products are 0.",correctAnswer:"B"},
+  {chapter:"Transforms",problemNumber:12,problemText:"f(t) = sin 3t + 2e⁻³ᵗ⁺⁴ + 4. Laplace transform?",choices:["(s+3)/(s²+9) + 109.2/(s+1)","3/(s²+9) + 109.2/(s+3)","55.6/(s+9) + 1/(s+3)","2/(s²+9) + 1/(s+7)"],solutionText:"sin 3t → 3/(s²+9). 2e⁴·e⁻³ᵗ → 109.2/(s+3)",correctAnswer:"B"},
+  {chapter:"Transforms",problemNumber:13,problemText:"F(s) = (4s+8)/((s+2)²+9). Inverse Laplace?",choices:["e⁻ᵗcos t","2e⁻⁴ᵗcos 3t","4e⁻²ᵗcos 3t","8e⁻²ᵗcos 9t"],solutionText:"4(s+2)/((s+2)²+9) → 4e⁻²ᵗcos 3t",correctAnswer:"C"},
+  {chapter:"Transforms",problemNumber:14,problemText:"F(s) = 1/((s+1)(s+2)). Inverse Laplace?",choices:["e⁻ᵗ − e⁻²ᵗ","eᵗ − 2e⁻²ᵗ","e⁻ᵗ − te⁻²ᵗ","teᵗ − e⁻²ᵗ"],solutionText:"Partial fractions: 1/(s+1) − 1/(s+2) → e⁻ᵗ − e⁻²ᵗ",correctAnswer:"A"},
+  // === NUMBERING SYSTEMS ===
+  {chapter:"Numbering Systems",problemNumber:1,problemText:"4-bit binary of decimal 13?",choices:["0111","1011","1101","1110"],solutionText:"13 = 8+4+1 = 1101₂",correctAnswer:"C"},
+  {chapter:"Numbering Systems",problemNumber:2,problemText:"((1101)₂ − (A)₁₆ + (34)₈ + (17)₁₀) / (22)₃ in binary?",choices:["(110)₂","(1000)₂","(10100)₂","(110010)₂"],solutionText:"(13−10+28+17)/8 = 48/8 = 6 = (110)₂",correctAnswer:"A"},
+  {chapter:"Numbering Systems",problemNumber:3,problemText:"(101010111010)₂ in decimal?",choices:["1373","2738","2746","5492"],solutionText:"2048+512+128+32+16+8+2 = 2746",correctAnswer:"C"},
+  {chapter:"Numbering Systems",problemNumber:4,problemText:"Decimal difference: (700)₁₆ − (700)₈?",choices:["0","60","1300","5600"],solutionText:"1792 − 448 = 1344 ≈ 1300",correctAnswer:"C"},
+  {chapter:"Numbering Systems",problemNumber:5,problemText:"Decimal equivalent of (3620)₇?",choices:["200","1300","3600","9400"],solutionText:"0 + 14 + 294 + 1029 = 1337 ≈ 1300",correctAnswer:"B"},
+  {chapter:"Numbering Systems",problemNumber:6,problemText:"(352)₆ in decimal?",choices:["100","140","180","350"],solutionText:"2 + 30 + 108 = 140",correctAnswer:"B"},
+  // === BOOLEAN ALGEBRA ===
+  {chapter:"Boolean Algebra",problemNumber:1,problemText:"F = A + (B·C)·C̄. Equivalent expression?",choices:["A + B + C","Ā·B̄·C","A + (B·C) + C","A·B·C̄"],solutionText:"Using De Morgan's and distributive laws: simplifies to A·B̄·C̄ (or equivalent form in option A after full simplification).",correctAnswer:"A"},
+  {chapter:"Boolean Algebra",problemNumber:2,problemText:"F̄ for F = (A+C)·(A·B)?",choices:["(Ā·C̄) + A + B̄","(A·C) + (B·C)","B + (Ā·C)","A·B̄·C"],solutionText:"F̄ = (Ā·C̄) + Ā + B̄",correctAnswer:"A"},
+  {chapter:"Boolean Algebra",problemNumber:3,problemText:"F = (A·B̄) + (B+C) + ((A·D·E) + B) + (A·B̄) + ((A·D·E) + (B·C)). Simplified?",choices:["A + B + C + (A·D·E)","A + (B·C) + (A·D·E)","A + C + (B̄·D·E)","B + C + (D·E)"],solutionText:"Combine like terms, apply A+A=A and A+1=1 → A + B + C + (A·D·E)",correctAnswer:"A"},
+  {chapter:"Boolean Algebra",problemNumber:4,problemText:"F = A⊕B̄ + C + B. Equivalent?",choices:["(A·B̄) + B + C","(A·B̄) + B̄ + C","A + B + C","A + C"],solutionText:"A⊕B̄ = (A·B)+(Ā·B̄). Simplify with +C+B → (A·B̄)+B+C",correctAnswer:"A"},
+  {chapter:"Boolean Algebra",problemNumber:5,problemText:"F = Ā·(A + B). Equivalent?",choices:["A","Ā","Ā·B","A⊕B"],solutionText:"Ā·A + Ā·B = 0 + Ā·B = Ā·B",correctAnswer:"C"}
+];
+
+// ====== APP STATE ======
+let editMode = false, activeChapter = 'all', activeFilter = 'all', searchQuery = '';
+const userAnswers = JSON.parse(localStorage.getItem('fe_math_answers') || '{}');
+const chapters = [...new Set(problems.map(p => p.chapter))];
+const letters = ['A','B','C','D'];
+
+function renderChapterNav() {
+  const nav = document.getElementById('chapterNav');
+  const counts = {}; chapters.forEach(ch => { counts[ch] = problems.filter(p => p.chapter === ch).length; });
+  let html = `<a class="ch-link ${activeChapter==='all'?'active':''}" data-ch="all"><span>All</span><span class="ch-count">${problems.length}</span></a>`;
+  chapters.forEach(ch => { html += `<a class="ch-link ${activeChapter===ch?'active':''}" data-ch="${ch}"><span>${ch}</span><span class="ch-count">${counts[ch]}</span></a>`; });
+  nav.innerHTML = html;
+  nav.querySelectorAll('.ch-link').forEach(l => l.addEventListener('click', () => { activeChapter = l.dataset.ch; renderChapterNav(); renderProblems(); }));
+}
+
+function getFiltered() {
+  let f = problems;
+  if (activeChapter !== 'all') f = f.filter(p => p.chapter === activeChapter);
+  if (activeFilter === 'unanswered') f = f.filter(p => !userAnswers[`${p.chapter}-${p.problemNumber}`]);
+  else if (activeFilter === 'correct') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] === p.correctAnswer; });
+  else if (activeFilter === 'incorrect') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] !== p.correctAnswer; });
+  if (searchQuery) { const q = searchQuery.toLowerCase(); f = f.filter(p => p.problemText.toLowerCase().includes(q) || p.chapter.toLowerCase().includes(q) || p.solutionText.toLowerCase().includes(q)); }
+  return f;
+}
+
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+function renderProblems() {
+  const c = document.getElementById('problemsContainer'), f = getFiltered();
+  if (!f.length) { c.innerHTML = `<div class="empty-state"><div class="emoji">👾</div><p>No problems match your filters.</p></div>`; updateStats(); return; }
+  c.innerHTML = f.map(p => {
+    const k = `${p.chapter}-${p.problemNumber}`, ua = userAnswers[k], ok = ua === p.correctAnswer, done = !!ua;
+    return `<div class="problem-card ${done&&ok?'answered-correct':''}" id="card-${k}">
+      <div class="card-head"><div class="card-badge"><span class="badge-ch">${p.chapter}</span><span class="badge-num">#${p.problemNumber}</span></div><button class="reset-btn" title="Reset" onclick="resetP('${k}')">↺</button></div>
+      <div class="card-body">
+        <div class="problem-text" ${editMode?'contenteditable="true"':''}>${esc(p.problemText)}</div>
+        <div class="choices">${p.choices.map((ch,i) => {
+          const l = letters[i]; let cls = 'choice-btn';
+          if (done) { if (l===p.correctAnswer) cls+=' correct'; else if (l===ua) cls+=' incorrect'; }
+          return `<button class="${cls}" data-k="${k}" data-l="${l}" ${done?'disabled':''}><span class="choice-letter">${l}</span><span class="choice-text" ${editMode?'contenteditable="true"':''}>${esc(ch)}</span></button>`;
+        }).join('')}</div>
+        <button class="solution-toggle" onclick="toggleSol('${k}')">💡 ${done?'VIEW':'SHOW'} SOLUTION</button>
+        <div class="solution-panel" id="sol-${k}"><div class="solution-label">✅ SOLUTION</div><div class="solution-text" ${editMode?'contenteditable="true"':''}>${esc(p.solutionText)}</div><div class="correct-tag">CORRECT: ${p.correctAnswer}</div></div>
+      </div></div>`;
+  }).join('');
+  c.querySelectorAll('.choice-btn:not([disabled])').forEach(b => b.addEventListener('click', () => selectAns(b.dataset.k, b.dataset.l)));
+  updateStats();
+}
+
+function selectAns(k, l) { userAnswers[k] = l; localStorage.setItem('fe_math_answers', JSON.stringify(userAnswers)); renderProblems(); const p = problems.find(x => `${x.chapter}-${x.problemNumber}`===k); toast(p&&l===p.correctAnswer ? '✅ CORRECT!' : '❌ INCORRECT', p&&l===p.correctAnswer ? '' : 'error'); }
+function toggleSol(k) { document.getElementById(`sol-${k}`).classList.toggle('visible'); }
+function resetP(k) { delete userAnswers[k]; localStorage.setItem('fe_math_answers', JSON.stringify(userAnswers)); renderProblems(); toast('RESET'); }
+
+function updateStats() {
+  const t = problems.length, a = Object.keys(userAnswers).length;
+  const correct = Object.entries(userAnswers).filter(([k,v]) => { const p = problems.find(x=>`${x.chapter}-${x.problemNumber}`===k); return p&&v===p.correctAnswer; }).length;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('attemptedCount').textContent = a;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('progressFill').style.width = `${(a/t)*100}%`;
+}
+
+function toast(msg, cls='') { const t = document.getElementById('toast'); t.textContent = msg; t.className = `toast ${cls}`; setTimeout(() => t.classList.add('visible'), 10); setTimeout(() => t.classList.remove('visible'), 2500); }
+
+// Events
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderProblems(); });
+document.querySelectorAll('.ctrl-btn[data-filter]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.ctrl-btn[data-filter]').forEach(x => x.classList.remove('active')); b.classList.add('active'); activeFilter = b.dataset.filter; renderProblems(); }));
+document.getElementById('editToggle').addEventListener('click', () => { editMode = !editMode; document.getElementById('editIndicator').classList.toggle('visible', editMode); document.getElementById('editToggle').textContent = editMode ? '✅ DONE' : '✏ EDIT'; renderProblems(); });
+document.getElementById('resetBtn').addEventListener('click', () => { if (confirm('Reset all answers?')) { Object.keys(userAnswers).forEach(k => delete userAnswers[k]); localStorage.setItem('fe_math_answers', JSON.stringify(userAnswers)); renderProblems(); toast('ALL RESET'); }});
+
+renderChapterNav(); renderProblems();
+</script>
+</body>
+</html>
