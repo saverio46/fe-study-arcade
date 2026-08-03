@@ -3,63 +3,658 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Notebook - FE Study Arcade</title>
+  <title>Study Notebook — FE Study Arcade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Caveat:wght@500;700&family=Patrick+Hand&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --void: #0a0a12; --panel: #12121f; --panel-2: #1a1a2e; --grid-line: #23233a;
-      --text: #eef0f7; --text-dim: #8a8aa8; --neon-cyan: #2de2ff; --neon-pink: #ff3d81;
-      --neon-yellow: #f9e94e; --neon-green: #3dff88; --neon-orange: #ff6a1a; --neon-purple: #b388ff;
-      --font-display: 'Press Start 2P', monospace; --font-ui: 'Orbitron', sans-serif; --font-body: 'Inter', sans-serif;
+      --void: #0a0a12;
+      --panel: #12121f;
+      --panel-2: #1a1a2e;
+      --grid-line: #23233a;
+      --text: #eef0f7;
+      --text-dim: #8a8aa8;
+
+      --neon-cyan: #2de2ff;
+      --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e;
+      --neon-green: #3dff88;
+      --neon-orange: #ff6a1a;
+      --neon-purple: #b388ff;
+
+      --font-display: 'Press Start 2P', monospace;
+      --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* Notebook Styling */
+      --paper: #f2ecd9;
+      --paper-line: #d8cfb0;
+      --ink: #2b2b2b;
+      --pink: #f3c6ce;
+      --teal: #b9dcd4;
+      --red: #b23b3b;
+      --spine: #6b5b73;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--void); color: var(--text); font-family: var(--font-body); display: flex; min-height: 100vh; }
-    nav.sidebar { width: 280px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--grid-line); padding: 22px 18px; position: sticky; top: 0; height: 100vh; }
-    nav.sidebar .brand { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-yellow); margin-bottom: 24px; }
-    nav.sidebar .nav-header { font-family: var(--font-ui); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--neon-cyan); margin-bottom: 8px; }
-    nav.sidebar ul { list-style: none; margin-bottom: 20px; }
-    nav.sidebar li a { display: block; padding: 8px 10px; border-radius: 4px; text-decoration: none; color: var(--text); font-family: var(--font-ui); font-size: 0.82rem; }
-    nav.sidebar li a:hover, nav.sidebar li a.active { background: var(--panel-2); color: #fff; border-left: 3px solid var(--neon-cyan); }
-    main { flex: 1; padding: 32px; max-width: 900px; }
-    h1 { font-family: var(--font-display); color: var(--neon-yellow); font-size: 1.4rem; margin-bottom: 12px; }
-    .card { background: var(--panel); border: 1px solid var(--grid-line); border-radius: 8px; padding: 20px; margin-top: 20px; }
-    a { color: var(--neon-cyan); }
+    
+    body {
+      background: #25222b;
+      color: var(--text);
+      font-family: var(--font-body);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    nav.sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--panel);
+      border-right: 1px solid var(--grid-line);
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav.sidebar .brand {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--neon-yellow);
+      margin-bottom: 24px;
+      text-shadow: 0 0 10px rgba(249, 233, 78, 0.4);
+    }
+
+    nav.sidebar .nav-header {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--neon-cyan);
+      margin: 14px 0 8px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+      margin-bottom: 8px;
+    }
+
+    nav.sidebar li a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      transition: all 0.15s var(--ease-out);
+      border-left: 3px solid transparent;
+    }
+
+    nav.sidebar li a:hover {
+      background: var(--panel-2);
+      color: var(--neon-cyan);
+      border-left-color: var(--neon-cyan);
+    }
+
+    nav.sidebar li a.active {
+      background: var(--panel-2);
+      color: #fff;
+      border-left-color: var(--neon-yellow);
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(249, 233, 78, 0.3);
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 40px 30px 100px;
+    }
+
+    h1.doc-title {
+      text-align: center;
+      color: #f2ecd9;
+      font-family: 'Caveat', cursive;
+      font-size: 3rem;
+      margin: 0 0 10px;
+    }
+
+    .doc-subtitle {
+      text-align: center;
+      margin-bottom: 36px;
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+    }
+    .doc-subtitle a {
+      color: var(--neon-yellow);
+      text-decoration: none;
+    }
+    .doc-subtitle a:hover {
+      text-decoration: underline;
+    }
+
+    .notebook {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      color: var(--ink);
+      font-family: 'Patrick Hand', cursive;
+    }
+
+    .page {
+      position: relative;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--paper-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+      background-size: 24px 24px;
+      border-radius: 4px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      padding: 36px 40px 44px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      line-height: 1.35;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 10px;
+      background: var(--spine);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .page-label {
+      position: absolute;
+      top: -14px;
+      left: 40px;
+      background: var(--spine);
+      color: #fff;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.85rem;
+      padding: 3px 12px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .fe-title {
+      font-size: 3.2rem;
+      font-weight: 700;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .fe-title span { padding: 0 4px; }
+    .fe-title .f { background: var(--pink); border-radius: 3px; }
+    .fe-title .e { background: var(--teal); border-radius: 3px; }
+
+    .topics-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-color: var(--teal);
+      text-decoration-thickness: 6px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    ol.item-list {
+      list-style: none;
+      counter-reset: item;
+      margin: 0;
+      padding: 0;
+    }
+    ol.item-list > li { margin-bottom: 16px; }
+    .item-head {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .circle-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 2.5px solid var(--ink);
+      border-radius: 50%;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .item-head .label {
+      text-decoration: underline;
+      padding: 0 3px;
+      border-radius: 2px;
+    }
+    .item-head .label.hl-pink { background: var(--pink); }
+    .item-head .label.hl-teal { background: var(--teal); }
+
+    ul.sub-list {
+      list-style: none;
+      margin: 6px 0 0 40px;
+      padding: 0;
+    }
+    ul.sub-list li { margin-bottom: 2px; }
+    ul.sub-list.checkbox li::before { content: "☐ "; }
+
+    .priority-legend {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 2px dashed var(--ink);
+      display: flex;
+      gap: 34px;
+      flex-wrap: wrap;
+      font-size: 1.3rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; }
+    .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink); display: inline-block; }
+    .dot.high { background: #e8899a; }
+    .dot.medium { background: #6fae7c; }
+    .dot.low { background: #a8cf9f; }
+
+    .newsletter-plan ul { list-style: none; margin: 4px 0; padding: 0; }
+    .newsletter-plan .l1 > li { margin: 6px 0; }
+    .newsletter-plan .l1 > li::before { content: "— "; }
+    .newsletter-plan .l2 { margin-left: 34px; }
+    .newsletter-plan .l2 > li::before { content: "○ "; }
+    .newsletter-plan .l3 { margin-left: 34px; }
+    .newsletter-plan .l3 > li::before { content: ": "; }
+    .bracket-note {
+      margin: 8px 0 8px 34px;
+      font-size: 1.15rem;
+      color: #555;
+      border-left: 3px solid var(--ink);
+      padding-left: 10px;
+    }
+
+    .resources-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--red);
+      text-decoration: underline;
+      margin: 26px 0 10px;
+    }
+    ul.resources { list-style: none; margin: 0; padding: 0; }
+    ul.resources li::before { content: "☐ "; }
+    ul.resources li.underline { text-decoration: underline; font-weight: 700; }
+
+    /* Puzzle spread */
+    .spread {
+      display: flex;
+      gap: 0;
+    }
+    .spread .half {
+      flex: 1;
+      padding: 6px 18px;
+    }
+    .spread .half.left { border-right: 2px dashed var(--paper-line); }
+    .word-row {
+      line-height: 2.4;
+    }
+    .word-row span {
+      margin-right: 22px;
+      white-space: nowrap;
+    }
+    .puzzle-banner {
+      text-align: center;
+      margin: 30px auto 10px;
+      max-width: 480px;
+    }
+    .puzzle-banner .badge {
+      display: inline-block;
+      position: relative;
+      background: repeating-linear-gradient(45deg, var(--teal), var(--teal) 8px, #cbe6df 8px, #cbe6df 16px);
+      border: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 14px 34px 18px;
+    }
+    .puzzle-banner .badge::before {
+      content: "";
+      position: absolute;
+      top: -14px; left: 6px; right: 6px; height: 20px;
+      background-image: radial-gradient(circle at 10px 10px, var(--red) 8px, transparent 9px);
+      background-size: 24px 20px;
+      background-repeat: repeat-x;
+    }
+    .puzzle-banner .small {
+      display: block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.1rem;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .puzzle-banner .big {
+      display: block;
+      font-family: 'Caveat', cursive;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 4px;
+      -webkit-text-stroke: 1px var(--red);
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      nav.sidebar { width: 100%; height: auto; position: static; }
+      .content-area { padding: 20px; }
+      .spread { flex-direction: column; }
+      .spread .half.left { border-right: none; border-bottom: 2px dashed var(--paper-line); }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Navigation Sidebar -->
   <nav class="sidebar">
     <div class="brand">FE STUDY ARCADE</div>
-    <div class="nav-header">Foundations</div>
+    
+    <div class="nav-header">Study Content</div>
+    <ul>
+      <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
+      <li><a href="notebook.html" class="active">Study Notebook</a></li>
+      <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+      <li><a href="math-practice-problems.html">Math Practice Problems</a></li>
+    </ul>
+
+    <div class="nav-header">Puzzle Engine</div>
+    <ul>
+      <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference (28)</a></li>
+    </ul>
+
+    <div class="nav-header">Design Language</div>
     <ul>
       <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
       <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
     </ul>
-    <div class="nav-header">Study Content</div>
-    <ul>
-      <li><a href="notebook.html" class="active">Study Notebook</a></li>
-      <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
-      <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
-      <li><a href="math-practice-problems.html">Math Practice Problems</a></li>
-    </ul>
-    <div class="nav-header">Puzzle Engine</div>
-    <ul>
-      <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference</a></li>
-    </ul>
   </nav>
-  <main>
-    <h1>FE Study Notebook</h1>
-    <p>Comprehensive Electrical Engineering FE exam formulas, circuit laws, and notes.</p>
-    <div class="card">
-      <h2 style="font-family:var(--font-ui); color:var(--neon-cyan); margin-bottom:10px;">Key Topics Covered</h2>
-      <ul style="color:var(--text-dim); line-height:1.8; margin-left:20px;">
-        <li>Circuit Analysis: KCL, KVL, Thevenin & Norton Equivalents</li>
-        <li>Electronics: Operational Amplifiers & Power Electronics</li>
-        <li>Power Systems: Transformers, Transmission & Distribution</li>
-        <li>Digital Systems: Boolean Logic & Logic Minimization</li>
-      </ul>
-      <p style="margin-top:20px;"><a href="index.html">← Return to Pac-Man Study Calendar</a></p>
+
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <h1 class="doc-title">Notebook — FE Study Plan &amp; Newsletter Ideas</h1>
+    <div class="doc-subtitle">
+      <a href="fe-arcade-adaptation-map.html">See these topics mapped to arcade-style puzzles →</a> &nbsp;|&nbsp; 
+      <a href="puzzle-engine-reference.html">View all 28 puzzle types →</a>
     </div>
-  </main>
+
+    <div class="notebook">
+
+      <!-- PAGE 1 -->
+      <div class="page">
+        <span class="page-label">Page 1</span>
+        <div class="fe-title"><span class="f">F</span><span class="e">E</span></div>
+
+        <ol class="item-list">
+          <li>
+            <div class="item-head"><span class="circle-num">1</span><span class="label hl-pink">MATHEMATICS</span></div>
+            <ul class="sub-list checkbox">
+              <li>Algebra &amp; Trigonometry</li>
+              <li>Complex Numbers</li>
+              <li>Discrete Mathematics</li>
+              <li>Analytic Geometry</li>
+              <li>Calculus</li>
+              <li>Ordinary differential equations</li>
+              <li>Linear Algebra</li>
+              <li>Vector Analysis</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">2</span><span class="label hl-teal">PROBABILITY &amp; STATISTICS</span></div>
+            <ul class="sub-list">
+              <li>Measures of central tendencies and dispersions</li>
+              <li>Probability distributions</li>
+              <li>Expected value</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">3</span><span class="label hl-teal">ETHICS &amp; PROFESSIONAL PRACTICE</span></div>
+            <ul class="sub-list">
+              <li>Codes of ethics</li>
+              <li>Intellectual property</li>
+              <li>Safety</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">4</span><span class="label hl-teal">ENGINEERING ECONOMICS</span></div>
+            <ul class="sub-list">
+              <li>Time value of money</li>
+              <li>Cost estimation</li>
+              <li>Risk identification</li>
+              <li>Analysis</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">5</span><span class="label">PROPERTIES OF ELECTRICAL MATERIALS</span></div>
+            <ul class="sub-list">
+              <li>Semiconductor materials</li>
+              <li>Electrical</li>
+              <li>Thermal</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">6</span><span class="label hl-pink">CIRCUIT ANALYSIS</span></div>
+            <ul class="sub-list">
+              <li>KCL, KVL</li>
+              <li>Series/parallel equivalent circuits</li>
+              <li>Thevenin &amp; Norton Theorems</li>
+              <li>Node &amp; Loop Analysis</li>
+              <li>Waveform Analysis</li>
+              <li>Phasors</li>
+              <li>Impedance</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">7</span><span class="label hl-teal">LINEAR SYSTEMS</span></div>
+            <ul class="sub-list">
+              <li>Frequency/transient response</li>
+              <li>Resonance</li>
+              <li>Laplace Transformations</li>
+              <li>Transfer Functions</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page">
+        <span class="page-label">Page 2</span>
+        <div class="topics-title">TOPICS</div>
+
+        <ol class="item-list">
+          <li>
+            <div class="item-head"><span class="circle-num">8</span><span class="label">SIGNAL PROCESSING</span></div>
+            <ul class="sub-list">
+              <li>Sampling</li>
+              <li>Analog filters</li>
+              <li>Digital filters</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">9</span><span class="label hl-pink">ELECTRONICS</span></div>
+            <ul class="sub-list">
+              <li>Models, biasing, &amp; performance of discrete devices</li>
+              <li>Amplifiers</li>
+              <li>Operational Amplifiers</li>
+              <li>Instrumentation</li>
+              <li>Power Electronics</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">10</span><span class="label hl-pink">POWER SYSTEMS</span></div>
+            <ul class="sub-list">
+              <li>Power Theory</li>
+              <li>Transmission &amp; Distribution</li>
+              <li>Transformers</li>
+              <li>Motor &amp; Generators</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">11</span><span class="label hl-teal">ELECTROMAGNETICS</span></div>
+            <ul class="sub-list">
+              <li>Electrostatics/magnetostatics</li>
+              <li>Electrodynamics</li>
+              <li>Transmission Lines</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">12</span><span class="label hl-teal">CONTROL SYSTEMS</span></div>
+            <ul class="sub-list">
+              <li>Block Diagrams</li>
+              <li>Bode plots</li>
+              <li>Closed Loop response, open-loop response, &amp; stability</li>
+              <li>Controller performance</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">13</span><span class="label hl-teal">COMMUNICATIONS</span></div>
+            <ul class="sub-list">
+              <li>Basic modulation/demodulation concepts</li>
+              <li>Fourier Transforms &amp; series</li>
+              <li>Multiplexing</li>
+              <li>Digital Communications</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">14</span><span class="label">COMPUTER NETWORKS</span></div>
+            <ul class="sub-list">
+              <li>Routing &amp; switching</li>
+              <li>Network topologies</li>
+              <li>Network types</li>
+              <li>Network models</li>
+              <li>Network intrusion detection &amp; prevention</li>
+              <li>Security</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="priority-legend">
+          <div class="legend-item"><span class="dot high"></span> High priority</div>
+          <div class="legend-item"><span class="dot low"></span> Low priority</div>
+          <div class="legend-item"><span class="dot medium"></span> Medium priority</div>
+        </div>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page">
+        <span class="page-label">Page 3</span>
+        <div class="fe-title"><span class="f">F</span><span class="e">E</span></div>
+
+        <ol class="item-list">
+          <li>
+            <div class="item-head"><span class="circle-num">15</span><span class="label hl-pink">DIGITAL SYSTEMS</span></div>
+            <ul class="sub-list">
+              <li>Number systems</li>
+              <li>Boolean Logic</li>
+              <li>Logic Gates &amp; Circuits</li>
+              <li>Logic Minimization</li>
+              <li>Flip Flops &amp; counters</li>
+              <li>Programmable logic devices &amp; gate arrays</li>
+              <li>State machine design</li>
+              <li>Timing</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">16</span><span class="label hl-teal">COMPUTER SYSTEMS</span></div>
+            <ul class="sub-list">
+              <li>Microprocessors</li>
+              <li>Memory technology &amp; systems</li>
+              <li>Interfacing</li>
+            </ul>
+          </li>
+          <li>
+            <div class="item-head"><span class="circle-num">17</span><span class="label">SOFTWARE ENGINEERING</span></div>
+            <ul class="sub-list">
+              <li>Algorithms</li>
+              <li>Data structures</li>
+              <li>Software implementation</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- PAGE 4 -->
+      <div class="page newsletter-plan">
+        <span class="page-label">Page 4</span>
+        <div class="topics-title">TOPICS</div>
+
+        <div style="font-size:1.6rem; font-weight:700; text-decoration:underline; margin-bottom:10px;">Things to include in newsletter</div>
+        <ul class="l1">
+          <li>Main subject title
+            <ul class="l2">
+              <li>Quick summary</li>
+              <li>Subtopic titles</li>
+              <li>summaries
+                <ul class="l3">
+                  <li>formulas — how/when to use</li>
+                  <li>practice problems &amp; previous answers</li>
+                  <li>definitions</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="bracket-note">
+          short summary of previous chapter · Real world/relatable examples · conclusion · example problems
+        </div>
+
+        <div class="resources-title">Possible resources</div>
+        <ul class="resources">
+          <li>college websites</li>
+          <li>youtube</li>
+          <li>practice exams</li>
+          <li>FE study book</li>
+          <li>FE reference Handbook</li>
+          <li class="underline">Notebook LLM</li>
+        </ul>
+      </div>
+
+      <!-- PAGE 5 -->
+      <div class="page">
+        <span class="page-label">Page 5</span>
+        <div class="spread">
+          <div class="half left">
+            <div class="word-row">
+              <span>Word search</span><span>crossword</span><span>wordle</span><span>word snake</span>
+              <span>riddle</span><span>system of equations</span><span>minesweeper</span>
+              <span>connections</span><span>word tetris</span><span>inner/outer word</span>
+              <span>likes/dislikes</span><span>train problem</span><span>liquid transfers</span>
+              <span>spot the difference</span>
+            </div>
+          </div>
+          <div class="half right">
+            <div class="word-row">
+              <span>maze</span><span>nonogram</span><span>flow</span><span>sudoku</span><span>logic puzzle</span>
+              <span>solitaire</span><span>same word fill in the blank</span><span>anagram</span><span>pips</span>
+              <span>cryptogram</span><span>spot the liar</span><span>coin breakdown</span>
+              <span>connections</span><span>pick a room</span><span>detective interviews</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="puzzle-banner">
+          <div class="badge">
+            <span class="small">TYPES OF</span>
+            <span class="big">PUZZLES</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>

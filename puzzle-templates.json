@@ -1,0 +1,433 @@
+{
+  "_meta": {
+    "purpose": "Generic, topic-agnostic data schemas for procedurally generating each puzzle type. Field names are deliberately abstract (items, answer, clue, categories, attributes) so any dataset — FE exam terms, vocabulary, trivia, formulas — can be mapped into these shapes to auto-generate a puzzle. Full mechanics, generation algorithms, and edge cases for each type live in puzzle-engine-reference.html.",
+    "categories": ["Word & Language", "Grid & Spatial Logic", "Deduction & Social", "Math & Physical"]
+  },
+  "puzzles": [
+    {
+      "slug": "word-search",
+      "name": "Word Search",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [{ "answer": "TERM1" }, { "answer": "TERM2" }, { "answer": "TERM3" }],
+        "config": {
+          "rows": 15, "cols": 15,
+          "directions": ["E", "W", "N", "S", "NE", "NW", "SE", "SW"],
+          "allow_backwards": true, "allow_overlap": true,
+          "max_placement_attempts": 200
+        }
+      }
+    },
+    {
+      "slug": "crossword",
+      "name": "Crossword",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [
+          { "answer": "TERM1", "clue": "clue1" },
+          { "answer": "TERM2", "clue": "clue2" },
+          { "answer": "TERM3", "clue": "clue3" }
+        ],
+        "config": { "max_rows": 15, "max_cols": 15, "enforce_symmetry": false, "min_word_length": 3 }
+      }
+    },
+    {
+      "slug": "wordle",
+      "name": "Wordle",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [{ "answer": "term1" }],
+        "config": {
+          "word_length": 5, "max_guesses": 6,
+          "guess_dictionary": ["term1", "otherword1", "otherword2"]
+        }
+      }
+    },
+    {
+      "slug": "word-snake",
+      "name": "Word Snake",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [
+          { "answer": "term1", "clue": "clue1" },
+          { "answer": "termB", "clue": "clueB" },
+          { "answer": "beta", "clue": "clueC" }
+        ],
+        "config": { "min_chain_length": 5, "grid_width": 12 }
+      }
+    },
+    {
+      "slug": "anagram",
+      "name": "Anagram",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [{ "answer": "term1", "clue": "clue1" }],
+        "config": { "min_length": 4, "allow_multi_word": false }
+      }
+    },
+    {
+      "slug": "cryptogram",
+      "name": "Cryptogram",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [{ "text": "quote or fact text here", "source": "attribution (optional)" }],
+        "config": { "reveal_count": 2 }
+      }
+    },
+    {
+      "slug": "inner-outer-word",
+      "name": "Inner/Outer Word",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [{ "outer": "term1", "outer_clue": "clue1" }],
+        "config": { "min_inner_length": 3, "max_hits_per_outer": 1 }
+      }
+    },
+    {
+      "slug": "same-word-fill-in-the-blank",
+      "name": "Same-word Fill-in-the-Blank",
+      "category": "Word & Language",
+      "dataTemplate": {
+        "items": [
+          {
+            "answer": "term1",
+            "sentences": [
+              "sentence1 with a _____ in it",
+              "a different sentence2 also needing _____",
+              "sentence3, unrelated context, still needs _____"
+            ]
+          }
+        ],
+        "config": { "blank_marker": "_____" }
+      }
+    },
+    {
+      "slug": "sudoku",
+      "name": "Sudoku",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "sudoku",
+        "gridSize": 9,
+        "boxDims": [3, 3],
+        "symbolSet": ["itemA", "itemB", "itemC", "itemD", "itemE", "itemF", "itemG", "itemH", "itemI"],
+        "generationParams": { "givenCount": 30, "symmetry": "rotational180", "targetDifficulty": "medium" },
+        "revealOverlay": { "cells": [[0, 0], [0, 1], [0, 2]], "onCompleteFact": "attributeA relates to attributeB because ..." }
+      }
+    },
+    {
+      "slug": "nonogram",
+      "name": "Nonogram",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "nonogram",
+        "gridSize": { "rows": 10, "cols": 10 },
+        "source": { "mode": "textRender", "revealText": "TERMA", "font": "pixel5x7" },
+        "sourceAlt": {
+          "mode": "dataMatrix",
+          "items": ["itemA", "itemB", "itemC"],
+          "attributes": ["attr1", "attr2", "attr3"],
+          "matrix": [[1, 0, 1], [0, 1, 0], [1, 1, 0]]
+        },
+        "palette": ["#000000"]
+      }
+    },
+    {
+      "slug": "minesweeper",
+      "name": "Minesweeper",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "minesweeper",
+        "gridSize": { "rows": 16, "cols": 16 },
+        "mineCount": 40,
+        "firstClickSafeRadius": 1,
+        "requireNoGuess": true,
+        "seed": 12345,
+        "cellFacts": { "3,4": "attributeA -> valueB" }
+      }
+    },
+    {
+      "slug": "flow",
+      "name": "Flow",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "flow",
+        "gridSize": { "rows": 8, "cols": 8 },
+        "requireFullCoverage": true,
+        "pairs": [
+          { "id": "pairA", "labelA": "itemA1", "labelB": "itemA2", "endpoints": [[0, 0], [3, 5]] },
+          { "id": "pairB", "labelA": "itemB1", "labelB": "itemB2", "endpoints": [[7, 0], [7, 7]] }
+        ]
+      }
+    },
+    {
+      "slug": "maze",
+      "name": "Maze",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "maze",
+        "gridSize": { "rows": 20, "cols": 20 },
+        "algorithm": "recursiveBacktracker",
+        "braidFactor": 0.0,
+        "start": [0, 0],
+        "end": [19, 19],
+        "waypointItems": [{ "cell": [4, 7], "content": "attributeA" }]
+      }
+    },
+    {
+      "slug": "logic-grid-puzzle",
+      "name": "Logic Grid Puzzle",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "logicGrid",
+        "categories": [
+          { "name": "categoryA", "items": ["itemA1", "itemA2", "itemA3"] },
+          { "name": "categoryB", "items": ["itemB1", "itemB2", "itemB3"] },
+          { "name": "categoryC", "items": ["itemC1", "itemC2", "itemC3"] }
+        ],
+        "solution": [
+          { "categoryA": "itemA1", "categoryB": "itemB2", "categoryC": "itemC3" },
+          { "categoryA": "itemA2", "categoryB": "itemB3", "categoryC": "itemC1" },
+          { "categoryA": "itemA3", "categoryB": "itemB1", "categoryC": "itemC2" }
+        ],
+        "clues": [
+          { "type": "direct", "text": "The row with itemA1 also has itemB2." },
+          { "type": "negative", "text": "itemA2 does not go with itemC3." },
+          { "type": "sameAs", "text": "Whoever has itemB3 also has itemC1." }
+        ]
+      }
+    },
+    {
+      "slug": "pips",
+      "name": "Pips",
+      "category": "Grid & Spatial Logic",
+      "dataTemplate": {
+        "puzzleType": "pips",
+        "boardCells": [
+          { "coord": [0, 0], "regionId": "R1" },
+          { "coord": [0, 1], "regionId": "R1" },
+          { "coord": [1, 0], "regionId": "R2" },
+          { "coord": [1, 1], "regionId": "blank" }
+        ],
+        "regions": [
+          { "id": "R1", "rule": "sum", "target": 7 },
+          { "id": "R2", "rule": "notEqual" }
+        ],
+        "dominoSet": "double-six-full",
+        "regionFacts": { "R1": "attributeA corresponds to valueB" }
+      }
+    },
+    {
+      "slug": "connections",
+      "name": "Connections",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "connections",
+        "gridSize": 16,
+        "categories": [
+          { "id": "categoryA", "theme": "shared trait A", "difficulty": 1, "items": ["itemA1", "itemA2", "itemA3", "itemA4"] },
+          { "id": "categoryB", "theme": "shared trait B", "difficulty": 2, "items": ["itemB1", "itemB2", "itemB3", "itemB4"] },
+          { "id": "categoryC", "theme": "shared trait C", "difficulty": 3, "items": ["itemC1", "itemC2", "itemC3", "itemC4"] },
+          { "id": "categoryD", "theme": "shared trait D (hardest/twist)", "difficulty": 4, "items": ["itemD1", "itemD2", "itemD3", "itemD4"] }
+        ],
+        "displayGrid": ["itemC2", "itemA1", "itemD4", "itemB3"]
+      }
+    },
+    {
+      "slug": "riddle",
+      "name": "Riddle",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "riddle",
+        "answer": "itemA",
+        "sourceFacts": ["itemA belongs to categoryX", "itemA has propertyY", "itemA relates to itemB"],
+        "clues": [
+          { "text": "I am always near categoryX but never counted as one of them.", "device": "misdirection" },
+          { "text": "The more of me you take, the more I leave behind.", "device": "paradox" }
+        ],
+        "difficulty": "medium"
+      }
+    },
+    {
+      "slug": "likes-dislikes",
+      "name": "Likes/Dislikes",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "likesDislikes",
+        "rule": { "description": "attributeX == valueA", "predicateField": "attributeX", "predicateValue": "valueA" },
+        "examples": [
+          { "item": "itemA", "liked": true },
+          { "item": "itemB", "liked": false },
+          { "item": "itemC", "liked": true },
+          { "item": "itemD", "liked": false }
+        ],
+        "probeItems": ["itemE", "itemF", "itemG"]
+      }
+    },
+    {
+      "slug": "spot-the-liar",
+      "name": "Spot the Liar",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "spotTheLiar",
+        "groundTruth": { "field": "attributeX", "value": "valueA" },
+        "speakers": [
+          { "id": "speakerA", "statement": "itemA has attributeX = valueA", "truthValue": true },
+          { "id": "speakerB", "statement": "itemA has attributeX = valueB", "truthValue": false },
+          { "id": "speakerC", "statement": "speakerB is telling the truth", "truthValue": false },
+          { "id": "speakerD", "statement": "itemA does not have attributeX = valueB", "truthValue": true }
+        ],
+        "liarCount": 1,
+        "solution": "speakerB"
+      }
+    },
+    {
+      "slug": "detective-interviews",
+      "name": "Detective Interviews",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "detectiveInterview",
+        "case": { "question": "Who is responsible for eventX?", "guiltyEntity": "suspectC" },
+        "suspects": [
+          { "id": "suspectA", "statement": "I was at locationX during timeY.", "claims": [{ "field": "location", "value": "locationX" }, { "field": "time", "value": "timeY" }] },
+          { "id": "suspectB", "statement": "I was at locationZ, ask suspectA.", "claims": [{ "field": "location", "value": "locationZ" }] },
+          { "id": "suspectC", "statement": "I was at locationX too, alone.", "claims": [{ "field": "location", "value": "locationX" }] }
+        ],
+        "facts": [{ "field": "location", "value": "locationX", "note": "the crime occurred here at timeY" }],
+        "solution": "suspectC"
+      }
+    },
+    {
+      "slug": "pick-a-room",
+      "name": "Pick a Room",
+      "category": "Deduction & Social",
+      "dataTemplate": {
+        "puzzleType": "pickARoom",
+        "rooms": [
+          { "id": "room1", "attributes": { "attributeX": "valueA", "attributeY": "valueB" }, "sign": "statement text", "signTruthValue": true },
+          { "id": "room2", "attributes": { "attributeX": "valueC", "attributeY": "valueD" }, "sign": "statement text", "signTruthValue": false },
+          { "id": "room3", "attributes": { "attributeX": "valueE", "attributeY": "valueF" }, "sign": "statement text", "signTruthValue": false }
+        ],
+        "clues": [
+          "The correct room does not have attributeX = valueC.",
+          "Exactly one room's sign is true, and it is not the correct room."
+        ],
+        "solution": "room1"
+      }
+    },
+    {
+      "slug": "system-of-equations",
+      "name": "System of Equations",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "facts": [
+          { "id": "F1", "label": "fact label A", "value": 7 },
+          { "id": "F2", "label": "fact label B", "value": 4 },
+          { "id": "F3", "label": "fact label C", "value": 12 }
+        ],
+        "num_unknowns": 3,
+        "equations": [
+          { "coeffs": [2, 1, -1], "vars": ["F1", "F2", "F3"], "result": 9 },
+          { "coeffs": [1, -1, 2], "vars": ["F1", "F2", "F3"], "result": 27 },
+          { "coeffs": [-1, 3, 1], "vars": ["F1", "F2", "F3"], "result": 23 }
+        ],
+        "presentation": "word_problem"
+      }
+    },
+    {
+      "slug": "train-problem",
+      "name": "Train Problem",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "movers": [
+          { "id": "A", "label": "mover A", "start_position": 0, "rate": 12, "start_time": 0 },
+          { "id": "B", "label": "mover B", "start_position": 180, "rate": -8, "start_time": 0 }
+        ],
+        "unit": { "position": "units", "time": "minutes" },
+        "scenario": "opposite_direction_meet",
+        "question": "at_what_time_do_they_meet"
+      }
+    },
+    {
+      "slug": "liquid-transfers",
+      "name": "Liquid Transfers",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "jug_capacities": [3, 5],
+        "target": 4,
+        "target_container": "either",
+        "unlimited_source_available": true,
+        "flavor_labels": { "jug_0": "container A", "jug_1": "container B" },
+        "max_moves_allowed": null
+      }
+    },
+    {
+      "slug": "coin-breakdown",
+      "name": "Coin Breakdown",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "denominations": [
+          { "label": "unit A", "value": 25 },
+          { "label": "unit B", "value": 10 },
+          { "label": "unit C", "value": 4 },
+          { "label": "unit D", "value": 1 }
+        ],
+        "target": 63,
+        "mode": "min_count",
+        "supply_per_denomination": "unlimited"
+      }
+    },
+    {
+      "slug": "solitaire",
+      "name": "Solitaire (Klondike)",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "deck_seed": 481932,
+        "draw_mode": "turn_one",
+        "redeals_allowed": "unlimited",
+        "topic_relabeling": {
+          "suits": [
+            { "name": "Category A", "color": "red", "ranks": ["item1", "item2", "item13"] },
+            { "name": "Category B", "color": "black", "ranks": ["item1"] },
+            { "name": "Category C", "color": "red", "ranks": ["item1"] },
+            { "name": "Category D", "color": "black", "ranks": ["item1"] }
+          ]
+        }
+      }
+    },
+    {
+      "slug": "spot-the-difference",
+      "name": "Spot the Difference",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "base_image": "scene_A.png",
+        "modified_image": "scene_B.png",
+        "differences": [
+          {
+            "id": "diff_1",
+            "region": { "x": 120, "y": 340, "radius": 25 },
+            "type": "color_change",
+            "associated_fact": { "label": "fact tied to this element", "value": "..." }
+          }
+        ],
+        "difficulty": { "num_differences": 7, "min_spacing_px": 60, "time_limit_sec": 120 }
+      }
+    },
+    {
+      "slug": "word-tetris",
+      "name": "Word Tetris (Wordtris)",
+      "category": "Math & Physical",
+      "dataTemplate": {
+        "word_bank": [
+          { "word": "TERM1", "hint": "hint1" },
+          { "word": "TERM2", "hint": "hint2" },
+          { "word": "TERM3", "hint": "hint3" }
+        ],
+        "magic_word": "TERM3",
+        "grid": { "width": 9, "height": 10, "water_rows": 5 },
+        "fall_speed": "level-dependent",
+        "special_tile_rates": { "wildcard": 0.05, "eraser": 0.03 },
+        "min_clear_length": 3
+      }
+    }
+  ]
+}

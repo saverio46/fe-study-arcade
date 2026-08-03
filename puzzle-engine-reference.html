@@ -1,60 +1,3255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Puzzle Engine Reference - FE Study Arcade</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --void: #0a0a12; --panel: #12121f; --panel-2: #1a1a2e; --grid-line: #23233a;
-      --text: #eef0f7; --text-dim: #8a8aa8; --neon-cyan: #2de2ff; --neon-pink: #ff3d81;
-      --neon-yellow: #f9e94e; --neon-green: #3dff88; --neon-orange: #ff6a1a; --neon-purple: #b388ff;
-      --font-display: 'Press Start 2P', monospace; --font-ui: 'Orbitron', sans-serif; --font-body: 'Inter', sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--void); color: var(--text); font-family: var(--font-body); display: flex; min-height: 100vh; }
-    nav.sidebar { width: 280px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--grid-line); padding: 22px 18px; position: sticky; top: 0; height: 100vh; }
-    nav.sidebar .brand { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-yellow); margin-bottom: 24px; }
-    nav.sidebar .nav-header { font-family: var(--font-ui); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--neon-cyan); margin-bottom: 8px; }
-    nav.sidebar ul { list-style: none; margin-bottom: 20px; }
-    nav.sidebar li a { display: block; padding: 8px 10px; border-radius: 4px; text-decoration: none; color: var(--text); font-family: var(--font-ui); font-size: 0.82rem; }
-    nav.sidebar li a:hover, nav.sidebar li a.active { background: var(--panel-2); color: #fff; border-left: 3px solid var(--neon-cyan); }
-    main { flex: 1; padding: 32px; max-width: 900px; }
-    h1 { font-family: var(--font-display); color: var(--neon-orange); font-size: 1.4rem; margin-bottom: 12px; }
-    .card { background: var(--panel); border: 1px solid var(--grid-line); border-radius: 8px; padding: 20px; margin-top: 20px; }
-    a { color: var(--neon-cyan); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puzzle Engine Reference · FE Study Arcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #080912;
+    --panel: #101222;
+    --panel-2: #181b33;
+    --panel-border: rgba(45, 226, 255, 0.18);
+    --grid-line: rgba(255, 255, 255, 0.06);
+    --neon-cyan: #2de2ff;
+    --neon-pink: #ff3d81;
+    --neon-yellow: #f9e94e;
+    --neon-green: #3dff88;
+    --neon-purple: #b388ff;
+    --neon-orange: #ff6a1a;
+    --text: #eef2f8;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --font-heading: 'Orbitron', -apple-system, sans-serif;
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+  }
+
+  /* Scanline effect */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(18, 16, 38, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* Subtle background grid */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  /* ============ SIDEBAR ============ */
+  nav.sidebar {
+    width: 320px;
+    min-width: 320px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: rgba(16, 18, 34, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid var(--panel-border);
+    background: rgba(8, 9, 18, 0.5);
+  }
+
+  .brand {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--neon-cyan);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-family: var(--font-code);
+    padding: 2px 6px;
+    background: rgba(45, 226, 255, 0.12);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 3px;
+    color: var(--neon-cyan);
+  }
+
+  .main-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+  }
+
+  .main-nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .main-nav-links a:hover {
+    color: var(--neon-cyan);
+    background: rgba(45, 226, 255, 0.08);
+  }
+
+  .main-nav-links a.active {
+    color: #fff;
+    background: rgba(45, 226, 255, 0.18);
+    border-left: 2px solid var(--neon-cyan);
+    font-weight: 600;
+  }
+
+  .sidebar-search {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .search-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+    background: rgba(8, 9, 18, 0.8);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 8px 12px 8px 30px;
+    color: #fff;
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(45, 226, 255, 0.25);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
+
+  .sidebar-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 14px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--panel-border) transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+  .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 2px; }
+
+  .cat-group {
+    margin-bottom: 16px;
+  }
+
+  .cat-title {
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 6px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cat-title.word { color: var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
+  .cat-title.grid { color: var(--neon-pink); border-left: 2px solid var(--neon-pink); }
+  .cat-title.deduction { color: var(--neon-yellow); border-left: 2px solid var(--neon-yellow); }
+  .cat-title.math { color: var(--neon-green); border-left: 2px solid var(--neon-green); }
+
+  .cat-count {
+    font-family: var(--font-code);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: normal;
+  }
+
+  .puzzle-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .puzzle-nav-item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem;
+    border-radius: 4px;
+    transition: all 0.12s ease;
+  }
+
+  .puzzle-nav-item a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    padding-left: 12px;
+  }
+
+  .puzzle-nav-item.active a {
+    color: var(--neon-cyan);
+    background: rgba(45, 226, 255, 0.1);
+    font-weight: 600;
+  }
+
+  .puzzle-nav-item.hidden { display: none !important; }
+
+  /* ============ MAIN CONTENT ============ */
+  main.content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+    padding: 40px 60px 140px;
+    max-width: 1280px;
+    overflow-y: auto;
+  }
+
+  /* Header marquee */
+  .hero-header {
+    background: linear-gradient(135deg, rgba(24, 27, 51, 0.8) 0%, rgba(16, 18, 34, 0.95) 100%);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-header::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 100%;
+    background: radial-gradient(circle at right top, rgba(45, 226, 255, 0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero-badge {
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    padding: 5px 10px;
+    background: rgba(255, 61, 129, 0.18);
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-badge.subtle {
+    font-family: var(--font-code);
+    background: rgba(45, 226, 255, 0.1);
+    border-color: rgba(45, 226, 255, 0.3);
+    color: var(--neon-cyan);
+    font-size: 0.72rem;
+  }
+
+  h1.page-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    text-shadow: 0 0 20px rgba(45, 226, 255, 0.35);
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: rgba(8, 9, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+
+  .stat-val {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .stat-lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  .quick-links-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--panel-2);
+    border: 1px solid var(--panel-border);
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .action-btn:hover {
+    background: rgba(45, 226, 255, 0.15);
+    border-color: var(--neon-cyan);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .action-btn.pink {
+    color: var(--neon-pink);
+    border-color: rgba(255, 61, 129, 0.4);
+  }
+  .action-btn.pink:hover {
+    background: rgba(255, 61, 129, 0.15);
+    border-color: var(--neon-pink);
+  }
+
+  /* Filter Toolbar */
+  .filter-toolbar {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 16px;
+    z-index: 90;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip-btn {
+    background: var(--panel-2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .chip-btn:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .chip-btn.active {
+    background: rgba(45, 226, 255, 0.2);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+  }
+
+  .chip-btn.word.active { background: rgba(45, 226, 255, 0.2); border-color: var(--neon-cyan); color: var(--neon-cyan); }
+  .chip-btn.grid.active { background: rgba(255, 61, 129, 0.2); border-color: var(--neon-pink); color: var(--neon-pink); }
+  .chip-btn.deduction.active { background: rgba(249, 233, 78, 0.2); border-color: var(--neon-yellow); color: var(--neon-yellow); }
+  .chip-btn.math.active { background: rgba(61, 255, 136, 0.2); border-color: var(--neon-green); color: var(--neon-green); }
+
+  .filter-counter {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ============ PUZZLE SECTIONS ============ */
+  .category-divider {
+    margin: 60px 0 30px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .category-divider.word { border-color: var(--neon-cyan); }
+  .category-divider.grid { border-color: var(--neon-pink); }
+  .category-divider.deduction { border-color: var(--neon-yellow); }
+  .category-divider.math { border-color: var(--neon-green); }
+
+  .category-divider h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  .category-divider.word h2 { color: var(--neon-cyan); }
+  .category-divider.grid h2 { color: var(--neon-pink); }
+  .category-divider.deduction h2 { color: var(--neon-yellow); }
+  .category-divider.math h2 { color: var(--neon-green); }
+
+  .puzzle-card {
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 30px 34px;
+    margin-bottom: 30px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .puzzle-card:hover {
+    border-color: var(--panel-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .puzzle-card.hidden { display: none !important; }
+
+  .puzzle-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .puzzle-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .puzzle-number {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    background: var(--panel-2);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .puzzle-head h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+
+  .tag {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .tag.word { background: rgba(45, 226, 255, 0.12); color: var(--neon-cyan); border: 1px solid rgba(45, 226, 255, 0.3); }
+  .tag.grid { background: rgba(255, 61, 129, 0.12); color: var(--neon-pink); border: 1px solid rgba(255, 61, 129, 0.3); }
+  .tag.deduction { background: rgba(249, 233, 78, 0.12); color: var(--neon-yellow); border: 1px solid rgba(249, 233, 78, 0.3); }
+  .tag.math { background: rgba(61, 255, 136, 0.12); color: var(--neon-green); border: 1px solid rgba(61, 255, 136, 0.3); }
+
+  .note-callout {
+    background: rgba(179, 136, 255, 0.08);
+    border-left: 3px solid var(--neon-purple);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #d8b4fe;
+  }
+
+  .note-callout strong {
+    color: #fff;
+  }
+
+  .section-field {
+    margin-bottom: 20px;
+  }
+
+  .section-field:last-child {
+    margin-bottom: 0;
+  }
+
+  .field-title {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--neon-cyan);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .puzzle-card.grid .field-title { color: var(--neon-pink); }
+  .puzzle-card.deduction .field-title { color: var(--neon-yellow); }
+  .puzzle-card.math .field-title { color: var(--neon-green); }
+
+  .section-field p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .section-field ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .section-field ul li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .section-field ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--neon-cyan);
+  }
+
+  .puzzle-card.grid .section-field ul li::before { color: var(--neon-pink); }
+  .puzzle-card.deduction .section-field ul li::before { color: var(--neon-yellow); }
+  .puzzle-card.math .section-field ul li::before { color: var(--neon-green); }
+
+  /* Code Blocks */
+  .code-container {
+    position: relative;
+    background: #090a14;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .code-header {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .code-lang {
+    font-family: var(--font-code);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .copy-code-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-dim);
+    font-family: var(--font-code);
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .copy-code-btn:hover {
+    background: rgba(45, 226, 255, 0.15);
+    border-color: var(--neon-cyan);
+    color: #fff;
+  }
+
+  pre {
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+    tab-size: 2;
+  }
+
+  code {
+    font-family: var(--font-code);
+  }
+
+  /* Back to top button */
+  .back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 32px;
+    background: rgba(16, 18, 34, 0.9);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(45, 226, 255, 0.3);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    transform: translateY(-3px);
+    background: var(--neon-cyan);
+    color: var(--void);
+    box-shadow: 0 6px 20px rgba(45, 226, 255, 0.6);
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--panel-2);
+    border: 1px solid var(--neon-green);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: var(--font-code);
+    font-size: 0.82rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    z-index: 10000;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 1024px) {
+    nav.sidebar { width: 260px; min-width: 260px; }
+    main.content { padding: 30px 30px 100px; }
+    h1.page-title { font-size: 1.8rem; }
+  }
+
+  @media (max-width: 800px) {
+    body { flex-direction: column; }
+    nav.sidebar { width: 100%; min-width: 100%; height: auto; position: relative; }
+    main.content { padding: 20px 16px 80px; }
+    .hero-header { padding: 24px 20px; }
+  }
+</style>
 </head>
 <body>
-  <nav class="sidebar">
-    <div class="brand">FE STUDY ARCADE</div>
-    <div class="nav-header">Foundations</div>
-    <ul>
-      <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
-      <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
-    </ul>
-    <div class="nav-header">Study Content</div>
-    <ul>
-      <li><a href="notebook.html">Study Notebook</a></li>
-      <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
-      <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
-      <li><a href="math-practice-problems.html">Math Practice Problems</a></li>
-    </ul>
-    <div class="nav-header">Puzzle Engine</div>
-    <ul>
-      <li><a href="puzzle-engine-reference.html" class="active">Puzzle Engine Reference</a></li>
-    </ul>
-  </nav>
-  <main>
-    <h1>Puzzle Engine Reference</h1>
-    <p>Architecture and logic specs for interactive FE practice puzzle mechanics.</p>
-    <div class="card">
-      <h2 style="font-family:var(--font-ui); color:var(--neon-cyan); margin-bottom:10px;">Engine Specifications</h2>
-      <p style="color:var(--text-dim); margin-bottom:12px;">The puzzle engine generates timed problem sets, tracks response latencies, and calculates streak scoring.</p>
-      <p><a href="index.html">← Return to Pac-Man Study Calendar</a></p>
+
+<!-- SIDEBAR NAVIGATION -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="brand">
+      <span>🕹️ FE STUDY ARCADE</span>
+      <span class="brand-tag">v2.0</span>
     </div>
-  </main>
+    <div class="main-nav-links">
+      <a href="index.html">👾 Pac-Man Calendar (Home)</a>
+      <a href="notebook.html">📓 Study Notebook</a>
+      <a href="fe-arcade-adaptation-map.html">🗺️ FE Adaptation Map</a>
+      <a href="01_FE_Practice_Questions/01-mathematics.html">🧮 Math Practice Problems</a>
+      <a href="00_Generic_Templates/neo-arcade-design-system.html">📐 Neo-Arcade Design System</a>
+      <a href="00_Generic_Templates/arcade-design-language.html">🕹️ Arcade Design Language</a>
+      <a href="puzzle-engine-reference.html" class="active">🧩 Puzzle Engine Reference</a>
+    </div>
+  </div>
+
+  <div class="sidebar-search">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="sidebar-filter" class="search-input" placeholder="Search 28 puzzle types..." autocomplete="off">
+    </div>
+  </div>
+
+  <div class="sidebar-scroll" id="sidebar-nav-container">
+    
+    <!-- WORD & LANGUAGE -->
+    <div class="cat-group" data-cat="word">
+      <div class="cat-title word">
+        <span>Word &amp; Language</span>
+        <span class="cat-count">8</span>
+      </div>
+      <ul class="puzzle-nav-list">
+        <li class="puzzle-nav-item" data-name="word search"><a href="#word-search"><span>1. Word Search</span></a></li>
+        <li class="puzzle-nav-item" data-name="crossword"><a href="#crossword"><span>2. Crossword</span></a></li>
+        <li class="puzzle-nav-item" data-name="wordle"><a href="#wordle"><span>3. Wordle</span></a></li>
+        <li class="puzzle-nav-item" data-name="word snake"><a href="#word-snake"><span>4. Word Snake</span></a></li>
+        <li class="puzzle-nav-item" data-name="anagram"><a href="#anagram"><span>5. Anagram</span></a></li>
+        <li class="puzzle-nav-item" data-name="cryptogram"><a href="#cryptogram"><span>6. Cryptogram</span></a></li>
+        <li class="puzzle-nav-item" data-name="inner outer word hidden word"><a href="#inner-outer-word"><span>7. Inner/Outer Word</span></a></li>
+        <li class="puzzle-nav-item" data-name="same word fill in the blank cloze"><a href="#same-word-fill-in-the-blank"><span>8. Same-word Fill Blank</span></a></li>
+      </ul>
+    </div>
+
+    <!-- GRID & SPATIAL LOGIC -->
+    <div class="cat-group" data-cat="grid">
+      <div class="cat-title grid">
+        <span>Grid &amp; Spatial Logic</span>
+        <span class="cat-count">7</span>
+      </div>
+      <ul class="puzzle-nav-list">
+        <li class="puzzle-nav-item" data-name="sudoku"><a href="#sudoku"><span>9. Sudoku</span></a></li>
+        <li class="puzzle-nav-item" data-name="nonogram picross"><a href="#nonogram"><span>10. Nonogram</span></a></li>
+        <li class="puzzle-nav-item" data-name="minesweeper"><a href="#minesweeper"><span>11. Minesweeper</span></a></li>
+        <li class="puzzle-nav-item" data-name="flow flow free"><a href="#flow"><span>12. Flow</span></a></li>
+        <li class="puzzle-nav-item" data-name="maze"><a href="#maze"><span>13. Maze</span></a></li>
+        <li class="puzzle-nav-item" data-name="logic grid puzzle zebra"><a href="#logic-grid-puzzle"><span>14. Logic Grid Puzzle</span></a></li>
+        <li class="puzzle-nav-item" data-name="pips dominoes"><a href="#pips"><span>15. Pips (NYT Dominoes)</span></a></li>
+      </ul>
+    </div>
+
+    <!-- DEDUCTION & SOCIAL -->
+    <div class="cat-group" data-cat="deduction">
+      <div class="cat-title deduction">
+        <span>Deduction &amp; Social</span>
+        <span class="cat-count">6</span>
+      </div>
+      <ul class="puzzle-nav-list">
+        <li class="puzzle-nav-item" data-name="connections nyt"><a href="#connections"><span>16. Connections</span></a></li>
+        <li class="puzzle-nav-item" data-name="riddle"><a href="#riddle"><span>17. Riddle</span></a></li>
+        <li class="puzzle-nav-item" data-name="likes dislikes zendo"><a href="#likes-dislikes"><span>18. Likes/Dislikes</span></a></li>
+        <li class="puzzle-nav-item" data-name="spot the liar knights knaves"><a href="#spot-the-liar"><span>19. Spot the Liar</span></a></li>
+        <li class="puzzle-nav-item" data-name="detective interviews mystery"><a href="#detective-interviews"><span>20. Detective Interviews</span></a></li>
+        <li class="puzzle-nav-item" data-name="pick a room escape"><a href="#pick-a-room"><span>21. Pick a Room</span></a></li>
+      </ul>
+    </div>
+
+    <!-- MATH & PHYSICAL -->
+    <div class="cat-group" data-cat="math">
+      <div class="cat-title math">
+        <span>Math &amp; Physical</span>
+        <span class="cat-count">7</span>
+      </div>
+      <ul class="puzzle-nav-list">
+        <li class="puzzle-nav-item" data-name="system of equations algebra"><a href="#system-of-equations"><span>22. System of Equations</span></a></li>
+        <li class="puzzle-nav-item" data-name="train problem two trains"><a href="#train-problem"><span>23. Train Problem</span></a></li>
+        <li class="puzzle-nav-item" data-name="liquid transfers water jug"><a href="#liquid-transfers"><span>24. Liquid Transfers</span></a></li>
+        <li class="puzzle-nav-item" data-name="coin breakdown making change"><a href="#coin-breakdown"><span>25. Coin Breakdown</span></a></li>
+        <li class="puzzle-nav-item" data-name="solitaire klondike"><a href="#solitaire"><span>26. Solitaire (Klondike)</span></a></li>
+        <li class="puzzle-nav-item" data-name="spot the difference"><a href="#spot-the-difference"><span>27. Spot the Difference</span></a></li>
+        <li class="puzzle-nav-item" data-name="word tetris wordtris"><a href="#word-tetris"><span>28. Word Tetris (Wordtris)</span></a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- MAIN CONTENT AREA -->
+<main class="content">
+
+  <!-- HERO BANNER -->
+  <header class="hero-header">
+    <div class="hero-badge-row">
+      <span class="hero-badge">PUZZLE ENGINE PLAYBOOK</span>
+      <span class="hero-badge subtle">28 MECHANICS • PROCEDURAL SCHEMAS • VERIFIED ALGORITHMS</span>
+    </div>
+    
+    <h1 class="page-title">PUZZLE ENGINE REFERENCE</h1>
+    
+    <p class="hero-description">
+      Every puzzle format researched from Page 5 of the Study Notebook, reverse-engineered into topic-agnostic procedural generators. Each format is documented with its core mechanic, cognitive skills, difficulty tuning levers, generic JSON schema, algorithmic generation pseudocode, and critical edge cases.
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🧩</div>
+        <div>
+          <div class="stat-val">28</div>
+          <div class="stat-lbl">Puzzle Formats</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏷️</div>
+        <div>
+          <div class="stat-val">4</div>
+          <div class="stat-lbl">Logic Categories</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div>
+          <div class="stat-val">28</div>
+          <div class="stat-lbl">JSON Schemas</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚙️</div>
+        <div>
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl">Algorithmic Specs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-links-bar">
+      <a href="puzzle-templates.json" class="action-btn" download>📥 Download puzzle-templates.json</a>
+      <a href="fe-arcade-adaptation-map.html" class="action-btn">🗺️ FE Adaptation Map →</a>
+      <a href="notebook.html" class="action-btn">📓 Open Study Notebook →</a>
+    </div>
+  </header>
+
+  <!-- FILTER & CATEGORY BAR -->
+  <div class="filter-toolbar">
+    <div class="filter-chips">
+      <button class="chip-btn active" data-filter="all">All (28)</button>
+      <button class="chip-btn word" data-filter="word">Word &amp; Language (8)</button>
+      <button class="chip-btn grid" data-filter="grid">Grid &amp; Spatial (7)</button>
+      <button class="chip-btn deduction" data-filter="deduction">Deduction &amp; Social (6)</button>
+      <button class="chip-btn math" data-filter="math">Math &amp; Physical (7)</button>
+    </div>
+    <div class="filter-counter" id="filter-counter">Showing 28 of 28 puzzle types</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 1. WORD & LANGUAGE CATEGORY -->
+  <!-- ============================================================ -->
+  <div class="category-divider word" id="cat-word-header">
+    <h2>1. Word &amp; Language (8 Mechanics)</h2>
+  </div>
+
+  <!-- 1. WORD SEARCH -->
+  <section class="puzzle-card word" id="word-search" data-name="word search" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">01</span>
+        <h3>Word Search</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid of letters contains a list of target words hidden in straight lines running in any of up to 8 directions (horizontal, vertical, diagonal — forward or backward). The solver scans the grid and traces each word from start letter to end letter.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Visual pattern-matching and sustained scanning attention — spotting a hidden shape in noise.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid dimensions; ratio of grid cells to letters-in-words (more filler = harder); number of allowed directions (straight-only vs. +diagonal vs. +backward); word count/length; visual similarity between filler and real letters; whether words may cross/share letters.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{ "answer": "TERM1" }, { "answer": "TERM2" }, { "answer": "TERM3" }],
+  "config": {
+    "rows": 15, "cols": 15,
+    "directions": ["E","W","N","S","NE","NW","SE","SW"],
+    "allow_backwards": true, "allow_overlap": true,
+    "max_placement_attempts": 200
+  }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>normalize(items) -&gt; strip spaces/punctuation, uppercase each answer
+sort items by answer length DESC          // place hardest/longest first
+grid_size = max(config.rows/cols, longest_answer_length)
+grid = empty rows x cols matrix
+
+for item in items:
+  placed = false
+  for attempt in 1..max_placement_attempts:
+    dir = random_choice(config.directions)
+    start = random_cell_such_that(word fits in bounds along dir)
+    if every cell along path is EITHER empty OR already has the matching letter:
+        write letters into grid along path
+        record solution[item.answer] = {start, dir, len}
+        placed = true; break
+  if not placed:
+      grow grid_size by 1 and retry item, OR drop item and flag as unplaced
+
+for each empty cell: fill with random letter (weighted by letter-frequency table)
+
+// integrity pass
+rescan all rows/cols/diagonals for accidental exact matches of OTHER list words
+  or blocklisted words -&gt; if found, re-roll offending filler letters and rescan
+
+output: { grid, solution_key, unplaced_items }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Grid must be at least as large as the longest word in both dimensions, or placement is impossible from the start.</li>
+        <li>No retry cap can loop forever on dense grids — always bound attempts with a grow-grid/drop-word fallback.</li>
+        <li>Random filler letters can accidentally spell an unintended real word (or profanity) — needs a post-fill validation rescan.</li>
+        <li>Multi-word phrases need an explicit policy (strip spaces vs. reject) since cells hold single letters.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. CROSSWORD -->
+  <section class="puzzle-card word" id="crossword" data-name="crossword" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">02</span>
+        <h3>Crossword</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid of white and black squares holds interlocking Across/Down answers; every white cell belongs to exactly one Across and one Down word, agreeing on the shared letter at intersections. Numbered clues correspond to each entry's start square.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Constraint-satisfaction deduction — inferring an unknown word from a clue plus letters already forced by intersecting answers.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid size; black-square density (fewer blacks = harder, more interlock required); average word length; crossings per word; clue directness (definition vs. wordplay); whether 180° rotational symmetry is enforced.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [
+    { "answer": "TERM1", "clue": "clue1" },
+    { "answer": "TERM2", "clue": "clue2" },
+    { "answer": "TERM3", "clue": "clue3" }
+  ],
+  "config": { "max_rows": 15, "max_cols": 15, "enforce_symmetry": false, "min_word_length": 3 }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>words = normalize(items)  // uppercase, strip spaces/punctuation, drop len&lt;3
+sort words by length DESC
+grid = empty max_rows x max_cols (all black)
+place words[0] across the center row; mark cells white/lettered
+unplaced = words[1:]
+
+loop until unplaced empty or no progress:
+  for word in unplaced (try longest first):
+    candidates = []
+    for placed_word in already_placed:
+      for i, letter in enumerate(word):
+        for j, letter2 in enumerate(placed_word.text):
+          if letter == letter2:
+              candidates.append(perpendicular placement crossing at that cell)
+    shuffle(candidates)  // or rank by resulting interlock score
+    for placement in candidates:
+      if VALID(placement): commit(placement); mark word placed; break
+  if no word was placed this pass: break  // stuck - needs backtrack/resize
+
+VALID(placement) checks:
+  - every overlapping cell matches the same literal letter (no contradictions)
+  - cell before start / after end is black/border (no unintended run-on word)
+  - resulting word length within [min_word_length, max bound]
+  - no adjacent parallel word created with zero gap
+  - grid stays within max_rows/max_cols
+
+// finishing
+mark all untouched cells black
+if enforce_symmetry: mirror black/white pattern under 180 deg rotation, re-verify
+number cells: row-major scan; numbers if cell starts an Across (no white cell
+  to its left) OR a Down entry (no white cell above)
+final check: every white cell touches &gt;=1 across AND &gt;=1 down entry &gt;=3 letters,
+  grid is one connected region (flood-fill check)
+
+output: { grid, across_clues, down_clues, numbering, unplaced_items }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Greedy placement without backtracking frequently dead-ends before all words are placed — needs real backtracking or simulated annealing, not one greedy pass.</li>
+        <li>Small/low-overlap topic vocab may never fully interlock — need a fallback (accept partial placement + report dropped words, or pad with filler words).</li>
+        <li>A common bug: checking word-level equality instead of per-character equality at the intersection.</li>
+        <li>Enforcing rotational symmetry is a major constraint multiplier — usually worth relaxing for auto-generation from arbitrary data.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. WORDLE -->
+  <section class="puzzle-card word" id="wordle" data-name="wordle" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">03</span>
+        <h3>Wordle</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>The solver has a fixed number of guesses (classically 6) to identify a secret word of fixed length (classically 5). Each guess must be a valid dictionary word; letters are colored green (correct position), yellow (present elsewhere, respecting duplicate-letter counts), or gray (absent).</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Deductive elimination under a limited-attempt budget — balancing information-gain guesses against committing to a final answer.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Word length; number of allowed guesses; target word obscurity/frequency; duplicate letters in the target; strictness of guess validation; "hard mode" requiring reuse of revealed clues.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{ "answer": "term1" }],
+  "config": {
+    "word_length": 5, "max_guesses": 6,
+    "guess_dictionary": ["term1", "otherword1", "otherword2"]
+  }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>eligible = filter(items.answer, len == word_length AND alphabetic-only)
+if eligible empty: reduce/raise word_length or reject config
+target = random_choice(eligible).answer.upper()
+
+// validation pool MUST be broader than the puzzle's own item list, or the
+// answer is trivially the only word of that length available
+guess_set = union(config.guess_dictionary, eligible) -&gt; dedupe
+
+score_guess(guess, target):
+    result = [GRAY] * len(guess)
+    remaining = letter_counts(target)
+    // pass 1: greens
+    for i in range(len(guess)):
+        if guess[i] == target[i]:
+            result[i] = GREEN; remaining[guess[i]] -= 1
+    // pass 2: yellows/grays using leftover counts only
+    for i in range(len(guess)):
+        if result[i] == GREEN: continue
+        if remaining[guess[i]] &gt; 0:
+            result[i] = YELLOW; remaining[guess[i]] -= 1
+        else:
+            result[i] = GRAY
+    return result
+
+output: { target, word_length, max_guesses, guess_set, score_guess_fn }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>The two-pass duplicate-letter scoring is essential — a naive "is this letter anywhere in the target" check is wrong whenever target or guess has repeated letters. This is the #1 bug in homemade clones.</li>
+        <li>Guess validation needs a real dictionary superset, or the game becomes solvable by elimination almost immediately with a small custom vocabulary.</li>
+        <li>Arbitrary datasets rarely have many words of exactly one fixed length — pick word_length dynamically per puzzle, or accept a shrunken eligible pool.</li>
+        <li>Non-alphabetic tokens or multi-word phrases must be filtered before becoming candidate answers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. WORD SNAKE -->
+  <section class="puzzle-card word" id="word-snake" data-name="word snake" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">04</span>
+        <h3>Word Snake</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> "Word Snake" covers two common formats: (a) a word-search variant where hidden words follow a bendable orthogonal path, and (b) a chain of words where each word's last letter equals the next word's first letter, laid out as one winding path. Variant (b) is used below since it's the more naturally generatable from an arbitrary list of terms.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A sequence of words is chained so each word's last letter equals the next word's first letter (e.g. PYTHON -&gt; NUMPY -&gt; YIELD), drawn as one continuous winding path with each junction letter sharing a single cell where the path turns a corner.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Sequential associative recall plus a lightweight constraint — recognizing a word that starts with a forced letter.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Chain length; variance in word length; number of overlapping letters required at each junction; whether clues are given per word; complexity of the snake's path.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [
+    { "answer": "term1", "clue": "clue1" },
+    { "answer": "termB", "clue": "clueB" },
+    { "answer": "beta",  "clue": "clueC" }
+  ],
+  "config": { "min_chain_length": 5, "grid_width": 12 }
+}
+// items do not need to already be in chainable order - the generator
+// must discover/order a valid subset.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>words = normalize(items)  // uppercase, strip non-letters
+build directed graph G: edge word_A -&gt; word_B if last_letter(A) == first_letter(B)
+
+// finding the longest usable chain is longest-path-in-a-digraph (NP-hard)
+if len(words) &lt;= ~25:
+    best_chain = DFS_with_memo(G) maximizing nodes visited without repeats
+else:
+    best_chain = greedy_nearest_neighbor(G) + bounded local repair passes
+
+if len(best_chain) &lt; config.min_chain_length:
+    report insufficient_data (dataset's first/last letters don't connect)
+
+// lay chain into a grid as a winding path
+cursor = (0,0); direction = RIGHT
+for word in best_chain:
+    for letter in word (skip first letter after the first word - shared junction):
+        place letter at cursor; advance cursor along direction
+    at junction (word end): turn direction 90 deg (alternate row/turn/row...)
+    ensure new segment doesn't collide with placed non-junction cells (retry
+    turn direction/offset if collision detected)
+
+output: { grid, ordered_chain, clues, junction_coords, dropped_items }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Most arbitrary vocabulary lists will not naturally chain by first/last letter — the generator must drop unchainable items and report how many made it in.</li>
+        <li>True longest-path search is NP-hard; use greedy-plus-repair heuristics for large item counts and cap runtime.</li>
+        <li>Greedy first-match chaining can dead-end early — prefer backtracking/beam search over pure greedy.</li>
+        <li>Routing the winding path needs collision detection at every turn; an overlap requires an alternate offset or direction.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANAGRAM -->
+  <section class="puzzle-card word" id="anagram" data-name="anagram" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">05</span>
+        <h3>Anagram</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>The solver is shown a scrambled arrangement of a word's letters and must rearrange them back into the correct, valid word — usually aided by a clue.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Combinatorial pattern search — mentally testing letter groupings against known vocabulary.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Word length; letter repetition (reduces meaningfully different scrambles); whether a clue is provided; single word vs. multi-word phrase; how scrambled the shuffle is; number of alternate valid solutions.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{ "answer": "term1", "clue": "clue1" }],
+  "config": { "min_length": 4, "allow_multi_word": false }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>for item in items:
+    letters = strip_spaces_and_punctuation(item.answer.upper())
+    if len(letters) &lt; config.min_length: skip item
+
+    scrambled = letters
+    attempts = 0
+    while (scrambled == letters OR too_similar(scrambled, letters)) and attempts &lt; 50:
+        scrambled = fisher_yates_shuffle(letters)
+        attempts += 1
+    if attempts == 50: skip item  // degenerate word (e.g. all identical letters)
+
+    // optional fairness check
+    if dictionary_available:
+        other_valid_answers = find_all_dictionary_words_matching_letter_multiset(letters)
+        ambiguous = len(other_valid_answers) &gt; 1
+
+    output_item = { scrambled, answer: item.answer, clue: item.clue, ambiguous, other_valid_answers }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Very short words (&le;3 letters) often have only one or two reorderings, making the puzzle trivial or impossible to scramble — enforce a minimum length.</li>
+        <li>Heavy letter repetition (e.g. "LULL") can make every shuffle look identical — bounded retry-then-skip fallback needed.</li>
+        <li>Anagram ambiguity is common (letters of "EAT" also spell "ATE"/"TEA") — decide a policy: accept any dictionary-valid answer, or lock to one canonical answer.</li>
+        <li>Multi-word phrases raise the question of whether space positions are given — must be an explicit config choice.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. CRYPTOGRAM -->
+  <section class="puzzle-card word" id="cryptogram" data-name="cryptogram" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">06</span>
+        <h3>Cryptogram</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A quote or short passage is encoded with a monoalphabetic substitution cipher — each plaintext letter consistently replaced by one other letter (a full bijection), while spacing/punctuation is preserved. The solver uses frequency analysis and pattern recognition to reconstruct the key.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Frequency analysis and pattern-based deduction — classic codebreaking.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Text length (more letters = easier frequency analysis); vocabulary obscurity; number of letters pre-revealed as free hints; whether word-length/spacing pattern is preserved or stripped.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{ "text": "quote or fact text here", "source": "attribution (optional)" }],
+  "config": { "reveal_count": 2 }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>plaintext = item.text.upper()
+
+// build a full 26-letter derangement (no letter maps to itself)
+mapping = random_permutation(A..Z)
+while any(mapping[c] == c for c in A..Z):
+    fix_points = find(mapping[c] == c)
+    for c in fix_points: swap mapping[c] with mapping[random_other_letter]
+
+ciphertext = ""
+for ch in plaintext:
+    if ch is A-Z: ciphertext += mapping[ch]
+    else: ciphertext += ch   // spaces, punctuation, digits pass through unchanged
+
+// optional freebies: reveal mapping for the most frequent ciphertext letter(s)
+revealed = top_N_most_frequent_letters(ciphertext, config.reveal_count)
+
+output: { ciphertext, mapping (solution key), plaintext, source, revealed }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Must guarantee a true bijection — independent random assignment without tracking used targets produces collisions, making some ciphertext letters undecodable.</li>
+        <li>A plain random shuffle can still produce fixed points (letter maps to itself) — needs an explicit derangement/repair step.</li>
+        <li>Non-letter characters (digits, symbols — common in formulas) must pass through unmodified.</li>
+        <li>Very short source texts (roughly under 40-50 letters) are often unsolvable by frequency analysis alone — enforce a minimum length or lean on revealed-letter hints.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. INNER/OUTER WORD -->
+  <section class="puzzle-card word" id="inner-outer-word" data-name="inner outer word hidden word" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">07</span>
+        <h3>Inner/Outer Word</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> No single trademarked name dominates this format; it's most commonly called a "hidden word" puzzle, with historical roots in the classic "logogriph."
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A longer "outer" word contains a shorter "inner" word spelled by a contiguous run of its letters (e.g. CAT hidden in s-CAT-ter). The solver locates/extracts the hidden inner word, sometimes guided by a clue defining it rather than seeing it directly.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Substring pattern recognition — spotting a smaller familiar shape camouflaged inside a bigger one.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Length gap between outer and inner word; number of hidden words surfaced per outer word; whether the inner word's position is hinted; whether the outer word itself must also be guessed from a clue; commonness of the inner word.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{ "outer": "term1", "outer_clue": "clue1" }],
+  "config": { "min_inner_length": 3, "max_hits_per_outer": 1 }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>for item in items:
+    outer = strip_non_letters(item.outer.upper())
+    hits = []
+    for start in range(len(outer)):
+        for end in range(start + config.min_inner_length, len(outer)):  // end &lt; len(outer)
+            substr = outer[start:end]
+            if dictionary_contains(substr):
+                hits.append({ inner: substr, start, end })
+
+    if hits is empty: skip item (flag: no hidden word found)
+
+    // prefer longer inner words and more central (non-edge) positions for harder mode
+    hits.sort_by(key = (-length, distance_from_center))
+    chosen = hits[0:config.max_hits_per_outer]
+
+    for hit in chosen:
+        inner_clue = dictionary_lookup_definition(hit.inner) or "a hidden word"
+
+    output_item = { outer: item.outer, outer_clue: item.outer_clue, hidden_words: chosen }</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Requires an independent dictionary/wordlist to validate substrings — many outer words will contain zero valid hidden words, so graceful skip is required.</li>
+        <li>A single outer word often contains several valid inner words at multiple lengths — needs explicit rules for how many to surface and a minimum length to avoid noisy 2-letter hits.</li>
+        <li>If outer terms are multi-word phrases, decide explicitly whether the search may span the removed space between words.</li>
+        <li>Domain-specific outer vocabulary is fine — the inner word found will usually be an unrelated common word, which is expected, not a bug.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. SAME-WORD FILL-IN-THE-BLANK -->
+  <section class="puzzle-card word" id="same-word-fill-in-the-blank" data-name="same word fill in the blank cloze" data-cat="word">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">08</span>
+        <h3>Same-word Fill-in-the-Blank</h3>
+      </div>
+      <span class="tag word">Word &amp; Language</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> No standardized commercial name exists for this exact format. Closest recognized categories: "cloze" exercises and educational homograph/multiple-meaning fill-in worksheets.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Several separate sentences are each shown with one blank; exactly one word — often used in a different sense or part of speech each time — correctly completes every sentence.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Lateral, convergent reasoning — triangulating one answer from multiple differently-flavored contexts, often exploiting polysemy/homonymy.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of sentences/blanks; semantic/part-of-speech distance between required senses; obscurity of the shared word; whether sentences are revealed all at once or one-by-one on failed guesses.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "items": [{
+    "answer": "term1",
+    "sentences": [
+      "sentence1 with a _____ in it",
+      "a different sentence2 also needing _____",
+      "sentence3, unrelated context, still needs _____"
+    ]
+  }],
+  "config": { "blank_marker": "_____" }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>// Mode A - curated dataset already supplies multiple sentences per answer (preferred)
+for item in items:
+    assert item.sentences.length &gt;= 2
+    for s in item.sentences:
+        assert s.count(config.blank_marker) == 1
+        assert item.answer.lower() not in remove_marker(s).lower()   // no spoiler leak
+    shuffle(item.sentences)   // presentation order
+    output_item = item
+
+// Mode B - flat term/definition datasets with no pre-written sentences:
+// group items by identical `answer` text (true homographs already present in data)
+groups = group_by(items, key = item.answer.lower())
+for group in groups where len(group) &gt;= 2:
+    sentences = []
+    for entry in group:
+        sentences.append(templated_sentence(entry.clue))  // vary templates,
+                                                            // avoid literal "the word meaning X is ___"
+    output_item = { answer: group.answer, sentences }
+for items not in any group of size &gt;= 2: report as unusable for this puzzle type</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Core bottleneck: this format needs multiple example sentences per answer word, which flat term-&gt;definition datasets rarely provide — expect to fall back to curated input or an LLM-assisted sentence-authoring step.</li>
+        <li>Auto-synthesized sentences built directly from definitions risk being unnatural or self-revealing — vary sentence templates and avoid echoing the definition verbatim.</li>
+        <li>Multi-solution risk: if a different common word also fits one sentence in isolation, the puzzle becomes ambiguous — spot-check each sentence individually.</li>
+        <li>Ensure the answer word (or an obvious inflection) doesn't appear elsewhere in the sentence text, which would spoil the answer.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. GRID & SPATIAL LOGIC CATEGORY -->
+  <!-- ============================================================ -->
+  <div class="category-divider grid" id="cat-grid-header">
+    <h2>2. Grid &amp; Spatial Logic (7 Mechanics)</h2>
+  </div>
+
+  <!-- 9. SUDOKU -->
+  <section class="puzzle-card grid" id="sudoku" data-name="sudoku" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">09</span>
+        <h3>Sudoku</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A 9x9 grid divided into nine 3x3 boxes is partially filled with digits 1-9; the player fills every empty cell so each row, column, and box contains every digit exactly once, using elimination across the intersecting constraints.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Deductive constraint-satisfaction — narrowing possibilities through pure logic until each cell is forced.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of givens (17 is the proven minimum for a unique solution); symmetry/placement pattern of givens; which solving techniques are required (naked singles &rarr; pairs/triples &rarr; X-wing/swordfish); grid variant (4x4/6x6, 16x16, jigsaw box shapes).</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "sudoku", "gridSize": 9, "boxDims": [3,3],
+  "symbolSet": ["itemA","itemB","itemC","itemD","itemE","itemF","itemG","itemH","itemI"],
+  "generationParams": { "givenCount": 30, "symmetry": "rotational180", "targetDifficulty": "medium" },
+  "revealOverlay": { "cells": [[0,0],[0,1],[0,2]], "onCompleteFact": "attributeA relates to attributeB because ..." }
+}
+// Sudoku is inherently numeric/spatial, not data-driven - topic content is
+// carried by bijectively relabeling digits 1-9 with 9 dataset items, or by
+// revealing a fact when specific marked cells are completed.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>fullGrid = solve(emptyGrid) via randomized backtracking (shuffle candidate order)
+puzzle = copy(fullGrid)
+cellsToTry = shuffle(all 81 positions), optionally paired by chosen symmetry
+
+for cell(s) in cellsToTry:
+     remove value(s) from puzzle
+     count = countSolutions(puzzle, limit=2)   // backtracking solver, stop early at 2
+     if count != 1: restore value(s)
+   until target givenCount reached or no more safe removals
+
+(optional) run a human-technique solver to classify difficulty by hardest
+  technique required; if too easy/hard, adjust removal set and re-verify
+
+output: puzzle grid + solution grid</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Removing cells without a uniqueness-check solver is the #1 bug — naive random removal frequently produces multi-solution puzzles.</li>
+        <li>Difficulty is not the same as given-count — two 28-given puzzles can differ wildly by required technique.</li>
+        <li>Symmetric removal patterns constrain which cells can be removed together — re-verify uniqueness after each symmetric pair.</li>
+        <li>Symbol substitution for topic data must preserve a strict 1:1 mapping — duplicate items break the puzzle.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10. NONOGRAM -->
+  <section class="puzzle-card grid" id="nonogram" data-name="nonogram picross" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">10</span>
+        <h3>Nonogram</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid is filled/left-blank so each row and column matches its clue — a sequence of numbers giving the lengths of consecutive filled runs, in order, separated by at least one blank. Cross-referencing row/column clues reveals a hidden picture.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Constraint propagation across two intersecting axes, with the payoff of a hidden image "revealing" itself.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid size; image complexity/fragmentation (fragmented images are harder and more ambiguity-prone); number of colors; whether solvable by pure line-logic or requires trial-and-error/contradiction.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "nonogram", "gridSize": { "rows": 10, "cols": 10 },
+  "source": { "mode": "textRender", "revealText": "TERMA", "font": "pixel5x7" },
+  "sourceAlt": {
+    "mode": "dataMatrix", "items": ["itemA","itemB","itemC"],
+    "attributes": ["attr1","attr2","attr3"], "matrix": [[1,0,1],[0,1,0],[1,1,0]]
+  },
+  "palette": ["#000000"]
+}
+// Topic-driven two ways: render a keyword into a pixel-font bitmap, or use a
+// real items-x-attributes boolean matrix directly as the grid so solving it
+// literally reconstructs a true/false fact table.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Obtain a boolean grid (bitmap): render revealText via pixel font, OR use
+   dataMatrix directly, OR random-generate with a target fill ratio
+2. Derive rowClues[i] and colClues[j] by scanning each line and recording
+   run lengths of consecutive filled cells
+3. Verify uniqueness: run a line-solver (iteratively compute forced cells per
+   row/col from clues, propagate) until stable
+   if grid fully determined -&gt; unique, done
+   else run backtracking search counting solutions (limit=2)
+   if &gt;1 solution: perturb grid (flip a small cluster of cells), retry from step 2
+4. Output rowClues, colClues, and solution grid</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Clue generation from a bitmap is trivial, but the clue set doesn't always uniquely determine that bitmap — always solver-verify, don't assume.</li>
+        <li>Highly symmetric or blocky/checkerboard patterns are most prone to ambiguous multiple solutions.</li>
+        <li>All-blank or all-filled lines produce a "0" clue or a single full-length run — must be handled explicitly.</li>
+        <li>Multi-color nonograms need color-tagged clue blocks and an explicit adjacency rule for same-color runs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. MINESWEEPER -->
+  <section class="puzzle-card grid" id="minesweeper" data-name="minesweeper" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">11</span>
+        <h3>Minesweeper</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid hides a set number of mines; revealing a safe cell shows a count of mines among its 8 neighbors (0 triggers a flood-fill reveal). The player flags suspected mines and deduces safe cells from the numbers, winning when all non-mine cells are revealed.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Local constraint deduction under risk — reading overlapping number constraints to prove safety.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid dimensions; mine density; size of the guaranteed-safe first-click opening; "no-guess" mode vs. allowing forced 50/50 spots; mine clustering/edge effects.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "minesweeper", "gridSize": { "rows": 16, "cols": 16 },
+  "mineCount": 40, "firstClickSafeRadius": 1, "requireNoGuess": true, "seed": 12345,
+  "cellFacts": { "3,4": "attributeA -&gt; valueB" }
+}
+// Not naturally data-driven; topic data attaches a fact to each revealed
+// number cell, or requires clearing a region before an "answer" cell is shown.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Player (or generator) picks first-click cell c0.
+2. Place mineCount mines uniformly at random over all cells EXCEPT c0 and its
+   immediate neighbors (guarantees a safe opening).
+3. Compute adjacency numbers for every non-mine cell.
+4. If requireNoGuess:
+     run a constraint-propagation solver from the flood-filled opening at c0:
+       repeat: mark cells provably safe/mine via single-cell and
+       subset/overlap constraint rules; reveal/flag them
+       until no progress
+     if entire board resolved -&gt; accept board
+     else -&gt; reshuffle mines (or swap one ambiguous mine) and retry, up to N attempts
+5. Output grid with mine positions + precomputed adjacency numbers</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Classic random placement frequently yields boards with a forced 50/50 late-game guess — must explicitly solver-validate "no-guess" claims.</li>
+        <li>Corner/edge cells have 3 or 5 neighbors instead of 8 — adjacency logic must handle boundaries separately.</li>
+        <li>The first click (and its opening) must never be a mine, or new players lose immediately.</li>
+        <li>High mine density near the safe-zone boundary can make the opening itself small/unsatisfying — tune density regionally.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 12. FLOW -->
+  <section class="puzzle-card grid" id="flow" data-name="flow flow free" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">12</span>
+        <h3>Flow</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid contains pairs of matching colored dots; the player draws one continuous, non-crossing path per color connecting its pair. In the standard "full" ruleset, every cell must be covered by exactly one path.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Spatial path-planning with mutual exclusion — one wrong route always leaves an unreachable pocket.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid size; number of color pairs; average/variance of path length; bottleneck density (narrow corridors forcing a specific route); whether full board coverage is required.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "flow", "gridSize": { "rows": 8, "cols": 8 }, "requireFullCoverage": true,
+  "pairs": [
+    { "id": "pairA", "labelA": "itemA1", "labelB": "itemA2", "endpoints": [[0,0],[3,5]] },
+    { "id": "pairB", "labelA": "itemB1", "labelB": "itemB2", "endpoints": [[7,0],[7,7]] }
+  ]
+}
+// Topic data layers on by relabeling each color pair with a matched item
+// pair (term/definition, synonym pairs, cause/effect).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Build a Hamiltonian path covering every cell of the r x c grid using a
+   Warnsdorff-style heuristic (step to the unvisited neighbor with fewest
+   onward options, randomized tie-break) with bounded restarts on dead ends.
+2. Choose k (number of color pairs). Pick k-1 random cut points along the
+   path, each segment length &gt;= 2, splitting it into k contiguous runs.
+3. For each run, its two endpoints become that color's dot pair; discard the
+   interior (it becomes the hidden ground-truth solution).
+4. Verify uniqueness: run a flow-solver (backtracking or SAT encoding of
+   "each color = simple path between its dots, paths partition all cells")
+   counting solutions with limit=2. If &gt;1, re-cut the path and retry.
+5. Output grid dims + endpoint pairs (+ topic labels).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Partitioning one Hamiltonian path doesn't guarantee a unique solution — a different partition of the same cells can sometimes also satisfy the same endpoints; must solver-check.</li>
+        <li>Degenerate 1-cell segments (adjacent endpoints) are trivial — enforce a minimum segment length.</li>
+        <li>Obstacles/walls require re-verifying grid connectivity before the Hamiltonian-path step.</li>
+        <li>Too many colors for the grid size (short segments) or too few (long, nearly-solved segments) hurt difficulty balance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 13. MAZE -->
+  <section class="puzzle-card grid" id="maze" data-name="maze" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">13</span>
+        <h3>Maze</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A grid/graph of cells connected by open passages (walls blocking other connections) must be traversed from a start cell to an end cell, backtracking out of dead ends until reaching the goal.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Graph/spatial traversal and backtracking — finding the one correct thread through a branching space.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Grid size; dead-end density/branching factor (algorithm choice matters); solution path length relative to grid size; "braiding" (adding loops, trading uniqueness for fewer dead ends); visual obfuscation (isometric, fog-of-war).</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "maze", "gridSize": { "rows": 20, "cols": 20 },
+  "algorithm": "recursiveBacktracker", "braidFactor": 0.0,
+  "start": [0,0], "end": [19,19],
+  "waypointItems": [{ "cell": [4,7], "content": "attributeA" }]
+}
+// Not naturally data-driven; topic data places items at junctions/dead-ends
+// (collecting the correct-path ones spells an answer), or gates passages
+// behind correctly-answered facts ("quiz-gated maze").</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Model grid as cells with a wall on all 4 sides initially.
+2. Randomized recursive backtracker:
+     stack = [randomStartCell]; mark visited
+     while stack not empty:
+       current = stack.top
+       neighbors = unvisited neighbors of current
+       if neighbors empty: stack.pop()
+       else:
+         next = randomChoice(neighbors)
+         removeWallBetween(current, next); mark next visited; stack.push(next)
+   (alternative: randomized Prim's - grow a frontier set, connect to a random
+    already-in-maze neighbor)
+3. This produces a "perfect maze" - a spanning tree, exactly one path between
+   any two cells.
+4. Pick start/end via double-BFS: BFS from a random cell to find the farthest
+   cell A, then BFS from A to find the farthest cell B -&gt; use A, B as
+   start/end to maximize solution path length.
+5. (optional) Braiding: for braidFactor% of dead-ends, remove one extra wall
+   to a random neighbor, eliminating that dead end but introducing a loop.
+6. Output wall grid + start + end (+ solution path via BFS/DFS).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Only an unbraided "perfect maze" guarantees a unique solution path — braiding trades uniqueness for fewer dead ends; decide upfront which is needed.</li>
+        <li>Recursive backtracking (long corridors) vs. Prim's (many short dead ends) materially changes difficulty, not just cosmetics.</li>
+        <li>Naive start/end choice (opposite corners) can produce a trivially short path — use the double-BFS farthest-cell trick.</li>
+        <li>Pre-placed obstacles require verifying full connectivity before generation, or some cells become unreachable islands.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 14. LOGIC GRID PUZZLE -->
+  <section class="puzzle-card grid" id="logic-grid-puzzle" data-name="logic grid puzzle zebra" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">14</span>
+        <h3>Logic Grid Puzzle</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>N categories (e.g. names, colors, times) each with N items must be matched one-to-one. A list of clues (direct, negative, "same as," comparative, positional) lets the player eliminate impossible pairings, cross-referencing between categories until one full consistent assignment survives.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Multi-step deductive elimination and cross-referencing across several linked relations.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of categories; items per category; clue types used; ratio of clues given vs. minimum required; "indirection depth" of chained inferences; whether redundant clues are left in (easier) or pruned (harder).</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "logicGrid",
+  "categories": [
+    { "name": "categoryA", "items": ["itemA1","itemA2","itemA3"] },
+    { "name": "categoryB", "items": ["itemB1","itemB2","itemB3"] },
+    { "name": "categoryC", "items": ["itemC1","itemC2","itemC3"] }
+  ],
+  "solution": [
+    { "categoryA": "itemA1", "categoryB": "itemB2", "categoryC": "itemC3" },
+    { "categoryA": "itemA2", "categoryB": "itemB3", "categoryC": "itemC1" },
+    { "categoryA": "itemA3", "categoryB": "itemB1", "categoryC": "itemC2" }
+  ],
+  "clues": [
+    { "type": "direct", "text": "The row with itemA1 also has itemB2." },
+    { "type": "negative", "text": "itemA2 does not go with itemC3." },
+    { "type": "sameAs", "text": "Whoever has itemB3 also has itemC1." }
+  ]
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Randomly generate the ground-truth solution: N rows, one column per
+   category, each column a random permutation of that category's items.
+2. Instantiate a candidate clue pool by applying clue templates (direct,
+   negative, sameAs, comparative-if-numeric, positional-if-ordered) to every
+   valid pairing/triple implied by the solution.
+3. Clue selection loop:
+     workingSet = {}
+     shuffle candidate pool
+     for clue in candidate pool:
+       add clue to workingSet
+       if CSPsolve(categories, workingSet) yields exactly 1 solution: break
+   (CSPsolve = row/column elimination + constraint propagation, falling back
+    to backtracking search if propagation stalls)
+4. Minimization pass: for each clue (random order), try removing it; if the
+   remaining set still yields a unique solution, drop it permanently. Repeat
+   until no clue can be dropped -&gt; locally minimal, irredundant set.
+5. Verify: exactly one solution, matches step-1 ground truth, no redundant
+   clues remain.
+6. Output categories + minimized clues (+ solution as answer key).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Too few clues -&gt; multiple valid solutions; too many/redundant -&gt; trivial or unsatisfying — the add-until-unique-then-minimize loop avoids both.</li>
+        <li>A pure elimination solver may not be powerful enough to verify uniqueness if the puzzle needs hypothetical/contradiction reasoning — the verification solver must support limited case-branching.</li>
+        <li>Positional clues ("directly left of") are only valid for categories with inherent linear/ordinal structure — don't apply to unordered categories like colors.</li>
+        <li>Clue phrasing must use a fixed, well-defined vocabulary — freeform natural language risks multiple valid logical readings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 15. PIPS -->
+  <section class="puzzle-card grid" id="pips" data-name="pips nyt dominoes" data-cat="grid">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">15</span>
+        <h3>Pips</h3>
+      </div>
+      <span class="tag grid">Grid &amp; Spatial Logic</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Verified via web research: released by NYT Games in August 2025 as their first original logic puzzle.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>The player places every tile from a full double-six domino set (28 tiles) onto a board whose cells are divided into color-coded regions. Each region carries a numeric rule (exact sum, all-equal, all-different, greater/less-than) over every pip value placed in it. A domino can straddle two regions, each half satisfying its own region's rule; solved when all tiles are placed and every rule holds.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Combinatorial allocation under a fixed, shared inventory of numeric pieces — balancing simultaneous arithmetic constraints against a domino set that can't be reused.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Board size/shape; mix of rule types per region; region size; how tight sum/threshold targets are relative to the feasible range; number of unconstrained "blank" cells; irregular board shapes with dead-end nooks.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "pips",
+  "boardCells": [
+    { "coord": [0,0], "regionId": "R1" }, { "coord": [0,1], "regionId": "R1" },
+    { "coord": [1,0], "regionId": "R2" }, { "coord": [1,1], "regionId": "blank" }
+  ],
+  "regions": [ { "id": "R1", "rule": "sum", "target": 7 }, { "id": "R2", "rule": "notEqual" } ],
+  "dominoSet": "double-six-full",
+  "regionFacts": { "R1": "attributeA corresponds to valueB" }
+}
+// Not naturally data-driven; topic content attaches a fact reveal to each
+// region, or maps the 0-6 pip scale onto an ordered topic attribute.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Choose a board shape: connected polyomino with even cell count =
+   2 x numDominoes (from a template library, or grown via randomized
+   region-growth with connectivity checks).
+2. Choose the domino subset (full double-six/28 for hard, smaller curated
+   subset for easy/medium) - cell count must equal 2 x |dominoSet|.
+3. Find a valid domino tiling of the board shape with the chosen set
+   (perfect-matching/exact-cover backtracking over adjacent cell pairs) -&gt;
+   fixes the ground-truth placement.
+4. Partition the board into regions (grow colored blobs of bounded size;
+   deliberately let some cuts fall between a placed domino's two cells so it
+   straddles two regions).
+5. For each region, compute the real pip values of the ground-truth
+   placement inside it, then choose a rule/target consistent with that
+   ground truth (its actual sum, or equal/notEqual if it already holds, or a
+   threshold with safe margin).
+6. Uniqueness check: backtracking search over all placements of the exact
+   domino multiset satisfying every region rule; count solutions (limit=2).
+   if count != 1: tighten a rule or reshape a region, re-check.
+7. Output board cells+regions, region rules, and domino inventory.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Uniqueness search here means searching over placements of a fixed shared multiset of dominoes, not free digit assignment like Sudoku — a digit-style solver won't directly apply.</li>
+        <li>A "notEqual"/all-different region with more than 7 cells is automatically unsolvable, since pip values only range 0-6.</li>
+        <li>Region cell-count must be checked against the feasible sum range before assigning a "sum" target, or the region becomes mathematically impossible.</li>
+        <li>Symmetric or near-symmetric boards can admit multiple equivalent solutions (interchangeable dominoes swap without breaking rules) — the uniqueness solver must catch these.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. DEDUCTION & SOCIAL CATEGORY -->
+  <!-- ============================================================ -->
+  <div class="category-divider deduction" id="cat-deduction-header">
+    <h2>3. Deduction &amp; Social (6 Mechanics)</h2>
+  </div>
+
+  <!-- 16. CONNECTIONS -->
+  <section class="puzzle-card deduction" id="connections" data-name="connections nyt" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">16</span>
+        <h3>Connections</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>16 items are secretly partitioned into 4 groups of 4, each sharing a hidden theme. The player repeatedly selects 4 items they believe share a category; a correct guess reveals the theme, a wrong guess costs one of a limited number of mistakes. Categories are difficulty-ranked and color-coded, with deliberately seeded "red herrings" — items plausibly belonging to more than one category.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Resolving competing categorical hypotheses under deliberate ambiguity — spotting which surface-plausible grouping is a trap.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number/strength of red herrings; semantic subtlety of the category rule (concrete vs. wordplay/pattern); number of allowed mistakes; surface homogeneity of items across categories; how loose vs. tight category definitions are.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "connections", "gridSize": 16,
+  "categories": [
+    { "id": "categoryA", "theme": "shared trait A", "difficulty": 1, "items": ["itemA1","itemA2","itemA3","itemA4"] },
+    { "id": "categoryB", "theme": "shared trait B", "difficulty": 2, "items": ["itemB1","itemB2","itemB3","itemB4"] },
+    { "id": "categoryC", "theme": "shared trait C", "difficulty": 3, "items": ["itemC1","itemC2","itemC3","itemC4"] },
+    { "id": "categoryD", "theme": "shared trait D (hardest/twist)", "difficulty": 4, "items": ["itemD1","itemD2","itemD3","itemD4"] }
+  ],
+  "displayGrid": ["itemC2","itemA1","itemD4","itemB3"]
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Cluster dataset records by shared attribute/tag; keep only clusters with
+   &gt;=4 members.
+2. Select 4 clusters as categories; rank difficulty by rule obscurity
+   (literal category = easy, wordplay/pattern-based = hard).
+3. For each category, pick exactly 4 items from its pool.
+4. For every chosen item, test it against every OTHER category's defining
+   predicate. IF item satisfies &gt;1 category's rule exactly -&gt; swap for a
+   different pool member (true ambiguity is a hard fail).
+5. OPTIONAL: for 1-2 items per category, pick ones with a surface-level
+   (non-defining) similarity to an item in another category - manufactures a
+   red herring without creating real ambiguity.
+6. Flatten all 16 items, shuffle display order, store category-&gt;items-
+   &gt;difficulty as the answer key.
+7. Brute-force/heuristic check: confirm no alternate 4x4 partition of the 16
+   items also satisfies 4 coherent rules.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>An item genuinely qualifying for two categories under both rules simultaneously creates multiple valid solutions — must hard-reject at generation time.</li>
+        <li>Two categories ending up too similar to distinguish means players can't tell which group an item belongs to — merge/re-diversify themes.</li>
+        <li>Category difficulty ranking doesn't always match actual solver difficulty — needs a heuristic or test pass, not just author intent.</li>
+        <li>Small source datasets force a padded 4th category with weak members, producing an incoherent group.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 17. RIDDLE -->
+  <section class="puzzle-card deduction" id="riddle" data-name="riddle" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">17</span>
+        <h3>Riddle</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A single answer entity is described through figurative, metaphorical, or punning clues that are literally true but intentionally misdirect from the obvious interpretation; the solver must reframe non-literally to converge on one specific answer.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>The "aha" of lateral reframing — mentally shifting from literal to figurative interpretation to unlock an otherwise-hidden answer.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of clues given; how abstract/personified the phrasing is; reliance on puns/homophones; strength of the false literal interpretation; obscurity of the answer; whether clues are ordered most-misleading to most-revealing.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "riddle", "answer": "itemA",
+  "sourceFacts": ["itemA belongs to categoryX", "itemA has propertyY", "itemA relates to itemB"],
+  "clues": [
+    { "text": "I am always near categoryX but never counted as one of them.", "device": "misdirection" },
+    { "text": "The more of me you take, the more I leave behind.", "device": "paradox" }
+  ],
+  "difficulty": "medium"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Pick target "answer" record from dataset.
+2. Extract 2-4 distinguishing facts/attributes (category, relation, property).
+3. For each fact, transform the literal statement into figurative form using
+   a device template: personification, paradox, category misdirection, or
+   pun substitution (swap a key term for a homophone).
+4. Order clues weakest/most-misleading -&gt; strongest/most-revealing.
+5. UNIQUENESS CHECK: verify no other dataset item satisfies ALL clues.
+6. MISDIRECTION CHECK: verify at least one other dataset item plausibly
+   satisfies the early clue(s) alone (proves genuine misdirection exists).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Clue 1 alone already uniquely identifying the answer means no lateral thinking is required — collapses to trivia.</li>
+        <li>Pun/homophone devices don't generalize across languages or numeric/structured data — need a device fallback.</li>
+        <li>Two dataset items satisfying the full clue set equally creates an ambiguous riddle.</li>
+        <li>A metaphor too obscure to reverse-engineer even with the answer in hand is unsolvable, not just hard.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 18. LIKES/DISLIKES -->
+  <section class="puzzle-card deduction" id="likes-dislikes" data-name="likes dislikes zendo" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">18</span>
+        <h3>Likes/Dislikes</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Best modeled on inductive rule-guessing games — closest real analogs are Zendo (hidden-rule classification game) and the "Green Glass Door" party-game family.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A hidden rule/predicate classifies every item as "liked" or "disliked." The solver is shown pre-labeled examples and must induce the rule well enough to correctly predict the classification of new, unlabeled items.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Hypothesis formation and testing against evidence — a compressed scientific-method loop.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Rule complexity (single attribute vs. conjunction/negation of multiple); number of seeded examples; presence of "minimal pairs" vs. spurious correlations; size of the probe/test set; content-based vs. surface-based rules.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "likesDislikes",
+  "rule": { "description": "attributeX == valueA", "predicateField": "attributeX", "predicateValue": "valueA" },
+  "examples": [
+    { "item": "itemA", "liked": true }, { "item": "itemB", "liked": false },
+    { "item": "itemC", "liked": true }, { "item": "itemD", "liked": false }
+  ],
+  "probeItems": ["itemE", "itemF", "itemG"]
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Choose one dataset attribute (or a conjunction of two, for harder mode) as
+   the hidden predicate.
+2. Partition all items into liked/disliked sets; require both non-empty with
+   enough members to seed examples + hold out probes.
+3. Select example set prioritizing "minimal pairs": items identical except
+   for the target attribute, labeled oppositely - blocks latching onto a
+   wrong correlated attribute.
+4. Hold out remaining items as probes for testing the induced rule.
+5. SPURIOUS-CORRELATION CHECK: verify no OTHER single attribute also
+   perfectly separates the shown example set. If one exists, add a
+   counter-example that breaks the alternate hypothesis without breaking
+   the true one.
+6. For harder tiers, compose the rule from 2+ attributes (AND/OR/NOT) and
+   repeat check 5.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Shown examples can accidentally support more than one valid rule — must actively probe for and eliminate alternate hypotheses.</li>
+        <li>A rule based on incidental dataset artifacts (alphabetical order, ID parity) feels arbitrary rather than discoverable.</li>
+        <li>Insufficient members on one side of the partition prevents building a real example set.</li>
+        <li>If the item's label/text leaks the rule directly, induction becomes unnecessary.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 19. SPOT THE LIAR -->
+  <section class="puzzle-card deduction" id="spot-the-liar" data-name="spot the liar knights knaves" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">19</span>
+        <h3>Spot the Liar</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Closest real genres: Knights and Knaves logic puzzles and the party game Two Truths and a Lie.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A fixed number of speakers each make one statement about a shared ground-truth fact (or about each other); exactly one (or a known fixed count) is lying and all others are truthful. The solver cross-references statement content for contradictions to identify the liar.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Constraint propagation on a small scale — testing each "who's lying" hypothesis until only one assignment stays contradiction-free.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of speakers/statements; direct fact-checkable vs. self-referential meta-statements; number of true-but-suspicious red herrings; fixed vs. unknown liar count; whether ground truth must be inferred from true statements or is given externally.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "spotTheLiar",
+  "groundTruth": { "field": "attributeX", "value": "valueA" },
+  "speakers": [
+    { "id": "speakerA", "statement": "itemA has attributeX = valueA", "truthValue": true },
+    { "id": "speakerB", "statement": "itemA has attributeX = valueB", "truthValue": false },
+    { "id": "speakerC", "statement": "speakerB is telling the truth", "truthValue": false },
+    { "id": "speakerD", "statement": "itemA does not have attributeX = valueB", "truthValue": true }
+  ],
+  "liarCount": 1, "solution": "speakerB"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Pick a verifiable ground-truth fact from the dataset.
+2. Generate N speaker statements: (N - liarCount) true statements consistent
+   with the fact; exactly `liarCount` false statement(s) that contradict the
+   fact or contradict another true statement.
+3. OPTIONAL: add meta-statements referencing another speaker's honesty to
+   force chained deduction.
+4. SOLVABILITY CHECK: enumerate all C(N, liarCount) liar assignments;
+   simulate statement truth values under each; confirm EXACTLY ONE
+   assignment is internally consistent. Regenerate if 0 or &gt;1 found.
+5. Shuffle speaker display order so the liar isn't positionally predictable.
+6. Tune difficulty by making the false statement subtle and/or padding with
+   extra true-but-suspicious statements.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Statements not mutually exclusive enough leave multiple liar assignments consistent (ambiguous) or none (unsolvable) — verify computationally.</li>
+        <li>Genuine self-referential paradoxes ("I am lying") make the puzzle logically unsolvable, not just hard — exclude these.</li>
+        <li>An ambiguous ground-truth fact in the source data (a tie on the relevant attribute) breaks true/false scoring.</li>
+        <li>Red herrings indistinguishable from the actual lie reduce deduction to a coin flip.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 20. DETECTIVE INTERVIEWS -->
+  <section class="puzzle-card deduction" id="detective-interviews" data-name="detective interviews mystery" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">20</span>
+        <h3>Detective Interviews</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Closest real genres: narrative logic-grid mysteries (e.g. "5 Minute Mystery"-style case books) and classic logic grid puzzles applied to a crime scenario.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Several suspects/witnesses each give a statement containing testable claims; the solver cross-references claims against each other and a small set of hard facts, eliminating suspects whose story is inconsistent until exactly one remains implicated.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Multi-constraint elimination — treating testimony as a mini logic grid solved via cross-referencing.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of suspects; independent clues per suspect; ratio of direct lies to true-but-misleading statements; direct vs. externally-derived contradictions; narrative flavor obscuring the logical core; whether one clue eliminates multiple suspects at once.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "detectiveInterview",
+  "case": { "question": "Who is responsible for eventX?", "guiltyEntity": "suspectC" },
+  "suspects": [
+    { "id": "suspectA", "statement": "I was at locationX during timeY.",
+      "claims": [{"field":"location","value":"locationX"},{"field":"time","value":"timeY"}] },
+    { "id": "suspectB", "statement": "I was at locationZ, ask suspectA.",
+      "claims": [{"field":"location","value":"locationZ"}] },
+    { "id": "suspectC", "statement": "I was at locationX too, alone.",
+      "claims": [{"field":"location","value":"locationX"}] }
+  ],
+  "facts": [{ "field": "location", "value": "locationX", "note": "the crime occurred here at timeY" }],
+  "solution": "suspectC"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Pick the guilty entity and define ground-truth crime facts.
+2. For each innocent suspect, generate a statement whose claims are fully
+   consistent with an alibi that does NOT match the crime facts (their
+   eliminating evidence).
+3. For the guilty suspect, generate a statement that either directly
+   contradicts an established fact, contradicts another corroborated
+   statement, or leaves no valid alibi consistent with the crime facts.
+4. Add independent corroborating clues/facts sufficient to eliminate every
+   innocent suspect via at least one clue each.
+5. OPTIONAL: inject a red herring - a suspect with suspicious-sounding but
+   true and ultimately exculpatory statement.
+6. VERIFY: run elimination logic over all suspects; confirm exactly one
+   cannot be cleared. Regenerate/adjust clues if zero or multiple remain.
+7. Order the narrative so no clue depends on later-introduced information.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Insufficient clues to eliminate all-but-one suspect leaves multiple viable suspects (unsolvable/ambiguous ending).</li>
+        <li>A clue can accidentally clear the actual guilty suspect too, or wrongly implicate an innocent one.</li>
+        <li>A suspect's statement might be checkable against real dataset facts the generator didn't account for, creating unintended contradictions.</li>
+        <li>Red herrings indistinguishable from real eliminating evidence turn deduction into guesswork.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 21. PICK A ROOM -->
+  <section class="puzzle-card deduction" id="pick-a-room" data-name="pick a room escape" data-cat="deduction">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">21</span>
+        <h3>Pick a Room</h3>
+      </div>
+      <span class="tag deduction">Deduction &amp; Social</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Closest real genres: escape-room "which door" elimination puzzles and classic mislabeled-sign puzzles (e.g. the three-boxes puzzle family).
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>N rooms/options each carry attributes and optionally a sign of unknown truth-value; a sequence of external clues progressively rules out rooms as candidates, applying each clue as a filter over the shrinking candidate set until exactly one valid choice remains.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Sequential constraint filtering — a lightweight constraint-satisfaction solve giving steady incremental progress toward certainty.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of rooms/options; number of clues relative to rooms; direct vs. conditional/indirect clues; whether signs can be true or false (adds a liar/truth-teller layer); order of clue revelation; redundancy between clues.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "puzzleType": "pickARoom",
+  "rooms": [
+    { "id": "room1", "attributes": {"attributeX":"valueA","attributeY":"valueB"}, "sign": "statement text", "signTruthValue": true },
+    { "id": "room2", "attributes": {"attributeX":"valueC","attributeY":"valueD"}, "sign": "statement text", "signTruthValue": false },
+    { "id": "room3", "attributes": {"attributeX":"valueE","attributeY":"valueF"}, "sign": "statement text", "signTruthValue": false }
+  ],
+  "clues": [
+    "The correct room does not have attributeX = valueC.",
+    "Exactly one room's sign is true, and it is not the correct room."
+  ],
+  "solution": "room1"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Pick the target correct room/option from the dataset.
+2. Assign each room distinguishing attributes so every pair of rooms differs
+   by at least one attribute.
+3. Generate a pool of candidate clue templates, each a TRUE statement that
+   eliminates one or more incorrect rooms without eliminating the correct one.
+4. Greedily select clues from the pool (set-cover style) until every
+   incorrect room is eliminated by at least one selected clue AND the
+   correct room satisfies every selected clue.
+5. IF using signs: fix a meta-rule (e.g. "exactly one sign is true") and
+   generate each room's sign text consistent with it; include the meta-rule
+   as a clue.
+6. Order clues broad -&gt; narrow for readability (or reverse to raise difficulty).
+7. VERIFY: brute-force/constraint-check all rooms against all clues; confirm
+   exactly one room satisfies every clue.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Under-determined clue sets leave more than one room surviving all clues — no unique answer.</li>
+        <li>Over-determined/contradictory clue sets leave zero rooms satisfying every clue — unsolvable.</li>
+        <li>A logically redundant clue is harmless as flavor but should be flagged so it isn't miscounted as load-bearing.</li>
+        <li>Adding a sign/truth-value layer can accidentally create a liar's-paradox sign that can't be consistently assigned true or false.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. MATH & PHYSICAL CATEGORY -->
+  <!-- ============================================================ -->
+  <div class="category-divider math" id="cat-math-header">
+    <h2>4. Math &amp; Physical (7 Mechanics)</h2>
+  </div>
+
+  <!-- 22. SYSTEM OF EQUATIONS -->
+  <section class="puzzle-card math" id="system-of-equations" data-name="system of equations algebra" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">22</span>
+        <h3>System of Equations</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>The solver is given N equations relating N unknowns (typically linear) and must isolate each unknown via substitution or elimination. Usually dressed up as a word problem, cryptarithmetic grid, or symbolic clue set — underneath, always a solvable linear (or occasionally polynomial) system.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Algebraic deduction — combining partial information from multiple constraints to pin down values no single clue reveals alone.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of unknowns; coefficient size/messiness; equations shown directly vs. hidden in a narrative; degree (linear vs. nonlinear); number of redundant clues; whether unknowns must be integers.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "facts": [
+    {"id":"F1","label":"fact label A","value":7},
+    {"id":"F2","label":"fact label B","value":4},
+    {"id":"F3","label":"fact label C","value":12}
+  ],
+  "num_unknowns": 3,
+  "equations": [
+    {"coeffs":[2,1,-1],"vars":["F1","F2","F3"],"result":9},
+    {"coeffs":[1,-1,2],"vars":["F1","F2","F3"],"result":27},
+    {"coeffs":[-1,3,1],"vars":["F1","F2","F3"],"result":23}
+  ],
+  "presentation": "word_problem"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Pull n numeric facts from the dataset as the "answer key" x = [x1..xn]
+   (or invent them if the dataset lacks enough numbers).
+2. Generate an n x n integer coefficient matrix A with det(A) != 0 (unique
+   solution), preferably det(A) in {1,-1} or small (clean intermediate
+   fractions), and no row a scalar multiple of another (redundant clue).
+3. Compute b = A * x -&gt; these become the equations' right-hand sides.
+4. Verify: solve A*x' = b via elimination, assert x' == x exactly (round-trip
+   check).
+5. Render each row as a raw equation, a templated word-problem sentence, or
+   a cryptarithmetic-style substitution.
+6. Optionally shuffle/relabel unknowns and add 1 harmless redundant
+   (dependent) equation as a "check" clue, never as one of the n solving
+   equations.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Singular or near-singular A gives no solution or infinitely many — always check det(A) != 0 before rendering.</li>
+        <li>Large/random coefficients produce ugly non-integer or huge solutions — constrain the coefficient range and verify the solution stays within a "nice" bound.</li>
+        <li>Two equations that are linear combinations of each other feel like two clues but convey only one constraint — rank-check the matrix, not just count rows.</li>
+        <li>Natural-language phrasing in word problems can accidentally imply a different equation than intended — re-derive the equation from the sentence template rather than writing sentences freehand.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 23. TRAIN PROBLEM -->
+  <section class="puzzle-card math" id="train-problem" data-name="train problem two trains" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">23</span>
+        <h3>Train Problem</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Two (or more) movers travel at constant rates from given starting positions/times; the solver applies distance = rate x time to find when/where they meet, one overtakes the other, or their gap closes to a target value. A narratively-dressed 2-variable system of equations.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Translating a real-world scenario into rate/time proportional reasoning.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Scenario type (opposite-direction meeting, same-direction catch-up, staggered departures); number of movers; clean integer vs. simple-fraction answers; added realism (unit conversions, rest stops); whether the question asks for time, location, or gap-at-time-T.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "movers": [
+    {"id":"A","label":"mover A","start_position":0,"rate":12,"start_time":0},
+    {"id":"B","label":"mover B","start_position":180,"rate":-8,"start_time":0}
+  ],
+  "unit": {"position":"units","time":"minutes"},
+  "scenario": "opposite_direction_meet",
+  "question": "at_what_time_do_they_meet"
+}
+// Generalizes to any two linearly-accumulating quantities (e.g. two
+// savings accounts growing at fixed rates, two readers finishing pages/day).</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Choose scenario type.
+2. Pick a target answer t* (clean integer, or simple fraction).
+3. Work backward:
+   - opposite direction: pick rates r1, r2 and gap D such that
+     D / (r1 + r2) = t*
+   - same direction/catch-up: pick rates r1 &gt; r2 and head-start such that
+     (head_start * r2) / (r1 - r2) = t*
+4. Verify r1 != r2 for meeting scenarios.
+5. Verify t* &gt; 0 and all derived distances/positions are physically sensible
+   (non-negative, realistic magnitude for the chosen unit).
+6. Render as narrative using dataset labels/units in place of "train."</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Equal rates in a same-direction chase means the gap never closes (no solution); check for meeting vs. overtaking explicitly for opposite-direction cases.</li>
+        <li>Rounding the target time to a "nice" number AFTER picking rates (forward generation) often produces repeating decimals — always generate backward from a clean t*.</li>
+        <li>Negative or zero derived distances/head-starts are nonsensical and must be rejected.</li>
+        <li>More than 2 movers makes "who meets whom first" non-linear — compute all pairwise meeting times explicitly and pick the intended one.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 24. LIQUID TRANSFERS -->
+  <section class="puzzle-card math" id="liquid-transfers" data-name="liquid transfers water jug" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">24</span>
+        <h3>Liquid Transfers</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Fixed-mechanic puzzle — no natural "any topic" data schema for the mechanic itself. Topic data layers on as flavor: relabel jugs/target with topic quantities, or attach a trivia fact to each jug revealed when used correctly.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Given jugs of fixed, unmarked capacities, the solver may fill a jug, empty a jug, or pour from one into another until the source is empty or destination is full, aiming to reach an exact target volume in some jug (or the total).</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>State-space search and forward planning — visualizing several moves ahead since intermediate states look nothing like the goal.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of jugs; capacities chosen (their GCD relative to target); minimum moves in the optimal solution; whether an unlimited source/drain exists; a distractor jug that isn't needed.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "jug_capacities": [3, 5], "target": 4, "target_container": "either",
+  "unlimited_source_available": true,
+  "flavor_labels": {"jug_0": "container A", "jug_1": "container B"},
+  "max_moves_allowed": null
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Choose 2+ jug capacities [c1, c2, ...].
+2. Compute g = gcd(c1, c2, ...).
+3. Choose target such that target % g == 0 AND target &lt;= max(capacities)
+   (single-jug reading) OR target &lt;= sum(capacities) (combined reading).
+4. Run BFS/DFS over the full state space (each state = tuple of current fill
+   levels) to confirm the target is reachable AND record the optimal move
+   count.
+5. If optimal move count is too low/high for the desired difficulty, re-roll
+   capacities/target and repeat step 4.
+6. Store the verified solution path for hint generation / solvability proof.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>A target not a multiple of gcd(capacities) is mathematically unreachable no matter how it's played — must be checked before publishing.</li>
+        <li>A target achievable only in the combined volume of two jugs rather than a single jug requires deciding up front which win condition applies.</li>
+        <li>Non-coprime-in-a-useful-way capacities can make the puzzle trivial or require far more moves than intended — BFS-verify move count, don't assume.</li>
+        <li>Naive generators often allow partial pours, which trivializes almost every instance — enforce "pour until source empty OR destination full" exactly.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 25. COIN BREAKDOWN -->
+  <section class="puzzle-card math" id="coin-breakdown" data-name="coin breakdown making change" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">25</span>
+        <h3>Coin Breakdown</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Given a target amount and a set of denominations, the solver finds the minimum number of "coins" summing exactly to the target, or enumerates/counts the distinct ways to reach it — the classic coin-change combinatorics/DP problem.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Combinatorial optimization — deciding when greedy (largest-first) reasoning works and when it silently fails.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Canonicity of the denomination set (canonical = greedy-safe; non-canonical requires real DP); target magnitude; unlimited vs. limited supply per denomination; "min coins" vs. "count all ways" mode; presence of a value-1 denomination.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "denominations": [
+    {"label":"unit A","value":25},{"label":"unit B","value":10},
+    {"label":"unit C","value":4},{"label":"unit D","value":1}
+  ],
+  "target": 63, "mode": "min_count", "supply_per_denomination": "unlimited"
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Choose a denomination set: canonical (greedy-safe) for easy mode, or
+   intentionally non-canonical for hard mode (e.g. {1,3,4}: greedy(6)=4+1+1
+   (3 coins) but optimal=3+3 (2 coins)).
+2. Ensure a value-1 (or dataset-min) denomination exists, OR verify the
+   target is expressible via a reachability DP over 0..target.
+3. Pick target: large enough to require multiple denominations; for "count
+   ways" mode, cap it so the combination count stays tractable (e.g. &lt;=50).
+4. Run DP to compute the true optimal min-coin count and/or full ways-count;
+   also compute the greedy result to detect divergence.
+5. If mode is "min_count," score against the DP-verified optimum, not
+   greedy, unless the denomination set is canonical.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Missing a value-1/smallest-unit denomination can make many targets flat-out unreachable — always DP-check reachability.</li>
+        <li>Confusing the greedy answer with the true optimal for non-canonical sets — decide explicitly which is scored, and verify with DP.</li>
+        <li>Limited supply per denomination changes the DP to a bounded-knapsack variant — an unlimited-supply solver will overcount.</li>
+        <li>"Count ways" mode can combinatorially explode for large targets/many denominations — bound target size or denomination count.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 26. SOLITAIRE -->
+  <section class="puzzle-card math" id="solitaire" data-name="solitaire klondike" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">26</span>
+        <h3>Solitaire (Klondike)</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Not inherently data-driven — a pure fixed-mechanic game. Topic data layers on only by relabeling the 52 cards: partition topic items into 4 categories of 13 strictly-ranked items, 2 assigned each "color," so the alternating-color tableau rule still functions.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>A 52-card deck is dealt into 7 tableau columns (only the top card face-up); tableau piles build downward in alternating colors, only a King may fill an empty column, foundations build upward by suit from the Ace. The player draws from stock to waste and wins by moving all 52 cards to the foundations.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Sequential planning under partial information — deciding which face-down cards to uncover and in what order.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Draw-one vs. draw-three; number of allowed stock redeals; the specific shuffle/seed (some deals are provably unsolvable); scoring mode; time/move limits.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "deck_seed": 481932, "draw_mode": "turn_one", "redeals_allowed": "unlimited",
+  "topic_relabeling": {
+    "suits": [
+      {"name":"Category A","color":"red","ranks":["item1","item2","item13"]},
+      {"name":"Category B","color":"black","ranks":["item1"]},
+      {"name":"Category C","color":"red","ranks":["item1"]},
+      {"name":"Category D","color":"black","ranks":["item1"]}
+    ]
+  }
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Seed an RNG (store the seed for reproducibility/sharing).
+2. Shuffle the 52-card deck.
+3. Deal columns 1..7 with i cards each, last card face-up, rest face-down;
+   remaining 24 cards -&gt; stock.
+4. Set draw_mode and redeal policy.
+5. (Recommended) Run a Klondike solver against the seed BEFORE publishing to
+   confirm winnability - a meaningful fraction of random deals are provably
+   unsolvable; reject/reshuffle seeds that fail.
+6. If topic-relabeling is used, map the 4 suits and 13 ranks onto the
+   generated deck positions after dealing.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Not every random deal is solvable — publishing "any shuffle" without a solver check occasionally hands players an impossible puzzle.</li>
+        <li>Turn-three mode is meaningfully harder/less solvable than turn-one — difficulty tuning must account for draw mode, not just the shuffle.</li>
+        <li>Topic relabeling breaks if a category doesn't have exactly 13 cleanly-ranked items or the 4 categories can't split into 2 balanced color groups.</li>
+        <li>A full Klondike solver is computationally expensive — precompute and cache a pool of verified-solvable seeds rather than solving on every request.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 27. SPOT THE DIFFERENCE -->
+  <section class="puzzle-card math" id="spot-the-difference" data-name="spot the difference" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">27</span>
+        <h3>Spot the Difference</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Not inherently data-driven for the image itself. Topic data layers on as an annotation/reward: each difference is tagged with a fact/question revealed once located, or the base scene is a topic-relevant diagram where one specific label is the altered element.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Two versions of the same image differ in a fixed number of discrete, localized edits (object added/removed/moved/resized/rotated, or color/pattern changed). The solver visually scans and marks each difference; solved when all N are found.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Sustained visual attention and comparative perception — noticing what changed versus what merely looks similar.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Number of differences; subtlety of each edit; overall image complexity/clutter; time limit; whether differences are clustered or spread out; camouflage against busy backgrounds.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "base_image": "scene_A.png", "modified_image": "scene_B.png",
+  "differences": [{
+    "id": "diff_1", "region": {"x":120,"y":340,"radius":25}, "type": "color_change",
+    "associated_fact": {"label":"fact tied to this element","value":"..."}
+  }],
+  "difficulty": {"num_differences": 7, "min_spacing_px": 60, "time_limit_sec": 120}
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Start from (or generate) base image A.
+2. Choose k differences to introduce.
+3. For each difference, pick a region fully inside image bounds and at least
+   min_spacing_px from every other chosen region (prevents visual merging).
+4. Apply the edit (recolor/remove/add/translate/scale/rotate) to produce
+   image B.
+5. Programmatically diff A vs B (pixel/structural diff) to auto-generate the
+   ground-truth manifest - never hand-track coordinates, since an edit can
+   have unintended side effects (e.g. moving an object reveals background
+   behind it, creating an unplanned second difference).
+6. Validate the manifest has exactly k distinct, non-overlapping regions;
+   adjust and re-diff if the count is off.
+7. Optionally attach topic facts to each verified region.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>Edits placed too close together get perceived (and auto-detected) as a single difference — enforce minimum spacing.</li>
+        <li>Edits near image edges can be cropped or barely visible — exclude a border margin from candidate regions.</li>
+        <li>An edit can have unintended side effects, silently changing the true difference count — always verify with automated image diff, not the edit list.</li>
+        <li>Overly subtle edits may be mathematically present but practically imperceptible — set a minimum perceptual-difference threshold.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 28. WORD TETRIS (WORDTRIS) -->
+  <section class="puzzle-card math" id="word-tetris" data-name="word tetris wordtris" data-cat="math">
+    <div class="puzzle-head">
+      <div class="puzzle-title-group">
+        <span class="puzzle-number">28</span>
+        <h3>Word Tetris (Wordtris)</h3>
+      </div>
+      <span class="tag math">Math &amp; Physical</span>
+    </div>
+    <div class="note-callout">
+      <strong>Research Note:</strong> Verified against the original 1991 Spectrum HoloByte game Wordtris.
+    </div>
+    <div class="section-field">
+      <div class="field-title">Core Mechanic</div>
+      <p>Single letter tiles fall one at a time into a 9-wide well; the player positions each tile to complete words of 3+ letters, readable horizontally or vertically (overlaps allowed). Completed words clear. Special tiles include a wildcard "?" and an eraser; completing a designated "magic word" clears the entire well for a bonus.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Cognitive Skill</div>
+      <p>Real-time vocabulary recall combined with spatial packing under time pressure — Tetris's falling-piece planning fused with a word game's lexical search.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Difficulty Levers</div>
+      <p>Fall speed; grid width/height; letter-frequency distribution of the falling queue; minimum word length required to score; frequency of wildcard/eraser tiles; length/rarity of the magic word.</p>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generic Data Template</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">json</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy JSON</button>
+        </div>
+        <pre><code>{
+  "word_bank": [
+    {"word":"TERM1","hint":"hint1"},{"word":"TERM2","hint":"hint2"},{"word":"TERM3","hint":"hint3"}
+  ],
+  "magic_word": "TERM3",
+  "grid": {"width": 9, "height": 10, "water_rows": 5},
+  "fall_speed": "level-dependent",
+  "special_tile_rates": {"wildcard": 0.05, "eraser": 0.03},
+  "min_clear_length": 3
+}</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Generation Algorithm</div>
+      <div class="code-container">
+        <div class="code-header">
+          <span class="code-lang">pseudocode</span>
+          <button class="copy-code-btn" onclick="copyCode(this)">Copy Algorithm</button>
+        </div>
+        <pre><code>1. Take the topic word list; filter to words that fit the grid dimensions
+   (length &lt;= max(width, height)).
+2. Build a letter-frequency table weighted toward letters in the word bank
+   (so the falling queue makes those words completable), while still
+   including enough common filler letters to keep the board playable.
+3. Choose one word (ideally longer/central to the topic) as the magic word.
+4. Seed the falling-tile queue by sampling from the frequency table, with a
+   periodic "guarantee" pass ensuring each target word's required letters
+   appear within a reasonable number of drops (simulate to check).
+5. Insert wildcard/eraser tiles at the configured rates.
+6. Set fall speed and grid size per difficulty tier.
+7. Simulate a few playthroughs (or a solver bot) to confirm target words are
+   completable often enough at the chosen difficulty before publishing.</code></pre>
+      </div>
+    </div>
+    <div class="section-field">
+      <div class="field-title">Edge Cases &amp; Gotchas</div>
+      <ul>
+        <li>A target word longer than the grid's width or height can never be placed — filter these out during word-bank ingestion.</li>
+        <li>Skewing the frequency table too heavily toward rare letters starves common connector letters and makes the board unplayable — always blend in baseline common-letter frequencies.</li>
+        <li>Without simulating letter arrival, a word requiring a rare letter may be statistically unreachable within a normal game length.</li>
+        <li>A magic word chosen too long relative to well capacity makes the bonus condition nearly unattainable — bound its length relative to grid height/width.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- FLOATING BACK TO TOP BUTTON -->
+<button class="back-to-top" id="backToTop" title="Back to top">↑</button>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">📋 Copied to clipboard!</div>
+
+<script>
+  // Elements
+  const searchInput = document.getElementById('sidebar-filter');
+  const chipBtns = document.querySelectorAll('.chip-btn');
+  const filterCounter = document.getElementById('filter-counter');
+  const cards = Array.from(document.querySelectorAll('.puzzle-card'));
+  const navItems = Array.from(document.querySelectorAll('.puzzle-nav-item'));
+  const catDividers = {
+    word: document.getElementById('cat-word-header'),
+    grid: document.getElementById('cat-grid-header'),
+    deduction: document.getElementById('cat-deduction-header'),
+    math: document.getElementById('cat-math-header')
+  };
+  const catGroups = Array.from(document.querySelectorAll('.cat-group'));
+  const backToTopBtn = document.getElementById('backToTop');
+  const toast = document.getElementById('toast');
+
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  function applyFilter() {
+    let visibleCount = 0;
+    const catCounts = { word: 0, grid: 0, deduction: 0, math: 0 };
+
+    cards.forEach(card => {
+      const cardCat = card.dataset.cat;
+      const cardName = (card.dataset.name || '').toLowerCase();
+      const cardId = card.id.toLowerCase();
+      
+      const matchesCategory = (currentCategory === 'all' || cardCat === currentCategory);
+      const matchesSearch = !searchQuery || cardName.includes(searchQuery) || cardId.includes(searchQuery);
+
+      const isVisible = matchesCategory && matchesSearch;
+      card.classList.toggle('hidden', !isVisible);
+
+      if (isVisible) {
+        visibleCount++;
+        catCounts[cardCat] = (catCounts[cardCat] || 0) + 1;
+      }
+    });
+
+    // Update sidebar nav items
+    navItems.forEach(item => {
+      const href = item.querySelector('a').getAttribute('href').slice(1);
+      const targetCard = document.getElementById(href);
+      const isVisible = targetCard && !targetCard.classList.contains('hidden');
+      item.classList.toggle('hidden', !isVisible);
+    });
+
+    // Update category section headers
+    Object.keys(catDividers).forEach(cat => {
+      if (catDividers[cat]) {
+        const hasVisible = catCounts[cat] > 0;
+        catDividers[cat].style.display = hasVisible ? 'flex' : 'none';
+      }
+    });
+
+    // Update category groups in sidebar
+    catGroups.forEach(group => {
+      const cat = group.dataset.cat;
+      const count = catCounts[cat] || 0;
+      group.style.display = count > 0 ? 'block' : 'none';
+    });
+
+    // Update counter
+    filterCounter.textContent = `Showing ${visibleCount} of 28 puzzle types`;
+  }
+
+  // Search input handler
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim().toLowerCase();
+    applyFilter();
+  });
+
+  // Category chip handlers
+  chipBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      chipBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  // Copy code helper
+  window.copyCode = function(button) {
+    const pre = button.closest('.code-container').querySelector('pre');
+    const text = pre.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = button.textContent;
+      button.textContent = '✓ Copied!';
+      showToast('✓ Code copied to clipboard');
+      setTimeout(() => {
+        button.textContent = originalText;
+      }, 2000);
+    });
+  };
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2200);
+  }
+
+  // Scroll to top listener
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Highlight active nav item on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          const href = item.querySelector('a').getAttribute('href').slice(1);
+          item.classList.toggle('active', href === id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  cards.forEach(card => observer.observe(card));
+</script>
+
 </body>
 </html>

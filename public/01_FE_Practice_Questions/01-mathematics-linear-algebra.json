@@ -6,8 +6,8 @@
   "subtopics": [
     "Linear algebra"
   ],
-  "puzzle_slug": "system-of-equations",
-  "puzzle_category": "Math & Physical",
+  "puzzle_slug": "crossword",
+  "puzzle_category": "Word & Language",
   "questions": [
     {
       "id": "MATH-LA-Q1",
@@ -131,122 +131,19 @@
     }
   ],
   "puzzle_instance": {
-    "narrative": "A set of matrix equation constraints yields the following linear system.",
-    "facts": [
-      {
-        "id": "F1",
-        "label": "Determinant of A = [[4,1],[2,3]] (Q1 answer)",
-        "value": 10
-      },
-      {
-        "id": "F2",
-        "label": "Absolute value of det(A) for the inverse of [[1,2],[3,4]] (Q3 answer)",
-        "value": 2
-      },
-      {
-        "id": "F3",
-        "label": "Value of x in the simultaneous equations (Q4 answer)",
-        "value": 3
-      },
-      {
-        "id": "F4",
-        "label": "Smaller eigenvalue of matrix B (Q5 answer, λ=1)",
-        "value": 1
-      },
-      {
-        "id": "F5",
-        "label": "Larger eigenvalue of matrix B (Q5 answer, λ=6)",
-        "value": 6
-      }
-    ],
-    "num_unknowns": 5,
-    "equations": [
-      {
-        "coeffs": [
-          1,
-          1,
-          0,
-          0,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 12
-      },
-      {
-        "coeffs": [
-          0,
-          1,
-          1,
-          0,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 5
-      },
-      {
-        "coeffs": [
-          0,
-          0,
-          1,
-          1,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 10
-      },
-      {
-        "coeffs": [
-          1,
-          0,
-          -1,
-          1,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 8
-      },
-      {
-        "coeffs": [
-          0,
-          1,
-          1,
-          -1,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 10
-      }
-    ],
-    "presentation": "word_problem"
+    "slug": "crossword",
+    "title": "Linear Algebra Crossword",
+    "narrative": "Complete the crossword to reinforce essential matrix terminology, operations, and definitions from the FE Reference Handbook.",
+    "grid_size": { "rows": 12, "cols": 8 },
+    "words": [
+      { "number": 1, "direction": "across", "answer": "MATRIX", "row": 1, "col": 2, "clue": "Rectangular array of numbers or expressions arranged in rows and columns.", "ref": "FE Reference Handbook, Mathematics: Matrices" },
+      { "number": 2, "direction": "down", "answer": "TRACE", "row": 1, "col": 4, "clue": "Sum of the elements on the main diagonal of a square matrix (also equals sum of eigenvalues).", "ref": "FE Reference Handbook, Mathematics: Matrices - Trace" },
+      { "number": 3, "direction": "across", "answer": "INVERSE", "row": 5, "col": 1, "clue": "Matrix A⁻¹ such that A × A⁻¹ = I; exists if and only if det(A) ≠ 0.", "ref": "FE Reference Handbook, Mathematics: Matrices - Inverse" },
+      { "number": 3, "direction": "down", "answer": "IDENTITY", "row": 5, "col": 1, "clue": "Square matrix denoted I with 1s on main diagonal and 0s elsewhere; satisfies A × I = A.", "ref": "FE Reference Handbook, Mathematics: Matrices - Identity Matrix" },
+      { "number": 4, "direction": "down", "answer": "RANK", "row": 5, "col": 5, "clue": "The maximum number of linearly independent rows or columns in a matrix.", "ref": "FE Reference Handbook, Mathematics: Matrices - Linear Independence" },
+      { "number": 5, "direction": "down", "answer": "SCALAR", "row": 5, "col": 6, "clue": "A single quantity that scales a matrix or vector, as opposed to a multi-dimensional array.", "ref": "FE Reference Handbook, Mathematics: Matrices" },
+      { "number": 6, "direction": "down", "answer": "ECHELON", "row": 5, "col": 7, "clue": "Row _____ form: a step-like matrix format with leading entries used in Gaussian elimination.", "ref": "FE Reference Handbook, Mathematics: Matrices - Echelon Form" },
+      { "number": 7, "direction": "across", "answer": "EIGEN", "row": 7, "col": 1, "clue": "German prefix for 'characteristic' root values (λ) satisfying det(A - λI) = 0.", "ref": "FE Reference Handbook, Mathematics: Matrices - Eigenvalues" }
+    ]
   }
 }

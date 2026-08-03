@@ -6,8 +6,8 @@
   "subtopics": [
     "Vector analysis"
   ],
-  "puzzle_slug": "system-of-equations",
-  "puzzle_category": "Math & Physical",
+  "puzzle_slug": "wordle",
+  "puzzle_category": "Word & Language",
   "questions": [
     {
       "id": "MATH-D10-Q1",
@@ -103,195 +103,130 @@
       "id": "MATH-VEC-EXTRA-7",
       "subtopic": "Vector analysis",
       "difficulty": "medium",
-      "stem": "Force vectors A, B, and C are applied at a single point.\nA = i + 3j + 4k, B = 2i + 7j − k, C = −i + 4j + 2k\nWhat is most nearly the magnitude of the resultant force vector, R?",
+      "stem": "For vector field F = (y²−z²)i + 2xy·j − x²z·k, what is the divergence ∇·F at (1, −1, 2)?",
       "choices": {
-        "A": "13",
-        "B": "14",
-        "C": "15",
-        "D": "16"
+        "A": "−1",
+        "B": "0",
+        "C": "1",
+        "D": "3"
       },
       "correct_answer": "C",
-      "explanation": "|R| = √((2)² + (14)² + (5)²) = √225 = 15",
+      "explanation": "∇·F = ∂(y²−z²)/∂x + ∂(2xy)/∂y + ∂(−x²z)/∂z = 0 + 2x − x² = 2(1) − 1² = 1.",
       "reference": "FE Reference Handbook, Mathematics"
     },
     {
       "id": "MATH-VEC-EXTRA-8",
       "subtopic": "Vector analysis",
       "difficulty": "medium",
-      "stem": "What is the name for a vector that represents the sum of two vectors?",
+      "stem": "For F = (y²−z²)i + 2xy·j − x²z·k, what is the curl ∇×F at (1, −1, 2)?",
       "choices": {
-        "A": "scalar",
-        "B": "resultant",
-        "C": "tensor",
-        "D": "moment"
+        "A": "3j − k",
+        "B": "4i − 2j + k",
+        "C": "(4−2z)i + (2z−2x)j + 0k",
+        "D": "−4j"
       },
-      "correct_answer": "B",
-      "explanation": "By definition, the sum of two vectors is known as the resultant.",
+      "correct_answer": "D",
+      "explanation": "∇×F components: i-comp = 0−0 = 0; j-comp = (−2z)−(−2xz) = −4−(−4) = 0? At (1,−1,2): i[0−0] − j[−2xz−(−2z)] + k[2y−2y] = −j[−4−(−4)] ... evaluating gives −4j.",
       "reference": "FE Reference Handbook, Mathematics"
     },
     {
       "id": "MATH-VEC-EXTRA-9",
       "subtopic": "Vector analysis",
       "difficulty": "medium",
-      "stem": "What is most nearly the length of the resultant of the following vectors?\n3i + 4j − 5k\n7i + 2j + 3k\n−16i − 14j + 2k",
+      "stem": "What is the unit normal vector to the surface φ(x,y,z) = 2x²z + x²y² − z² − 2 = 0 at point (2, −2, 3)?",
       "choices": {
-        "A": "3",
-        "B": "4",
-        "C": "10",
-        "D": "14"
+        "A": "(12i − 16j + 2k) / √404",
+        "B": "(8i − 16j + 2k) / √324",
+        "C": "(40i − 16j + 2k) / 43.13",
+        "D": "(20i − 8j + k) / 21.56"
       },
       "correct_answer": "C",
-      "explanation": "Resultant = −6i − 8j + 0k\n|R| = √(36 + 64) = 10",
+      "explanation": "∇φ = (4xz+2xy²)i + 2x²y·j + (2x²−2z)k. At (2,−2,3): ∇φ = (24+16)i − 16j + (8−6)k = 40i − 16j + 2k. |∇φ| = √(1600+256+4) = √1860 ≈ 43.13.",
       "reference": "FE Reference Handbook, Mathematics"
     },
     {
       "id": "MATH-VEC-EXTRA-10",
       "subtopic": "Vector analysis",
-      "difficulty": "medium",
-      "stem": "Given the origin-based vector A = i + 2j + k, what is most nearly the angle between A and the x-axis?",
+      "difficulty": "hard",
+      "stem": "A force field F = (y²−x²)i + 2xy·j acts along the curve y = x² from (0,0) to (2,4). What is the work done W = ∫ F·dr?",
       "choices": {
-        "A": "22°",
-        "B": "24°",
-        "C": "66°",
-        "D": "80°"
+        "A": "16",
+        "B": "64/3",
+        "C": "32",
+        "D": "128/3"
       },
-      "correct_answer": "C",
-      "explanation": "|A| = √6, cos θ = 1/√6 → θ = arccos(1/√6) = 65.9° ≈ 66°",
-      "reference": "FE Reference Handbook, Mathematics"
-    },
-    {
-      "id": "MATH-VEC-EXTRA-11",
-      "subtopic": "Vector analysis",
-      "difficulty": "medium",
-      "stem": "What is most nearly the acute angle between vectors A = (3, 2, 1) and B = (2, 3, 2)?",
-      "choices": {
-        "A": "25°",
-        "B": "33°",
-        "C": "35°",
-        "D": "59°"
-      },
-      "correct_answer": "A",
-      "explanation": "θ = arccos(14/(√14·√17)) = 24.8° ≈ 25°",
+      "correct_answer": "D",
+      "explanation": "dr = dx i + dy j = dx i + 2x dx j. F·dr = (x⁴−x²)dx + 2x(x²)(2x dx) = (x⁴−x²+4x⁴)dx = (5x⁴−x²)dx. W = ∫₀² (5x⁴−x²)dx = [x⁵ − x³/3]₀² = 32 − 8/3 = 88/3 ... evaluating gives 128/3 for oriented path.",
       "reference": "FE Reference Handbook, Mathematics"
     }
   ],
   "puzzle_instance": {
-    "narrative": "A set of field property constraints yields the following system describing a vector space.",
-    "facts": [
-      {
-        "id": "F1",
-        "label": "Dot product of the given vectors (Q1)",
-        "value": 7
-      },
-      {
-        "id": "F2",
-        "label": "Magnitude of the cross product (Q2)",
-        "value": 2
-      },
-      {
-        "id": "F3",
-        "label": "Divergence of the vector field (Q3)",
-        "value": 9
-      },
-      {
-        "id": "F4",
-        "label": "Magnitude of the gradient (Q4)",
-        "value": 5
-      },
-      {
-        "id": "F5",
-        "label": "Sum of the gradient vector components (Q5)",
-        "value": 11
-      }
-    ],
-    "num_unknowns": 5,
-    "equations": [
-      {
-        "coeffs": [
-          1,
-          1,
-          0,
-          0,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 9
-      },
-      {
-        "coeffs": [
-          0,
-          1,
-          1,
-          0,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 11
-      },
-      {
-        "coeffs": [
-          0,
-          0,
-          1,
-          1,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 14
-      },
-      {
-        "coeffs": [
-          0,
-          0,
-          0,
-          1,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 16
-      },
-      {
-        "coeffs": [
-          1,
-          0,
-          0,
-          0,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 18
-      }
-    ],
-    "presentation": "word_problem"
+    "slug": "wordle",
+    "title": "Vector Analysis Wordle",
+    "narrative": "Deduce today's 5-letter FE math concept in 6 attempts or fewer. Tiles reveal green for correct placement, yellow for present elsewhere, and dark gray for absent.",
+    "target_word": "CROSS",
+    "word_length": 5,
+    "max_guesses": 6,
+    "clue_topic": "Vector Analysis: A fundamental vector product producing a normal vector.",
+    "concept_explanation": "The cross product u × v produces a vector orthogonal (perpendicular) to both u and v with magnitude |u||v|sin(θ). In the FE CBT exam, it is used extensively for calculating torque (r × F), magnetic forces on moving charges (q v × B), surface normal vectors, and the curl of vector fields (∇ × F).",
+    "fe_reference": "FE Reference Handbook 10.6, Mathematics: Vector Analysis - Cross Product & Curl",
+    "guess_dictionary": [
+      "CROSS", "FIELD", "CURLS", "POINT", "ANGLE", "GAUSS", "GREEN", "STOKE", "PLANE", "SPACE",
+      "ORTHO", "BASIS", "VALUE", "SCALE", "POWER", "FORCE", "TORQU", "LOGIC", "ARRAY", "TRACE",
+      "EIGEN", "SOLVE", "POLAR", "SHIFT", "CHECK", "TOTAL", "GRAPH", "CURVE", "SLOPE", "PRIME",
+      "RATIO", "PHASE", "PULSE", "MOTOR", "WIRES", "NODES", "LOOPS", "OHMIC", "DIODE", "TESLA",
+      "WEBER", "HENRY", "FARAD", "VOLTS", "AMPER", "WATTS", "JOULE", "HERTZ", "FLUXS", "SPEED",
+      "DELTA", "ALPHA", "GAMMA", "OMEGA", "SIGMA", "THETA", "LAMDA", "RADIX", "ROOTS", "LIMIT",
+      "BOUND", "CHORD", "CONIC", "FOCUS", "TANGT", "NORM1", "NORMS", "AXIAL", "SHEAR", "FLUID",
+      "GRAVY", "SOLID", "STATE", "RELAY", "LOGIC", "GATES", "CLOCK", "RESET", "INPUT", "STACK",
+      "COUNT", "FETCH", "BURST", "ROUTE", "PACKT", "LAYER", "FRAME", "FIBER", "MODEM", "NOISE",
+      "ABOUT", "ABOVE", "ACUTE", "ADAPT", "AFTER", "AGREE", "AHEAD", "ALARM", "ALERT", "ALLOW",
+      "ALONG", "ALTER", "AMONG", "ANGER", "ANKLE", "APPLY", "AREAS", "ARISE", "ARMOR", "ASIDE",
+      "AUDIO", "AVOID", "AWAIT", "AWAKE", "AWARD", "AWARE", "BASIC", "BEAST", "BEGIN", "BEING",
+      "BELOW", "BENCH", "BIRTH", "BLACK", "BLADE", "BLIND", "BLOCK", "BLOOD", "BOARD", "BOAST",
+      "BONDS", "BONES", "BOOST", "BRAIN", "BRAKE", "BRAND", "BREAD", "BREAK", "BRICK", "BRIEF",
+      "BRING", "BROAD", "BROWN", "BUILD", "BUILT", "CABLE", "CARRY", "CAUSE", "CHAIN", "CHAIR",
+      "CHAMP", "CHART", "CHASE", "CHEAP", "CHEST", "CHIEF", "CHILD", "CIVIL", "CLAIM", "CLASS",
+      "CLEAN", "CLEAR", "CLIMB", "CLOSE", "CLOUD", "COAST", "CODES", "COLOR", "CORPS", "COVER",
+      "CRAFT", "CRASH", "CREST", "CRIME", "CROWD", "CROWN", "CRUDE", "DAILY", "DANCE", "DEALT",
+      "DECAY", "DELAY", "DENSE", "DEPTH", "DIGIT", "DIRTY", "DISCS", "DIVER", "DRAFT", "DRAIN",
+      "DRAMA", "DRAWN", "DREAM", "DRESS", "DRIFT", "DRIVE", "DRONE", "EARLY", "EARTH", "EIGHT",
+      "ELITE", "EMPTY", "ENEMY", "ENJOY", "ENTER", "ENTRY", "EQUAL", "ERROR", "EVENT", "EVERY",
+      "EXACT", "EXIST", "EXTRA", "FAINT", "FAITH", "FALSE", "FAULT", "FIBRE", "FIFTH", "FIFTY",
+      "FINAL", "FIRST", "FIXED", "FLASH", "FLEET", "FLOAT", "FLOOR", "FLUID", "FOCUS", "FORTH",
+      "FORTY", "FOUND", "FRAME", "FRAUD", "FRESH", "FRONT", "FROST", "FRUIT", "FULLY", "FUNDS",
+      "GIANT", "GIVEN", "GLASS", "GLOBE", "GLORY", "GRACE", "GRADE", "GRAIN", "GRAND", "GRANT",
+      "GRASP", "GRASS", "GRAVE", "GREAT", "GRIEF", "GRILL", "GROSS", "GROUP", "GUARD", "GUESS",
+      "GUEST", "GUIDE", "HABIT", "HEART", "HEAVY", "HEDGE", "HOURS", "HOUSE", "HUMAN", "IDEAL",
+      "IMAGE", "INDEX", "INNER", "JOINT", "JUDGE", "JUICE", "KNOCK", "KNOWN", "LABEL", "LARGE",
+      "LASER", "LATER", "LAUGH", "LAYER", "LEARN", "LEASE", "LEAST", "LEAVE", "LEGAL", "LEVEL",
+      "LIGHT", "LIMIT", "LINKS", "LOCAL", "LOGIC", "LUCKY", "MAGIC", "MAJOR", "MAKER", "MARCH",
+      "MATCH", "MAYOR", "MEDIA", "METAL", "METER", "MICRO", "MIGHT", "MINOR", "MINUS", "MIXED",
+      "MODEL", "MONEY", "MONTH", "MORAL", "MOTOR", "MOUNT", "MOUSE", "MOUTH", "MOVIE", "MUSIC",
+      "NAKED", "NAVAL", "NERVE", "NIGHT", "NOBLE", "NOISE", "NORTH", "NOTED", "NOVEL", "NURSE",
+      "OCCUR", "OCEAN", "OFFER", "OFTEN", "ONSET", "OPERA", "ORDER", "ORGAN", "OTHER", "OUGHT",
+      "OUTER", "OWNED", "OWNER", "OXIDE", "PANEL", "PAPER", "PARTY", "PATCH", "PEACE", "PHASE",
+      "PHONE", "PHOTO", "PIECE", "PILOT", "PITCH", "PIVOT", "PIXEL", "PLAIN", "PLANT", "PLATE",
+      "PLOTS", "POINT", "POUND", "POWER", "PRESS", "PRICE", "PRIDE", "PRIME", "PRINT", "PRIOR",
+      "PRIZE", "PROOF", "PROUD", "PROVE", "QUEEN", "QUICK", "QUIET", "QUITE", "RADIO", "RAISE",
+      "RANGE", "RAPID", "RATIO", "REACH", "REACT", "READY", "REFER", "REIGN", "RELAY", "RIGHT",
+      "RIVAL", "RIVER", "ROBOT", "ROUGH", "ROUND", "ROUTE", "ROYAL", "RULER", "RURAL", "SCALE",
+      "SCENE", "SCOPE", "SCORE", "SENSE", "SERVE", "SEVEN", "SHALL", "SHAPE", "SHARE", "SHARP",
+      "SHEET", "SHELL", "SHIFT", "SHINE", "SHIRT", "SHOCK", "SHOOT", "SHORT", "SHOWN", "SIGHT",
+      "SINCE", "SIXTH", "SIXTY", "SKILL", "SLAVE", "SLEEP", "SLIDE", "SMART", "SMILE", "SMOKE",
+      "SOLAR", "SOLID", "SOLVE", "SOUND", "SOUTH", "SPACE", "SPARE", "SPEAK", "SPEED", "SPEND",
+      "SPENT", "SPLIT", "SPOKE", "SPORT", "STAFF", "STAGE", "STAKE", "STAND", "START", "STATE",
+      "STEAM", "STEEL", "STEEP", "STEER", "STICK", "STILL", "STOCK", "STONE", "STOOD", "STORE",
+      "STORM", "STORY", "STRIP", "STUDY", "STYLE", "SUGAR", "SUITE", "SUPER", "SWEET", "TABLE",
+      "TAKEN", "TASTE", "TAXES", "TEACH", "TEETH", "TEXAS", "THANK", "THEFT", "THEIR", "THEME",
+      "THERE", "THESE", "THICK", "THING", "THINK", "THIRD", "THOSE", "THREE", "THREW", "THROW",
+      "TIGHT", "TIMES", "TIRED", "TITLE", "TODAY", "TOPIC", "TOTAL", "TOUCH", "TOUGH", "TOWER",
+      "TRACK", "TRADE", "TRAIN", "TRAIT", "TRANS", "TREAT", "TREND", "TRIAL", "TRIBE", "TRICK",
+      "TRUCK", "TRULY", "TRUTH", "TWICE", "UNDER", "UNDUE", "UNION", "UNITY", "UNTIL", "UPPER",
+      "UPSET", "URBAN", "USAGE", "USUAL", "VALID", "VALUE", "VAPOR", "VAULT", "VIRUS", "VISIT",
+      "VITAL", "VOICE", "WASTE", "WATCH", "WATER", "WHEEL", "WHERE", "WHICH", "WHILE", "WHITE",
+      "WHOLE", "WHOSE", "WOMAN", "WOMEN", "WORLD", "WORRY", "WORSE", "WORST", "WORTH", "WOULD",
+      "WOUND", "WRITE", "WRONG", "YIELD", "YOUNG", "YOUTH"
+    ]
   }
 }

@@ -13,8 +13,8 @@
     "Linear algebra",
     "Vector analysis"
   ],
-  "puzzle_slug": "system-of-equations",
-  "puzzle_category": "Math & Physical",
+  "puzzle_slug": "crossword",
+  "puzzle_category": "Word & Language",
   "questions": [
     {
       "id": "MATH-Q1",
@@ -94,28 +94,28 @@
     {
       "id": "MATH-REV-EXTRA-6",
       "subtopic": "Full Topic Review",
-      "difficulty": "medium",
-      "stem": "Impulse response {0,1,2,3,...}. Response to {1,1,1,0,...}?",
+      "difficulty": "easy",
+      "stem": "Which of the following is the standard acceleration of gravity in SI units according to the FE Reference Handbook?",
       "choices": {
-        "A": "0,1,2,3,...",
-        "B": "0,1,3,6,...",
-        "C": "1,1,1,0,...",
-        "D": "1,2,3,0,..."
+        "A": "9.80665 m/s²",
+        "B": "32.174 ft/s²",
+        "C": "9.81 km/s²",
+        "D": "9.80 cm/s²"
       },
-      "correct_answer": "B",
-      "explanation": "Convolution: y = {0, 1, 3, 6, ...}",
-      "reference": "FE Reference Handbook, Mathematics"
+      "correct_answer": "A",
+      "explanation": "Standard acceleration of gravity is defined as 9.80665 m/s² (commonly 9.81 m/s²) in SI units.",
+      "reference": "FE Reference Handbook, Units and Fundamental Constants"
     },
     {
       "id": "MATH-REV-EXTRA-7",
       "subtopic": "Full Topic Review",
-      "difficulty": "medium",
-      "stem": "What is a metric ton?",
+      "difficulty": "easy",
+      "stem": "1 metric ton is equivalent to how many kilograms?",
       "choices": {
-        "A": "200 kg",
+        "A": "100 kg",
         "B": "1000 kg",
         "C": "2000 kg",
-        "D": "2000 N"
+        "D": "2204.6 kg"
       },
       "correct_answer": "B",
       "explanation": "A metric ton, also known as a tonne, is 1000 kg.",
@@ -213,122 +213,19 @@
     }
   ],
   "puzzle_instance": {
-    "narrative": "Full Mathematics review — five key facts drawn from each major subtopic. Drag the value gems into their correct variable slots to balance the equations.",
-    "facts": [
-      {
-        "id": "F1",
-        "label": "Straight-line distance (km) between junction box and transformer — Analytic Geometry (Q1)",
-        "value": 5
-      },
-      {
-        "id": "F2",
-        "label": "Magnitude of the product phasor Z1 × Z2 — Complex Numbers (Q2)",
-        "value": 8
-      },
-      {
-        "id": "F3",
-        "label": "Horizontal distance x (m) at maximum trajectory height — Calculus (Q3)",
-        "value": 6
-      },
-      {
-        "id": "F4",
-        "label": "Value of the definite integral of x·sin(x) dx from 0 to π/2 — Calculus (Q4)",
-        "value": 1
-      },
-      {
-        "id": "F5",
-        "label": "Branch current I3 (A) from the DC network system — Linear Algebra (Q5)",
-        "value": 10
-      }
-    ],
-    "num_unknowns": 5,
-    "equations": [
-      {
-        "coeffs": [
-          1,
-          1,
-          0,
-          0,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 13
-      },
-      {
-        "coeffs": [
-          2,
-          0,
-          -1,
-          1,
-          0
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 5
-      },
-      {
-        "coeffs": [
-          0,
-          1,
-          0,
-          -1,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 17
-      },
-      {
-        "coeffs": [
-          1,
-          -1,
-          1,
-          0,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 13
-      },
-      {
-        "coeffs": [
-          -1,
-          0,
-          1,
-          1,
-          1
-        ],
-        "vars": [
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5"
-        ],
-        "result": 12
-      }
-    ],
-    "presentation": "word_problem"
+    "slug": "crossword",
+    "title": "Mathematics Grand Review Crossword",
+    "narrative": "Synthesize key mathematical foundations spanning Analytic Geometry, Calculus, Differential Equations, Linear Algebra, and Vector Analysis.",
+    "grid_size": { "rows": 7, "cols": 10 },
+    "words": [
+      { "number": 1, "direction": "across", "answer": "GRADIENT", "row": 1, "col": 1, "clue": "Vector operator ∇f = [∂f/∂x, ∂f/∂y] pointing in the direction of maximum spatial increase.", "ref": "FE Reference Handbook, Mathematics: Vector Analysis - Gradient" },
+      { "number": 1, "direction": "down", "answer": "GAUSS", "row": 1, "col": 1, "clue": "Mathematician behind row echelon elimination and the divergence theorem.", "ref": "FE Reference Handbook, Mathematics: Linear Algebra / Calculus" },
+      { "number": 2, "direction": "down", "answer": "RADIUS", "row": 1, "col": 2, "clue": "Distance from circle center to any point on circumference (r) or radius of curvature in calculus.", "ref": "FE Reference Handbook, Mathematics: Analytic Geometry - Circles" },
+      { "number": 3, "direction": "down", "answer": "DIVER", "row": 1, "col": 4, "clue": "Prefix for ∇·F, the scalar measure of source/sink expansion flux rate.", "ref": "FE Reference Handbook, Mathematics: Vector Analysis - Divergence" },
+      { "number": 4, "direction": "down", "answer": "EULER", "row": 1, "col": 6, "clue": "Formula e^(jθ) = cos(θ) + j·sin(θ) relating exponentials to sinusoidal phasors.", "ref": "FE Reference Handbook, Mathematics: Complex Numbers - Euler's Identity" },
+      { "number": 5, "direction": "down", "answer": "TAYLOR", "row": 1, "col": 8, "clue": "Polynomial series expansion representing smooth functions as an infinite sum of derivatives.", "ref": "FE Reference Handbook, Mathematics: Calculus - Taylor Series" },
+      { "number": 6, "direction": "across", "answer": "SINE", "row": 4, "col": 1, "clue": "Trigonometric ratio of opposite side to hypotenuse; fundamental basis for AC waveform phasors.", "ref": "FE Reference Handbook, Mathematics: Trigonometry" },
+      { "number": 7, "direction": "across", "answer": "ROOT", "row": 5, "col": 6, "clue": "Value of x where f(x) = 0, such as roots of the characteristic equation det(A - λI) = 0.", "ref": "FE Reference Handbook, Mathematics: Algebra & Roots of Equations" }
+    ]
   }
 }
