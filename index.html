@@ -1100,9 +1100,9 @@
       // REAL TODAY CONTEXT (July 26, 2026 or real system date if in July 2026)
       const REAL_TODAY = new Date();
       // If running inside the seeded context, ensure today defaults to July 26, 2026 or system date
-      const TODAY_YEAR = 2026;
-      const TODAY_MONTH = 6; // 0-indexed (July)
-      const TODAY_DATE = 26;
+      const TODAY_YEAR = REAL_TODAY.getFullYear();
+      const TODAY_MONTH = REAL_TODAY.getMonth(); // 0-indexed
+      const TODAY_DATE = REAL_TODAY.getDate();
 
       function isToday(y, m, d) {
         // If current calendar matches system real date, or July 26, 2026
