@@ -18,6 +18,7 @@ export default defineConfig(() => {
           dayDetails: path.resolve(__dirname, 'day-details.html'),
           notebook: path.resolve(__dirname, 'notebook.html'),
           mathPracticeProblems: path.resolve(__dirname, 'math-practice-problems.html'),
+          circuitAnalysisProblems: path.resolve(__dirname, 'circuit-analysis-problems.html'),
           feArcadeAdaptationMap: path.resolve(__dirname, 'fe-arcade-adaptation-map.html'),
           puzzleEngineReference: path.resolve(__dirname, 'puzzle-engine-reference.html'),
           neoArcadeDesignSystem: path.resolve(__dirname, '00_Generic_Templates/neo-arcade-design-system.html'),

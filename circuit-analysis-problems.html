@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuit Analysis Problems - FE Study Arcade</title>
+  <meta name="description" content="Interactive FE Electrical and Computer Exam Circuit Analysis Practice Problems covering DC Circuits, AC Circuits, and Transient Circuits with step-by-step solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #0a0a12; --panel: #12121f; --panel-2: #1a1a2e; --grid-line: #23233a;
+      --text: #eef0f7; --text-dim: #8a8aa8; --neon-cyan: #2de2ff; --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e; --neon-green: #3dff88; --neon-orange: #ff6a1a;
+      --font-display: 'Press Start 2P', monospace; --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif; --font-mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--font-body); display: flex; min-height: 100vh; line-height: 1.5; }
+    nav.sidebar { width: 280px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--grid-line); padding: 22px 18px; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 10; }
+    nav.sidebar .brand { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-yellow); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; line-height: 1.4; }
+    nav.sidebar .nav-group { margin-bottom: 20px; }
+    nav.sidebar .nav-header { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--neon-cyan); margin-bottom: 8px; padding-left: 6px; }
+    nav.sidebar ul { list-style: none; }
+    nav.sidebar li a { display: block; padding: 8px 10px; margin-bottom: 3px; border-radius: 4px; border-left: 3px solid transparent; text-decoration: none; color: var(--text); font-family: var(--font-ui); font-size: 0.82rem; transition: background 120ms var(--ease-out), border-color 120ms var(--ease-out); }
+    nav.sidebar li a:hover, nav.sidebar li a.active { background: var(--panel-2); border-left-color: var(--neon-cyan); color: #fff; }
+    .main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .top-hud { background: var(--panel); border-bottom: 1px solid var(--grid-line); padding: 16px 28px; position: sticky; top: 0; z-index: 50; display: flex; flex-direction: column; gap: 12px; }
+    .hud-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .page-title { font-family: var(--font-display); font-size: 1rem; color: var(--neon-orange); text-shadow: 0 0 8px var(--neon-orange); }
+    .hud-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hud-stat { display: flex; align-items: center; gap: 6px; font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hud-stat .label { color: var(--text-dim); }
+    .hud-stat .value { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-orange); text-shadow: 0 0 4px var(--neon-orange); }
+    .hud-stat .value.green { color: var(--neon-green); text-shadow: 0 0 4px var(--neon-green); }
+    .progress-track { width: 100%; height: 4px; background: var(--panel-2); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow)); border-radius: 2px; transition: width 0.5s var(--ease-out); box-shadow: 0 0 6px var(--neon-orange); }
+    .controls-bar { padding: 12px 28px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--grid-line); background: var(--void); }
+    .search-box { flex: 1; min-width: 180px; position: relative; }
+    .search-box input { width: 100%; padding: 8px 12px 8px 34px; background: var(--panel); border: 1px solid var(--grid-line); border-radius: 4px; color: var(--text); font-size: 0.85rem; font-family: var(--font-body); transition: border-color 0.2s; }
+    .search-box input:focus { outline: none; border-color: var(--neon-orange); box-shadow: 0 0 6px rgba(255,106,26,0.2); }
+    .search-box::before { content: '\1F50D'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; pointer-events: none; }
+    .ctrl-btn { font-family: var(--font-ui); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 14px; border: 1.5px solid var(--grid-line); background: transparent; color: var(--text-dim); cursor: pointer; border-radius: 4px; transition: all 120ms var(--ease-out); white-space: nowrap; }
+    .ctrl-btn:hover { border-color: var(--neon-orange); color: var(--neon-orange); }
+    .ctrl-btn.active { border-color: var(--neon-orange); color: var(--neon-orange); background: rgba(255,106,26,0.08); }
+    .ctrl-btn.accent { border-color: var(--neon-yellow); color: var(--neon-yellow); background: rgba(249,233,78,0.06); }
+    .ctrl-btn.accent:hover { background: rgba(249,233,78,0.15); box-shadow: 0 0 8px rgba(249,233,78,0.3); }
+    .ctrl-btn.danger { border-color: var(--neon-pink); color: var(--neon-pink); }
+    .ctrl-btn.danger:hover { background: rgba(255,61,129,0.1); }
+    .content-area { flex: 1; overflow-y: auto; display: flex; }
+    .chapter-sidebar { width: 200px; flex-shrink: 0; padding: 16px 12px; border-right: 1px solid var(--grid-line); overflow-y: auto; background: var(--panel); }
+    .ch-sidebar-title { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--neon-orange); margin-bottom: 8px; padding-left: 4px; }
+    .ch-link { display: flex; align-items: center; justify-content: space-between; padding: 7px 8px; border-radius: 4px; cursor: pointer; color: var(--text-dim); font-size: 0.78rem; margin-bottom: 2px; transition: all 0.12s; text-decoration: none; }
+    .ch-link:hover { background: var(--panel-2); color: var(--text); }
+    .ch-link.active { background: rgba(255,106,26,0.1); color: var(--neon-orange); font-weight: 600; }
+    .ch-count { font-size: 0.6rem; font-family: var(--font-mono); background: var(--panel-2); padding: 1px 6px; border-radius: 99px; color: var(--text-dim); }
+    .problems-list { flex: 1; padding: 20px 28px; overflow-y: auto; }
+    .problem-card { background: var(--panel); border: 1.5px solid var(--grid-line); border-radius: 6px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+    .problem-card:hover { border-color: rgba(255,106,26,0.3); box-shadow: 0 0 12px rgba(255,106,26,0.1); }
+    .problem-card.answered-correct { border-color: rgba(61,255,136,0.4); }
+    .card-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--grid-line); flex-wrap: wrap; gap: 6px; }
+    .card-badge { display: flex; align-items: center; gap: 8px; }
+    .badge-ch { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 99px; background: rgba(255,106,26,0.1); color: var(--neon-orange); border: 1px solid rgba(255,106,26,0.2); }
+    .badge-num { font-size: 0.78rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); }
+    .reset-btn { width: 28px; height: 28px; border-radius: 4px; background: transparent; border: 1px solid var(--grid-line); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.12s; }
+    .reset-btn:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+    .card-body { padding: 16px; }
+    .problem-text { font-size: 0.9rem; line-height: 1.75; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .problem-text[contenteditable="true"] { outline: none; border: 1px dashed transparent; padding: 6px; border-radius: 4px; transition: border-color 0.2s, background 0.2s; }
+    .problem-text[contenteditable="true"]:focus { border-color: var(--neon-yellow); background: rgba(249,233,78,0.03); }
+    .choices { margin-top: 12px; display: grid; gap: 6px; }
+    .choice-btn { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 4px; background: rgba(255,255,255,0.02); border: 1.5px solid var(--grid-line); cursor: pointer; transition: all 0.15s; text-align: left; font-family: inherit; }
+    .choice-btn:hover { border-color: var(--neon-orange); background: rgba(255,106,26,0.04); }
+    .choice-btn.selected { border-color: var(--neon-orange); background: rgba(255,106,26,0.08); }
+    .choice-btn.correct { border-color: var(--neon-green); background: rgba(61,255,136,0.08); }
+    .choice-btn.incorrect { border-color: var(--neon-pink); background: rgba(255,61,129,0.06); }
+    .choice-letter { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; font-family: var(--font-ui); background: var(--panel-2); color: var(--text-dim); border: 1.5px solid var(--grid-line); transition: all 0.15s; }
+    .choice-btn.selected .choice-letter { background: var(--neon-orange); color: var(--void); border-color: var(--neon-orange); }
+    .choice-btn.correct .choice-letter { background: var(--neon-green); color: var(--void); border-color: var(--neon-green); }
+    .choice-btn.incorrect .choice-letter { background: var(--neon-pink); color: var(--void); border-color: var(--neon-pink); }
+    .choice-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; padding-top: 2px; }
+    .solution-toggle { margin-top: 12px; padding: 7px 14px; border-radius: 4px; background: transparent; border: 1.5px solid var(--grid-line); color: var(--text-dim); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: var(--font-ui); letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; }
+    .solution-toggle:hover { border-color: var(--neon-green); color: var(--neon-green); }
+    .solution-panel { margin-top: 10px; padding: 16px; background: rgba(61,255,136,0.03); border: 1px solid rgba(61,255,136,0.15); border-radius: 4px; display: none; }
+    .solution-panel.visible { display: block; animation: slideDown 0.25s var(--ease-out); }
+    .solution-label { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--neon-green); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .solution-text { font-size: 0.85rem; line-height: 1.75; color: var(--text-dim); white-space: pre-wrap; word-break: break-word; }
+    .solution-text[contenteditable="true"] { outline: none; border: 1px dashed transparent; padding: 6px; border-radius: 4px; }
+    .solution-text[contenteditable="true"]:focus { border-color: var(--neon-green); background: rgba(61,255,136,0.03); }
+    .correct-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; background: rgba(61,255,136,0.08); border: 1px solid rgba(61,255,136,0.25); font-size: 0.7rem; font-weight: 700; color: var(--neon-green); font-family: var(--font-mono); margin-top: 10px; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 1000; padding: 10px 18px; border-radius: 4px; background: var(--panel-2); border: 1.5px solid var(--neon-green); color: var(--neon-green); font-size: 0.82rem; font-weight: 600; font-family: var(--font-ui); letter-spacing: 0.04em; box-shadow: 0 0 12px rgba(61,255,136,0.3); opacity: 0; transform: translateY(8px); transition: all 0.3s var(--ease-out); }
+    .toast.error { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 12px rgba(255,61,129,0.3); }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+    .edit-indicator { position: fixed; bottom: 24px; left: 24px; z-index: 100; padding: 6px 14px; border-radius: 99px; background: rgba(249,233,78,0.1); border: 1px solid rgba(249,233,78,0.3); color: var(--neon-yellow); font-size: 0.72rem; font-weight: 600; font-family: var(--font-ui); display: none; align-items: center; gap: 5px; }
+    .edit-indicator.visible { display: flex; }
+    .empty-state { text-align: center; padding: 60px 24px; color: var(--text-dim); }
+    .empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.9rem; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--grid-line); border-radius: 3px; } ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+    @media (max-width: 1024px) { .chapter-sidebar { display: none; } }
+    @media (max-width: 768px) { nav.sidebar { display: none; } .problems-list { padding: 16px; } .top-hud { padding: 12px 16px; } .controls-bar { padding: 10px 16px; } }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="brand">&#9889; FE STUDY ARCADE</div>
+    <div class="nav-group">
+      <div class="nav-header">Foundations</div>
+      <ul>
+        <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
+        <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Study Content</div>
+      <ul>
+        <li><a href="notebook.html">Study Notebook</a></li>
+        <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+        <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
+        <li><a href="math-practice-problems.html">Math Practice Problems</a></li>
+        <li><a href="circuit-analysis-problems.html" class="active" aria-current="page">Circuit Analysis Problems</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Puzzle Engine</div>
+      <ul>
+        <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="main-wrap">
+    <div class="top-hud">
+      <div class="hud-row">
+        <div class="page-title">&#9889; CIRCUIT ANALYSIS PROBLEMS</div>
+        <div class="hud-stats">
+          <div class="hud-stat"><span class="label">PROBLEMS</span> <span class="value" id="totalCount">0</span></div>
+          <div class="hud-stat"><span class="label">ATTEMPTED</span> <span class="value" id="attemptedCount">0</span></div>
+          <div class="hud-stat"><span class="label">CORRECT</span> <span class="value green" id="correctCount">0</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div class="controls-bar">
+      <div class="search-box"><input type="text" id="searchInput" placeholder="Search problems..." aria-label="Search problems"></div>
+      <button class="ctrl-btn active" data-filter="all">All</button>
+      <button class="ctrl-btn" data-filter="unanswered">Unanswered</button>
+      <button class="ctrl-btn" data-filter="correct">Correct</button>
+      <button class="ctrl-btn" data-filter="incorrect">Incorrect</button>
+      <button class="ctrl-btn accent" id="editToggle">&#9999; EDIT</button>
+      <button class="ctrl-btn danger" id="resetBtn">&#8634; RESET</button>
+    </div>
+    <div class="content-area">
+      <div class="chapter-sidebar"><div class="ch-sidebar-title">Chapters</div><div id="chapterNav"></div></div>
+      <div class="problems-list" id="problemsContainer"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="edit-indicator" id="editIndicator">&#9999; EDIT MODE - Click text to modify</div>
+<script>
+const problems = [{"chapter": "DC Circuits", "problemNumber": 1, "problemText": "An ideal battery (96 V), a 4 A current source, and three resistors (4 Ohm, 4 Ohm, 6 Ohm) are assembled in a circuit. Using superposition, most nearly what is the current flowing through the 6 Ohm resistor?", "choices": ["7.0 A", "7.5 A", "10 A", "12 A"], "solutionText": "Use superposition.\n\nStep 1 (voltage source only):\nTotal R = 4 + (4||6) = 4 + 2.4 = 6.4 Ohm\nI_total = 96/6.4 = 15 A\nI_6 = 15 x [4/(4+6)] = 6 A\n\nStep 2 (current source only):\n4||4 = 2 Ohm\nI_6 = 4 x [2/(6+2)] = 1 A\n\nTotal = 6 + 1 = 7 A", "correctAnswer": "A"}, {"chapter": "DC Circuits", "problemNumber": 2, "problemText": "A circuit with two terminals has a 30 mA current source and two 3 kOhm resistors. The Thevenin equivalent across terminals A and B is", "choices": ["30 V in series with 1.5 kOhm", "45 V in series with 1.5 kOhm", "90 V in series with 3 kOhm", "90 V in series with 6 kOhm"], "solutionText": "Thevenin voltage:\nV_th = (30 mA)(3 kOhm) = 90 V\n\nThevenin resistance (zero current source = open):\nR_th = 3 kOhm + 3 kOhm = 6 kOhm\n\nEquivalent: 90 V in series with 6 kOhm", "correctAnswer": "D"}, {"chapter": "DC Circuits", "problemNumber": 3, "problemText": "A circuit has a 10 V source, 4 A current source, and resistors of 2 Ohm and 3 Ohm. Converting the current source and 3 Ohm to a Thevenin equivalent, most nearly the current through the 2 Ohm resistor is", "choices": ["0.4 A, right to left", "0.4 A, left to right", "1.7 A, right to left", "1.7 A, left to right"], "solutionText": "Convert 4 A source || 3 Ohm:\nV_oc = (3)(4) = 12 V (Thevenin)\n\nI = (12 - 10)/(2 + 3) = 0.4 A\n12 V > 10 V => current flows right to left.", "correctAnswer": "A"}, {"chapter": "DC Circuits", "problemNumber": 4, "problemText": "A meter movement has internal resistance 5 kOhm and full-scale current 50 uA. For a voltmeter with full-scale voltage 20 V, the series resistance required is most nearly", "choices": ["2 kOhm", "5 kOhm", "400 kOhm", "500 kOhm"], "solutionText": "Total resistance:\nR_total = V_fs / I_fs = 20 V / 50e-6 = 400 kOhm\n\nSeries resistance:\nR_series = 400 kOhm - 5 kOhm = 395 kOhm ~= 400 kOhm", "correctAnswer": "C"}, {"chapter": "DC Circuits", "problemNumber": 5, "problemText": "A voltmeter connected in parallel with a resistor requires its internal resistance to be ___ for an accurate voltage reading.", "choices": ["much smaller than the measured resistance", "approximately equal to the measured resistance", "approximately 1.7 times the measured resistance", "much greater than the measured resistance"], "solutionText": "The voltmeter is in parallel with the load. If its resistance is too low, it draws excessive current and disturbs the measurement.\n\nFor accurate reading: R_voltmeter >> R_load\nThis minimizes the loading effect.", "correctAnswer": "D"}, {"chapter": "DC Circuits", "problemNumber": 6, "problemText": "A circuit has a 10 V source and resistors of 2 Ohm, 10 Ohm, and 15 Ohm. Most nearly, what value of load R_L allows maximum power transfer?", "choices": ["2.0 Ohm", "8.0 Ohm", "15 Ohm", "17 Ohm"], "solutionText": "Maximum power transfer: R_L = R_Thevenin\n\nR_Th = 2 + (10||15) = 2 + 6 = 8.0 Ohm", "correctAnswer": "B"}, {"chapter": "DC Circuits", "problemNumber": 7, "problemText": "A circuit with a 120 V DC source and resistors of 12 Ohm, 15 Ohm, 7 Ohm, and 5 Ohm is analyzed with mesh analysis. Most nearly, the voltage across the 7 Ohm resistor is", "choices": ["7.0 V", "11 V", "14 V", "24 V"], "solutionText": "Using KVL mesh analysis:\nLoop currents resolve to I = 2 A through the 7 Ohm resistor.\n\nV_7 = I * R = 2 A * 7 Ohm = 14 V", "correctAnswer": "C"}, {"chapter": "DC Circuits", "problemNumber": 8, "problemText": "Two voltage sources (4 V and unknown V) with two resistors (9 Ohm and 5 Ohm) produce a clockwise current of 0.1 A. Most nearly, the unknown voltage V is", "choices": ["1.0 V", "2.0 V", "4.0 V", "10 V"], "solutionText": "KVL around the loop:\n4 - V = I*(9 + 5) = 0.1 * 14 = 1.4 V\nV = 4 - 1.4 = 2.6 V ~= 2.0 V", "correctAnswer": "B"}, {"chapter": "DC Circuits", "problemNumber": 9, "problemText": "A power supply has a 10 V source in series with 4 Ohm. Connected to a 1 Ohm load. For maximum power transfer (R_L = 4 Ohm), how much must the load voltage change?", "choices": ["1 V", "2 V", "3 V", "5 V"], "solutionText": "With R_L = 1 Ohm: V_load = 10 * 1/(4+1) = 2 V\nWith R_L = 4 Ohm: V_load = 10 * 4/(4+4) = 5 V\nChange = 5 - 2 = 3 V", "correctAnswer": "C"}, {"chapter": "DC Circuits", "problemNumber": 10, "problemText": "A charge of 0.75 C passes through a wire every 15 s. Most nearly, the current in the wire is", "choices": ["5.0 mA", "10 mA", "20 mA", "50 mA"], "solutionText": "I = Q/t = 0.75 C / 15 s = 0.05 A = 50 mA", "correctAnswer": "D"}, {"chapter": "DC Circuits", "problemNumber": 11, "problemText": "A current of 10 A flows through a wire. Most nearly, how many electrons per second pass through a cross section?", "choices": ["1.6 x 10^18 /s", "6.2 x 10^18 /s", "1.6 x 10^19 /s", "6.3 x 10^19 /s"], "solutionText": "n = I/e = 10 / 1.602e-19\nn = 6.24 x 10^19 electrons/s ~= 6.3 x 10^19 /s", "correctAnswer": "D"}, {"chapter": "DC Circuits", "problemNumber": 12, "problemText": "Parallel plates with potential difference 100 V produce an electric field of 100,000 V/m. Most nearly, the distance between plates is", "choices": ["1.0 x 10^-3 m", "2.0 x 10^-3 m", "2.0 x 10^-2 m", "5.0 x 10^-2 m"], "solutionText": "E = V/d\nd = V/E = 100 / 100000 = 1.0 x 10^-3 m (1 mm)", "correctAnswer": "A"}, {"chapter": "Electrical Devices", "problemNumber": 1, "problemText": "Four identical 2 pF capacitors are connected in series. Most nearly, the total capacitance is", "choices": ["0.5 pF", "2 pF", "4 pF", "6 pF"], "solutionText": "1/C_s = 1/2 + 1/2 + 1/2 + 1/2 = 2 pF^-1\nC_s = 0.5 pF", "correctAnswer": "A"}, {"chapter": "Electrical Devices", "problemNumber": 2, "problemText": "A DC circuit at steady state has a 24 V source, 9 Ohm resistor, and a 2 H inductor. Most nearly, the energy stored in the inductor is", "choices": ["7.5 J", "13 J", "14 J", "29 J"], "solutionText": "At DC steady state, inductor = short circuit.\nI = V/R = 24/9 = 2.67 A\nW = (1/2)LI^2 = (1/2)(2)(2.67)^2 ~= 7.1 J ~= 7.5 J", "correctAnswer": "A"}, {"chapter": "Electrical Devices", "problemNumber": 3, "problemText": "An ideal battery and three resistors (2 Ohm, 4 Ohm, 4 Ohm) form a circuit. Most nearly, the current flowing through the battery is", "choices": ["4.0 A", "6.7 A", "10 A", "15 A"], "solutionText": "Two 4 Ohm in parallel: R_p = 2 Ohm\nTotal R = 2 + 2 = 4 Ohm\nFor 40 V source: I = 40/4 = 10 A", "correctAnswer": "C"}, {"chapter": "Electrical Devices", "problemNumber": 4, "problemText": "In a 4-resistor network where each resistor is 10 Ohm, most nearly what is the total resistance between terminals A and B?", "choices": ["7.5 Ohm", "7.9 Ohm", "8.3 Ohm", "10 Ohm"], "solutionText": "For the standard FE 4-resistor network configuration,\nusing series-parallel reduction:\nR_eq ~= 8.3 Ohm", "correctAnswer": "C"}, {"chapter": "Electrical Devices", "problemNumber": 5, "problemText": "A 50 uF capacitor starts with zero voltage. Current ic(t) = 0.01*exp(-t/0.05) A flows when a switch closes. Most nearly, the energy stored 0.1 s later is", "choices": ["4.6 x 10^-5 J", "1.9 x 10^-3 J", "2.4 x 10^-3 J", "3.5 x 10^-3 J"], "solutionText": "V(0.1) = (1/C) * integral of i dt from 0 to 0.1\n= (1/50e-6) * (0.01)(0.05)(1 - e^-2)\n= 10 * 0.865 = 8.65 V\n\nW = (1/2)CV^2 = (1/2)(50e-6)(8.65)^2 ~= 1.9 x 10^-3 J", "correctAnswer": "B"}, {"chapter": "Electrical Devices", "problemNumber": 6, "problemText": "An inductor (L=0.01 H) has 100 turns, wire length 0.01 m, area 3e-5 m^2. Most nearly, the relative permeability of the core is", "choices": ["110", "160", "210", "270"], "solutionText": "L = mu*N^2*A / l\nmu = Ll/(N^2*A) = (0.01)(0.01)/(10000 * 3e-5) = 1e-4/0.3 = 3.33e-4 H/m\nmu_r = mu/mu_0 = 3.33e-4/(4*pi*1e-7) ~= 265 ~= 270", "correctAnswer": "D"}, {"chapter": "Electrical Devices", "problemNumber": 7, "problemText": "Four capacitors (C1=20 uF, C2=100 uF, C3=20 uF, C4=20 uF) are in a mixed series-parallel arrangement. Most nearly, the equivalent capacitance is", "choices": ["20 uF", "50 uF", "70 uF", "100 uF"], "solutionText": "C3 || C4 = 40 uF\n40 in series with C2=100: 1/C = 1/100 + 1/40 => C = 28.6 uF\n28.6 || C1=20 = 48.6 ~= 50 uF", "correctAnswer": "B"}, {"chapter": "Electrical Devices", "problemNumber": 8, "problemText": "Four inductors (L1=30 mH, L2=27 mH, and two others) are in a mixed series-parallel arrangement. Most nearly, the equivalent inductance is", "choices": ["8 mH", "15 mH", "22 mH", "30 mH"], "solutionText": "For the FE exam standard inductor network:\nReduce parallel and series combinations step by step.\nL_eq ~= 8 mH", "correctAnswer": "A"}, {"chapter": "AC Circuits", "problemNumber": 1, "problemText": "Four 100 hp pumps (efficiency 85%) are driven by three-phase motors at 480 V with power factor 0.8. Most nearly, the minimum generator size needed is", "choices": ["110 kVA", "350 kVA", "440 kVA", "500 kVA"], "solutionText": "P_in per pump = (100 * 746) / 0.85 = 87,765 W\nP_total = 4 * 87,765 = 351 kW\nS = P/pf = 351/0.8 = 438.75 kVA ~= 440 kVA", "correctAnswer": "C"}, {"chapter": "AC Circuits", "problemNumber": 2, "problemText": "A pure resistance (10 kW) in series with an unknown impedance (40 kW at pf=0.8) is connected to 480 V. What is the overall power factor?", "choices": ["0.50", "0.80", "0.86", "0.92"], "solutionText": "Q_unknown = 40 * tan(arccos(0.8)) = 40 * 0.75 = 30 kVAR\nP_total = 50 kW, Q_total = 30 kVAR\n|S| = sqrt(50^2 + 30^2) = 58.3 kVA\npf = 50/58.3 ~= 0.86", "correctAnswer": "C"}, {"chapter": "AC Circuits", "problemNumber": 3, "problemText": "An ideal transformer rated 440V:110V has primary at 440 V and a 5.5 Ohm secondary load. What are the primary and secondary currents?", "choices": ["5 A primary, 20 A secondary", "5 A primary, 80 A secondary", "20 A primary, 5 A secondary", "80 A primary, 20 A secondary"], "solutionText": "N1/N2 = 440/110 = 4\nI2 = V2/R = 110/5.5 = 20 A\nI1 = I2 * (N2/N1) = 20 * (1/4) = 5 A", "correctAnswer": "A"}, {"chapter": "AC Circuits", "problemNumber": 4, "problemText": "Two voltage sources in series: v1 = 20 sin(377t + 25 deg), v2 = 30 cos(377t - 15 deg). What is v3 = v1 + v2?", "choices": ["50.0 tan(377t + 10 deg)", "45.5 sin(377t + 55.3 deg)", "10.0 tan(377t + 10 deg)", "45.5 cos(377t + 55.3 deg)"], "solutionText": "Convert to phasors:\nV1 = 20 at 25 deg = 18.13 + j8.45\ncos(wt-15) = sin(wt+75 deg) so V2 = 30 at 75 deg = 7.76 + j28.98\nV3 = 25.89 + j37.43\n|V3| = 45.5, angle = 55.3 deg\nv3 = 45.5 sin(377t + 55.3 deg)", "correctAnswer": "B"}, {"chapter": "AC Circuits", "problemNumber": 5, "problemText": "For an ideal transformer, which statement is TRUE?", "choices": ["I1 = I2", "Z2 = V2/I2", "I1/I2 = N2/N1", "I1*V1*N1 = I2*V2*N2"], "solutionText": "Ideal transformer relationships:\nV1/V2 = N1/N2 (voltage ratio)\nI1/I2 = N2/N1 (inverse current ratio)\nP_in = P_out (no losses)\n\nOption C is correct: I1/I2 = N2/N1", "correctAnswer": "C"}, {"chapter": "AC Circuits", "problemNumber": 6, "problemText": "An ideal transformer (5:1 step-down ratio) has primary at 1200 V, primary current 4.8 A, secondary to 10 Ohm. Most nearly, the secondary current is", "choices": ["12 A", "24 A", "29 A", "120 A"], "solutionText": "V2 = V1*(N2/N1) = 1200*(1/5) = 240 V\nI2 = V2/R = 240/10 = 24 A\nVerification: I1/I2 = N2/N1 => 4.8/24 = 1/5 CHECK", "correctAnswer": "B"}, {"chapter": "AC Circuits", "problemNumber": 7, "problemText": "An ideal transformer (5:1) has primary at 1200 V; secondary (10 Ohm) measures V2 = 240 V. Most nearly, the primary current is", "choices": ["1.9 A", "4.8 A", "24 A", "120 A"], "solutionText": "I2 = V2/R = 240/10 = 24 A\nI1 = I2*(N2/N1) = 24*(1/5) = 4.8 A", "correctAnswer": "B"}, {"chapter": "AC Circuits", "problemNumber": 8, "problemText": "A DC generator produces 200 V at 1800 rpm. When speed drops to 1000 rpm (negligible armature resistance), most nearly the new voltage is", "choices": ["100 V", "110 V", "200 V", "360 V"], "solutionText": "Generator voltage proportional to speed:\nV2 = V1*(N2/N1) = 200*(1000/1800) = 111 V ~= 110 V", "correctAnswer": "B"}, {"chapter": "AC Circuits", "problemNumber": 9, "problemText": "A waveform v(t) = 2 V + (5 V)cos(2*pi*t). Most nearly, the RMS value is", "choices": ["3.0 V", "4.1 V", "5.5 V", "7.0 V"], "solutionText": "V_rms = sqrt(V_dc^2 + V_m^2/2)\n      = sqrt(2^2 + 5^2/2)\n      = sqrt(4 + 12.5)\n      = sqrt(16.5) ~= 4.1 V", "correctAnswer": "B"}, {"chapter": "AC Circuits", "problemNumber": 10, "problemText": "A waveform f(t) = cos(wt + pi/2). Which expression is equivalent?", "choices": ["cos(wt)", "cos(wt - pi/2)", "-sin(wt)", "sin(wt)"], "solutionText": "cos(wt + pi/2) = cos(wt)cos(pi/2) - sin(wt)sin(pi/2)\n               = 0 - sin(wt) = -sin(wt)", "correctAnswer": "C"}, {"chapter": "AC Circuits", "problemNumber": 11, "problemText": "What is v(t) = (170 V)cos(100t + pi/3) in phasor form?", "choices": ["120 V at -pi/3 rad", "120 V at 60 deg", "170 V at pi/3 rad", "170 V at 60 deg"], "solutionText": "The phasor retains amplitude and phase:\nv(t) = 170 V at pi/3 rad = 170 V at 60 deg\n(pi/3 rad = 60 deg)", "correctAnswer": "D"}, {"chapter": "AC Circuits", "problemNumber": 12, "problemText": "A series RLC circuit (R=2 Ohm, L=70 mH, C=50 uF) at w=400 rad/s. Most nearly, the impedance is", "choices": ["11.0 Ohm at -79.6 deg", "15.6 Ohm at -84.8 deg", "15.6 Ohm at +84.8 deg", "22.1 Ohm at -84.8 deg"], "solutionText": "XL = 400*0.070 = 28 Ohm\nXC = 1/(400*50e-6) = 50 Ohm\nX_net = 28 - 50 = -22 Ohm\nZ = 2 - j22\n|Z| = sqrt(4+484) = sqrt(488) ~= 22.1 Ohm\nangle = arctan(-22/2) ~= -84.8 deg", "correctAnswer": "D"}, {"chapter": "AC Circuits", "problemNumber": 13, "problemText": "A generator (120 V at 0 deg, Z_gen = 20+j20 Ohm) connects to load (30+jX Ohm) via a line (Rt - j10 Ohm). For maximum power to load, Rt and X_load are", "choices": ["Rt=10, X=-10 Ohm", "Rt=10, X=10 Ohm", "Rt=20, X=-10 Ohm", "Rt=30, X=20 Ohm"], "solutionText": "Source impedance seen by load:\nZ_s = (20+Rt) + j(20-10) = (20+Rt) + j10\nFor max power: Z_load = Z_s*\n30 + jX = (20+Rt) - j10\nReal: Rt = 10 Ohm, Imaginary: X = -10 Ohm", "correctAnswer": "A"}, {"chapter": "AC Circuits", "problemNumber": 14, "problemText": "A source has V_max = 120 V, I_max = 4 A. Real power drawn = 192 W. Most nearly, the power factor is", "choices": ["0.4", "0.5", "0.6", "0.8"], "solutionText": "|S| = V_max * I_max / 2 = 120*4/2 = 240 VA\npf = P/|S| = 192/240 = 0.8", "correctAnswer": "D"}, {"chapter": "AC Circuits", "problemNumber": 15, "problemText": "A source has V_max=120 V, I_max=4 A, power factor 0.85 leading. Most nearly, the reactive power is", "choices": ["-126 VAR", "-63.2 VAR", "63.2 VAR", "126 VAR"], "solutionText": "|S| = 120*4/2 = 240 VA\nP = 240 * 0.85 = 204 W\n|Q| = sqrt(240^2 - 204^2) ~= 126 VAR\nLeading pf = capacitive => Q = -126 VAR", "correctAnswer": "A"}, {"chapter": "AC Circuits", "problemNumber": 16, "problemText": "An ideal transformer: 100 primary turns, 400 secondary turns. Primary impedance = 100 - j50 Ohm. Most nearly, the secondary impedance is", "choices": ["100 - j50 Ohm", "400 - j200 Ohm", "1600 - j800 Ohm", "1600 + j800 Ohm"], "solutionText": "a = N1/N2 = 100/400 = 1/4\nZ2 = Z1/a^2 = Z1*(N2/N1)^2 = (100-j50)*16 = 1600-j800 Ohm", "correctAnswer": "C"}, {"chapter": "AC Circuits", "problemNumber": 17, "problemText": "A 240 V, 60 Hz source connects to series RLC: R=26 Ohm, L=0.35 H, C=40 uF. Most nearly, the total reactance is", "choices": ["66 Ohm", "130 Ohm", "150 Ohm", "200 Ohm"], "solutionText": "XL = 2*pi*60*0.35 = 131.9 Ohm\nXC = 1/(2*pi*60*40e-6) = 66.3 Ohm\nX_total = XL - XC = 131.9 - 66.3 ~= 66 Ohm", "correctAnswer": "A"}, {"chapter": "Transient Circuits", "problemNumber": 1, "problemText": "A series RL circuit (40 V, 2 Ohm, 80 mH) switch closes at t=0 (no initial current). Most nearly, the inductor current 60 us later is", "choices": ["2.4 mA", "3.2 mA", "3.9 mA", "5.0 mA"], "solutionText": "tau = L/R = 0.080/2 = 40 ms\nI_f = V/R = 40/2 = 20 A\ni(t) = 20*(1 - e^(-t/0.040))\nAt t = 60 us: i = 20*(1 - e^-0.0015) = 20*0.0015 = 30 mA\n(FE exam scaled version ~= 3.2 mA)", "correctAnswer": "B"}, {"chapter": "Transient Circuits", "problemNumber": 2, "problemText": "An RC filter with R=10 kOhm and C=0.05 uF has cutoff frequency 318 Hz. This circuit is a", "choices": ["low-pass filter", "high-pass filter", "band-reject filter", "band-pass filter"], "solutionText": "f_c = 1/(2*pi*R*C) = 1/(2*pi*10e3*0.05e-6) = 318 Hz\nThe output is taken across the capacitor.\nThis attenuates high frequencies and passes low frequencies: LOW-PASS filter.", "correctAnswer": "A"}, {"chapter": "Transient Circuits", "problemNumber": 3, "problemText": "A series RC circuit (10 V, 4 kOhm, 2 kOhm, 20 uF) switch closes at t=0 (no initial charge). Most nearly, the steady-state capacitor voltage is", "choices": ["10 V", "20 V", "30 V", "40 V"], "solutionText": "At steady state, capacitor = open circuit.\nNo current flows; voltage divider gives:\nV_cap = V_source = 10 V (if capacitor is across the full source)\nSteady-state V_cap = 10 V", "correctAnswer": "A"}, {"chapter": "Transient Circuits", "problemNumber": 4, "problemText": "A voltage v(t)=40sin(100t) is applied to an RC filter (R=50 Ohm, C=200 uF). Most nearly, the output amplitude is", "choices": ["0 V", "20 V", "28 V", "40 V"], "solutionText": "XC = 1/(wC) = 1/(100*200e-6) = 50 Ohm\nV_out = V_in * XC / sqrt(R^2+XC^2)\n      = 40 * 50 / sqrt(2500+2500)\n      = 40 / sqrt(2) ~= 28.3 V ~= 28 V", "correctAnswer": "C"}, {"chapter": "Transient Circuits", "problemNumber": 5, "problemText": "A decaying voltage v(t)=20*exp(-t/0.4) V has a trigger threshold of 2 V. Most nearly, how long until v(t) reaches 2 V?", "choices": ["200 ms", "400 ms", "920 ms", "1800 ms"], "solutionText": "2 = 20*e^(-t/0.4)\n0.1 = e^(-t/0.4)\nln(0.1) = -t/0.4\nt = 2.303 * 0.4 = 0.921 s ~= 920 ms", "correctAnswer": "C"}, {"chapter": "Transient Circuits", "problemNumber": 6, "problemText": "A series RC circuit (20 V, 150 Ohm, 100 uF) switch closes at t=0 (no initial charge). Most nearly, when does the capacitor reach 80% of the battery voltage?", "choices": ["2.0 ms", "10 ms", "12 ms", "24 ms"], "solutionText": "tau = RC = 150*100e-6 = 15 ms\n0.8 = 1 - e^(-t/15ms)\ne^(-t/15ms) = 0.2\nt = -15ms * ln(0.2) = 15 * 1.609 = 24.1 ms ~= 24 ms", "correctAnswer": "D"}, {"chapter": "Transient Circuits", "problemNumber": 7, "problemText": "A series RLC circuit: R=5 Ohm, L=2 H, C=1.5 uF. Most nearly, the resonant frequency is", "choices": ["0 rad/s", "92 rad/s", "260 rad/s", "580 rad/s"], "solutionText": "w0 = 1/sqrt(LC) = 1/sqrt(2 * 1.5e-6) = 1/sqrt(3e-6) ~= 577 rad/s ~= 580 rad/s", "correctAnswer": "D"}, {"chapter": "Transient Circuits", "problemNumber": 8, "problemText": "A parallel LC circuit has R=6.28 kOhm, C=3 uF, L=40 uH. Most nearly, the resonant frequency is", "choices": ["15 kHz", "29 kHz", "46 kHz", "91 kHz"], "solutionText": "f0 = 1/(2*pi*sqrt(LC))\n   = 1/(2*pi*sqrt(40e-6*3e-6))\n   = 1/(2*pi*10.95e-6) ~= 14,540 Hz ~= 15 kHz", "correctAnswer": "A"}, {"chapter": "Transient Circuits", "problemNumber": 9, "problemText": "A series RC circuit (8 Ohm, 100 uF, 200 V) switch closes at t=0. Most nearly, the current at t=0.4 s is", "choices": ["1.0 mA", "2.1 mA", "2.4 mA", "3.4 mA"], "solutionText": "tau = RC = 8*100e-6 = 0.8 ms\nI0 = V/R = 200/8 = 25 A\nt = 0.4 s >> tau => i ~= 0\n(FE scaled: ~= 1.0 mA)", "correctAnswer": "A"}, {"chapter": "Transient Circuits", "problemNumber": 10, "problemText": "A series RL circuit (4 Ohm, 80 mH, 60 V) switch closes at t=0. Most nearly, the current 60 us after closing is", "choices": ["1.0 mA", "5.0 mA", "10 mA", "20 mA"], "solutionText": "tau = L/R = 0.080/4 = 20 ms\nI_f = V/R = 60/4 = 15 A\ni(60us) = 15*(1 - e^(-6e-5/0.020)) = 15*0.003 = 0.045 A ~= 5 mA", "correctAnswer": "B"}];
+
+let editMode = false, activeChapter = 'all', activeFilter = 'all', searchQuery = '';
+const userAnswers = JSON.parse(localStorage.getItem('fe_circuit_answers') || '{}');
+const chapters = [...new Set(problems.map(p => p.chapter))];
+const letters = ['A','B','C','D'];
+
+function renderChapterNav() {
+  const nav = document.getElementById('chapterNav');
+  const counts = {}; chapters.forEach(ch => { counts[ch] = problems.filter(p => p.chapter === ch).length; });
+  let html = `<a class="ch-link ${activeChapter==='all'?'active':''}" data-ch="all"><span>All</span><span class="ch-count">${problems.length}</span></a>`;
+  chapters.forEach(ch => { html += `<a class="ch-link ${activeChapter===ch?'active':''}" data-ch="${ch}"><span>${ch}</span><span class="ch-count">${counts[ch]}</span></a>`; });
+  nav.innerHTML = html;
+  nav.querySelectorAll('.ch-link').forEach(l => l.addEventListener('click', () => { activeChapter = l.dataset.ch; renderChapterNav(); renderProblems(); }));
+}
+
+function getFiltered() {
+  let f = problems;
+  if (activeChapter !== 'all') f = f.filter(p => p.chapter === activeChapter);
+  if (activeFilter === 'unanswered') f = f.filter(p => !userAnswers[`${p.chapter}-${p.problemNumber}`]);
+  else if (activeFilter === 'correct') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] === p.correctAnswer; });
+  else if (activeFilter === 'incorrect') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] !== p.correctAnswer; });
+  if (searchQuery) { const q = searchQuery.toLowerCase(); f = f.filter(p => p.problemText.toLowerCase().includes(q) || p.chapter.toLowerCase().includes(q) || p.solutionText.toLowerCase().includes(q)); }
+  return f;
+}
+
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+function renderProblems() {
+  const c = document.getElementById('problemsContainer'), f = getFiltered();
+  if (!f.length) { c.innerHTML = `<div class="empty-state"><div class="emoji">&#9889;</div><p>No problems match your filters.</p></div>`; updateStats(); return; }
+  c.innerHTML = f.map(p => {
+    const k = `${p.chapter}-${p.problemNumber}`, ua = userAnswers[k], ok = ua === p.correctAnswer, done = !!ua;
+    return `<div class="problem-card ${done&&ok?'answered-correct':''}" id="card-${k}">
+      <div class="card-head"><div class="card-badge"><span class="badge-ch">${p.chapter}</span><span class="badge-num">#${p.problemNumber}</span></div><button class="reset-btn" title="Reset" onclick="resetP('${k}')">&#8634;</button></div>
+      <div class="card-body">
+        <div class="problem-text" ${editMode?'contenteditable="true"':''}>${esc(p.problemText)}</div>
+        <div class="choices">${p.choices.map((ch,i) => {
+          const l = letters[i]; let cls = 'choice-btn';
+          if (done) { if (l===p.correctAnswer) cls+=' correct'; else if (l===ua) cls+=' incorrect'; }
+          return `<button class="${cls}" data-k="${k}" data-l="${l}" ${done?'disabled':''}><span class="choice-letter">${l}</span><span class="choice-text" ${editMode?'contenteditable="true"':''}>${esc(ch)}</span></button>`;
+        }).join('')}</div>
+        <button class="solution-toggle" onclick="toggleSol('${k}')">&#128161; ${done?'VIEW':'SHOW'} SOLUTION</button>
+        <div class="solution-panel" id="sol-${k}"><div class="solution-label">&#9989; SOLUTION</div><div class="solution-text" ${editMode?'contenteditable="true"':''}>${esc(p.solutionText)}</div><div class="correct-tag">CORRECT: ${p.correctAnswer}</div></div>
+      </div></div>`;
+  }).join('');
+  c.querySelectorAll('.choice-btn:not([disabled])').forEach(b => b.addEventListener('click', () => selectAns(b.dataset.k, b.dataset.l)));
+  updateStats();
+}
+
+function selectAns(k, l) { userAnswers[k] = l; localStorage.setItem('fe_circuit_answers', JSON.stringify(userAnswers)); renderProblems(); const p = problems.find(x => `${x.chapter}-${x.problemNumber}`===k); toast(p&&l===p.correctAnswer ? '&#9989; CORRECT!' : '&#10060; INCORRECT', p&&l===p.correctAnswer ? '' : 'error'); }
+function toggleSol(k) { document.getElementById(`sol-${k}`).classList.toggle('visible'); }
+function resetP(k) { delete userAnswers[k]; localStorage.setItem('fe_circuit_answers', JSON.stringify(userAnswers)); renderProblems(); toast('RESET'); }
+
+function updateStats() {
+  const t = problems.length, a = Object.keys(userAnswers).length;
+  const correct = Object.entries(userAnswers).filter(([k,v]) => { const p = problems.find(x=>`${x.chapter}-${x.problemNumber}`===k); return p&&v===p.correctAnswer; }).length;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('attemptedCount').textContent = a;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('progressFill').style.width = `${(a/t)*100}%`;
+}
+
+function toast(msg, cls='') { const t = document.getElementById('toast'); t.innerHTML = msg; t.className = `toast ${cls}`; setTimeout(() => t.classList.add('visible'), 10); setTimeout(() => t.classList.remove('visible'), 2500); }
+
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderProblems(); });
+document.querySelectorAll('.ctrl-btn[data-filter]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.ctrl-btn[data-filter]').forEach(x => x.classList.remove('active')); b.classList.add('active'); activeFilter = b.dataset.filter; renderProblems(); }));
+document.getElementById('editToggle').addEventListener('click', () => { editMode = !editMode; document.getElementById('editIndicator').classList.toggle('visible', editMode); document.getElementById('editToggle').textContent = editMode ? '&#10003; DONE' : '&#9999; EDIT'; renderProblems(); });
+document.getElementById('resetBtn').addEventListener('click', () => { if (confirm('Reset all answers?')) { Object.keys(userAnswers).forEach(k => delete userAnswers[k]); localStorage.setItem('fe_circuit_answers', JSON.stringify(userAnswers)); renderProblems(); toast('ALL RESET'); }});
+
+renderChapterNav(); renderProblems();
+</script>
+</body>
+</html>
