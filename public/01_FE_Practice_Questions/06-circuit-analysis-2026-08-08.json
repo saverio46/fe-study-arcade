@@ -1,0 +1,203 @@
+{
+  "topic_number": 6,
+  "topic_name": "Circuit Analysis",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "KCL, KVL",
+    "Series/parallel equivalent circuits",
+    "Thevenin and Norton theorems",
+    "Node and loop analysis",
+    "Waveform analysis",
+    "Phasors",
+    "Impedance"
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CA-01",
+      "subtopic": "Series/parallel equivalent circuits",
+      "difficulty": "easy",
+      "stem": "A 12 V ideal DC source is connected in series with a 4 \u03a9 resistor (R1). The output of that series combination feeds a parallel combination of a 6 \u03a9 resistor (R2) and a 12 \u03a9 resistor (R3), and the parallel combination returns to the source's negative terminal, completing the circuit. What is the total current supplied by the source?",
+      "choices": {
+        "A": "1.0 A",
+        "B": "1.5 A",
+        "C": "2.0 A",
+        "D": "3.0 A"
+      },
+      "correct_answer": "B",
+      "explanation": "First reduce the parallel pair: R23 = (R2 R3)/(R2 + R3) = (6)(12)/(6+12) = 72/18 = 4 \u03a9. This combines in series with R1: R_eq = R1 + R23 = 4 + 4 = 8 \u03a9. By Ohm's law, I = V/R_eq = 12 V / 8 \u03a9 = 1.5 A. (Choice D results from ignoring R1 and using only R23; choice A and C do not satisfy Ohm's law for this network.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Resistors in Series and Parallel\" (p. 363)"
+    },
+    {
+      "id": "CA-02",
+      "subtopic": "Waveform analysis",
+      "difficulty": "easy",
+      "stem": "The current through a circuit element is given by i(t) = 14.14 cos(377t + 30\u00b0) A. What are the RMS value of the current and the frequency of the waveform?",
+      "choices": {
+        "A": "I_rms = 14.14 A, f = 60 Hz",
+        "B": "I_rms = 10.0 A, f = 60 Hz",
+        "C": "I_rms = 10.0 A, f = 377 Hz",
+        "D": "I_rms = 7.07 A, f = 60 Hz"
+      },
+      "correct_answer": "B",
+      "explanation": "For a sinusoid, X_rms = X_max/\u221a2. Here I_max = 14.14 A, so I_rms = 14.14/\u221a2 = 10.0 A. The angular frequency is \u03c9 = 377 rad/s, and f = \u03c9/(2\u03c0) = 377/6.2832 = 60.0 Hz. (Choice A confuses peak with RMS; choice C mistakes \u03c9 for f; choice D incorrectly halves the peak value as for a half-wave rectified signal.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"AC Circuits\": Average Value and Effective or RMS Values (p. 365)"
+    },
+    {
+      "id": "CA-03",
+      "subtopic": "KCL, KVL",
+      "difficulty": "medium",
+      "stem": "At node A of a resistive DC circuit, a 3 A ideal current source injects current into the node. Node A is also connected to a 24 V source through a 6 \u03a9 resistor (R1), to ground through a 12 \u03a9 resistor (R2), and to ground through a 4 \u03a9 resistor (R3). Using Kirchhoff's current law (KCL) at node A, determine the node voltage V_A.",
+      "choices": {
+        "A": "8.0 V",
+        "B": "12.0 V",
+        "C": "14.0 V",
+        "D": "18.0 V"
+      },
+      "correct_answer": "C",
+      "explanation": "Sum currents entering node A and set equal to currents leaving: 3 + (24 \u2212 V_A)/6 = V_A/12 + V_A/4. Multiply through by 12: 36 + 2(24 \u2212 V_A) = V_A + 3V_A, so 36 + 48 \u2212 2V_A = 4V_A, giving 84 = 6V_A, so V_A = 14.0 V. Check: current in = 3 + (24\u221214)/6 = 3 + 1.667 = 4.667 A; current out = 14/12 + 14/4 = 1.167 + 3.5 = 4.667 A. KCL balances.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Kirchhoff's Laws\" (p. 363)"
+    },
+    {
+      "id": "CA-04",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "A 30 V ideal DC source is connected in series with a 6 \u03a9 resistor (R1) to node a. From node a, a 12 \u03a9 resistor (R2) and a 4 \u03a9 resistor (R3) each connect back to the source's negative terminal, which is node b (R2 and R3 are in parallel with each other between nodes a and b). A load will be attached across terminals a-b. Determine the Th\u00e9venin equivalent voltage V_oc and equivalent resistance R_eq seen by the load.",
+      "choices": {
+        "A": "V_oc = 10 V, R_eq = 2 \u03a9",
+        "B": "V_oc = 30 V, R_eq = 6 \u03a9",
+        "C": "V_oc = 15 V, R_eq = 3 \u03a9",
+        "D": "V_oc = 10 V, R_eq = 9 \u03a9"
+      },
+      "correct_answer": "A",
+      "explanation": "With the load removed, node a is a voltage divider: R2 \u2225 R3 = (12)(4)/(12+4) = 48/16 = 3 \u03a9. V_oc = 30 V \u00d7 3/(6+3) = 30 \u00d7 1/3 = 10 V. To find R_eq, deactivate the source (short it), which places R1, R2, and R3 all in parallel between a and b: R_eq = 1/(1/6 + 1/12 + 1/4) = 1/(2/12 + 1/12 + 3/12) = 1/(6/12) = 2 \u03a9. (Choice D incorrectly adds R1 in series with R2\u2225R3 = 6+3 = 9 \u03a9 instead of placing all three in parallel after deactivation.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Source Equivalents\" (p. 363)"
+    },
+    {
+      "id": "CA-05",
+      "subtopic": "Phasors",
+      "difficulty": "hard",
+      "stem": "A series RLC circuit consists of a 30 \u03a9 resistor, a 106.1 mH inductor, and a 33.2 \u00b5F capacitor, all in series across an AC source v(t) = 120\u221a2 cos(377t) V (i.e., V_rms = 120\u2220 0\u00b0 V at f = 60 Hz). Determine the RMS magnitude and phase angle of the current phasor, and state whether the current leads or lags the source voltage.",
+      "choices": {
+        "A": "I = 2.4 A\u2220 53.13\u00b0, current leads the voltage",
+        "B": "I = 2.4 A\u2220 \u221253.13\u00b0, current lags the voltage",
+        "C": "I = 4.0 A\u2220 36.87\u00b0, current leads the voltage",
+        "D": "I = 1.5 A\u2220 53.13\u00b0, current leads the voltage"
+      },
+      "correct_answer": "A",
+      "explanation": "At \u03c9 = 2\u03c0(60) = 377 rad/s: X_L = \u03c9L = 377(0.1061) = 40.0 \u03a9, and X_C = 1/(\u03c9C) = 1/[377(33.2\u00d710\u207b\u2076)] = 80.0 \u03a9. The series impedance is Z = R + j(X_L \u2212 X_C) = 30 + j(40 \u2212 80) = 30 \u2212 j40 \u03a9 = 50\u2220\u221253.13\u00b0 \u03a9. Since X_C > X_L, the circuit is net capacitive, and Z has a negative angle. The current phasor is I = V/Z = 120\u22200\u00b0 / 50\u2220\u221253.13\u00b0 = 2.4\u2220+53.13\u00b0 A rms. Because the impedance angle is negative (capacitive), the current phasor leads the voltage phasor by 53.13\u00b0.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Phasor Transforms of Sinusoids\" and Impedance table (p. 366)"
+    },
+    {
+      "id": "CA-NEW-13",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "Four identical 2 pF capacitors are connected in series. Most nearly, the total capacitance is",
+      "choices": {
+        "A": "0.5 pF",
+        "B": "2 pF",
+        "C": "4 pF",
+        "D": "6 pF"
+      },
+      "correct_answer": "A",
+      "explanation": "1/C_s = 1/2 + 1/2 + 1/2 + 1/2 = 2 pF^-1\nC_s = 0.5 pF",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-14",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "A DC circuit at steady state has a 24 V source, 9 Ohm resistor, and a 2 H inductor. Most nearly, the energy stored in the inductor is",
+      "choices": {
+        "A": "7.5 J",
+        "B": "13 J",
+        "C": "14 J",
+        "D": "29 J"
+      },
+      "correct_answer": "A",
+      "explanation": "At DC steady state, inductor = short circuit.\nI = V/R = 24/9 = 2.67 A\nW = (1/2)LI^2 = (1/2)(2)(2.67)^2 ~= 7.1 J ~= 7.5 J",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-15",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "An ideal battery and three resistors (2 Ohm, 4 Ohm, 4 Ohm) form a circuit. Most nearly, the current flowing through the battery is",
+      "choices": {
+        "A": "4.0 A",
+        "B": "6.7 A",
+        "C": "10 A",
+        "D": "15 A"
+      },
+      "correct_answer": "C",
+      "explanation": "Two 4 Ohm in parallel: R_p = 2 Ohm\nTotal R = 2 + 2 = 4 Ohm\nFor 40 V source: I = 40/4 = 10 A",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-16",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "In a 4-resistor network where each resistor is 10 Ohm, most nearly what is the total resistance between terminals A and B?",
+      "choices": {
+        "A": "7.5 Ohm",
+        "B": "7.9 Ohm",
+        "C": "8.3 Ohm",
+        "D": "10 Ohm"
+      },
+      "correct_answer": "C",
+      "explanation": "For the standard FE 4-resistor network configuration,\nusing series-parallel reduction:\nR_eq ~= 8.3 Ohm",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-17",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "A 50 uF capacitor starts with zero voltage. Current ic(t) = 0.01*exp(-t/0.05) A flows when a switch closes. Most nearly, the energy stored 0.1 s later is",
+      "choices": {
+        "A": "4.6 x 10^-5 J",
+        "B": "1.9 x 10^-3 J",
+        "C": "2.4 x 10^-3 J",
+        "D": "3.5 x 10^-3 J"
+      },
+      "correct_answer": "B",
+      "explanation": "V(0.1) = (1/C) * integral of i dt from 0 to 0.1\n= (1/50e-6) * (0.01)(0.05)(1 - e^-2)\n= 10 * 0.865 = 8.65 V\n\nW = (1/2)CV^2 = (1/2)(50e-6)(8.65)^2 ~= 1.9 x 10^-3 J",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-18",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "An inductor (L=0.01 H) has 100 turns, wire length 0.01 m, area 3e-5 m^2. Most nearly, the relative permeability of the core is",
+      "choices": {
+        "A": "110",
+        "B": "160",
+        "C": "210",
+        "D": "270"
+      },
+      "correct_answer": "D",
+      "explanation": "L = mu*N^2*A / l\nmu = Ll/(N^2*A) = (0.01)(0.01)/(10000 * 3e-5) = 1e-4/0.3 = 3.33e-4 H/m\nmu_r = mu/mu_0 = 3.33e-4/(4*pi*1e-7) ~= 265 ~= 270",
+      "reference": "Added from Electrical Devices"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "wordle",
+    "items": [
+      {
+        "answer": "norton"
+      }
+    ],
+    "config": {
+      "word_length": 6,
+      "max_guesses": 6,
+      "guess_dictionary": [
+        "norton",
+        "source",
+        "equals",
+        "output",
+        "series"
+      ]
+    }
+  }
+}

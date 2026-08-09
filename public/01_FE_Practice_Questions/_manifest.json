@@ -75,7 +75,17 @@
       "file": "06-circuit-analysis.json",
       "question_count": 5,
       "puzzle_slug": "flow",
-      "puzzle_category": "Grid & Spatial Logic"
+      "puzzle_category": "Grid & Spatial Logic",
+      "date_file_map": {
+        "2026-08-06": "06-circuit-analysis-2026-08-06.json",
+        "2026-08-07": "06-circuit-analysis-2026-08-07.json",
+        "2026-08-08": "06-circuit-analysis-2026-08-08.json",
+        "2026-08-10": "06-circuit-analysis-2026-08-10.json",
+        "2026-08-11": "06-circuit-analysis-2026-08-11.json",
+        "2026-08-12": "06-circuit-analysis-2026-08-12.json",
+        "2026-08-13": "06-circuit-analysis-2026-08-13.json",
+        "2026-08-14": "06-circuit-analysis-2026-08-14.json"
+      }
     },
     {
       "topic_number": 7,

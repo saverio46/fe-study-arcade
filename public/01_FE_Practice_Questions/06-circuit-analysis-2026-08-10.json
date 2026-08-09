@@ -1,0 +1,210 @@
+{
+  "topic_number": 6,
+  "topic_name": "Circuit Analysis",
+  "fe_priority": "high",
+  "fe_exam_weight": "11-17 of 110 questions",
+  "subtopics": [
+    "KCL, KVL",
+    "Series/parallel equivalent circuits",
+    "Thevenin and Norton theorems",
+    "Node and loop analysis",
+    "Waveform analysis",
+    "Phasors",
+    "Impedance"
+  ],
+  "puzzle_slug": "crossword",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "CA-01",
+      "subtopic": "Series/parallel equivalent circuits",
+      "difficulty": "easy",
+      "stem": "A 12 V ideal DC source is connected in series with a 4 \u03a9 resistor (R1). The output of that series combination feeds a parallel combination of a 6 \u03a9 resistor (R2) and a 12 \u03a9 resistor (R3), and the parallel combination returns to the source's negative terminal, completing the circuit. What is the total current supplied by the source?",
+      "choices": {
+        "A": "1.0 A",
+        "B": "1.5 A",
+        "C": "2.0 A",
+        "D": "3.0 A"
+      },
+      "correct_answer": "B",
+      "explanation": "First reduce the parallel pair: R23 = (R2 R3)/(R2 + R3) = (6)(12)/(6+12) = 72/18 = 4 \u03a9. This combines in series with R1: R_eq = R1 + R23 = 4 + 4 = 8 \u03a9. By Ohm's law, I = V/R_eq = 12 V / 8 \u03a9 = 1.5 A. (Choice D results from ignoring R1 and using only R23; choice A and C do not satisfy Ohm's law for this network.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Resistors in Series and Parallel\" (p. 363)"
+    },
+    {
+      "id": "CA-02",
+      "subtopic": "Waveform analysis",
+      "difficulty": "easy",
+      "stem": "The current through a circuit element is given by i(t) = 14.14 cos(377t + 30\u00b0) A. What are the RMS value of the current and the frequency of the waveform?",
+      "choices": {
+        "A": "I_rms = 14.14 A, f = 60 Hz",
+        "B": "I_rms = 10.0 A, f = 60 Hz",
+        "C": "I_rms = 10.0 A, f = 377 Hz",
+        "D": "I_rms = 7.07 A, f = 60 Hz"
+      },
+      "correct_answer": "B",
+      "explanation": "For a sinusoid, X_rms = X_max/\u221a2. Here I_max = 14.14 A, so I_rms = 14.14/\u221a2 = 10.0 A. The angular frequency is \u03c9 = 377 rad/s, and f = \u03c9/(2\u03c0) = 377/6.2832 = 60.0 Hz. (Choice A confuses peak with RMS; choice C mistakes \u03c9 for f; choice D incorrectly halves the peak value as for a half-wave rectified signal.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"AC Circuits\": Average Value and Effective or RMS Values (p. 365)"
+    },
+    {
+      "id": "CA-03",
+      "subtopic": "KCL, KVL",
+      "difficulty": "medium",
+      "stem": "At node A of a resistive DC circuit, a 3 A ideal current source injects current into the node. Node A is also connected to a 24 V source through a 6 \u03a9 resistor (R1), to ground through a 12 \u03a9 resistor (R2), and to ground through a 4 \u03a9 resistor (R3). Using Kirchhoff's current law (KCL) at node A, determine the node voltage V_A.",
+      "choices": {
+        "A": "8.0 V",
+        "B": "12.0 V",
+        "C": "14.0 V",
+        "D": "18.0 V"
+      },
+      "correct_answer": "C",
+      "explanation": "Sum currents entering node A and set equal to currents leaving: 3 + (24 \u2212 V_A)/6 = V_A/12 + V_A/4. Multiply through by 12: 36 + 2(24 \u2212 V_A) = V_A + 3V_A, so 36 + 48 \u2212 2V_A = 4V_A, giving 84 = 6V_A, so V_A = 14.0 V. Check: current in = 3 + (24\u221214)/6 = 3 + 1.667 = 4.667 A; current out = 14/12 + 14/4 = 1.167 + 3.5 = 4.667 A. KCL balances.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Kirchhoff's Laws\" (p. 363)"
+    },
+    {
+      "id": "CA-04",
+      "subtopic": "Thevenin and Norton theorems",
+      "difficulty": "medium",
+      "stem": "A 30 V ideal DC source is connected in series with a 6 \u03a9 resistor (R1) to node a. From node a, a 12 \u03a9 resistor (R2) and a 4 \u03a9 resistor (R3) each connect back to the source's negative terminal, which is node b (R2 and R3 are in parallel with each other between nodes a and b). A load will be attached across terminals a-b. Determine the Th\u00e9venin equivalent voltage V_oc and equivalent resistance R_eq seen by the load.",
+      "choices": {
+        "A": "V_oc = 10 V, R_eq = 2 \u03a9",
+        "B": "V_oc = 30 V, R_eq = 6 \u03a9",
+        "C": "V_oc = 15 V, R_eq = 3 \u03a9",
+        "D": "V_oc = 10 V, R_eq = 9 \u03a9"
+      },
+      "correct_answer": "A",
+      "explanation": "With the load removed, node a is a voltage divider: R2 \u2225 R3 = (12)(4)/(12+4) = 48/16 = 3 \u03a9. V_oc = 30 V \u00d7 3/(6+3) = 30 \u00d7 1/3 = 10 V. To find R_eq, deactivate the source (short it), which places R1, R2, and R3 all in parallel between a and b: R_eq = 1/(1/6 + 1/12 + 1/4) = 1/(2/12 + 1/12 + 3/12) = 1/(6/12) = 2 \u03a9. (Choice D incorrectly adds R1 in series with R2\u2225R3 = 6+3 = 9 \u03a9 instead of placing all three in parallel after deactivation.)",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Source Equivalents\" (p. 363)"
+    },
+    {
+      "id": "CA-05",
+      "subtopic": "Phasors",
+      "difficulty": "hard",
+      "stem": "A series RLC circuit consists of a 30 \u03a9 resistor, a 106.1 mH inductor, and a 33.2 \u00b5F capacitor, all in series across an AC source v(t) = 120\u221a2 cos(377t) V (i.e., V_rms = 120\u2220 0\u00b0 V at f = 60 Hz). Determine the RMS magnitude and phase angle of the current phasor, and state whether the current leads or lags the source voltage.",
+      "choices": {
+        "A": "I = 2.4 A\u2220 53.13\u00b0, current leads the voltage",
+        "B": "I = 2.4 A\u2220 \u221253.13\u00b0, current lags the voltage",
+        "C": "I = 4.0 A\u2220 36.87\u00b0, current leads the voltage",
+        "D": "I = 1.5 A\u2220 53.13\u00b0, current leads the voltage"
+      },
+      "correct_answer": "A",
+      "explanation": "At \u03c9 = 2\u03c0(60) = 377 rad/s: X_L = \u03c9L = 377(0.1061) = 40.0 \u03a9, and X_C = 1/(\u03c9C) = 1/[377(33.2\u00d710\u207b\u2076)] = 80.0 \u03a9. The series impedance is Z = R + j(X_L \u2212 X_C) = 30 + j(40 \u2212 80) = 30 \u2212 j40 \u03a9 = 50\u2220\u221253.13\u00b0 \u03a9. Since X_C > X_L, the circuit is net capacitive, and Z has a negative angle. The current phasor is I = V/Z = 120\u22200\u00b0 / 50\u2220\u221253.13\u00b0 = 2.4\u2220+53.13\u00b0 A rms. Because the impedance angle is negative (capacitive), the current phasor leads the voltage phasor by 53.13\u00b0.",
+      "reference": "FE Reference Handbook, Electrical and Computer Engineering \u2014 \"Phasor Transforms of Sinusoids\" and Impedance table (p. 366)"
+    },
+    {
+      "id": "CA-NEW-19",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "Four capacitors (C1=20 uF, C2=100 uF, C3=20 uF, C4=20 uF) are in a mixed series-parallel arrangement. Most nearly, the equivalent capacitance is",
+      "choices": {
+        "A": "20 uF",
+        "B": "50 uF",
+        "C": "70 uF",
+        "D": "100 uF"
+      },
+      "correct_answer": "B",
+      "explanation": "C3 || C4 = 40 uF\n40 in series with C2=100: 1/C = 1/100 + 1/40 => C = 28.6 uF\n28.6 || C1=20 = 48.6 ~= 50 uF",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-20",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "Four inductors (L1=30 mH, L2=27 mH, and two others) are in a mixed series-parallel arrangement. Most nearly, the equivalent inductance is",
+      "choices": {
+        "A": "8 mH",
+        "B": "15 mH",
+        "C": "22 mH",
+        "D": "30 mH"
+      },
+      "correct_answer": "A",
+      "explanation": "For the FE exam standard inductor network:\nReduce parallel and series combinations step by step.\nL_eq ~= 8 mH",
+      "reference": "Added from Electrical Devices"
+    },
+    {
+      "id": "CA-NEW-21",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "Four 100 hp pumps (efficiency 85%) are driven by three-phase motors at 480 V with power factor 0.8. Most nearly, the minimum generator size needed is",
+      "choices": {
+        "A": "110 kVA",
+        "B": "350 kVA",
+        "C": "440 kVA",
+        "D": "500 kVA"
+      },
+      "correct_answer": "C",
+      "explanation": "P_in per pump = (100 * 746) / 0.85 = 87,765 W\nP_total = 4 * 87,765 = 351 kW\nS = P/pf = 351/0.8 = 438.75 kVA ~= 440 kVA",
+      "reference": "Added from AC Circuits"
+    },
+    {
+      "id": "CA-NEW-22",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "A pure resistance (10 kW) in series with an unknown impedance (40 kW at pf=0.8) is connected to 480 V. What is the overall power factor?",
+      "choices": {
+        "A": "0.50",
+        "B": "0.80",
+        "C": "0.86",
+        "D": "0.92"
+      },
+      "correct_answer": "C",
+      "explanation": "Q_unknown = 40 * tan(arccos(0.8)) = 40 * 0.75 = 30 kVAR\nP_total = 50 kW, Q_total = 30 kVAR\n|S| = sqrt(50^2 + 30^2) = 58.3 kVA\npf = 50/58.3 ~= 0.86",
+      "reference": "Added from AC Circuits"
+    },
+    {
+      "id": "CA-NEW-23",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "An ideal transformer rated 440V:110V has primary at 440 V and a 5.5 Ohm secondary load. What are the primary and secondary currents?",
+      "choices": {
+        "A": "5 A primary, 20 A secondary",
+        "B": "5 A primary, 80 A secondary",
+        "C": "20 A primary, 5 A secondary",
+        "D": "80 A primary, 20 A secondary"
+      },
+      "correct_answer": "A",
+      "explanation": "N1/N2 = 440/110 = 4\nI2 = V2/R = 110/5.5 = 20 A\nI1 = I2 * (N2/N1) = 20 * (1/4) = 5 A",
+      "reference": "Added from AC Circuits"
+    },
+    {
+      "id": "CA-NEW-24",
+      "subtopic": "Node and loop analysis",
+      "difficulty": "medium",
+      "stem": "Two voltage sources in series: v1 = 20 sin(377t + 25 deg), v2 = 30 cos(377t - 15 deg). What is v3 = v1 + v2?",
+      "choices": {
+        "A": "50.0 tan(377t + 10 deg)",
+        "B": "45.5 sin(377t + 55.3 deg)",
+        "C": "10.0 tan(377t + 10 deg)",
+        "D": "45.5 cos(377t + 55.3 deg)"
+      },
+      "correct_answer": "B",
+      "explanation": "Convert to phasors:\nV1 = 20 at 25 deg = 18.13 + j8.45\ncos(wt-15) = sin(wt+75 deg) so V2 = 30 at 75 deg = 7.76 + j28.98\nV3 = 25.89 + j37.43\n|V3| = 45.5, angle = 55.3 deg\nv3 = 45.5 sin(377t + 55.3 deg)",
+      "reference": "Added from AC Circuits"
+    }
+  ],
+  "puzzle_instance": {
+    "slug": "crossword",
+    "title": "Node Analysis Crossword",
+    "grid_size": {
+      "rows": 11,
+      "cols": 11
+    },
+    "words": [
+      {
+        "number": 1,
+        "direction": "down",
+        "answer": "REFERENCE",
+        "row": 1,
+        "col": 5,
+        "clue": "The node typically chosen as ground (0V)."
+      },
+      {
+        "number": 2,
+        "direction": "across",
+        "answer": "SUPERNODE",
+        "row": 5,
+        "col": 1,
+        "clue": "Formed by a voltage source between two non-reference nodes."
+      }
+    ]
+  }
+}
