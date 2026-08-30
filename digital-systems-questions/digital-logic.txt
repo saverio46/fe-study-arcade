@@ -1,0 +1,183 @@
+                                       Digital Logic
+
+PRACTICE PROBLEMS                                           3. Which column of the truth table corresponds to the
+                                                            logic circuit shown?
+1. In the circuit shown, X = 1, Y = 0, and Z = l.           A
+        XYX YZ
+
+
+
+                                                                                                               out
+
+
+                                                            C
+
+                                                                          C
+                                                                          D
+
+
+                                                                A     B         C   D     I    II   III   IV
+\Vhat are the outputs, A and B?                                 0     0         0   0     1     0    0     1
+                                                                0     0         0   1     1     0    0     0
+  (A)    A =0, B=O                                              0     0         1   0     0     0    0     1
+                                                                0     0         1   1     0     0    0     0
+  (B)    A = O, B= 1
+                                                                0     1         0   0     0     0    0     1
+  (C)    A=l , B=O                                              0     1         0   1     0     0    0     0
+                                                                0     1         1   0     1     1    1     1
+  (D)    A=l,B=l
+                                                                0     1         1   1     0    0     0     0
+2. What is the output of the following logic circuit?           1     0         0   0     0    0     0     1
+                                                                1     0         0   1     0    0     0     0
+                                                                1     0         1   0     1    1     1     1
+                                                      out       1     0         1   1     0    0     0     0
+                                                                1     1         0   0     0    1     0     1
+                ground
+                                                                1     1         0   1     0    0     0     0
+                                                                1     1         1   0     1    1     1     1
+                                                                1     1         1   1     0    1     0     0
+ (A)    A·B·C
+ (B)    A- B · C+ A- C
+                                                             (A)    column I
+ (C)    A . B. C + A · B · C + A · B · C + A- B · C
+                                                             (B)    column II
+ (D)    A. B · C
+                                                             (C)    column III
+                                                             (D)    column IV
+
+
+
+
+                                                                                    PPI   •   ppi2pass.com
+ 37-2               F E   E L EC T R I C A L   A N D   C O M P U T E R   P R A C T I C E    P R O B L E M S
+
+
+
+
+ 4. A logic circuit consists of an AND, NAND, and NOR                     SOLUTIONS
+ gate, as shown.
+                                                                          1. The NAND gate at the top left has inputs 1 and 1, so
+                A
+                                                                          the condition is not satisfied and the output is 0.
+                B
+                                                                          The XOR gate at the middle left has inputs 1 and 1, so
+                                                       out                the condition is not satisfied and the output is 0.
+                A                                                         The AND gate at the bottom left has inputs O and 0, so
+                B                                                         the condition is not satisfied and the output is 0.
+                C
+                                                                          The XOR gate at the top right has inputs O and 0, so
+What is the output of the AND gate?                                       the condition is not satisfied and the output is A = 0.
+  (A)       0                                                             The NOR gate at the bottom right has inputs O and 0,
+                                                                          so the condition is satisfied and the output is B = l.
+  (B) (A+ B) ·(A· B· C)
+                                                                          The answer is (B).
+  (C)       (A. C) + (B. C)
+                                                                          2. Determine the Boolean logic expression from the
+  (D)       X.ff.c                                                        logic circuit.
+5. A logic circuit consists of five gates as shown.
+                                                                                           out =A· C· (0 + A EBB)
+   A
+   B
+   C                                                                      The logic "O" on the NOR gate makes the NOR gate
+                                                                          effectively an inverter gate.
+   A
+   B
+   c                                                                                         O+AEBB =AEBB
+                                                D - out
+   A
+   B                                                                     The output is
+   l5
+What is the output?                                                                          out   = A· C· (AEBB)
+
+  (A)       0                                                            The EXCLUSIVE-OR is equivalent to the conditions
+                                                                         that will make the output true when the inputs are
+  (B)       1                                                            different.
+  (C)       A-B· C+B+A· C-D
+                                                                                            AEBB =A·B+A·B
+  (D)       A-B· C+A·B· c+A-B-D
+                                                                         The negation of the EXCLUSIVE-OR is
+6. A logic circuit consists of four gates as shown.
+                                                                                            AEBB =A·B+A·B
+
+                                                                         Apply De Morgan's theorem to the negation of the
+                                                             out         EXCLUSIVE-OR.
+
+                                                                               A EBB =A· B + A · B = (A· B) ·(A· B)
+                                                                                           =(A+B)·(A+B)
+What is the output?
+                                                                         The AND is distributive over the OR, so the terms can
+ (A)        0                                                            be distributed analogously to cross multiplication in
+                                                                         regular algebra.
+  (B)       A- C+B· C
+ (C)        A- B. c+ A· B                                                        A EBB =(A+ B) ·(A+ B)
+                                                                                           =A·A +A·B+A·B+B·B
+ (D)        A . B + A·B+B · C
+                                                                                           =O+A·B+A·B+o
+                                                                                           =A·B+A·B
+
+
+
+PPI     •   ppi2pass.com
+                                                                                           DIGITAL         LOGIC         37-3
+
+ Substitute this result into the equation for the output        Use the distributive law.
+ and simplify.
+                                                                       out   = ( A . ( A · ff . E)) + ( ff . ( A . ff . C))
+            out = A- C· (AEBB)                                               = ((A. A). ff . c) +(A. (ff. ff). c)
+                 = A- C · ( A · B + A · ff)                                  = (A-ff· C)+(X-ff. C)
+                 = A- c. A· B+ A. C· A · JI                                  =A-ff-C
+                 =A· A- B · C+ A· A· ff · C
+                 =A-B·C+O · ff·C                                The answer is (D).
+                 =A·B · C
+                                                                5. The outputs from the three NOR gates from top to
+The answer is (A).                                              bottom are
+
+3. The Boolean equation for the system can be written                                     A+B+C
+from the diagram.
+                                                                                          A+B+C
+    out = (A+ A. B) · (D + C· C) · ( C· ( C+ D))
+                                                                                          A +B+D
+If A = 1, then A+ A· B= 1 + 0 · B= 1, regardless of the         The output from the NAND gate is
+value of B. If A = 0, then A+ A · B = 0 + 1 · B = B.
+Therefore, A+ A · B= A+ B.
+                                                                    Z =(A+ B+ C) · (A+ B+ C) · (A+ B + D)
+      out   = (A+ B) · ( D + C · C) · ( C · ( C + D))
+                                                                Applying De Morgan's second theorem gives
+C · C=O,so
+                                                                   Z   = (A+B+ C)+(A+B+ C)+(A +B+D)
+        out =(A+B)·(D+O)·(C·(C+D))
+                                                                       = (A + B + C) + (A + B + C) + (A+ B + D)
+             =(A+B)·D·(C·(C+D))                                        =1
+
+The last product, C · ( C + D ), is equal to 1 when C = 1 and   The answer is (B).
+is equal to Owhen C = 0, regardless of the value of D , so
+                                                                6. The Boolean expression for the circuit is
+                 out= (A+B)·D· C
+                                                                                  out    = A EBB+ B + C
+The output is 1 only when C = 1, D = 0, and either A = 1
+or B = 1; the output is O under all other conditions.
+Only column III shows this pattern.                             Applying De Morgan's first theorem gives
+
+The answer is (C).                                                               out    = (A EBB)· (B+ C)
+4. From De Morgan 's second theorem , the output of the                                 = (A EBB) · (B+ C)
+NAND gate is
+                                                                The result of the EXCLUSIVE-OR is true when the
+                     A·B =A+ff                                  inputs are different.
+
+From De Morgan's first theorem, the output of the                                AEBB      = A-ff +A ·B
+NOR gate is                                                                               =A-ff+A·B
+
+                A+B+C =A-ff-C                                   The negation of the EXCLUSIVE-OR is
+
+The output of the AND gate combines the output of the
+                                                                                 AEBB =A·B+A · B
+other two gates.
+
+              out    = (A + ff) ( A · ff . C)
+
+
+
+                                                                                            PPI    •   ppi2pass.com.
+ 37-4       FE   ELECTRICAL         AND     COMPUTER       PRACTICE   PROBLEMS
+
+

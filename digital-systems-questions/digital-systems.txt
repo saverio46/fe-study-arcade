@@ -1,0 +1,122 @@
+                                                                          Digital Systems
+
+PRACTICE PROBLEMS                                                                5. An analog-to-digital converter has a range of -5 V to
+·······································································
+                                                                                 5 V and an 8-bit output. Most nearly, an output of
+                                                                                 01101100 from the converter corresponds to an input
+1. A 24 kHz, 16-bit, analog-to-digital converter samples                         voltage of
+an analog signal. The voltage resolution is 1 m V, and
+the low end of the voltage range is OV. Most nearly, the                           (A)   -0.82 V
+high end of the voltage range that can be measured is
+                                                                                   (B)   -0.78 V
+    (A)         18 V
+                                                                                   (C)   -0.64 V
+    (B)         44 V
+                                                                                   (D)   0.039 V
+    (C)         66 V
+                                                                                 6. A resistance temperature detector (RTD) transducer
+    (D)         120 V                                                            is to be chosen such that the analog-to-digital conver-
+                                                                                 sion will have a resolution of 0.001 °C. The conversion
+2. A 24 kHz, 16-bit, analog-to-digital converter samples                         uses 16 bits. The RTD will be in a circuit with a lower
+an analog signal. The voltage resolution is 1 m V, and                           voltage of -0.150 Vat the lowest temperature extreme
+the low end of the voltage range is O V. Most nearly, an                         and an upper voltage of 0.300 Vat the highest tempera-
+output of 1100100 from the converter represents a volt-                          ture extreme. The RTD will have an output of 0.000 V
+age of                                                                           at 0.000°C. What is most nearly the sensitivity of the
+                                                                                 RTD, and what is most nearly the temperature range
+   (A)          1 mV                                                             that the analog-to-digital conversion can represent?
+   (B)         10 mV
+                                                                                   (A)   96.0 °C/V, -43.9°C to 98.6°C
+   (C)         100 mV
+                                                                                   (B)   146 °C/V, -21.9°C to 43.7°C
+   (D)         1000 mV
+                                                                                   (C)   160 °C/V, -ll.7°C to 38.8°C
+3. An analog signal varying from O V to 10 V is sampled
+                                                                                  (D)    222 °C/V, l.90°C to 78.7°C
+by an 8-bit analog-to-digital converter. Most nearly, the
+voltage resolution is
+
+   (A)         0.039 V
+   (B)         0.33 V
+  (C)          1.0 V
+  (D)          1.2 V
+4. An 8-bit programmable module will be used to con-
+trol temperature. If the temperature sensor's range is
+0-300°F and the controller's range is 0-5 V oc, what is
+the resolution capacity of the controller?
+
+  (A)         0.02 °F /step
+  (B)         1.2 °F /step
+  (C)         2.3 °F /step
+  (D)         60 °F /step
+
+
+
+
+                                                                                                         PPI   •   ppi2pass . com
+ 40-2         FE    E L EC T R I C A L    A N D   C O M P U T E R   P A AC T IC E    P RO B L EM S
+
+
+
+
+ SOLUTIONS                                                           The decimal equivalent of (01101100) 2 gives the number
+                                                                     of steps from the lower voltage range.
+ 1. Rearrange the voltage resolution equation to find the
+ high voltage.                                                        (01101100)2 = (0)(2) 7 + (1)(2) 6 + (1)(2) 5 + (0)(2) 4
+                                                                                      +(1)(2) 3 + (1)(2) 2 + (0)(2) 1 + (0)(2) 0
+                                                                                    = (108)i 0
+          Vs = 2nt:v + VL = (2) 16 (1 x 10-3 V) + 0 V
+                                                                     There are 108 steps. The voltage deviation from the
+             = 65.54 V (66 V)                                        lower voltage range is
+
+The answer is (C).
+                                                                              (0.0391 _.:!__)(108
+                                                                                      step
+                                                                                                  steps)= 4.2228 V
+2. Convert the binary value to decimal form.
+                                                                     The input voltage is
+   (1100100h       = (1)(2)6 + (1)(2) 5 + (0)(2) 4 + (0)(2) 3
+                        + (1)(2) 2 + (0)(2) 1 + (0)(2) 0                  -5 V + 4.2228 V = -0.7772 V             (-0.78 V)
+                   = (100)10
+                                                                     The answer is (8).
+
+Use the equation for converted voltage to find the volt-
+age represented by this decimal value.                               6. The resolution of the circuit is
+                                                                                                 0.300 V - ( -0.150 V)
+            V =t:vN+ VL= (1 mV)(IOO)+OV
+                                                                                                          216
+              = 100 mV
+                                                                                = 6.8665 x 10- 6 V
+The answer is (C).
+                                                                    This voltage is to represent 0.001 °C with the RTD;
+3. The voltage resolution is                                        therefore, the sensitivity of the RTD should be
+
+                               IOV-OV                                        O.OOl °C     = 145.64 °C/V        (146 °C/V)
+                                            = 0.039 V                    6.8665 x 10- 6 V
+                                   (2)8
+                                                                    The temperature range that this sensor can represent is
+The answer is (A).                                                  derived from the number of bits and the value that rep-
+                                                                    resents 0°C. The voltage range is
+4. The number of distinct states, or steps, that the con-
+troller can be in is (2) 8 or 256. The monitored tempera-                            (0.001°C)(2 16 ) = 65.54°C
+ture can range from 0°F to 300°F, so the resolution
+capacity is                                                         The value that represents 0°C is O V, and one-third of
+                                                                    the voltage range is below zero while two-thirds of the
+      300°F - 0°F                                                   voltage range is above zero. The lower and upper limits
+      - - - - = 1.17 °F/step (1.2 °F/step)
+       256 steps                                                    the sensor can represent are
+
+The answer is (8).                                                              -65 .54oC = - 21.85cc       (-21.9oC)
+                                                                                    3
+5. The number of distinct steps (levels) of the 8-bit digital                 2 5 54
+                                                                             ( )( ~· °C) = 43.69°C         (43.7°C)
+system is (2) 8 , or 256. The voltage range is 5 V - (- 5 V) =
+IO V, so the resolution is
+                                                                    The answer is (8).
+                         5 V- (-5 V)
+                                          = 0.0391 V /step
+                           (2) 8 steps
+
+
+
+
+PPI   •    ppi2pass.com
