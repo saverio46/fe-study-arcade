@@ -1406,7 +1406,7 @@
             const char = e.key.toUpperCase();
             userCells[activeCellKey] = char;
             dayState.puzzleCrossword.cells = userCells;
-            saveDayState();
+            saveDayState(false);
 
             const valSpan = cellEls[activeCellKey].querySelector('.cw-val');
             if (valSpan) valSpan.textContent = char;
@@ -1428,7 +1428,7 @@
             if (currentVal) {
               delete userCells[activeCellKey];
               dayState.puzzleCrossword.cells = userCells;
-              saveDayState();
+              saveDayState(false);
               const valSpan = cellEls[activeCellKey].querySelector('.cw-val');
               if (valSpan) valSpan.textContent = '';
               cellEls[activeCellKey].classList.remove('incorrect', 'correct');
@@ -1441,7 +1441,7 @@
                 activeCellKey = prevKey;
                 delete userCells[prevKey];
                 dayState.puzzleCrossword.cells = userCells;
-                saveDayState();
+                saveDayState(false);
                 const valSpan = cellEls[prevKey].querySelector('.cw-val');
                 if (valSpan) valSpan.textContent = '';
                 cellEls[prevKey].classList.remove('incorrect', 'correct');
@@ -1479,7 +1479,7 @@
             selectWord(words[nextIdx]);
           }
         }
-        window.addEventListener('keydown', handleCrosswordKey);
+        gridEl.addEventListener('keydown', handleCrosswordKey);
 
         const actions = document.createElement('div');
         actions.className = 'puzzle-btn-row';
@@ -1538,7 +1538,7 @@
             const hint = unrevealedKeys[0];
             userCells[hint.key] = hint.char;
             dayState.puzzleCrossword.cells = userCells;
-            saveDayState();
+            saveDayState(false);
             const valSpan = cellEls[hint.key].querySelector('.cw-val');
             if (valSpan) valSpan.textContent = hint.char;
             cellEls[hint.key].classList.add('correct');
@@ -1627,7 +1627,7 @@
         return result;
       }
 
-      function renderWordlePuzzle(puzzleData, containerEl) {
+      async function renderWordlePuzzle(puzzleData, containerEl) {
         containerEl.innerHTML = '';
 
         const intro = document.createElement('p');
@@ -1646,10 +1646,23 @@
           wordleContainer.appendChild(clueBadge);
         }
 
-        const targetWord = (puzzleData.target_word || 'CROSS').toUpperCase();
-        const wordLen = puzzleData.word_length || 5;
-        const maxGuesses = puzzleData.max_guesses || 6;
-        const dict = (puzzleData.guess_dictionary || []).map(w => w.toUpperCase());
+        const config = puzzleData.config || {};
+        const targetWord = (puzzleData.items?.[0]?.answer || puzzleData.target_word || 'CROSS').toUpperCase();
+        const wordLen = config.word_length || puzzleData.word_length || 5;
+        const maxGuesses = config.max_guesses || puzzleData.max_guesses || 6;
+        const dict = (config.guess_dictionary || puzzleData.guess_dictionary || []).map(w => w.toUpperCase());
+
+        try {
+          const res = await fetch('/data/wordle_dict.txt');
+          if (res.ok) {
+            const text = await res.text();
+            const extDict = text.split('\n').map(w => w.trim().toUpperCase()).filter(w => w.length === wordLen);
+            dict.push(...extDict);
+          }
+        } catch (e) {
+          console.error("Failed to load standard dictionary", e);
+        }
+
 
         dayState.puzzleWordle = dayState.puzzleWordle || {
           guesses: [],
@@ -1846,6 +1859,10 @@
             handleKeyInput(e.key);
           }
         }
+        if (window._currentWordleKeyHandler) {
+          window.removeEventListener('keydown', window._currentWordleKeyHandler);
+        }
+        window._currentWordleKeyHandler = handlePhysicalKey;
         window.addEventListener('keydown', handlePhysicalKey);
 
         const actions = document.createElement('div');

@@ -1,0 +1,148 @@
+{
+  "topic_number": 10,
+  "topic_name": "Power Systems",
+  "date": "2026-08-28",
+  "subtopic_focus": "Motors & Generators",
+  "questions": [
+    {
+      "id": "PWR-D4-1",
+      "subtopic": "Motors & Generators",
+      "difficulty": "medium",
+      "stem": "A motor with three pole pairs is operating at 60 Hz. The rotational speed is 1080 rpm. Most nearly, the slip angular velocity is:",
+      "choices": {
+        "A": "\u03c0 rad/s",
+        "B": "2\u03c0/3 rad/s",
+        "C": "2\u03c0 rad/s",
+        "D": "4\u03c0 rad/s"
+      },
+      "correct_answer": "D",
+      "explanation": "There are 3 pole pairs, so p = 6 poles. Synchronous speed: n_s = 120f/p = (120 \u00d7 60)/6 = 1200 rev/min. Fractional slip = (n_s \u2212 n)/n_s = (1200 \u2212 1080)/1200 = 0.1. Slip angular velocity = 2\u03c0(slip)n_s = (2\u03c0 rad/rev)(0.1)(1200 rev/min) \u00d7 (1 min/60 s) = 4\u03c0 rad/s. The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
+    },
+    {
+      "id": "PWR-D4-2",
+      "subtopic": "Motors & Generators",
+      "difficulty": "easy",
+      "stem": "A three-phase synchronous generator produces a 60 Hz waveform when operating at 1200 rpm. How many poles does the generator have?",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "6",
+        "D": "12"
+      },
+      "correct_answer": "C",
+      "explanation": "Use the synchronous speed equation: n_s = 120f/p \u2192 p = 120f/n_s = (120 \u00d7 60)/1200 = 6 poles. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
+    },
+    {
+      "id": "PWR-D4-3",
+      "subtopic": "Motors & Generators",
+      "difficulty": "medium",
+      "stem": "A two-pole induction motor operates on a three-phase, 60 Hz line-to-line supply. The motor speed is 3420 rpm, and the rms voltage is 240 V. Most nearly, what is the slip?",
+      "choices": {
+        "A": "5%",
+        "B": "7%",
+        "C": "10%",
+        "D": "20%"
+      },
+      "correct_answer": "A",
+      "explanation": "For a 2-pole motor (p = 2), synchronous speed: n_s = 120f/p = (120 \u00d7 60)/2 = 3600 rev/min. Slip = (n_s \u2212 n)/n_s \u00d7 100% = (3600 \u2212 3420)/3600 \u00d7 100% = 180/3600 \u00d7 100% = 5%. The answer is (A).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
+    },
+    {
+      "id": "PWR-D4-4",
+      "subtopic": "Motors & Generators",
+      "difficulty": "medium",
+      "stem": "A DC generator turns at 2000 rpm and has an output of 200 V. The armature constant is 0.5 V\u00b7min/Wb, and the field constant of the machine is 0.02 H. Most nearly, what is the field current produced by the generator?",
+      "choices": {
+        "A": "4.0 A",
+        "B": "10 A",
+        "C": "1000 A",
+        "D": "4000 A"
+      },
+      "correct_answer": "B",
+      "explanation": "The generated voltage equation is V_a = K_a \u00d7 n \u00d7 \u03c6, so \u03c6 = V_a / (K_a \u00d7 n) = 200 V / (0.5 V\u00b7min/Wb \u00d7 2000 rev/min) = 200 / 1000 = 0.2 Wb. Using \u03c6 = K_f \u00d7 I_f: I_f = \u03c6 / K_f = 0.2 Wb / 0.02 H = 10 A. The answer is (B).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
+    },
+    {
+      "id": "PWR-D4-5",
+      "subtopic": "Motors & Generators",
+      "difficulty": "medium",
+      "stem": "A 10 hp DC motor draws 42 A. Most nearly, what is the armature voltage?",
+      "choices": {
+        "A": "42 V",
+        "B": "89 V",
+        "C": "120 V",
+        "D": "180 V"
+      },
+      "correct_answer": "D",
+      "explanation": "The mechanical power of a DC motor is P_m = V_a \u00d7 I_a. Converting hp to watts: P_m = 10 hp \u00d7 745.7 W/hp = 7457 W. Solving for armature voltage: V_a = P_m / I_a = 7457 W / 42 A \u2248 177.5 V \u2248 180 V. The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
+    }
+  ],
+  "puzzle_slug": "crossword",
+  "puzzle_instance": {
+    "slug": "crossword",
+    "narrative": "Fill in the crossword puzzle using the clues related to motors and generators.",
+    "grid_size": {
+      "rows": 12,
+      "cols": 6
+    },
+    "words": [
+      {
+        "number": 1,
+        "answer": "MOTOR",
+        "direction": "across",
+        "row": 1,
+        "col": 2,
+        "clue": "Machine converting electrical energy to mechanical rotation; speed = n_s \u00d7 (1 \u2212 slip)",
+        "ref": "Ch.29 Q1"
+      },
+      {
+        "number": 2,
+        "answer": "ROTOR",
+        "direction": "down",
+        "row": 1,
+        "col": 6,
+        "clue": "Rotating component of an induction machine; its speed relative to synchronous speed defines slip",
+        "ref": "Ch.29 Q5"
+      },
+      {
+        "number": 3,
+        "answer": "STATOR",
+        "direction": "across",
+        "row": 5,
+        "col": 1,
+        "clue": "Stationary winding that creates the rotating magnetic field in an induction motor",
+        "ref": "Ch.29 Q2"
+      },
+      {
+        "number": 4,
+        "answer": "SLIP",
+        "direction": "down",
+        "row": 5,
+        "col": 1,
+        "clue": "Fractional difference between synchronous speed and actual rotor speed",
+        "ref": "Ch.29 Q5"
+      },
+      {
+        "number": 5,
+        "answer": "POLES",
+        "direction": "across",
+        "row": 8,
+        "col": 1,
+        "clue": "Magnetic p = 120f / n_s; more of these \u2192 slower synchronous speed",
+        "ref": "Ch.29 Q2"
+      },
+      {
+        "number": 6,
+        "answer": "TORQUE",
+        "direction": "down",
+        "row": 7,
+        "col": 2,
+        "clue": "Rotational force; T = K_a \u00d7 \u03c6 \u00d7 I_a for DC machines; depends on flux and armature current",
+        "ref": "Ch.29 Q4"
+      }
+    ]
+  }
+}

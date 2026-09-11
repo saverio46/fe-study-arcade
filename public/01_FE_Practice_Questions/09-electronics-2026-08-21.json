@@ -1,0 +1,91 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY4-1",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "The n-channel JFET in the circuit shown is operat-\ning in the saturation region. It has a pinch-off voltage of\n\n-4 V, a drain current of 7.2 mA, and a gate-to-source \nvoltage of 10 V. The drain-to-source voltage is 8 V.\n\n24V\n\n,----------+------- Vout\n\n100 Mn\n\nD \n+ \nav\n\nMost nearly, the drain resistance is",
+      "choices": {
+        "A": "12.7kn",
+        "B": "13.0 kn",
+        "C": "14.4 kn",
+        "D": "15.0 kn"
+      },
+      "correct_answer": "B",
+      "explanation": "The circuit is as shown.\n\nV00 = 24V\n\n-----+--- Vout\n\nRG = 100 Mil \nD \n+\n\nv05 = av\n\nUse the equation for JFET operation in the saturation \nregion, and solve for the drain-to-source saturation \ncurrent.\n\nin \n0.0072 A \nloss~[,-\";: r \n(1- 10 V )2\n\niv = lvss(l - Vasi Vp)2\n\n-4 V\n\n= 1.37 x 10-4 A\n\nBecause the current into the gate is minimal, the drop \nacross Ra is insignificant. The gate-to-source voltage \nand the drain-to-source voltage will be approximately \nequal.\n\nVos~ Vvs = 8V\n\nThe drain-to-source current is\n\niv= lvss(l - Vos/Vp)2\n\n= (1.37 X 10-4 A)(l - ~)\n\n2\n\n-4 V \n= 1.23 x 10- 3 A\n\nWrite Kirchhoff's voltage law around the output circuit, \nand solve for Rn.\n\nVnn- inRn- Vns = 0\n\n24 V - 8 V\n\nVnn - Vns \nRv= --.--\niv \n= 13.0 X 103 fl\n\n1.23 x 10-3 A\n\n(13.0 kO)\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY4-2",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A JFET operating in the saturation region has a \npinch-off voltage of -4 V, a drain current of 6.4 mA, \nand a gate-to-source voltage of 9 V. Most nearly, the \ntransconductance is",
+      "choices": {
+        "A": "9.9 X 10-4 s",
+        "B": "6.7 X 10-4 s",
+        "C": "2.8 x 10-3 S",
+        "D": "1.3 x 10-3 S"
+      },
+      "correct_answer": "A",
+      "explanation": "Use the equation for JFET operation in the satura-\ntion region, and solve for the drain-to-source saturation \ncurrent.\n\n6.4 X 10-3 A\n\n(1-~)2\n\nIvss = [ \nVcs]2 = \n1 - -vp\n\n-4 V\n\n= 6.06 x 10-4 A\n\nThe transconductance is\n\n9m. =\n\n2~ (6.06 x 10-4 A)(6.4 x 10- 3 A)\n\nl-4 V/ \n= 9.85 x 10-4 S \n(9.9 x 10-4 S)\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY4-3",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "The n-channel enhancement MOSFET shown is \noperating in the saturation region. It has a threshold volt-\nage of 4 V, a drain current of 7.2 mA, and a gate-to-\nsource voltage of 10 V. The drain-to-source voltage is \n8V.\n\n24V\n\n,------+---- Vout\n\n100 Mn\n\n+\n\nV;0 ____...____. ~ \n~ V \n,~v 1-Most nearly, what is the drain resistance?",
+      "choices": {
+        "A": "2.7 kD",
+        "B": "3.0 kD",
+        "C": "4.4 kD",
+        "D": "5.0 kD"
+      },
+      "correct_answer": "D",
+      "explanation": "Use the equation for MOSFET operation in the sat-\nuration region, and solve for the conductivity factor.\n\nV00 = 24V\n\n,------+--- Vout\n\nRG = 100 M.fl\n\niv = K( Vos -\nv;)2 \niv \nK= ---=----\n\n0.0072 A\n\n( Vas - v;)2 \n= 0.0002 A/V2\n\n(10 V - 4 V)2Because the current into the gate is minimal, the drop \nacross Re is insignificant. The gate-to-source voltage \nand the drain-to-source voltage\u00b7 will be approximately \nequal.\n\nBecause the current into the base is insignificant, the \ncurrent through Rn will be equal to the drain-to-source \ncurrent. In the saturation region, the drain-source cur-\nrent is\n\nin = K( v08 - ~)2\n\n= (o.0002 :\n2 )(8 V - 4 V)\n2\n\n= 3.2 x 10-3 A\n\nWrite Kirchhoff's voltage law for the output circuit, and \nsolve for Rn.\n\nVDD- inRn- Vns = 0\n\n24 V-8 V \n3.2 x 10-3 A\n\nVDD- Vns \nRn= --.--\n\nzn \n= 5.0 X 103 0\n\n(5.0 kO)\n\nThe answer is (D).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY4-4",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "The ideal op amps are cascaded as shown.\n\n2 n\n\n5V\n\nWhat is most nearly the output voltage?",
+      "choices": {
+        "A": "-20 V",
+        "B": "2.5 V",
+        "C": "4.0 V",
+        "D": "16 V"
+      },
+      "correct_answer": "A",
+      "explanation": "The circuit can be split into two parts, where the out-\nput voltage of the configuration in the left box, Vo.1, is \nthe input to the configuration in the right box, and the \noutput voltage of the configuration in the right box, Vo,2, \nis equal to the total output voltage of the circuit. The \nconfiguration in the left box acts as an inverting ampli-\nfier on Va and as a noninverting amplifier on Vt,.\n\nThe output voltage of the configuration in the left box,\n\nVo,1, is\n\n= -(~ ~)(s v)+(1+ ~ ~)(2 v) \n= -4 V\n\nSince Vo,1 is not O and is the sole input to the configura-\ntion in the right box, the configuration in the right box \nis a noninverting amplifier. The output voltage for the \nconfiguration in the right box, iti,2, is\n\nVo,2 = ( 1 \n+ ~::) Vo,1 = [ 1 + ~ ~ l [-4 V l\n\n= -20 V\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY4-5",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "An amplifier with a gain of 2.0 is shown. The input \nsignal is V;.11(t) = (5 V)sin((601r)t+ 28\u00b0). The source volt-\nage is 8.0 V.\n\n1 n\n\nV;n(t) = (5 V)sin((60'!T)t + 28\u00b0)\n\nWhat is most nearly the output voltage at t = 0.025 s?",
+      "choices": {
+        "A": "-8.8 V",
+        "B": "-8.0 V",
+        "C": "-4.4 V",
+        "D": "8.0 V"
+      },
+      "correct_answer": "B",
+      "explanation": "The output signal can be drawn as shown.\n\n10 \n8\n\n6\n\n~\n\n(1) \n4 \nCl \n2 \n\"' \n.... \n0 > \n0.07 \n.... \n- 2 \n~ \nC. -4 \n....\n\n~ \n0 \n-6 \n-8 \n-10 \ntime (s)Since the gain is 2.0 and Vout= A'lljn(t), the output volt-\nage at 0.025 sis\n\nV0 ut = Av;n(t) = (2.0)((5 V)sin((601r)t+ 28\u00b0))\n\n= (2.o)( (5 V)sin( 60rr[ 2!\n6\n~~d J(0.025 s) + 28\u00b0 ))\n\n= -8.83 V\n\nThe output voltage cannot be less than -8.0 V, so the \noutput voltage is -8.0 V.\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_instance": {
+    "slug": "wordle",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "target_word": "PTYPE",
+    "config": {
+      "word_length": 5,
+      "max_guesses": 6
+    }
+  }
+}

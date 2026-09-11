@@ -1,0 +1,93 @@
+{
+  "topic_number": 10,
+  "topic_name": "Power Systems",
+  "date": "2026-08-29",
+  "subtopic_focus": "Full Topic Review",
+  "questions": [
+    {
+      "id": "PWR-REV-1",
+      "subtopic": "Full Topic Review",
+      "difficulty": "medium",
+      "stem": "A balanced, three-phase, delta-connected system has three identical loads of 4 Ω − j3 Ω. The line-to-line voltage is 120 V. Most nearly, the total apparent power in polar form is:",
+      "choices": {
+        "A": "2880 VA ∠−36.87°",
+        "B": "2880 VA ∠36.87°",
+        "C": "8640 VA ∠−36.87°",
+        "D": "8640 VA ∠36.87°"
+      },
+      "correct_answer": "C",
+      "explanation": "For a delta load: V_phase = V_line = 120 V. |Z| = √(4²+3²) = 5 Ω. I_phase = 120/5 = 24 A. S_per_phase = V_phase × I_phase* = (120)(24) ∠θ where θ = −arctan(3/4) = −36.87° (capacitive/lagging in Z). S_total = 3 × S_phase = 3 × 120 × 24 = 8640 VA ∠−36.87°. The answer is (C).",
+      "reference": "FE Reference Handbook – Power, Three-Phase Circuits"
+    },
+    {
+      "id": "PWR-REV-2",
+      "subtopic": "Full Topic Review",
+      "difficulty": "easy",
+      "stem": "Which of these statements concerning transmission lines is FALSE?",
+      "choices": {
+        "A": "A standing wave is the sum of the incident and reflected waves.",
+        "B": "The reflection coefficient is the ratio of the reflected wave voltage to the incident wave voltage.",
+        "C": "The magnitude of a standing wave is constant at a given position of the transmission line.",
+        "D": "The standing wave ratio is the ratio of the maximum and minimum current magnitudes of a standing wave."
+      },
+      "correct_answer": "C",
+      "explanation": "A standing wave is formed by the superposition of incident and reflected waves (A is TRUE). The reflection coefficient Γ = V_reflected / V_incident (B is TRUE). The SWR is the ratio of maximum to minimum current (or voltage) magnitudes (D is TRUE). However, the magnitude of a standing wave at a given position is NOT constant — it varies sinusoidally in time (C is FALSE). The amplitude envelope of a standing wave is constant at each spatial position, but the instantaneous magnitude oscillates. The answer is (C).",
+      "reference": "FE Reference Handbook – Power, Transmission Lines"
+    },
+    {
+      "id": "PWR-REV-3",
+      "subtopic": "Full Topic Review",
+      "difficulty": "easy",
+      "stem": "A step-up transformer is used to connect a large generating plant to the electric grid. Which of the following is TRUE about backup generation in a simple radial distribution system?",
+      "choices": {
+        "A": "Backup generation must be connected on the primary side of the supply transformer.",
+        "B": "Backup generation can only be connected at the utility meter.",
+        "C": "With proper controls and protection devices, backup generation can be connected on any of the consumer feeders.",
+        "D": "Backup generation requires a looped or networked distribution topology."
+      },
+      "correct_answer": "C",
+      "explanation": "In a simple radial distribution system, the loads are supplied through a single path from one transformer. While there is no inherent redundancy, with the proper controls and protection devices, backup generation can be connected on any of the consumer feeders — it does not need to be on the primary side. The answer is (C).",
+      "reference": "FE Reference Handbook – Power, Power Distribution"
+    },
+    {
+      "id": "PWR-REV-4",
+      "subtopic": "Full Topic Review",
+      "difficulty": "medium",
+      "stem": "A four-pole induction motor operates on a three-phase, 60 Hz line-to-line supply. The rms voltage is 240 V. The slip is 2%. What is most nearly the operating speed?",
+      "choices": {
+        "A": "1240 rpm",
+        "B": "1660 rpm",
+        "C": "1760 rpm",
+        "D": "1800 rpm"
+      },
+      "correct_answer": "C",
+      "explanation": "For a 4-pole motor: synchronous speed n_s = 120f/p = (120 × 60)/4 = 1800 rpm. Operating speed n = n_s × (1 − slip) = 1800 × (1 − 0.02) = 1800 × 0.98 = 1764 rpm ≈ 1760 rpm. The answer is (C).",
+      "reference": "FE Reference Handbook – Power, Motors & Generators"
+    },
+    {
+      "id": "PWR-REV-5",
+      "subtopic": "Full Topic Review",
+      "difficulty": "medium",
+      "stem": "A synchronous motor is running at 1200 rpm on a 60 Hz supply voltage. The supply frequency is changed to 50 Hz. Most nearly, the mechanical angular velocity when the motor reaches steady state is:",
+      "choices": {
+        "A": "18 rad/s",
+        "B": "65 rad/s",
+        "C": "100 rad/s",
+        "D": "380 rad/s"
+      },
+      "correct_answer": "C",
+      "explanation": "For a synchronous motor, n_s is proportional to frequency: n_s2/n_s1 = f₂/f₁, so n_s2 = (50/60) × 1200 = 1000 rpm. Convert to angular velocity: ω = n_s2 × 2π/60 = 1000 × 2π/60 = 104.7 rad/s ≈ 100 rad/s. The answer is (C).",
+      "reference": "FE Reference Handbook – Power, Motors & Generators"
+    }
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_instance": {
+    "slug": "wordle",
+    "narrative": "Power Systems week is complete! Today's word is the fundamental concept linking power generation, transmission, and machines.",
+    "target_word": "GRIDS",
+    "config": {
+      "word_length": 5,
+      "max_guesses": 6
+    }
+  }
+}

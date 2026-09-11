@@ -1,0 +1,66 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY7-1",
+      "subtopic": "Measurement and Instrumentation",
+      "difficulty": "medium",
+      "stem": "To avoid aliasing, the analog signal must be sampled \nat least at the Nyquist rate, which is twice the highest \nfrequency contained in the signal. The highest frequency \ncontained in the given signal is 2001r rad/s or 100 Hz. \nTherefore, the minimum frequency that can be used to \navoid aliasing is 200 Hz.\n\nThe answer is (C).",
+      "choices": {},
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY7-2",
+      "subtopic": "Measurement and Instrumentation",
+      "difficulty": "medium",
+      "stem": "Precision is a measure of the repeatability of results, \nwhich is important for this measurement. The accuracy \ncan have a significant bias, and the RTD would be \nacceptable for this measurement, so the accuracy is not \nimportant.\n\nThe answer is (A).",
+      "choices": {},
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY7-3",
+      "subtopic": "Measurement and Instrumentation",
+      "difficulty": "medium",
+      "stem": "Find the change in resistance, 6.R.\n\nSubstitute the equation for 6.R into the equation for \nreference voltage.\n\n6.R \nVa~ -- . ViN \n4R \n= [ e:(R)( GF)] V,\n\n4R \nIN\n\nVo = VIN( GF) \n(12 V)(2.l)\n\n\u20ac \n4 \n4 \n= 6.3 V-cm/cm\n\n(Any linear unit can be used for strain.)\n\nThe answer is (D).",
+      "choices": {},
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY7-4",
+      "subtopic": "Measurement and Instrumentation",
+      "difficulty": "medium",
+      "stem": "Use the definition of sensitivity to calculate the \nstrain.\n\n. . . \nVo \nsens1t1v1ty = -\n\n\u20ac\n\nVo \n\u20ac= --..:....._-\n\nsensitivity \n10 mV\n\n(10 V~~ ](1000 ~VJ\n\n= 0.0010 cm/cm\n\nThe answer is (B).",
+      "choices": {},
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY7-5",
+      "subtopic": "Measurement and Instrumentation",
+      "difficulty": "medium",
+      "stem": "The minimum sampling rate is the Nyquist rate, \nwhich is given by\n\nfs ~ 2 W = ( 2) ( 4 kHz) = 8 kHz\n\nThe answer is (C).",
+      "choices": {},
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_instance": {
+    "slug": "wordle",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "target_word": "GAUGE",
+    "config": {
+      "word_length": 5,
+      "max_guesses": 6
+    }
+  }
+}

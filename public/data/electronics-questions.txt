@@ -1,0 +1,1931 @@
+Semiconductor Devices 
+and Circuits
+
+PRACTICE PROBLEMS
+
+1. At an equilibrium temperature of 50°C, the contact 
+potential of a pn junction is 0.6 V. The intrinsic carrier 
+concentration is n; = 1.5 x 1010 1 / cm3, and the donor con-
+centration in the n-type material is 7.0 x 1017 1/cm3. 
+The acceptor concentration is most nearly
+
+(A) 
+7.0 x 1010 1/cm3
+
+(B) 
+1.0 x 1011 1/cm3
+
+(C) 
+7.4 x 1011 1/cm3
+
+(D) 
+7.0 x 1017 1/cm3
+
+2. A diode can be formed by doping an otherwise pure 
+crystal such that
+
+(A) 
+an n-type semiconductor is produced
+
+(B) 
+the crystal becomes an intrinsic semiconductor
+
+(C) 
+one half of the crystal is p-type and the other 
+half is n-type
+
+(D) 
+a p-type semiconductor is produced
+
+3. An ideal diode and two resistors are arranged in a series 
+circuit as shown. The load resistor, RL, dissipates 25 W.
+
+R5 = 20 n
+
+RL = 200 fl
+
+Most nearly, what is the magnitude, Vm, of the supply 
+voltage?
+
+(A) 
+100 V
+
+(B) 
+110 V
+
+(C) 
+140 V
+
+(D) 
+160 V
+
+4. A JFET is used in an amplifier circuit. The JFET 
+operates in the saturation region. The conductivity
+
+factor is 6.5 x 10- 4 A/V2, and the transconductance is 
+2 X 10-3 S.
+
+Most nearly, the drain current is
+
+(A) 
+0.5 mA
+
+(B) 
+1.0 mA
+
+(C) 
+1.3 mA
+
+(D) 
+1.5 mA
+
+5. A black box is reverse-engineered and is found to con-
+tain the circuit shown.
+
+Vee
+
+200n
+
+500 n 40 µ.F 
+t-1\Vv------J 
++
+
++ 
+500 n 
+Vout
+
+480D.
+
+Most likely, what is the purpose of the capacitors in the 
+circuit?
+
+(A) 
+to speed up the voltage propagation
+
+(B) 
+to isolate the DC biasing circuit from the AC 
+input and output
+
+(C) 
+to suppress noise form the DC voltage source Vee
+
+(D) 
+to increase the amplification
+
+
+--- PAGE BREAK ---
+
+
+30-2 
+F E 
+E L EC T R I CA L 
+A N D 
+C O M P U T E R 
+P R A CT I C E 
+P A O B L E M S
+
+6. A BJT used in a circuit as shown has a common emit-
+ter current gain of 100 and a DC base-to-emitter voltage 
+of 0.6 V. Most nearly, the output voltage of the circuit is
+
+R2 = 0.8 k!l
+
++ 
+-=- Vee= 10V
+
++
+
++ 
+V1 = 3V
+
+Vaut
+
+(A) 
+0.4 V
+
+(B) 
+2 V
+
+(C) 
+3 V
+
+(D) 
+10 V
+
+7. An npn BJT at 300K has a saturation current of 
+1 pA. Most nearly, the base-emitter voltage needed to 
+create a collector current of 556 mA is
+
+(A) 
+18 mV
+
+(B) 
+0.70V
+
+(C) 
+22 V
+
+(D) 
+27 V
+
+8. An npn BJT has a common emitter current gain of 
+80 and a base current of 134 µA. Most nearly, the emit-
+ter current is
+
+(A) 
+1.20 mA
+
+(B) 
+5.40 mA
+
+(C) 
+10.6 mA
+
+(D) 
+10.9 mA
+
+9. A p-channel JFET is biased by two ideal voltage 
+sources, as shown. The pinch-off voltage for the JFET is 
+-6.0 V, and the drain-to-source saturation current is 
+34.5 mA.
+
+-2.0V 
+1.9V
+
+Most nearly, the drain current is
+
+(A) 
+11 mA
+
+(B) 
+15 mA
+
+(C) 
+35 mA
+
+(D) 
+170 mA
+
+1 O. A p-channel JFET is operating in the saturation 
+region. The drain-to-source current is 500 mA, the 
+pinch-off voltage is 2.5 V, and the drain current is 
+34.5 mA. Most nearly, the small-signal transconduc-
+tance is
+
+(A) 
+0.24 mS
+
+(B) 
+42 mS
+
+(C) 
+110 mS
+
+(D) 
+150 mS
+
+11. An enhancement-mode NMOS MOSFET has a con-
+ductivity factor of 4 mA/V2 and a threshold voltage of 
+0.7 V. The MOSFET is operating in the saturation 
+region. Most nearly, the gate-to-source voltage needed 
+to produce a drain current of 23.5 mA is
+
+(A) 
+1.7 V
+
+(B) 
+2.5 V
+
+(C) 
+3.1 V
+
+(D) 
+4.1 V
+
+12. A silicon pn diode at room temperature has a ther-
+mal voltage of 0.025 V. Most nearly, the applied diode 
+voltage needed to make the diode current equal 90% of 
+the diode saturation current is
+
+(A) 
+0.016 V
+
+(B) 
+0.16 V
+
+(C) 
+0.50 V
+
+(D) 
+0.70 V
+
+13. The JFET used in the circuit shown operates in the 
+saturation region. The JFET's drain-to-source satura-
+tion current is 18 mA, and its pinch-off voltage is - 3 V . 
+.._
+
+
+--- PAGE BREAK ---
+
+
+S E M I C O N D U C T O R 
+D E V I C E S 
+A N D 
+C I R C U I T S 
+30-3
+
+Most nearly, the power dissipated in the JFET is
+
+(A) 
+0.016 W
+
+(B) 
+0.16 W
+
+(C) 
+1.6 W
+
+(D) 
+16 W
+
+14. The JFET shown is operating in the saturation 
+region. The drain supply voltage is 5 V, the saturation 
+resistance is 1 kn, the drain-to-source saturation cur-
+rent is 2 mA, and the pinch-off voltage is -2 V.
+
+s 
++ 
+-=- Voo 
++
+
+Most nearly, what is the gate-to-drain voltage?
+
+(A) -3 V
+
+(B) -2 V
+
+(C) 
+2 V
+
+(D) 
+OV
+
+15. The BJT incorporated into the circuit shown has a 
+base-emitter voltage of 0. 7 V and a common emitter cur-
+rent gain of 100.
+
+2 kn
+
++ 
++ 
+5V-=-
+-=-10V
+
+1ill 
+~
+
+Most nearly, the base current is
+
+(A) 
+0.043 mA
+
+(B) 
+0.43 mA
+
+(C) 
+0.75 mA
+
+(D) 
+7.5 mA
+
+16. The n-channel JFET in the circuit shown is operat-
+ing in the saturation region. It has a pinch-off voltage of
+
+-4 V, a drain current of 7.2 mA, and a gate-to-source 
+voltage of 10 V. The drain-to-source voltage is 8 V.
+
+24V
+
+,----------+------- Vout
+
+100 Mn
+
+D 
++ 
+av
+
+Most nearly, the drain resistance is
+
+(A) 
+12.7kn
+
+(B) 
+13.0 kn
+
+(C) 
+14.4 kn
+
+(D) 
+15.0 kn
+
+17. A JFET operating in the saturation region has a 
+pinch-off voltage of -4 V, a drain current of 6.4 mA, 
+and a gate-to-source voltage of 9 V. Most nearly, the 
+transconductance is
+
+(A) 
+9.9 X 10-4 s
+
+(B) 
+6.7 X 10-4 s
+
+(C) 
+2.8 x 10-3 S
+
+(D) 
+1.3 x 10-3 S
+
+18. The n-channel enhancement MOSFET shown is 
+operating in the saturation region. It has a threshold volt-
+age of 4 V, a drain current of 7.2 mA, and a gate-to-
+source voltage of 10 V. The drain-to-source voltage is 
+8V.
+
+24V
+
+,------+---- Vout
+
+100 Mn
+
++
+
+V;0 ____...____. ~ 
+~ V 
+,~v 1-
+
+
+--- PAGE BREAK ---
+
+
+30-4 
+F E 
+E L E C T R I C A L 
+A N D 
+C O M P U T E R 
+P R A C T I C E 
+P R O B L E M S
+
+Most nearly, what is the drain resistance?
+
+(A) 
+2.7 kD
+
+(B) 
+3.0 kD
+
+(C) 
+4.4 kD
+
+(D) 
+5.0 kD
+
+SOLUTIONS
+
+1. The absolute equilibrium temperature is
+
+T = 50°C + 273.15° = 323.15K
+
+Use the equation for the contact potential of a pn junc-
+tion, and solve for the acceptor concentration.
+
+kT 
+NaNd 
+Vo= -ln-· -
+
+q 
+nf
+
+Na= [ ;: ]eV,q/kT
+
+(
+1.5 X 
+1010 _1_]2
+
+cm3
+
+(0.6 V)(l.602 x 10- 19 C) 
+exp 
+23 
+(1.38 x 10-
+J/K)(323.15K)
+
+7.0 X 10 17 _l_
+
+cm3
+
+= 7.4 x 10 11 cm-3
+
+The answer is (C).
+
+2. A diode is a junction of n-type and p,-type semicon-
+ductors. Option C is correct.
+
+The answer is (C).
+
+3. The circuit is a half-wave rectifier.
+
+V
+
+VL,max
+
+VL,rms
+
+The power drawn by the load, PL, is proportional to the 
+rms value of the voltage. For a half-wave rectified sinus-
+oid, therms value is equal to one-half of the maximum 
+value.
+
+v; 
+v; 
+_ 
+L,max 
+L,rms -
+2
+
+
+--- PAGE BREAK ---
+
+
+S E M I C O N D U C T O R 
+D E V I C E S 
+A N D 
+C I R C U I T S 
+30-5
+
+For a purely resistive load, power is
+
+_ 
+L,nns v; 
+[ v; l 
+-
+200 fl 
+L,rms
+
+PL = IL,rms VL,rms
+
+V£,rms 
+200 n 
+[~]'
+
+200 n
+
+V£,max 
+=---
+800 n
+
+The load resistor dissipates 25 W, so
+
+y2 
+25 W = 
+L,max 
+800 n
+
+VL,max = J (25 W) (800 0)
+
+= 141.4 V 
+[at the load]
+
+The shunt resistance creates a voltage divider.
+
+v; 
+_ V ( 
+RL 
+) _ V. ( 
+200 0 
+) 
+L,max -
+m Rs+ RL 
+-
+m 20 n + 200 n 
+= 0.909Vm
+
+v; 
+V. = 
+L,max
+
+141.4 V 
+0.909 
+(160 V)
+
+m 
+0.909 
+= 155.6 V
+
+The answer is (D).
+
+4, Use the equation for JFET transconductance, and 
+solve for the drain current, In.
+
+9m =
+
+g2 y2 
+I -~ 
+D-
+
+4/DSS
+
+From the equation for the drain-to-source saturation 
+current, IDss = KV;, so
+
+2 y2 
+2 
+I -~-!I..:!!_
+
+D -
+4KV2 -
+4K 
+p
+
+(2 X 10-3 8)2 
+( 4)( 6.5 X 10-
+
+4
+
+:
+2 )
+
+= 1.54 x 10-3 A 
+(1.5 mA)
+
+The answer is (D).
+
+5. The capacitors allow the DC bias on the transistor to 
+operate the transistor in the desired range without the 
+DC voltage affecting the input or the output. The pur-
+pose of the capacitors, .then, is most likely to isolate the 
+DC biasing circuit from the AC input and output.
+
+The answer is (8).
+
+6. Use Ohm's law to find the base current.
+
+V= IR 
+1= V 
+R
+
+iB = Vi - VBE = ( 3 V - 0.6 V )(lOOO mA)
+
+R1 
+20 x 103 n 
+A 
+= 0.12 mA
+
+Find the collector current.
+
+ic = /3iB = (100)(0.12mA) = 12mA
+
+Find the output voltage.
+
+Vout = Vee - icR2
+
+mA ]r(0.8 kn)(1000 E_JJ 
+1000 mA 
+. 
+kn 
+A 
+=0.4 V
+
+= 10 V -
+12
+
+The answer is (A).
+
+
+--- PAGE BREAK ---
+
+
+30-6 
+F E 
+E L E C T R I C A L 
+A N D 
+C O M P U T E R 
+P R A C T I C E 
+P R O B L E M S
+
+7. The thermal voltage is
+
+TT 
+-
+kT 
+YT 
+-
+q
+
+( 1.38 x 10-23 f )(300K) 
+= 
+1.6022 x 10-19 C 
+= 0.0258 V
+
+Use the equation for collector current. Solve for the 
+base-emitter voltage, setting the collector current to 
+556mA.
+
+ic ~ Ise(VeEIVT)
+
+ic 
+0.556 A 
+VBE = Vrln- = (0.0258 V)ln 
+12 
+Is 
+1 x 10-
+A 
+= 0.70 V
+
+The answer is (8).
+
+8. Substitute the equation for collector current, ic, into 
+the equation for emitter current.
+
+iE = iB+ ic = is+ /Jis = is(l + {J)
+
+= (134 x 10-6 A)(l + 80) 
+= 10.9 mA
+
+The answer is (D).
+
+9. The drain current depends on the operating condi-
+tion of the JFET. When a JFET is operating in the cut-
+off region, the gate-to-source voltage, Vcs, is less than 
+the pinch-off voltage, VP. In this case, however, the gate-
+to-source voltage, -2.0 V, is greater than the pinch-off 
+voltage, -6.0 V, so the JFET is not operating in the cut-
+off region.
+
+vGs = -2.0V 
+v05 = 1.9V
+
+When a JFET is operating in the triode region, both the 
+gate-to-source voltage and the gate-to-drain voltage,
+
+van, are greater than the pinch-off voltage. Find the 
+gate-to-drain voltage by subtracting the drain-to-source 
+voltage from the gate-to-source voltage.
+
+v0 v = v08 -
+Vvs = -2.0 V-1.9 V = -3.9 V
+
+Both the gate-to-drain voltage of -3.9 V and the gate-
+to-source voltage of -2.0 V are greater than the pinch-
+off voltage of -6.0 V, so the JFET is operating in the 
+triode region. Use the JFET performance equation for 
+the triode region to find the drain current.
+
+iv= (Ivss/V;)[2vvs(Vas- VP) - vJs]
+
+= [ 34·5 mA ) ( (2)(1.9 V) (-2.0 - ( -6.0 V)) - (1.9 V)2) 
+(-6.0 V)2
+
+= 11.0 mA 
+(11 mA)
+
+The answer is (A).
+
+1 O. The small-signal transconductance of a JFET oper-
+ating in the saturation region is
+
+2~ (500 x 10-3 A)(34.5 x 10-3 A)
+
+9m = 2~
+
+12.5 VI 
+= 0.105 S 
+(110 mS)
+
+IVPI
+
+The answer is (C).
+
+11. Use the drain current equation for a MOSFET oper-
+ating in the saturation region, and solve for the gate-to-
+source voltage.
+
+{Ti; 
+Vcs = VK + v; = 
+23.5 mA + 0_7 V
+
+4 mA
+
+y2 
+= 3.12 V 
+(3.1 V)
+
+The answer is (C).
+
+12. For silicon, the emission coefficient, rJ, is 1. Use 
+Shockley's equation, and set the diode current, in, equal 
+to 90% of the saturation current, I8 •
+
+in ~ Is[ e<vn/1JVr) - 1]
+
+0.9Is = I.(e"n/0.025V -1)
+
+1.9 = e"n/0.025V
+
+lnl.9 = __ 
+vD __ 
+0.025 V 
+vv = (ln 1.9)(0.025 V) 
+= 0.01605 V 
+(0.016 V)
+
+The answer is (A).
+
+
+--- PAGE BREAK ---
+
+
+S E M I C O N D U C T O R 
+D E V I C E S 
+A N D 
+C I R C U I T S 
+30-7
+
+13. The JFET is as shown.
+
+R0 = 1 k!l
+
+R, = 90 k!l
+
+G 
+D 
+s
+
+10V-=-
+
++
+
+Use the voltage divider concept on the left side of the 
+circuit. The battery polarity is negative, so use a nega-
+tive value for the voltage.
+
+) Vi 
+R1 + R2
+
+vcs = [ 
+R
+2
+
+_ ( 
+10 kn 
+) ( _ 10 V) 
+90 kn+ 10 kn 
+= -1.0 V
+
+The drain current is
+
+in= Inss(l - Vcs/ Vp)
+2
+
+2
+
+= (18 mA)(1- -1.0 V )
+
+-3 V 
+=8mA
+
+The source-to-drain voltage is
+
+= lOV -
+_S_m_A_ ( (1 kn) ( 1000 k~))
+
+1000 :A
+
+=2V
+
+The power dissipated in the JFET is
+
+8 mA 
+P = vnsin = (2 V) ----
+
+1000 mA
+
+A 
+= 0.016 W
+
+The answer is (A).
+
+14. Because the gate and the source are tied together, 
+the gate-to-source voltage, Vcs, is zero. Find the drain
+
+current using the equation for JFET performance in the 
+saturation region.
+
+in= Inss(l - Vcs/ Vp)
+2
+
+- (2 mAi(i . OV~r
+
+= 2mA
+
+Use Ohm's law to find the saturation voltage.
+
+2 mA
+
+1000 mA
+
+A 
+=2V
+
+The drain-to-source voltage is
+
+The gate-to-drain voltage is
+
+Vcn=-Vns=-3V
+
+The answer is (A).
+
+15. The circuit is as shown.
+
+Re= 2 k!l
+
++ 
++ 
+V88 = 5V-=-
+-=-Vee= 10V
+
+Write Kirchhoff's voltage law for the base-emitter loop, 
+and solve for the emitter current.
+
+(5 V - 0.7 V)( 1000 ¥)
+
+(1 krn( 1000 ; 
+)
+
+= 4.3 mA
+
+
+--- PAGE BREAK ---
+
+
+30-8 
+F E 
+E L E C T R I C A L 
+A N D 
+C O M P U T E R 
+P R A C T I C E 
+P R O B L E M S
+
+Substitute the equation for collector current, le, into the 
+equation for emitter current, JE,
+
+iE = iB+ ic = iB+ /3iB
+
+= (1 + /3)iB 
+. 
+iE 
+4.3 mA 
+i ----
+B-1+/3 -
+1+100 
+= 0.0426 mA 
+(0.043 mA)
+
+The answer is (A).
+
+16. The circuit is as shown.
+
+V00 = 24V
+
+-----+--- Vout
+
+RG = 100 Mil 
+D 
++
+
+v05 = av
+
+Use the equation for JFET operation in the saturation 
+region, and solve for the drain-to-source saturation 
+current.
+
+in 
+0.0072 A 
+loss~[,-";: r 
+(1- 10 V )2
+
+iv = lvss(l - Vasi Vp)2
+
+-4 V
+
+= 1.37 x 10-4 A
+
+Because the current into the gate is minimal, the drop 
+across Ra is insignificant. The gate-to-source voltage 
+and the drain-to-source voltage will be approximately 
+equal.
+
+Vos~ Vvs = 8V
+
+The drain-to-source current is
+
+iv= lvss(l - Vos/Vp)2
+
+= (1.37 X 10-4 A)(l - ~)
+
+2
+
+-4 V 
+= 1.23 x 10- 3 A
+
+Write Kirchhoff's voltage law around the output circuit, 
+and solve for Rn.
+
+Vnn- inRn- Vns = 0
+
+24 V - 8 V
+
+Vnn - Vns 
+Rv= --.--
+iv 
+= 13.0 X 103 fl
+
+1.23 x 10-3 A
+
+(13.0 kO)
+
+The answer is (B).
+
+17. Use the equation for JFET operation in the satura-
+tion region, and solve for the drain-to-source saturation 
+current.
+
+6.4 X 10-3 A
+
+(1-~)2
+
+Ivss = [ 
+Vcs]2 = 
+1 - -vp
+
+-4 V
+
+= 6.06 x 10-4 A
+
+The transconductance is
+
+9m. =
+
+2~ (6.06 x 10-4 A)(6.4 x 10- 3 A)
+
+l-4 V/ 
+= 9.85 x 10-4 S 
+(9.9 x 10-4 S)
+
+The answer is (A).
+
+18. Use the equation for MOSFET operation in the sat-
+uration region, and solve for the conductivity factor.
+
+V00 = 24V
+
+,------+--- Vout
+
+RG = 100 M.fl
+
+iv = K( Vos -
+v;)2 
+iv 
+K= ---=----
+
+0.0072 A
+
+( Vas - v;)2 
+= 0.0002 A/V2
+
+(10 V - 4 V)2
+
+
+--- PAGE BREAK ---
+
+
+S E M I C O N D U C T O R 
+D E V I C E S 
+A N D 
+C I R C U I T S 
+30-9
+
+Because the current into the gate is minimal, the drop 
+across Re is insignificant. The gate-to-source voltage 
+and the drain-to-source voltage· will be approximately 
+equal.
+
+Because the current into the base is insignificant, the 
+current through Rn will be equal to the drain-to-source 
+current. In the saturation region, the drain-source cur-
+rent is
+
+in = K( v08 - ~)2
+
+= (o.0002 :
+2 )(8 V - 4 V)
+2
+
+= 3.2 x 10-3 A
+
+Write Kirchhoff's voltage law for the output circuit, and 
+solve for Rn.
+
+VDD- inRn- Vns = 0
+
+24 V-8 V 
+3.2 x 10-3 A
+
+VDD- Vns 
+Rn= --.--
+
+zn 
+= 5.0 X 103 0
+
+(5.0 kO)
+
+The answer is (D).
+
+
+--- PAGE BREAK ---
+
+
+
+--- PAGE BREAK ---
+
+
+Amplifiers
+
+PRACTICE PROBLEMS
+
+1. The ideal op amps are cascaded as shown.
+
+2 n
+
+5V
+
+What is most nearly the output voltage?
+
+(A) -20 V
+
+(B) 
+2.5 V
+
+(C) 
+4.0 V
+
+(D) 
+16 V
+
+2. An amplifier with a gain of 2.0 is shown. The input 
+signal is V;.11(t) = (5 V)sin((601r)t+ 28°). The source volt-
+age is 8.0 V.
+
+1 n
+
+V;n(t) = (5 V)sin((60'!T)t + 28°)
+
+What is most nearly the output voltage at t = 0.025 s?
+
+(A) 
+-8.8 V
+
+(B) 
+-8.0 V
+
+(C) 
+-4.4 V
+
+(D) 
+8.0 V
+
+3. An op amp circuit is shown. The non-inverting input 
+is connected to a 12 V DC source. The op amp voltage 
+gain, A, is 100 000, the input resistance, Rin, is 1.0 MD, 
+and the output resistance, Rout, is 20 D.
+
+What is most nearly the gain of the circuit?
+
+(A) 
+1.0
+
+(B) 
+5.0
+
+(C) 
+10
+
+(D) 
+20
+
+4. A half-rectified sine wave is the input to an amplifier 
+with an amplification factor of-2.
+
+10V
+
+5V
+
+5 
+10 
+15 
+20 
+25 
+time (ms) 
+-5V
+
+-10V
+
+
+--- PAGE BREAK ---
+
+
+31-2 
+FE ELECTRICAL AND COMPUTER PRACTICE PROBLEMS
+
+Which graph most nearly shows the waveform of the 
+output?
+
+(A)
+
+10V
+
+5V
+
+5
+
+-5V
+
+-10V
+
+(B)
+
+10V
+
+5V
+
+10 
+15 
+20 
+25 
+\) \)
+
+-10V
+
+(C)
+
+10V
+
+5V
+
+20 
+25 
+\)
+
+- 5V
+
+-10V
+
+(D)
+
+10V
+
+5V
+
+-5V
+
+-10V
+
+5. During testing of an operational amplifier, signals of 
+equal magnitude are applied to the two terminals (i.e., 
+Vi= -v2). What gain is measured?
+
+(A) 
+Acm
+
+(B) 
+A;d
+
+(C) 
+Av
+
+(D) 
+Gp
+
+6. An ideal operational amplifier is shown. The voltage 
+at the inverting terminal, Vi, is 0.002 V, and the voltage 
+at the noninverting terminal, v1, is 0.001 V. The output
+
+voltage is -10 V. Most nearly, what is the gain of the 
+operational amplifier?
+
+(A) 
+1000
+
+(B) 
+10,000
+
+(C) 
+100,000
+
+(D) 
+1,000,000
+
+7. An ideal operational amplifier is used in a voltage 
+amplification circuit as shown.
+
+40.!l
+
+80.!l
+
++
+
+10V
+
+Most nearly, what is the output voltage?
+
+(A) -14 V
+
+(B) 
+-11 V
+
+(C) 
+-1 V
+
+(D) 
+6 V
+
+8. An ideal operational amplifier is used in a voltage 
+amplification circuit as shown.
+
+200!1
+
+Most nearly, what is the output voltage?
+
+(A) 
+-10 V
+
+(B) 
+-5 V
+
+(C) 5 V
+
+(D) 
+10 V
+
+
+--- PAGE BREAK ---
+
+
+9. The voltage gain in the ideal operational amplifier 
+circuit shown is -200.
+
++
+
+Most nearly, what is the value of R2?
+
+(A) 
+3 kn
+
+(B) 
+30 kn
+
+(C) 
+100 kn
+
+(D) 
+300 kn
+
+10. The inverting input of a nonideal operational 
+amplifier is at 0.001 V. The noninverting voltage is 
+0.002 V, and the output voltage is 10.01 V. The differen-
+tial gain of the operational amplifier is 10,000. Most 
+nearly, what is the common-mode rejection ratio?
+
+(A) 
+64 dB
+
+(B) 
+74 dB
+
+(C) 
+98 dB
+
+(D) 
+134 dB
+
+11. For a differential amplifier, the ratio of the first 
+emitter current to the second emitter current is 2.0. The 
+voltage difference between the first base current and the 
+second base current is 0.02 V. Most nearly, what is the 
+temperature of operation?
+
+(A) 335K
+
+(B) 
+345K
+
+(C) 
+465K
+
+(D) 
+485K
+
+A M P L I F I E A S 
+31-3
+
+SOLUTIONS
+
+1. The circuit can be split into two parts, where the out-
+put voltage of the configuration in the left box, Vo.1, is 
+the input to the configuration in the right box, and the 
+output voltage of the configuration in the right box, Vo,2, 
+is equal to the total output voltage of the circuit. The 
+configuration in the left box acts as an inverting ampli-
+fier on Va and as a noninverting amplifier on Vt,.
+
+The output voltage of the configuration in the left box,
+
+Vo,1, is
+
+= -(~ ~)(s v)+(1+ ~ ~)(2 v) 
+= -4 V
+
+Since Vo,1 is not O and is the sole input to the configura-
+tion in the right box, the configuration in the right box 
+is a noninverting amplifier. The output voltage for the 
+configuration in the right box, iti,2, is
+
+Vo,2 = ( 1 
++ ~::) Vo,1 = [ 1 + ~ ~ l [-4 V l
+
+= -20 V
+
+The answer is (A).
+
+2. The output signal can be drawn as shown.
+
+10 
+8
+
+6
+
+~
+
+(1) 
+4 
+Cl 
+2 
+"' 
+.... 
+0 > 
+0.07 
+.... 
+- 2 
+~ 
+C. -4 
+....
+
+~ 
+0 
+-6 
+-8 
+-10 
+time (s)
+
+
+--- PAGE BREAK ---
+
+
+31-4 
+FE ELECTRICAL AND COMPUTER PRACTICE PROBLEMS
+
+Since the gain is 2.0 and Vout= A'lljn(t), the output volt-
+age at 0.025 sis
+
+V0 ut = Av;n(t) = (2.0)((5 V)sin((601r)t+ 28°))
+
+= (2.o)( (5 V)sin( 60rr[ 2!
+6
+~~d J(0.025 s) + 28° ))
+
+= -8.83 V
+
+The output voltage cannot be less than -8.0 V, so the 
+output voltage is -8.0 V.
+
+The answer is (B).
+
+3. Use loop analysis to find the equations for the 12 V 
+source and Vout· Use the relationships shown for the path 
+of the current.
+
+I 
+I 
+I 
+I 
+I 
+Vout 
+I 
+I 
+I 
+-
+I 
+I 
+:_L-
+l----------..--------~ -
+I 
+-
+
+12 V = !Rin +!Rout+ A(v+ - v-)
+
+vout = A( v+ - v-) + !Rout
+
+Since the voltage across v+ and v- is IR;n, the equations 
+become
+
+12 V = !Rin + IR out+ AIR;n
+
+Vout = AIR;n + !Rout
+
+Divide the equation for Vout by the equation for the 12 V 
+source to find the gain of the configuration.
+
+vout 
+A configuration = 12 V 
+IR;n + !Rout+ AIR;n 
+1
+
+1
+
+1 x 106 D 
+l+ - ---------~
+
+20 D + (1 x 105)(1 x 106 D) 
+= 1.0
+
+The answer is (A).
+
+4. The voltage input to the amplifier between O ms and 
+5 ms, between 10 ms and 15 ms, and between 20 ms and 
+25 ms is the same, so the output voltage at those three 
+intervals will be the same. The maximum input voltage 
+at those intervals is 5 V, so the minimum output voltage 
+at those intervals is
+
+V0 ut = Avin = (- 2)(5 V)
+
+= -10 V
+
+Since the amplification factor is negative and all nonzero 
+inputs in the given waveform are positive, all nonzero 
+outputs must be negative. Option A shows positive out-
+put voltages between Oms and 5 ms and between 20 ms 
+and 25 ms, and option D shows positive output voltages 
+between 5 ms and 10 ms and between 15 ms and 20 ms, 
+so option A and option D do not show the waveform of 
+the output. The input voltage is O V between 5 ms and 
+10 ms and between 15 ms and 20 ms, resulting in a O V 
+output for these intervals. Option C shows outputs dur-
+ing these intervals, so option C does not show the wave-
+form of the output. Option B shows negative outputs at 
+the intervals where the input is positive and O V outputs 
+at the intervals where the input is O V, and the output 
+voltage is never less than - 10 V. Option B shows the 
+waveform of the output.
+
+The answer is (B).
+
+5. The differential-mode voltage is
+
+Therefore, with V1 = -v2,
+
+The common-mode voltage is
+
+Therefore, only the difference is being amplified, and 
+the gain is Aid·
+
+The answer is (B).
+
+6. Use the equation for output voltage, and rearrange to 
+solve for the gain.
+
+v0 = A(v1 - v2)
+
+A=~= 
+-lOV
+
+V1 -
+V2 
+0.001 V - 0.002 V 
+= 10,000
+
+The answer is (B).
+
+
+--- PAGE BREAK ---
+
+
+7. Use the equation for a two-source operational ampli-
+fier. The output voltage is
+
+Vo= - R2 Va+ (1 + R2 )vb
+
+R1 
+R1
+
+= (- 40 n )(lO V) + (1 + 40 n )(-4 V)
+
+80 n 
+80 n 
+= -11 V
+
+The answer is (B).
+
+8. The voltage at the noninverting terminal is a voltage 
+divider of the input voltage.
+
+V, _ ( 
+R1 
+) V- ( 
+20 D 
+)(-2 V) 
+b -
+R1 + R2 
+-
+20 n + 20 n 
+= -1 V
+
+The inverting voltage is zero, so use the equation for a 
+noninverting operational amplifier. The output voltage is
+
+=-5 V
+
+The answer is (B).
+
+9. The voltage gain is Vo/ Va = -200. The noninverting 
+voltage is zero, so use the equation for the output volt-
+age of an inverting operational amplifier, and rearrange 
+to solve for R2.
+
+150 n ]
+
+1000 ~
+
+kD
+
+= 30 kD
+
+The answer is (B).
+
+1 O. The differential input voltage is
+
+vid = v1 - v2 = 0.002 V - 0.001 V = 0.001 V
+
+The common-mode input voltage is
+
+_ ( 
+)/2 _ 0.002 V +0.001V_ 00015 V 
+V· 
+-
+V1 + V2 
+-
+-
+· 
+1cm 
+2
+
+A M P L I F I E R S 
+31-5
+
+Use the equation for output voltage, and rearrange to 
+solve for the common-mode gain.
+
+Vo = A V;d + Acm vicm
+
+Vo- Avid 
+Acm = -'----
+
+Vicm 
+10.01 V - (10,000)(0.001 V)
+
+0.0015 V 
+= 6.67
+
+The common-mode rejection ratio in decibels is
+
+IAI ) 
+110,0001 
+CMRR = 20log10 IAcml 
+= 20log10 16.671 
+= 63.5 dB (64 dB)
+
+(
+
+The answer is (A).
+
+11. The ratio of emitter currents is
+
+iEl = e(vn1-11s,)/Vr 
+iE'2
+
+2.0 = e0.02 V/VT
+
+Take the natural logarithm of both sides and solve for 
+the thermal voltage.
+
+0.02 V 
+ln2.0 = ---
+
+Vr 
+v; _ 0.02 V
+
+T -
+ln2.0
+
+Use the equation for thermal voltage and solve for the 
+temperature.
+
+v; _ kT 
+r-
+q
+
+( 0.02 V )(1.6022 X 10-19 C) 
+T=-v;_Tq_= _ l_n_2_.0 _______ _
+
+k 
+1.38 X 10-23 l_ 
+K 
+= 334.5K 
+(335K)
+
+The answer is (A).
+
+
+--- PAGE BREAK ---
+
+
+
+--- PAGE BREAK ---
+
+
+Measurement and 
+Instrumentation
+
+PRACTICE PROBLEMS
+
+1. An analog signal is sampled and processed digitally. 
+The filtered signal is sent through an output digital-to--
+analog (D / A) converter where the analog signal is 
+reconstructed.
+
+digital 
+signal 
+processor
+
+Most nearly, what is the minimum sampling frequency 
+needed to accurately reconstruct the signal without 
+aliasing?
+
+(A) 
+60 Hz
+
+(B) 
+120 Hz
+
+(C) 
+190 Hz
+
+(D) 
+380 Hz
+
+2. Most nearly, what minimum sampling frequency will 
+avoid aliasing with the analog signal, x( t)?
+
+x( t) = cos l001rt + sin 2001rt + sin 601Tt
+
+(A) 
+30 Hz
+
+(B) 
+60 Hz
+
+(C) 
+200 Hz
+
+(D) 
+400 Hz
+
+3. It is desired to choose a resistance temperature detec-
+tor (RTD) transducer for a measurement. The actual 
+value of the temperature is not important because the 
+initial temperature is known by other means, but the 
+change in temperature as the test item is heated is 
+important. Which statement is true about the selection 
+of the RTD?
+
+(A) 
+The precision is important, and the accuracy is 
+not important.
+
+(B) 
+The accuracy is important, and the precision is 
+not important.
+
+(C) 
+Neither the accuracy nor the precision is 
+important.
+
+(D) 
+Both accuracy and precision are important.
+
+4. Using a gage factor of 2.1, what is most nearly the 
+output sensitivity for the strain gauge bridge circuit 
+shown?
+
+(A) 
+0.5 V.cm/cm
+
+(B) 
+3.0V·cm/cm
+
+(C) 
+6.0V·cm/cm
+
+(D) 
+6.3 V·cm/cm
+
+5. The output sensitivity of a strain gauge bridge circuit 
+is 10 V·cm/cm. The output voltage is 10 mV. Most 
+nearly, the strain is
+
+(A) 
+0.0001 cm/cm
+
+(B) 
+0.0010 cm/cm
+
+(C) 
+0.0100 cm/cm
+
+(D) 
+0.1000 cm/cm
+
+6. Most nearly, what is the minimum sampling rate of a 
+4 kHz wideband signal to ensure accurate reconstruction 
+of the signal?
+
+(A) 
+4 kHz
+
+(B) 
+7 kHz
+
+(C) 
+8 kHz
+
+(D) 
+13 kHz
+
+
+--- PAGE BREAK ---
+
+
+32-2 
+F E 
+EL EC TR I C A L 
+A ND 
+C O M P U T E R 
+P R AC T IC E 
+P R O B L E M S
+
+SOLUTIONS
+
+1. The signal, x( t) , generated by the oscillator can be 
+determined by inspecting the Laplace transform table. 
+The signal is
+
+x(t) = sin377t = sin21rft = sin21r60t
+
+To reconstruct x( t) from x( n) without aliasing, the sam-
+pling rate must be at least the Nyquist rate.
+
+f, ~ 2fN = (2)(60 Hz) = 120 Hz
+
+The answer is (B).
+
+2. To avoid aliasing, the analog signal must be sampled 
+at least at the Nyquist rate, which is twice the highest 
+frequency contained in the signal. The highest frequency 
+contained in the given signal is 2001r rad/s or 100 Hz. 
+Therefore, the minimum frequency that can be used to 
+avoid aliasing is 200 Hz.
+
+The answer is (C).
+
+3. Precision is a measure of the repeatability of results, 
+which is important for this measurement. The accuracy 
+can have a significant bias, and the RTD would be 
+acceptable for this measurement, so the accuracy is not 
+important.
+
+The answer is (A).
+
+4. Find the change in resistance, 6.R.
+
+Substitute the equation for 6.R into the equation for 
+reference voltage.
+
+6.R 
+Va~ -- . ViN 
+4R 
+= [ e:(R)( GF)] V,
+
+4R 
+IN
+
+Vo = VIN( GF) 
+(12 V)(2.l)
+
+€ 
+4 
+4 
+= 6.3 V-cm/cm
+
+(Any linear unit can be used for strain.)
+
+The answer is (D).
+
+5. Use the definition of sensitivity to calculate the 
+strain.
+
+. . . 
+Vo 
+sens1t1v1ty = -
+
+€
+
+Vo 
+€= --..:....._-
+
+sensitivity 
+10 mV
+
+(10 V~~ ](1000 ~VJ
+
+= 0.0010 cm/cm
+
+The answer is (B).
+
+6. The minimum sampling rate is the Nyquist rate, 
+which is given by
+
+fs ~ 2 W = ( 2) ( 4 kHz) = 8 kHz
+
+The answer is (C).
+
+
+--- PAGE BREAK ---

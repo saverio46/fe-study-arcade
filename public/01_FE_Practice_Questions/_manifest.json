@@ -115,7 +115,16 @@
       "file": "09-electronics.json",
       "question_count": 5,
       "puzzle_slug": "sudoku",
-      "puzzle_category": "Grid & Spatial Logic"
+      "puzzle_category": "Grid & Spatial Logic",
+      "date_file_map": {
+        "2026-08-18": "09-electronics-2026-08-18.json",
+        "2026-08-19": "09-electronics-2026-08-19.json",
+        "2026-08-20": "09-electronics-2026-08-20.json",
+        "2026-08-21": "09-electronics-2026-08-21.json",
+        "2026-08-22": "09-electronics-2026-08-22.json",
+        "2026-08-23": "09-electronics-2026-08-23.json",
+        "2026-08-24": "09-electronics-2026-08-24.json"
+      }
     },
     {
       "topic_number": 10,
@@ -124,8 +133,15 @@
       "fe_exam_weight": "8-12 of 110 questions",
       "file": "10-power-systems.json",
       "question_count": 5,
-      "puzzle_slug": "pips",
-      "puzzle_category": "Grid & Spatial Logic"
+      "puzzle_slug": "wordle",
+      "puzzle_category": "Word & Language",
+      "date_file_map": {
+        "2026-08-25": "10-power-systems-2026-08-25.json",
+        "2026-08-26": "10-power-systems-2026-08-26.json",
+        "2026-08-27": "10-power-systems-2026-08-27.json",
+        "2026-08-28": "10-power-systems-2026-08-28.json",
+        "2026-08-29": "10-power-systems-2026-08-29.json"
+      }
     },
     {
       "topic_number": 11,

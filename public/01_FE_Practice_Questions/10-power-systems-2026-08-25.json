@@ -1,0 +1,148 @@
+{
+  "topic_number": 10,
+  "topic_name": "Power Systems",
+  "date": "2026-08-25",
+  "subtopic_focus": "Three-Phase Power",
+  "questions": [
+    {
+      "id": "PWR-D1-1",
+      "subtopic": "Three-Phase Power",
+      "difficulty": "medium",
+      "stem": "The balanced delta load shown is connected to a stable, three-phase voltage source. The rms line voltage is 120 V. The load impedance per phase is 15 \u03a9 + j10 \u03a9.\n\n![Delta load circuit diagram](/images/ch26-q1-delta-load-circuit.png)\n\nWhat is most nearly the rms magnitude of the line current?",
+      "choices": {
+        "A": "4.80 A",
+        "B": "8.50 A",
+        "C": "11.5 A",
+        "D": "12.0 A"
+      },
+      "correct_answer": "C",
+      "explanation": "For a delta connection, V_phase = V_line = 120 V. Phase impedance magnitude |Z| = \u221a(15\u00b2 + 10\u00b2) \u2248 18.028 \u03a9. Phase current I_phase = V_phase / |Z| = 120 / 18.028 \u2248 6.656 A. Line current I_line = \u221a3 \u00d7 I_phase = \u221a3 \u00d7 6.656 \u2248 11.53 A. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
+    },
+    {
+      "id": "PWR-D1-2",
+      "subtopic": "Three-Phase Power",
+      "difficulty": "medium",
+      "stem": "A 240 V \u22200\u00b0 source supplies a balanced, three-phase load in a delta configuration. The line current is 3 A \u222045\u00b0. What is most nearly the magnitude of the complex power measured across the load?",
+      "choices": {
+        "A": "420 VA",
+        "B": "720 VA",
+        "C": "1200 VA",
+        "D": "2200 VA"
+      },
+      "correct_answer": "C",
+      "explanation": "Total complex power magnitude |S| = \u221a3 \u00d7 V_line \u00d7 I_line = \u221a3 \u00d7 240 V \u00d7 3 A \u2248 1247 VA \u2248 1200 VA. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
+    },
+    {
+      "id": "PWR-D1-3",
+      "subtopic": "Three-Phase Power",
+      "difficulty": "easy",
+      "stem": "A balanced, three-phase, delta-connected system has three identical phase impedances. The line-to-line voltage is 240 V. The line current is 41 A. Most nearly, the magnitudes of the phase voltage and phase current in the system are:",
+      "choices": {
+        "A": "138 V and 11.8 A",
+        "B": "138 V and 23.7 A",
+        "C": "240 V and 11.8 A",
+        "D": "240 V and 23.7 A"
+      },
+      "correct_answer": "D",
+      "explanation": "In a delta connection, phase voltage equals line voltage (V_phase = 240 V). Phase current is line current divided by \u221a3 (I_phase = 41 A / \u221a3 \u2248 23.67 A). The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
+    },
+    {
+      "id": "PWR-D1-4",
+      "subtopic": "Three-Phase Power",
+      "difficulty": "easy",
+      "stem": "A balanced, three-phase, wye-connected load system has three identical phase impedances of 40 \u03a9 \u2212 j30 \u03a9. Most nearly, the equivalent delta-connected phase impedances are:\n\n![Wye-connected load circuit diagram](/images/ch26-q4-wye-load-circuit.png)",
+      "choices": {
+        "A": "40 \u03a9 \u2212 j30 \u03a9",
+        "B": "40 \u03a9 + j30 \u03a9",
+        "C": "120 \u03a9 \u2212 j90 \u03a9",
+        "D": "120 \u03a9 + j90 \u03a9"
+      },
+      "correct_answer": "C",
+      "explanation": "To convert from wye to delta, Z_delta = 3 \u00d7 Z_wye = 3 \u00d7 (40 \u03a9 \u2212 j30 \u03a9) = 120 \u03a9 \u2212 j90 \u03a9. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
+    },
+    {
+      "id": "PWR-D1-5",
+      "subtopic": "Three-Phase Power",
+      "difficulty": "medium",
+      "stem": "A balanced, three-phase, wye-connected system has three identical phase impedances. The line-to-line voltage is 240 V. The line-to-neutral current is 41 A. The power factor is 0.8 leading. Most nearly, the total apparent power in the system is:",
+      "choices": {
+        "A": "7.9 kW \u2212 j5.9 kVA",
+        "B": "7.9 kW + j5.9 kVA",
+        "C": "14 kW \u2212 j10 kVA",
+        "D": "14 kW + j10 kVA"
+      },
+      "correct_answer": "C",
+      "explanation": "Total apparent power S = \u221a3 \u00d7 V_line \u00d7 I_line \u00d7 (pf \u2212 j\u00b7sin(acos(pf))). S = \u221a3 \u00d7 240 \u00d7 41 \u2248 17043 VA \u2248 17 kVA. Real power P = 17 kVA \u00d7 0.8 = 13.6 kW \u2248 14 kW. Reactive power Q is negative for leading (capacitive) loads. Q = -17 kVA \u00d7 sin(acos(0.8)) = -17 \u00d7 0.6 = -10.2 kVAR \u2248 -10 kVAR. S = 14 kW - j10 kVA. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
+    }
+  ],
+  "puzzle_slug": "crossword",
+  "puzzle_instance": {
+    "slug": "crossword",
+    "narrative": "Fill in the crossword puzzle using the clues related to three-phase power.",
+    "grid_size": {
+      "rows": 11,
+      "cols": 9
+    },
+    "words": [
+      {
+        "number": 1,
+        "answer": "IMPEDANCE",
+        "direction": "across",
+        "row": 1,
+        "col": 1,
+        "clue": "Complex AC opposition; Z = R + jX, units in ohms",
+        "ref": "FE Ref Handbook"
+      },
+      {
+        "number": 2,
+        "answer": "DELTA",
+        "direction": "down",
+        "row": 1,
+        "col": 5,
+        "clue": "Triangle three-phase load connection; V_phase = V_line",
+        "ref": "Ch.26 Q1"
+      },
+      {
+        "number": 3,
+        "answer": "PHASE",
+        "direction": "across",
+        "row": 5,
+        "col": 3,
+        "clue": "One of three branches; voltage or current per branch",
+        "ref": "Ch.26 Q3"
+      },
+      {
+        "number": 4,
+        "answer": "LOAD",
+        "direction": "down",
+        "row": 5,
+        "col": 2,
+        "clue": "Impedance that consumes power in the circuit",
+        "ref": "FE Ref Handbook"
+      },
+      {
+        "number": 5,
+        "answer": "WATT",
+        "direction": "across",
+        "row": 7,
+        "col": 1,
+        "clue": "Unit of real (active) power; P = I\u00b2R",
+        "ref": "FE Ref Handbook"
+      },
+      {
+        "number": 6,
+        "answer": "POWER",
+        "direction": "down",
+        "row": 7,
+        "col": 5,
+        "clue": "Rate of energy transfer; P = VI\u00b7cos(\u03b8) in AC systems",
+        "ref": "Ch.26 Q4"
+      }
+    ]
+  }
+}

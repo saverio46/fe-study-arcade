@@ -1,0 +1,116 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY2-1",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A BJT used in a circuit as shown has a common emit-\nter current gain of 100 and a DC base-to-emitter voltage \nof 0.6 V. Most nearly, the output voltage of the circuit is\n\nR2 = 0.8 k!l\n\n+ \n-=- Vee= 10V\n\n+\n\n+ \nV1 = 3V\n\nVaut",
+      "choices": {
+        "A": "0.4 V",
+        "B": "2 V",
+        "C": "3 V",
+        "D": "10 V"
+      },
+      "correct_answer": "A",
+      "explanation": "Use Ohm's law to find the base current.\n\nV= IR \n1= V \nR\n\niB = Vi - VBE = ( 3 V - 0.6 V )(lOOO mA)\n\nR1 \n20 x 103 n \nA \n= 0.12 mA\n\nFind the collector current.\n\nic = /3iB = (100)(0.12mA) = 12mA\n\nFind the output voltage.\n\nVout = Vee - icR2\n\nmA ]r(0.8 kn)(1000 E_JJ \n1000 mA \n. \nkn \nA \n=0.4 V\n\n= 10 V -\n12\n\nThe answer is (A).7. The thermal voltage is\n\nTT \n-\nkT \nYT \n-\nq\n\n( 1.38 x 10-23 f )(300K) \n= \n1.6022 x 10-19 C \n= 0.0258 V\n\nUse the equation for collector current. Solve for the \nbase-emitter voltage, setting the collector current to \n556mA.\n\nic ~ Ise(VeEIVT)\n\nic \n0.556 A \nVBE = Vrln- = (0.0258 V)ln \n12 \nIs \n1 x 10-\nA \n= 0.70 V\n\nThe answer is (8).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY2-2",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "An npn BJT at 300K has a saturation current of \n1 pA. Most nearly, the base-emitter voltage needed to \ncreate a collector current of 556 mA is",
+      "choices": {
+        "A": "18 mV",
+        "B": "0.70V",
+        "C": "22 V",
+        "D": "27 V"
+      },
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY2-3",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "An npn BJT has a common emitter current gain of \n80 and a base current of 134 \u00b5A. Most nearly, the emit-\nter current is",
+      "choices": {
+        "A": "1.20 mA",
+        "B": "5.40 mA",
+        "C": "10.6 mA",
+        "D": "10.9 mA"
+      },
+      "correct_answer": "D",
+      "explanation": "Substitute the equation for collector current, ic, into \nthe equation for emitter current.\n\niE = iB+ ic = is+ /Jis = is(l + {J)\n\n= (134 x 10-6 A)(l + 80) \n= 10.9 mA\n\nThe answer is (D).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY2-4",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A p-channel JFET is biased by two ideal voltage \nsources, as shown. The pinch-off voltage for the JFET is \n-6.0 V, and the drain-to-source saturation current is \n34.5 mA.\n\n-2.0V \n1.9V\n\nMost nearly, the drain current is",
+      "choices": {
+        "A": "11 mA",
+        "B": "15 mA",
+        "C": "35 mA",
+        "D": "170 mA"
+      },
+      "correct_answer": "A",
+      "explanation": "The drain current depends on the operating condi-\ntion of the JFET. When a JFET is operating in the cut-\noff region, the gate-to-source voltage, Vcs, is less than \nthe pinch-off voltage, VP. In this case, however, the gate-\nto-source voltage, -2.0 V, is greater than the pinch-off \nvoltage, -6.0 V, so the JFET is not operating in the cut-\noff region.\n\nvGs = -2.0V \nv05 = 1.9V\n\nWhen a JFET is operating in the triode region, both the \ngate-to-source voltage and the gate-to-drain voltage,\n\nvan, are greater than the pinch-off voltage. Find the \ngate-to-drain voltage by subtracting the drain-to-source \nvoltage from the gate-to-source voltage.\n\nv0 v = v08 -\nVvs = -2.0 V-1.9 V = -3.9 V\n\nBoth the gate-to-drain voltage of -3.9 V and the gate-\nto-source voltage of -2.0 V are greater than the pinch-\noff voltage of -6.0 V, so the JFET is operating in the \ntriode region. Use the JFET performance equation for \nthe triode region to find the drain current.\n\niv= (Ivss/V;)[2vvs(Vas- VP) - vJs]\n\n= [ 34\u00b75 mA ) ( (2)(1.9 V) (-2.0 - ( -6.0 V)) - (1.9 V)2) \n(-6.0 V)2\n\n= 11.0 mA \n(11 mA)\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY2-5",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A p-channel JFET is operating in the saturation \nregion. The drain-to-source current is 500 mA, the \npinch-off voltage is 2.5 V, and the drain current is \n34.5 mA. Most nearly, the small-signal transconduc-\ntance is",
+      "choices": {
+        "A": "0.24 mS",
+        "B": "42 mS",
+        "C": "110 mS",
+        "D": "150 mS"
+      },
+      "correct_answer": "C",
+      "explanation": "The small-signal transconductance of a JFET oper-\nating in the saturation region is\n\n2~ (500 x 10-3 A)(34.5 x 10-3 A)\n\n9m = 2~\n\n12.5 VI \n= 0.105 S \n(110 mS)\n\nIVPI\n\nThe answer is (C).",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "crossword",
+  "puzzle_instance": {
+    "slug": "crossword",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "grid_size": {
+      "rows": 4,
+      "cols": 4
+    },
+    "words": [
+      {
+        "number": 1,
+        "direction": "across",
+        "row": 1,
+        "col": 1,
+        "answer": "FET",
+        "clue": "Field Effect Transistor"
+      },
+      {
+        "number": 1,
+        "direction": "down",
+        "row": 1,
+        "col": 1,
+        "answer": "FLOW",
+        "clue": "Movement of current"
+      },
+      {
+        "number": 2,
+        "direction": "across",
+        "row": 3,
+        "col": 1,
+        "answer": "OHM",
+        "clue": "Unit of resistance"
+      }
+    ]
+  }
+}

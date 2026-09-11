@@ -223,9 +223,6 @@
     .hud .stat { text-align: center; }
     .hud .stat .k { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-dim); display: block; margin-bottom: 4px; }
     .hud .stat .v { font-family: var(--font-display); font-size: 0.95rem; color: var(--neon-yellow); text-shadow: 0 0 4px var(--neon-yellow); }
-    .hud .lives { display: flex; gap: 8px; align-items: center; justify-content: center; min-height: 20px; }
-    .hud .lives .pip { width: 12px; height: 12px; border-radius: 50%; background: var(--neon-pink); box-shadow: 0 0 4px var(--neon-pink); transition: all 150ms var(--ease-out); }
-    .hud .lives .pip.spent { background: #2a2a3a; box-shadow: none; opacity: 0.4; }
 
     /* Buttons */
     .btn {
@@ -940,14 +937,6 @@
         <span class="k">LEVEL</span>
         <span class="v" id="hud-level" style="font-size: 0.72rem; font-family: var(--font-ui);">Microprocessors</span>
       </div>
-      <div class="stat">
-        <span class="k">DAILY LIVES</span>
-        <div class="lives" id="hud-lives" aria-label="3 completions remaining today">
-          <div class="pip" id="pip-1" title="Life Pip 1"></div>
-          <div class="pip" id="pip-2" title="Life Pip 2"></div>
-          <div class="pip" id="pip-3" title="Life Pip 3"></div>
-        </div>
-      </div>
     </section>
 
     <!-- Item c: Compact Legend Row -->
@@ -1073,6 +1062,10 @@
           if (stored) {
             const parsed = JSON.parse(stored);
             appState = { ...appState, ...parsed };
+            if (appState.lastCompletedDate) {
+              const [year, month, day] = appState.lastCompletedDate.split('-');
+              appState.currentDate = new Date(year, month - 1, 1);
+            }
           }
         } catch (e) {
           console.warn('localStorage unavailable, using in-memory state');
@@ -1123,21 +1116,7 @@
         document.getElementById('hud-highscore').textContent = String(appState.highScore).padStart(4, '0');
         document.getElementById('hud-streak').textContent = `x${appState.streak}`;
 
-        // Get completions used today
-        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
-        const usedToday = appState.dailyCompletions[todayKey] || 0;
-        const livesLeft = Math.max(0, 3 - usedToday);
 
-        for (let i = 1; i <= 3; i++) {
-          const pip = document.getElementById(`pip-${i}`);
-          if (pip) {
-            if (i <= livesLeft) {
-              pip.classList.remove('spent');
-            } else {
-              pip.classList.add('spent');
-            }
-          }
-        }
       }
 
       // FLOURISH BANNER
@@ -1477,17 +1456,12 @@
           });
         }
 
-        // Check completion limits & completed status
-        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
-        const usedToday = appState.dailyCompletions[todayKey] || 0;
+        // Check completed status
         const isAlreadyCompleted = !!appState.completedDays[dateKey];
 
         if (isAlreadyCompleted) {
           completeBtn.disabled = true;
           completeBtn.textContent = 'DAY COMPLETED ✓';
-        } else if (usedToday >= 3) {
-          completeBtn.disabled = true;
-          completeBtn.textContent = 'DAILY LIVES EXHAUSTED (3/3)';
         } else {
           completeBtn.disabled = false;
           completeBtn.textContent = currentDialogIsBonus ? 'COMPLETE BONUS DAY (+200 PTS)' : 'MARK DAY COMPLETE (+100 PTS)';
@@ -1523,14 +1497,8 @@
       completeBtn.addEventListener('click', () => {
         if (!currentDialogDateKey || appState.completedDays[currentDialogDateKey]) return;
 
-        const todayKey = formatDateKey(TODAY_YEAR, TODAY_MONTH, TODAY_DATE);
-        const usedToday = appState.dailyCompletions[todayKey] || 0;
-
-        if (usedToday >= 3) return;
-
         // Mark completed
         appState.completedDays[currentDialogDateKey] = true;
-        appState.dailyCompletions[todayKey] = usedToday + 1;
 
         // Score Calculation
         const pointsAdded = currentDialogIsBonus ? 200 : 100;
@@ -1594,6 +1562,11 @@
         appState.lastCompletedDate = cloudState.lastCompletedDate ?? appState.lastCompletedDate;
         appState.dailyCompletions = cloudState.dailyCompletions ?? appState.dailyCompletions;
         
+        if (appState.lastCompletedDate) {
+          const [year, month, day] = appState.lastCompletedDate.split('-');
+          appState.currentDate = new Date(year, month - 1, 1);
+        }
+
         // Save locally without pushing back to the cloud to avoid loops
         saveState(false);
         updateHUD();

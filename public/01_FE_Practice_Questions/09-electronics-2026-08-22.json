@@ -1,0 +1,116 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY5-1",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "An op amp circuit is shown. The non-inverting input \nis connected to a 12 V DC source. The op amp voltage \ngain, A, is 100 000, the input resistance, Rin, is 1.0 MD, \nand the output resistance, Rout, is 20 D.\n\nWhat is most nearly the gain of the circuit?",
+      "choices": {
+        "A": "1.0",
+        "B": "5.0",
+        "C": "10",
+        "D": "20"
+      },
+      "correct_answer": "A",
+      "explanation": "Use loop analysis to find the equations for the 12 V \nsource and Vout\u00b7 Use the relationships shown for the path \nof the current.\n\nI \nI \nI \nI \nI \nVout \nI \nI \nI \n-\nI \nI \n:_L-\nl----------..--------~ -\nI \n-\n\n12 V = !Rin +!Rout+ A(v+ - v-)\n\nvout = A( v+ - v-) + !Rout\n\nSince the voltage across v+ and v- is IR;n, the equations \nbecome\n\n12 V = !Rin + IR out+ AIR;n\n\nVout = AIR;n + !Rout\n\nDivide the equation for Vout by the equation for the 12 V \nsource to find the gain of the configuration.\n\nvout \nA configuration = 12 V \nIR;n + !Rout+ AIR;n \n1\n\n1\n\n1 x 106 D \nl+ - ---------~\n\n20 D + (1 x 105)(1 x 106 D) \n= 1.0\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY5-2",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "A half-rectified sine wave is the input to an amplifier \nwith an amplification factor of-2.\n\n10V\n\n5V\n\n5 \n10 \n15 \n20 \n25 \ntime (ms) \n-5V\n\n-10VWhich graph most nearly shows the waveform of the \noutput?",
+      "choices": {
+        "A": "10V\n\n5V\n\n5\n\n-5V\n\n-10V",
+        "B": "10V\n\n5V\n\n10 \n15 \n20 \n25 \n\\) \\)\n\n-10V",
+        "C": "10V\n\n5V\n\n20 \n25 \n\\)\n\n- 5V\n\n-10V",
+        "D": "10V\n\n5V\n\n-5V\n\n-10V"
+      },
+      "correct_answer": "B",
+      "explanation": "The voltage input to the amplifier between O ms and \n5 ms, between 10 ms and 15 ms, and between 20 ms and \n25 ms is the same, so the output voltage at those three \nintervals will be the same. The maximum input voltage \nat those intervals is 5 V, so the minimum output voltage \nat those intervals is\n\nV0 ut = Avin = (- 2)(5 V)\n\n= -10 V\n\nSince the amplification factor is negative and all nonzero \ninputs in the given waveform are positive, all nonzero \noutputs must be negative. Option A shows positive out-\nput voltages between Oms and 5 ms and between 20 ms \nand 25 ms, and option D shows positive output voltages \nbetween 5 ms and 10 ms and between 15 ms and 20 ms, \nso option A and option D do not show the waveform of \nthe output. The input voltage is O V between 5 ms and \n10 ms and between 15 ms and 20 ms, resulting in a O V \noutput for these intervals. Option C shows outputs dur-\ning these intervals, so option C does not show the wave-\nform of the output. Option B shows negative outputs at \nthe intervals where the input is positive and O V outputs \nat the intervals where the input is O V, and the output \nvoltage is never less than - 10 V. Option B shows the \nwaveform of the output.\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY5-3",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "During testing of an operational amplifier, signals of \nequal magnitude are applied to the two terminals (i.e., \nVi= -v2). What gain is measured?",
+      "choices": {
+        "A": "Acm",
+        "B": "A;d",
+        "C": "Av",
+        "D": "Gp"
+      },
+      "correct_answer": "B",
+      "explanation": "The differential-mode voltage is\n\nTherefore, with V1 = -v2,\n\nThe common-mode voltage is\n\nTherefore, only the difference is being amplified, and \nthe gain is Aid\u00b7\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY5-4",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "An ideal operational amplifier is shown. The voltage \nat the inverting terminal, Vi, is 0.002 V, and the voltage \nat the noninverting terminal, v1, is 0.001 V. The output\n\nvoltage is -10 V. Most nearly, what is the gain of the \noperational amplifier?",
+      "choices": {
+        "A": "1000",
+        "B": "10,000",
+        "C": "100,000",
+        "D": "1,000,000"
+      },
+      "correct_answer": "B",
+      "explanation": "Use the equation for output voltage, and rearrange to \nsolve for the gain.\n\nv0 = A(v1 - v2)\n\nA=~= \n-lOV\n\nV1 -\nV2 \n0.001 V - 0.002 V \n= 10,000\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY5-5",
+      "subtopic": "Amplifiers",
+      "difficulty": "medium",
+      "stem": "An ideal operational amplifier is used in a voltage \namplification circuit as shown.\n\n40.!l\n\n80.!l\n\n+\n\n10V\n\nMost nearly, what is the output voltage?",
+      "choices": {
+        "A": "-14 V",
+        "B": "-11 V",
+        "C": "-1 V",
+        "D": "6 V"
+      },
+      "correct_answer": "B",
+      "explanation": "Use the equation for a two-source operational ampli-\nfier. The output voltage is\n\nVo= - R2 Va+ (1 + R2 )vb\n\nR1 \nR1\n\n= (- 40 n )(lO V) + (1 + 40 n )(-4 V)\n\n80 n \n80 n \n= -11 V\n\nThe answer is (B).",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "crossword",
+  "puzzle_instance": {
+    "slug": "crossword",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "grid_size": {
+      "rows": 5,
+      "cols": 5
+    },
+    "words": [
+      {
+        "number": 1,
+        "direction": "across",
+        "row": 1,
+        "col": 1,
+        "answer": "BJT",
+        "clue": "Bipolar Junction Transistor"
+      },
+      {
+        "number": 1,
+        "direction": "down",
+        "row": 1,
+        "col": 1,
+        "answer": "BIAS",
+        "clue": "DC voltage applied to set operating point"
+      },
+      {
+        "number": 2,
+        "direction": "across",
+        "row": 3,
+        "col": 1,
+        "answer": "AMP",
+        "clue": "Short for Amplifier"
+      }
+    ]
+  }
+}

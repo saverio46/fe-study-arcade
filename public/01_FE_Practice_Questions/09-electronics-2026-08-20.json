@@ -1,0 +1,91 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY3-1",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "An enhancement-mode NMOS MOSFET has a con-\nductivity factor of 4 mA/V2 and a threshold voltage of \n0.7 V. The MOSFET is operating in the saturation \nregion. Most nearly, the gate-to-source voltage needed \nto produce a drain current of 23.5 mA is",
+      "choices": {
+        "A": "1.7 V",
+        "B": "2.5 V",
+        "C": "3.1 V",
+        "D": "4.1 V"
+      },
+      "correct_answer": "C",
+      "explanation": "Use the drain current equation for a MOSFET oper-\nating in the saturation region, and solve for the gate-to-\nsource voltage.\n\n{Ti; \nVcs = VK + v; = \n23.5 mA + 0_7 V\n\n4 mA\n\ny2 \n= 3.12 V \n(3.1 V)\n\nThe answer is (C).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY3-2",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A silicon pn diode at room temperature has a ther-\nmal voltage of 0.025 V. Most nearly, the applied diode \nvoltage needed to make the diode current equal 90% of \nthe diode saturation current is",
+      "choices": {
+        "A": "0.016 V",
+        "B": "0.16 V",
+        "C": "0.50 V",
+        "D": "0.70 V"
+      },
+      "correct_answer": "A",
+      "explanation": "For silicon, the emission coefficient, rJ, is 1. Use \nShockley's equation, and set the diode current, in, equal \nto 90% of the saturation current, I8 \u2022\n\nin ~ Is[ e<vn/1JVr) - 1]\n\n0.9Is = I.(e\"n/0.025V -1)\n\n1.9 = e\"n/0.025V\n\nlnl.9 = __ \nvD __ \n0.025 V \nvv = (ln 1.9)(0.025 V) \n= 0.01605 V \n(0.016 V)\n\nThe answer is (A).13. The JFET is as shown.\n\nR0 = 1 k!l\n\nR, = 90 k!l\n\nG \nD \ns\n\n10V-=-\n\n+\n\nUse the voltage divider concept on the left side of the \ncircuit. The battery polarity is negative, so use a nega-\ntive value for the voltage.\n\n) Vi \nR1 + R2\n\nvcs = [ \nR\n2\n\n_ ( \n10 kn \n) ( _ 10 V) \n90 kn+ 10 kn \n= -1.0 V\n\nThe drain current is\n\nin= Inss(l - Vcs/ Vp)\n2\n\n2\n\n= (18 mA)(1- -1.0 V )\n\n-3 V \n=8mA\n\nThe source-to-drain voltage is\n\n= lOV -\n_S_m_A_ ( (1 kn) ( 1000 k~))\n\n1000 :A\n\n=2V\n\nThe power dissipated in the JFET is\n\n8 mA \nP = vnsin = (2 V) ----\n\n1000 mA\n\nA \n= 0.016 W\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY3-3",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "The JFET used in the circuit shown operates in the \nsaturation region. The JFET's drain-to-source satura-\ntion current is 18 mA, and its pinch-off voltage is - 3 V . \n.._Most nearly, the power dissipated in the JFET is",
+      "choices": {
+        "A": "0.016 W",
+        "B": "0.16 W",
+        "C": "1.6 W",
+        "D": "16 W"
+      },
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY3-4",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "The JFET shown is operating in the saturation \nregion. The drain supply voltage is 5 V, the saturation \nresistance is 1 kn, the drain-to-source saturation cur-\nrent is 2 mA, and the pinch-off voltage is -2 V.\n\ns \n+ \n-=- Voo \n+\n\nMost nearly, what is the gate-to-drain voltage?",
+      "choices": {
+        "A": "-3 V",
+        "B": "-2 V",
+        "C": "2 V",
+        "D": "OV"
+      },
+      "correct_answer": "A",
+      "explanation": "Because the gate and the source are tied together, \nthe gate-to-source voltage, Vcs, is zero. Find the drain\n\ncurrent using the equation for JFET performance in the \nsaturation region.\n\nin= Inss(l - Vcs/ Vp)\n2\n\n- (2 mAi(i . OV~r\n\n= 2mA\n\nUse Ohm's law to find the saturation voltage.\n\n2 mA\n\n1000 mA\n\nA \n=2V\n\nThe drain-to-source voltage is\n\nThe gate-to-drain voltage is\n\nVcn=-Vns=-3V\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY3-5",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "The BJT incorporated into the circuit shown has a \nbase-emitter voltage of 0. 7 V and a common emitter cur-\nrent gain of 100.\n\n2 kn\n\n+ \n+ \n5V-=-\n-=-10V\n\n1ill \n~\n\nMost nearly, the base current is",
+      "choices": {
+        "A": "0.043 mA",
+        "B": "0.43 mA",
+        "C": "0.75 mA",
+        "D": "7.5 mA"
+      },
+      "correct_answer": "A",
+      "explanation": "The circuit is as shown.\n\nRe= 2 k!l\n\n+ \n+ \nV88 = 5V-=-\n-=-Vee= 10V\n\nWrite Kirchhoff's voltage law for the base-emitter loop, \nand solve for the emitter current.\n\n(5 V - 0.7 V)( 1000 \u00a5)\n\n(1 krn( 1000 ; \n)\n\n= 4.3 mASubstitute the equation for collector current, le, into the \nequation for emitter current, JE,\n\niE = iB+ ic = iB+ /3iB\n\n= (1 + /3)iB \n. \niE \n4.3 mA \ni ----\nB-1+/3 -\n1+100 \n= 0.0426 mA \n(0.043 mA)\n\nThe answer is (A).",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_instance": {
+    "slug": "wordle",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "target_word": "DRAIN",
+    "config": {
+      "word_length": 5,
+      "max_guesses": 6
+    }
+  }
+}

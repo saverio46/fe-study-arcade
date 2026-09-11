@@ -1,0 +1,91 @@
+{
+  "topic_number": 9,
+  "topic_name": "Electronics",
+  "questions": [
+    {
+      "id": "ELEC-DAY1-1",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "At an equilibrium temperature of 50\u00b0C, the contact \npotential of a pn junction is 0.6 V. The intrinsic carrier \nconcentration is n; = 1.5 x 1010 1 / cm3, and the donor con-\ncentration in the n-type material is 7.0 x 1017 1/cm3. \nThe acceptor concentration is most nearly",
+      "choices": {
+        "A": "7.0 x 1010 1/cm3",
+        "B": "1.0 x 1011 1/cm3",
+        "C": "7.4 x 1011 1/cm3",
+        "D": "7.0 x 1017 1/cm3"
+      },
+      "correct_answer": "C",
+      "explanation": "The absolute equilibrium temperature is\n\nT = 50\u00b0C + 273.15\u00b0 = 323.15K\n\nUse the equation for the contact potential of a pn junc-\ntion, and solve for the acceptor concentration.\n\nkT \nNaNd \nVo= -ln-\u00b7 -\n\nq \nnf\n\nNa= [ ;: ]eV,q/kT\n\n(\n1.5 X \n1010 _1_]2\n\ncm3\n\n(0.6 V)(l.602 x 10- 19 C) \nexp \n23 \n(1.38 x 10-\nJ/K)(323.15K)\n\n7.0 X 10 17 _l_\n\ncm3\n\n= 7.4 x 10 11 cm-3\n\nThe answer is (C).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY1-2",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A diode can be formed by doping an otherwise pure \ncrystal such that",
+      "choices": {
+        "A": "an n-type semiconductor is produced",
+        "B": "the crystal becomes an intrinsic semiconductor",
+        "C": "one half of the crystal is p-type and the other \nhalf is n-type",
+        "D": "a p-type semiconductor is produced"
+      },
+      "correct_answer": "C",
+      "explanation": "A diode is a junction of n-type and p,-type semicon-\nductors. Option C is correct.\n\nThe answer is (C).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY1-3",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "An ideal diode and two resistors are arranged in a series \ncircuit as shown. The load resistor, RL, dissipates 25 W.\n\nR5 = 20 n\n\nRL = 200 fl\n\nMost nearly, what is the magnitude, Vm, of the supply \nvoltage?",
+      "choices": {
+        "A": "100 V",
+        "B": "110 V",
+        "C": "140 V",
+        "D": "160 V"
+      },
+      "correct_answer": "D",
+      "explanation": "The circuit is a half-wave rectifier.\n\nV\n\nVL,max\n\nVL,rms\n\nThe power drawn by the load, PL, is proportional to the \nrms value of the voltage. For a half-wave rectified sinus-\noid, therms value is equal to one-half of the maximum \nvalue.\n\nv; \nv; \n_ \nL,max \nL,rms -\n2For a purely resistive load, power is\n\n_ \nL,nns v; \n[ v; l \n-\n200 fl \nL,rms\n\nPL = IL,rms VL,rms\n\nV\u00a3,rms \n200 n \n[~]'\n\n200 n\n\nV\u00a3,max \n=---\n800 n\n\nThe load resistor dissipates 25 W, so\n\ny2 \n25 W = \nL,max \n800 n\n\nVL,max = J (25 W) (800 0)\n\n= 141.4 V \n[at the load]\n\nThe shunt resistance creates a voltage divider.\n\nv; \n_ V ( \nRL \n) _ V. ( \n200 0 \n) \nL,max -\nm Rs+ RL \n-\nm 20 n + 200 n \n= 0.909Vm\n\nv; \nV. = \nL,max\n\n141.4 V \n0.909 \n(160 V)\n\nm \n0.909 \n= 155.6 V\n\nThe answer is (D).\n\n4, Use the equation for JFET transconductance, and \nsolve for the drain current, In.\n\n9m =\n\ng2 y2 \nI -~ \nD-\n\n4/DSS\n\nFrom the equation for the drain-to-source saturation \ncurrent, IDss = KV;, so\n\n2 y2 \n2 \nI -~-!I..:!!_\n\nD -\n4KV2 -\n4K \np\n\n(2 X 10-3 8)2 \n( 4)( 6.5 X 10-\n\n4\n\n:\n2 )\n\n= 1.54 x 10-3 A \n(1.5 mA)\n\nThe answer is (D).",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY1-4",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A JFET is used in an amplifier circuit. The JFET \noperates in the saturation region. The conductivity\n\nfactor is 6.5 x 10- 4 A/V2, and the transconductance is \n2 X 10-3 S.\n\nMost nearly, the drain current is",
+      "choices": {
+        "A": "0.5 mA",
+        "B": "1.0 mA",
+        "C": "1.3 mA",
+        "D": "1.5 mA"
+      },
+      "correct_answer": "A",
+      "explanation": "",
+      "reference": "FE Reference Handbook, Electronics"
+    },
+    {
+      "id": "ELEC-DAY1-5",
+      "subtopic": "Semiconductor Devices",
+      "difficulty": "medium",
+      "stem": "A black box is reverse-engineered and is found to con-\ntain the circuit shown.\n\nVee\n\n200n\n\n500 n 40 \u00b5.F \nt-1\\Vv------J \n+\n\n+ \n500 n \nVout\n\n480D.\n\nMost likely, what is the purpose of the capacitors in the \ncircuit?",
+      "choices": {
+        "A": "to speed up the voltage propagation",
+        "B": "to isolate the DC biasing circuit from the AC \ninput and output",
+        "C": "to suppress noise form the DC voltage source Vee",
+        "D": "to increase the amplification\n\n\n\n\n\n30-2 \nF E \nE L EC T R I CA L \nA N D \nC O M P U T E R \nP R A CT I C E \nP A O B L E M S"
+      },
+      "correct_answer": "A",
+      "explanation": "The capacitors allow the DC bias on the transistor to \noperate the transistor in the desired range without the \nDC voltage affecting the input or the output. The pur-\npose of the capacitors, .then, is most likely to isolate the \nDC biasing circuit from the AC input and output.\n\nThe answer is (8).",
+      "reference": "FE Reference Handbook, Electronics"
+    }
+  ],
+  "puzzle_slug": "wordle",
+  "puzzle_instance": {
+    "slug": "wordle",
+    "narrative": "Complete the puzzle for today's electronics review.",
+    "target_word": "DIODE",
+    "config": {
+      "word_length": 5,
+      "max_guesses": 6
+    }
+  }
+}
