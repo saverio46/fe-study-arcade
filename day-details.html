@@ -859,7 +859,10 @@
 
         const stem = document.createElement('div');
         stem.className = 'q-stem';
-        stem.textContent = q.stem;
+        let safeHtml = escapeHtml(q.stem);
+        safeHtml = safeHtml.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%; border-radius:4px; margin-top:8px;">');
+        safeHtml = safeHtml.replace(/\^\^\^([\s\S]*?)\^\^\^/g, '<pre style="font-family:var(--font-mono); background:var(--panel-2); padding:10px; border-radius:4px; margin-top:8px;">$1</pre>');
+        stem.innerHTML = safeHtml;
         item.appendChild(stem);
 
         const choicesWrap = document.createElement('div');

@@ -94,7 +94,7 @@
       "id": "CA-NEW-7",
       "subtopic": "Series/parallel equivalent circuits",
       "difficulty": "medium",
-      "stem": "A circuit with a 120 V DC source and resistors of 12 Ohm, 15 Ohm, 7 Ohm, and 5 Ohm is analyzed with mesh analysis. Most nearly, the voltage across the 7 Ohm resistor is",
+      "stem": "A circuit with a 120 V DC source and resistors of 12 Ohm, 15 Ohm, 7 Ohm, and 5 Ohm is analyzed with mesh analysis. Most nearly, the voltage across the 7 Ohm resistor is\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_7.png)",
       "choices": {
         "A": "7.0 V",
         "B": "11 V",
@@ -109,7 +109,7 @@
       "id": "CA-NEW-8",
       "subtopic": "Series/parallel equivalent circuits",
       "difficulty": "medium",
-      "stem": "Two voltage sources (4 V and unknown V) with two resistors (9 Ohm and 5 Ohm) produce a clockwise current of 0.1 A. Most nearly, the unknown voltage V is",
+      "stem": "Two voltage sources (4 V and unknown V) with two resistors (9 Ohm and 5 Ohm) produce a clockwise current of 0.1 A. Most nearly, the unknown voltage V is\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_8.png)",
       "choices": {
         "A": "1.0 V",
         "B": "2.0 V",

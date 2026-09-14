@@ -8,7 +8,7 @@
       "id": "PWR-D1-1",
       "subtopic": "Three-Phase Power",
       "difficulty": "medium",
-      "stem": "The balanced delta load shown is connected to a stable, three-phase voltage source. The rms line voltage is 120 V. The load impedance per phase is 15 \u03a9 + j10 \u03a9.\n\n![Delta load circuit diagram](/images/ch26-q1-delta-load-circuit.png)\n\nWhat is most nearly the rms magnitude of the line current?",
+      "stem": "The balanced delta load shown is connected to a stable, three-phase voltage source. The rms line voltage is 120 V. The load impedance per phase is 15 \u03a9 + j10 \u03a9.\n\n\n\nWhat is most nearly the rms magnitude of the line current?",
       "choices": {
         "A": "4.80 A",
         "B": "8.50 A",
@@ -53,7 +53,7 @@
       "id": "PWR-D1-4",
       "subtopic": "Three-Phase Power",
       "difficulty": "easy",
-      "stem": "A balanced, three-phase, wye-connected load system has three identical phase impedances of 40 \u03a9 \u2212 j30 \u03a9. Most nearly, the equivalent delta-connected phase impedances are:\n\n![Wye-connected load circuit diagram](/images/ch26-q4-wye-load-circuit.png)",
+      "stem": "A balanced, three-phase, wye-connected load system has three identical phase impedances of 40 \u03a9 \u2212 j30 \u03a9. Most nearly, the equivalent delta-connected phase impedances are:",
       "choices": {
         "A": "40 \u03a9 \u2212 j30 \u03a9",
         "B": "40 \u03a9 + j30 \u03a9",

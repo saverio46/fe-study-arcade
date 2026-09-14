@@ -109,7 +109,7 @@
       "id": "CA-NEW-26",
       "subtopic": "Waveform analysis",
       "difficulty": "medium",
-      "stem": "An ideal transformer (5:1 step-down ratio) has primary at 1200 V, primary current 4.8 A, secondary to 10 Ohm. Most nearly, the secondary current is",
+      "stem": "An ideal transformer (5:1 step-down ratio) has primary at 1200 V, primary current 4.8 A, secondary to 10 Ohm. Most nearly, the secondary current is\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_8.png)",
       "choices": {
         "A": "12 A",
         "B": "24 A",
@@ -124,7 +124,7 @@
       "id": "CA-NEW-27",
       "subtopic": "Waveform analysis",
       "difficulty": "medium",
-      "stem": "An ideal transformer (5:1) has primary at 1200 V; secondary (10 Ohm) measures V2 = 240 V. Most nearly, the primary current is",
+      "stem": "An ideal transformer (5:1) has primary at 1200 V; secondary (10 Ohm) measures V2 = 240 V. Most nearly, the primary current is\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_10.png)",
       "choices": {
         "A": "1.9 A",
         "B": "4.8 A",

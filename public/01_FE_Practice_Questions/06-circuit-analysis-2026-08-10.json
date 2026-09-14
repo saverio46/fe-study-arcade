@@ -94,7 +94,7 @@
       "id": "CA-NEW-19",
       "subtopic": "Node and loop analysis",
       "difficulty": "medium",
-      "stem": "Four capacitors (C1=20 uF, C2=100 uF, C3=20 uF, C4=20 uF) are in a mixed series-parallel arrangement. Most nearly, the equivalent capacitance is",
+      "stem": "Four capacitors (C1=20 uF, C2=100 uF, C3=20 uF, C4=20 uF) are in a mixed series-parallel arrangement. Most nearly, the equivalent capacitance is\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_1.png)",
       "choices": {
         "A": "20 uF",
         "B": "50 uF",
@@ -109,7 +109,7 @@
       "id": "CA-NEW-20",
       "subtopic": "Node and loop analysis",
       "difficulty": "medium",
-      "stem": "Four inductors (L1=30 mH, L2=27 mH, and two others) are in a mixed series-parallel arrangement. Most nearly, the equivalent inductance is",
+      "stem": "Four inductors (L1=30 mH, L2=27 mH, and two others) are in a mixed series-parallel arrangement. Most nearly, the equivalent inductance is\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_4.png)",
       "choices": {
         "A": "8 mH",
         "B": "15 mH",
@@ -154,7 +154,7 @@
       "id": "CA-NEW-23",
       "subtopic": "Node and loop analysis",
       "difficulty": "medium",
-      "stem": "An ideal transformer rated 440V:110V has primary at 440 V and a 5.5 Ohm secondary load. What are the primary and secondary currents?",
+      "stem": "An ideal transformer rated 440V:110V has primary at 440 V and a 5.5 Ohm secondary load. What are the primary and secondary currents?\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_6.png)",
       "choices": {
         "A": "5 A primary, 20 A secondary",
         "B": "5 A primary, 80 A secondary",

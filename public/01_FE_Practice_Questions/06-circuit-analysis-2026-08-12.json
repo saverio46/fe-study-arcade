@@ -109,7 +109,7 @@
       "id": "CA-NEW-32",
       "subtopic": "Phasors",
       "difficulty": "medium",
-      "stem": "A series RLC circuit (R=2 Ohm, L=70 mH, C=50 uF) at w=400 rad/s. Most nearly, the impedance is",
+      "stem": "A series RLC circuit (R=2 Ohm, L=70 mH, C=50 uF) at w=400 rad/s. Most nearly, the impedance is\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_12.png)",
       "choices": {
         "A": "11.0 Ohm at -79.6 deg",
         "B": "15.6 Ohm at -84.8 deg",
@@ -124,7 +124,7 @@
       "id": "CA-NEW-33",
       "subtopic": "Phasors",
       "difficulty": "medium",
-      "stem": "A generator (120 V at 0 deg, Z_gen = 20+j20 Ohm) connects to load (30+jX Ohm) via a line (Rt - j10 Ohm). For maximum power to load, Rt and X_load are",
+      "stem": "A generator (120 V at 0 deg, Z_gen = 20+j20 Ohm) connects to load (30+jX Ohm) via a line (Rt - j10 Ohm). For maximum power to load, Rt and X_load are\n\n![Circuit Diagram](/images/pdf_crops/ca_ac_13.png)",
       "choices": {
         "A": "Rt=10, X=-10 Ohm",
         "B": "Rt=10, X=10 Ohm",

@@ -109,7 +109,7 @@
       "id": "CA-NEW-38",
       "subtopic": "Impedance",
       "difficulty": "medium",
-      "stem": "A series RL circuit (40 V, 2 Ohm, 80 mH) switch closes at t=0 (no initial current). Most nearly, the inductor current 60 us later is",
+      "stem": "A series RL circuit (40 V, 2 Ohm, 80 mH) switch closes at t=0 (no initial current). Most nearly, the inductor current 60 us later is\n\n![Circuit Diagram](/images/pdf_crops/ca_tr_1.png)",
       "choices": {
         "A": "2.4 mA",
         "B": "3.2 mA",
@@ -124,7 +124,7 @@
       "id": "CA-NEW-39",
       "subtopic": "Impedance",
       "difficulty": "medium",
-      "stem": "An RC filter with R=10 kOhm and C=0.05 uF has cutoff frequency 318 Hz. This circuit is a",
+      "stem": "An RC filter with R=10 kOhm and C=0.05 uF has cutoff frequency 318 Hz. This circuit is a\n\n![Circuit Diagram](/images/pdf_crops/ca_tr_2.png)",
       "choices": {
         "A": "low-pass filter",
         "B": "high-pass filter",
@@ -139,7 +139,7 @@
       "id": "CA-NEW-40",
       "subtopic": "Impedance",
       "difficulty": "medium",
-      "stem": "A series RC circuit (10 V, 4 kOhm, 2 kOhm, 20 uF) switch closes at t=0 (no initial charge). Most nearly, the steady-state capacitor voltage is",
+      "stem": "A series RC circuit (10 V, 4 kOhm, 2 kOhm, 20 uF) switch closes at t=0 (no initial charge). Most nearly, the steady-state capacitor voltage is\n\n![Circuit Diagram](/images/pdf_crops/ca_tr_3.png)",
       "choices": {
         "A": "10 V",
         "B": "20 V",
@@ -154,7 +154,7 @@
       "id": "CA-NEW-41",
       "subtopic": "Impedance",
       "difficulty": "medium",
-      "stem": "A voltage v(t)=40sin(100t) is applied to an RC filter (R=50 Ohm, C=200 uF). Most nearly, the output amplitude is",
+      "stem": "A voltage v(t)=40sin(100t) is applied to an RC filter (R=50 Ohm, C=200 uF). Most nearly, the output amplitude is\n\n![Circuit Diagram](/images/pdf_crops/ca_tr_4.png)",
       "choices": {
         "A": "0 V",
         "B": "20 V",

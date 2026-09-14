@@ -94,7 +94,7 @@
       "id": "CA-NEW-1",
       "subtopic": "KCL, KVL",
       "difficulty": "medium",
-      "stem": "An ideal battery (96 V), a 4 A current source, and three resistors (4 Ohm, 4 Ohm, 6 Ohm) are assembled in a circuit. Using superposition, most nearly what is the current flowing through the 6 Ohm resistor?",
+      "stem": "An ideal battery (96 V), a 4 A current source, and three resistors (4 Ohm, 4 Ohm, 6 Ohm) are assembled in a circuit. Using superposition, most nearly what is the current flowing through the 6 Ohm resistor?\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_1.png)",
       "choices": {
         "A": "7.0 A",
         "B": "7.5 A",
@@ -109,7 +109,7 @@
       "id": "CA-NEW-2",
       "subtopic": "KCL, KVL",
       "difficulty": "medium",
-      "stem": "A circuit with two terminals has a 30 mA current source and two 3 kOhm resistors. The Thevenin equivalent across terminals A and B is",
+      "stem": "A circuit with two terminals has a 30 mA current source and two 3 kOhm resistors. The Thevenin equivalent across terminals A and B is\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_2.png)",
       "choices": {
         "A": "30 V in series with 1.5 kOhm",
         "B": "45 V in series with 1.5 kOhm",
@@ -124,7 +124,7 @@
       "id": "CA-NEW-3",
       "subtopic": "KCL, KVL",
       "difficulty": "medium",
-      "stem": "A circuit has a 10 V source, 4 A current source, and resistors of 2 Ohm and 3 Ohm. Converting the current source and 3 Ohm to a Thevenin equivalent, most nearly the current through the 2 Ohm resistor is",
+      "stem": "A circuit has a 10 V source, 4 A current source, and resistors of 2 Ohm and 3 Ohm. Converting the current source and 3 Ohm to a Thevenin equivalent, most nearly the current through the 2 Ohm resistor is\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_3.png)",
       "choices": {
         "A": "0.4 A, right to left",
         "B": "0.4 A, left to right",
@@ -169,7 +169,7 @@
       "id": "CA-NEW-6",
       "subtopic": "KCL, KVL",
       "difficulty": "medium",
-      "stem": "A circuit has a 10 V source and resistors of 2 Ohm, 10 Ohm, and 15 Ohm. Most nearly, what value of load R_L allows maximum power transfer?",
+      "stem": "A circuit has a 10 V source and resistors of 2 Ohm, 10 Ohm, and 15 Ohm. Most nearly, what value of load R_L allows maximum power transfer?\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_6.png)",
       "choices": {
         "A": "2.0 Ohm",
         "B": "8.0 Ohm",

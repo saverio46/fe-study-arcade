@@ -139,7 +139,7 @@
       "id": "CA-NEW-16",
       "subtopic": "Thevenin and Norton theorems",
       "difficulty": "medium",
-      "stem": "In a 4-resistor network where each resistor is 10 Ohm, most nearly what is the total resistance between terminals A and B?",
+      "stem": "In a 4-resistor network where each resistor is 10 Ohm, most nearly what is the total resistance between terminals A and B?\n\n![Circuit Diagram](/images/pdf_crops/ca_dc_9.png)",
       "choices": {
         "A": "7.5 Ohm",
         "B": "7.9 Ohm",
