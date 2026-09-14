@@ -8,7 +8,7 @@
       "id": "PWR-D3-1",
       "subtopic": "Transformers",
       "difficulty": "easy",
-      "stem": "The point of common coupling — also known as the service connection point — between a utility electric distribution system and a customer's electric distribution system is most commonly:",
+      "stem": "The point of common coupling \u2014 also known as the service connection point \u2014 between a utility electric distribution system and a customer's electric distribution system is most commonly:\n\n![Circuit Diagram](/images/pdf_crops/auto_135_14.png)",
       "choices": {
         "A": "A transformer",
         "B": "An electric meter",
@@ -17,13 +17,13 @@
       },
       "correct_answer": "B",
       "explanation": "The point of common coupling is defined by the National Electrical Code and local regulations. It is the point where the jurisdiction of the local utility ends and that of the local electrical authority (the customer) begins. This is most commonly the site of an electric meter owned by the utility. A transformer may be upstream or downstream of the meter, and a fused disconnect or main OCPD will be downstream of the meter (owned by the customer). The answer is (B).",
-      "reference": "FE Reference Handbook – Power, Power Distribution"
+      "reference": "FE Reference Handbook \u2013 Power, Power Distribution"
     },
     {
       "id": "PWR-D3-2",
       "subtopic": "Transformers",
       "difficulty": "easy",
-      "stem": "A step-up transformer is used to connect a large generating plant to the electric grid in order to:",
+      "stem": "A step-up transformer is used to connect a large generating plant to the electric grid in order to:\n\n![Circuit Diagram](/images/pdf_crops/auto_132_8.png)",
       "choices": {
         "A": "Prevent ground faults at the generator terminal",
         "B": "Provide a means of disconnecting the generator from the grid",
@@ -31,14 +31,14 @@
         "D": "Increase the output voltage of the generator to match the transmission voltage at the interconnection point"
       },
       "correct_answer": "D",
-      "explanation": "The output voltage of a large generator is typically 3 kV to 13.8 kV. Transmission-level voltages are in the range of 138 kV to 765 kV. The step-up transformer provides this voltage transformation so the generator can interconnect with the grid. Options A, B, and C are all incorrect — ground fault minimization is done by impedance grounding, disconnection is provided by breakers/switches, and stability is maintained by the generator's control system. The answer is (D).",
-      "reference": "FE Reference Handbook – Power, Power Distribution"
+      "explanation": "The output voltage of a large generator is typically 3 kV to 13.8 kV. Transmission-level voltages are in the range of 138 kV to 765 kV. The step-up transformer provides this voltage transformation so the generator can interconnect with the grid. Options A, B, and C are all incorrect \u2014 ground fault minimization is done by impedance grounding, disconnection is provided by breakers/switches, and stability is maintained by the generator's control system. The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Power Distribution"
     },
     {
       "id": "PWR-D3-3",
       "subtopic": "Transformers",
       "difficulty": "medium",
-      "stem": "Which of these statements about a simple radial distribution system is FALSE?",
+      "stem": "Which of these statements about a simple radial distribution system is FALSE?\n\n![Circuit Diagram](/images/pdf_crops/auto_134_13.png)",
       "choices": {
         "A": "A single primary service and transformer supply all consumer feeders.",
         "B": "There is no redundancy of equipment (i.e., switches, fuses, transformers, service cable).",
@@ -46,14 +46,14 @@
         "D": "A backup generator must be connected on the primary side of the supply transformer."
       },
       "correct_answer": "D",
-      "explanation": "In a radial distribution system, loads are supplied through a single electrical path with one transformer and a common bus. Options A, B, and C are all TRUE statements: one transformer/service feeds all feeders (A), there is no equipment redundancy so any upstream fault causes an outage (B), and operation and expansion are simpler than looped/networked systems (C). Option D is FALSE — with proper controls and protection devices, backup generation can be connected on any of the consumer feeders (the secondary side). The answer is (D).",
-      "reference": "FE Reference Handbook – Power, Power Distribution"
+      "explanation": "In a radial distribution system, loads are supplied through a single electrical path with one transformer and a common bus. Options A, B, and C are all TRUE statements: one transformer/service feeds all feeders (A), there is no equipment redundancy so any upstream fault causes an outage (B), and operation and expansion are simpler than looped/networked systems (C). Option D is FALSE \u2014 with proper controls and protection devices, backup generation can be connected on any of the consumer feeders (the secondary side). The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Power Distribution"
     },
     {
       "id": "PWR-D3-4",
       "subtopic": "Transformers",
       "difficulty": "easy",
-      "stem": "When deciding on whether to use a fuse or a circuit breaker for overcurrent protection, which factor should generally NOT be considered?",
+      "stem": "When deciding on whether to use a fuse or a circuit breaker for overcurrent protection, which factor should generally NOT be considered?\n\n![Circuit Diagram](/images/pdf_crops/auto_135_16.png)",
       "choices": {
         "A": "Environmental regulations",
         "B": "Interrupting ratings",
@@ -61,14 +61,14 @@
         "D": "Economics"
       },
       "correct_answer": "A",
-      "explanation": "Fuses and circuit breakers are both valid choices for overcurrent protection. Key deciding factors include: interrupting rating (both must handle the available fault current), selective coordination (the ability to isolate just the faulted section), and economics (fuses are generally cheaper to purchase but circuit breakers are reusable). Environmental regulations are NOT a standard factor when choosing between these devices — both meet environmental requirements. The answer is (A).",
-      "reference": "FE Reference Handbook – Power, Power Distribution"
+      "explanation": "Fuses and circuit breakers are both valid choices for overcurrent protection. Key deciding factors include: interrupting rating (both must handle the available fault current), selective coordination (the ability to isolate just the faulted section), and economics (fuses are generally cheaper to purchase but circuit breakers are reusable). Environmental regulations are NOT a standard factor when choosing between these devices \u2014 both meet environmental requirements. The answer is (A).",
+      "reference": "FE Reference Handbook \u2013 Power, Power Distribution"
     },
     {
       "id": "PWR-D3-5",
       "subtopic": "Transformers",
       "difficulty": "medium",
-      "stem": "A transmission line has a characteristic impedance of 75 Ω. The load at the end of the transmission line has an impedance of 377 Ω. Most nearly, the percentage of the signal voltage that is transmitted to the load is:",
+      "stem": "A transmission line has a characteristic impedance of 75 \u03a9. The load at the end of the transmission line has an impedance of 377 \u03a9. Most nearly, the percentage of the signal voltage that is transmitted to the load is:\n\n![Circuit Diagram](/images/pdf_crops/auto_132_9.png)",
       "choices": {
         "A": "10%",
         "B": "30%",
@@ -76,14 +76,14 @@
         "D": "100%"
       },
       "correct_answer": "C",
-      "explanation": "The transmission coefficient τ = 1 + Γ where Γ = (Z_L − Z₀)/(Z_L + Z₀) = (377 − 75)/(377 + 75) = 302/452 ≈ 0.668. So τ = 1 + 0.668 = 1.668 — but this is the voltage transmission coefficient at the termination, not the fraction transmitted away from source. The power transmitted = 1 − |Γ|² = 1 − 0.668² = 1 − 0.447 ≈ 0.553 ≈ 50%. Voltage at load relative to incident: |τ|² × Z₀/Z_L = 1.668² × 75/377 ≈ 0.55. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "The transmission coefficient \u03c4 = 1 + \u0393 where \u0393 = (Z_L \u2212 Z\u2080)/(Z_L + Z\u2080) = (377 \u2212 75)/(377 + 75) = 302/452 \u2248 0.668. So \u03c4 = 1 + 0.668 = 1.668 \u2014 but this is the voltage transmission coefficient at the termination, not the fraction transmitted away from source. The power transmitted = 1 \u2212 |\u0393|\u00b2 = 1 \u2212 0.668\u00b2 = 1 \u2212 0.447 \u2248 0.553 \u2248 50%. Voltage at load relative to incident: |\u03c4|\u00b2 \u00d7 Z\u2080/Z_L = 1.668\u00b2 \u00d7 75/377 \u2248 0.55. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     }
   ],
   "puzzle_slug": "wordle",
   "puzzle_instance": {
     "slug": "wordle",
-    "narrative": "Today's word is a key component of power distribution systems — the device that transforms voltage levels.",
+    "narrative": "Today's word is a key component of power distribution systems \u2014 the device that transforms voltage levels.",
     "target_word": "POWER",
     "config": {
       "word_length": 5,

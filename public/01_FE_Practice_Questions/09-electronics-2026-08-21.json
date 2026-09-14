@@ -6,7 +6,7 @@
       "id": "ELEC-DAY4-1",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "The n-channel JFET in the circuit shown is operat-\ning in the saturation region. It has a pinch-off voltage of\n\n-4 V, a drain current of 7.2 mA, and a gate-to-source \nvoltage of 10 V. The drain-to-source voltage is 8 V.\n\n24V\n\n,----------+------- Vout\n\n100 Mn\n\nD \n+ \nav\n\nMost nearly, the drain resistance is",
+      "stem": "The n-channel JFET in the circuit shown is operat-\ning in the saturation region. It has a pinch-off voltage of\n\n-4 V, a drain current of 7.2 mA, and a gate-to-source \nvoltage of 10 V. The drain-to-source voltage is 8 V.\n\n24V\n\n,----------+------- Vout\n\n100 Mn\n\nD \n+ \nav\n\nMost nearly, the drain resistance is\n\n![Circuit Diagram](/images/pdf_crops/auto_147_28.png)",
       "choices": {
         "A": "12.7kn",
         "B": "13.0 kn",
@@ -21,7 +21,7 @@
       "id": "ELEC-DAY4-2",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "A JFET operating in the saturation region has a \npinch-off voltage of -4 V, a drain current of 6.4 mA, \nand a gate-to-source voltage of 9 V. Most nearly, the \ntransconductance is",
+      "stem": "A JFET operating in the saturation region has a \npinch-off voltage of -4 V, a drain current of 6.4 mA, \nand a gate-to-source voltage of 9 V. Most nearly, the \ntransconductance is\n\n![Circuit Diagram](/images/pdf_crops/auto_144_24.png)",
       "choices": {
         "A": "9.9 X 10-4 s",
         "B": "6.7 X 10-4 s",
@@ -36,7 +36,7 @@
       "id": "ELEC-DAY4-3",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "The n-channel enhancement MOSFET shown is \noperating in the saturation region. It has a threshold volt-\nage of 4 V, a drain current of 7.2 mA, and a gate-to-\nsource voltage of 10 V. The drain-to-source voltage is \n8V.\n\n24V\n\n,------+---- Vout\n\n100 Mn\n\n+\n\nV;0 ____...____. ~ \n~ V \n,~v 1-Most nearly, what is the drain resistance?",
+      "stem": "The n-channel enhancement MOSFET shown is \noperating in the saturation region. It has a threshold volt-\nage of 4 V, a drain current of 7.2 mA, and a gate-to-\nsource voltage of 10 V. The drain-to-source voltage is \n8V.\n\n24V\n\n,------+---- Vout\n\n100 Mn\n\n+\n\nV;0 ____...____. ~ \n~ V \n,~v 1-Most nearly, what is the drain resistance?\n\n![Circuit Diagram](/images/pdf_crops/auto_144_25.png)",
       "choices": {
         "A": "2.7 kD",
         "B": "3.0 kD",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY4-4",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "The ideal op amps are cascaded as shown.\n\n2 n\n\n5V\n\nWhat is most nearly the output voltage?",
+      "stem": "The ideal op amps are cascaded as shown.\n\n2 n\n\n5V\n\nWhat is most nearly the output voltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_154_38.png)",
       "choices": {
         "A": "-20 V",
         "B": "2.5 V",

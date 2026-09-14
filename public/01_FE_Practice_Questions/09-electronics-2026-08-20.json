@@ -36,7 +36,7 @@
       "id": "ELEC-DAY3-3",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "The JFET used in the circuit shown operates in the \nsaturation region. The JFET's drain-to-source satura-\ntion current is 18 mA, and its pinch-off voltage is - 3 V . \n.._Most nearly, the power dissipated in the JFET is",
+      "stem": "The JFET used in the circuit shown operates in the \nsaturation region. The JFET's drain-to-source satura-\ntion current is 18 mA, and its pinch-off voltage is - 3 V . \n.._Most nearly, the power dissipated in the JFET is\n\n![Circuit Diagram](/images/pdf_crops/auto_146_26.png)",
       "choices": {
         "A": "0.016 W",
         "B": "0.16 W",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY3-4",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "The JFET shown is operating in the saturation \nregion. The drain supply voltage is 5 V, the saturation \nresistance is 1 kn, the drain-to-source saturation cur-\nrent is 2 mA, and the pinch-off voltage is -2 V.\n\ns \n+ \n-=- Voo \n+\n\nMost nearly, what is the gate-to-drain voltage?",
+      "stem": "The JFET shown is operating in the saturation \nregion. The drain supply voltage is 5 V, the saturation \nresistance is 1 kn, the drain-to-source saturation cur-\nrent is 2 mA, and the pinch-off voltage is -2 V.\n\ns \n+ \n-=- Voo \n+\n\nMost nearly, what is the gate-to-drain voltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_149_30.png)",
       "choices": {
         "A": "-3 V",
         "B": "-2 V",
@@ -66,7 +66,7 @@
       "id": "ELEC-DAY3-5",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "The BJT incorporated into the circuit shown has a \nbase-emitter voltage of 0. 7 V and a common emitter cur-\nrent gain of 100.\n\n2 kn\n\n+ \n+ \n5V-=-\n-=-10V\n\n1ill \n~\n\nMost nearly, the base current is",
+      "stem": "The BJT incorporated into the circuit shown has a \nbase-emitter voltage of 0. 7 V and a common emitter cur-\nrent gain of 100.\n\n2 kn\n\n+ \n+ \n5V-=-\n-=-10V\n\n1ill \n~\n\nMost nearly, the base current is\n\n![Circuit Diagram](/images/pdf_crops/auto_144_23.png)",
       "choices": {
         "A": "0.043 mA",
         "B": "0.43 mA",

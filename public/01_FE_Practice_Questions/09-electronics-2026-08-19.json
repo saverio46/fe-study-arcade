@@ -6,7 +6,7 @@
       "id": "ELEC-DAY2-1",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "A BJT used in a circuit as shown has a common emit-\nter current gain of 100 and a DC base-to-emitter voltage \nof 0.6 V. Most nearly, the output voltage of the circuit is\n\nR2 = 0.8 k!l\n\n+ \n-=- Vee= 10V\n\n+\n\n+ \nV1 = 3V\n\nVaut",
+      "stem": "A BJT used in a circuit as shown has a common emit-\nter current gain of 100 and a DC base-to-emitter voltage \nof 0.6 V. Most nearly, the output voltage of the circuit is\n\nR2 = 0.8 k!l\n\n+ \n-=- Vee= 10V\n\n+\n\n+ \nV1 = 3V\n\nVaut\n\n![Circuit Diagram](/images/pdf_crops/auto_143_20.png)",
       "choices": {
         "A": "0.4 V",
         "B": "2 V",
@@ -21,7 +21,7 @@
       "id": "ELEC-DAY2-2",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "An npn BJT at 300K has a saturation current of \n1 pA. Most nearly, the base-emitter voltage needed to \ncreate a collector current of 556 mA is",
+      "stem": "An npn BJT at 300K has a saturation current of \n1 pA. Most nearly, the base-emitter voltage needed to \ncreate a collector current of 556 mA is\n\n![Circuit Diagram](/images/pdf_crops/auto_158_41.png)",
       "choices": {
         "A": "18 mV",
         "B": "0.70V",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY2-4",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "A p-channel JFET is biased by two ideal voltage \nsources, as shown. The pinch-off voltage for the JFET is \n-6.0 V, and the drain-to-source saturation current is \n34.5 mA.\n\n-2.0V \n1.9V\n\nMost nearly, the drain current is",
+      "stem": "A p-channel JFET is biased by two ideal voltage \nsources, as shown. The pinch-off voltage for the JFET is \n-6.0 V, and the drain-to-source saturation current is \n34.5 mA.\n\n-2.0V \n1.9V\n\nMost nearly, the drain current is\n\n![Circuit Diagram](/images/pdf_crops/auto_143_21.png)",
       "choices": {
         "A": "11 mA",
         "B": "15 mA",
@@ -66,7 +66,7 @@
       "id": "ELEC-DAY2-5",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "A p-channel JFET is operating in the saturation \nregion. The drain-to-source current is 500 mA, the \npinch-off voltage is 2.5 V, and the drain current is \n34.5 mA. Most nearly, the small-signal transconduc-\ntance is",
+      "stem": "A p-channel JFET is operating in the saturation \nregion. The drain-to-source current is 500 mA, the \npinch-off voltage is 2.5 V, and the drain current is \n34.5 mA. Most nearly, the small-signal transconduc-\ntance is\n\n![Circuit Diagram](/images/pdf_crops/auto_143_22.png)",
       "choices": {
         "A": "0.24 mS",
         "B": "42 mS",

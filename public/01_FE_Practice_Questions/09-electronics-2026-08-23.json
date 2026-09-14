@@ -6,7 +6,7 @@
       "id": "ELEC-DAY6-1",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "An ideal operational amplifier is used in a voltage \namplification circuit as shown.\n\n200!1\n\nMost nearly, what is the output voltage?",
+      "stem": "An ideal operational amplifier is used in a voltage \namplification circuit as shown.\n\n200!1\n\nMost nearly, what is the output voltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_153_35.png)",
       "choices": {
         "A": "-10 V",
         "B": "-5 V",
@@ -21,7 +21,7 @@
       "id": "ELEC-DAY6-2",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "The voltage gain in the ideal operational amplifier \ncircuit shown is -200.\n\n+\n\nMost nearly, what is the value of R2?",
+      "stem": "The voltage gain in the ideal operational amplifier \ncircuit shown is -200.\n\n+\n\nMost nearly, what is the value of R2?\n\n![Circuit Diagram](/images/pdf_crops/auto_133_12.png)",
       "choices": {
         "A": "3 kn",
         "B": "30 kn",
@@ -36,7 +36,7 @@
       "id": "ELEC-DAY6-3",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "The inverting input of a nonideal operational \namplifier is at 0.001 V. The noninverting voltage is \n0.002 V, and the output voltage is 10.01 V. The differen-\ntial gain of the operational amplifier is 10,000. Most \nnearly, what is the common-mode rejection ratio?",
+      "stem": "The inverting input of a nonideal operational \namplifier is at 0.001 V. The noninverting voltage is \n0.002 V, and the output voltage is 10.01 V. The differen-\ntial gain of the operational amplifier is 10,000. Most \nnearly, what is the common-mode rejection ratio?\n\n![Circuit Diagram](/images/pdf_crops/auto_154_37.png)",
       "choices": {
         "A": "64 dB",
         "B": "74 dB",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY6-4",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "For a differential amplifier, the ratio of the first \nemitter current to the second emitter current is 2.0. The \nvoltage difference between the first base current and the \nsecond base current is 0.02 V. Most nearly, what is the \ntemperature of operation?",
+      "stem": "For a differential amplifier, the ratio of the first \nemitter current to the second emitter current is 2.0. The \nvoltage difference between the first base current and the \nsecond base current is 0.02 V. Most nearly, what is the \ntemperature of operation?\n\n![Circuit Diagram](/images/pdf_crops/auto_127_2.png)",
       "choices": {
         "A": "335K",
         "B": "345K",

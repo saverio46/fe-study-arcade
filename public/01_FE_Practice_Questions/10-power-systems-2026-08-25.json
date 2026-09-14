@@ -8,7 +8,7 @@
       "id": "PWR-D1-1",
       "subtopic": "Three-Phase Power",
       "difficulty": "medium",
-      "stem": "The balanced delta load shown is connected to a stable, three-phase voltage source. The rms line voltage is 120 V. The load impedance per phase is 15 \u03a9 + j10 \u03a9.\n\n\n\nWhat is most nearly the rms magnitude of the line current?",
+      "stem": "The balanced delta load shown is connected to a stable, three-phase voltage source. The rms line voltage is 120 V. The load impedance per phase is 15 \u03a9 + j10 \u03a9.\n\n\n\nWhat is most nearly the rms magnitude of the line current?\n\n![Circuit Diagram](/images/pdf_crops/auto_126_0.png)",
       "choices": {
         "A": "4.80 A",
         "B": "8.50 A",
@@ -38,7 +38,7 @@
       "id": "PWR-D1-3",
       "subtopic": "Three-Phase Power",
       "difficulty": "easy",
-      "stem": "A balanced, three-phase, delta-connected system has three identical phase impedances. The line-to-line voltage is 240 V. The line current is 41 A. Most nearly, the magnitudes of the phase voltage and phase current in the system are:",
+      "stem": "A balanced, three-phase, delta-connected system has three identical phase impedances. The line-to-line voltage is 240 V. The line current is 41 A. Most nearly, the magnitudes of the phase voltage and phase current in the system are:\n\n![Circuit Diagram](/images/pdf_crops/auto_135_15.png)",
       "choices": {
         "A": "138 V and 11.8 A",
         "B": "138 V and 23.7 A",
@@ -53,7 +53,7 @@
       "id": "PWR-D1-4",
       "subtopic": "Three-Phase Power",
       "difficulty": "easy",
-      "stem": "A balanced, three-phase, wye-connected load system has three identical phase impedances of 40 \u03a9 \u2212 j30 \u03a9. Most nearly, the equivalent delta-connected phase impedances are:",
+      "stem": "A balanced, three-phase, wye-connected load system has three identical phase impedances of 40 \u03a9 \u2212 j30 \u03a9. Most nearly, the equivalent delta-connected phase impedances are:\n\n![Circuit Diagram](/images/pdf_crops/auto_126_1.png)",
       "choices": {
         "A": "40 \u03a9 \u2212 j30 \u03a9",
         "B": "40 \u03a9 + j30 \u03a9",

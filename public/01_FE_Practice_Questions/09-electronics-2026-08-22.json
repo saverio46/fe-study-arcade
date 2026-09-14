@@ -6,7 +6,7 @@
       "id": "ELEC-DAY5-1",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "An op amp circuit is shown. The non-inverting input \nis connected to a 12 V DC source. The op amp voltage \ngain, A, is 100 000, the input resistance, Rin, is 1.0 MD, \nand the output resistance, Rout, is 20 D.\n\nWhat is most nearly the gain of the circuit?",
+      "stem": "An op amp circuit is shown. The non-inverting input \nis connected to a 12 V DC source. The op amp voltage \ngain, A, is 100 000, the input resistance, Rin, is 1.0 MD, \nand the output resistance, Rout, is 20 D.\n\nWhat is most nearly the gain of the circuit?\n\n![Circuit Diagram](/images/pdf_crops/auto_152_32.png)",
       "choices": {
         "A": "1.0",
         "B": "5.0",
@@ -21,7 +21,7 @@
       "id": "ELEC-DAY5-2",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "A half-rectified sine wave is the input to an amplifier \nwith an amplification factor of-2.\n\n10V\n\n5V\n\n5 \n10 \n15 \n20 \n25 \ntime (ms) \n-5V\n\n-10VWhich graph most nearly shows the waveform of the \noutput?",
+      "stem": "A half-rectified sine wave is the input to an amplifier \nwith an amplification factor of-2.\n\n10V\n\n5V\n\n5 \n10 \n15 \n20 \n25 \ntime (ms) \n-5V\n\n-10VWhich graph most nearly shows the waveform of the \noutput?\n\n![Circuit Diagram](/images/pdf_crops/auto_152_34.png)",
       "choices": {
         "A": "10V\n\n5V\n\n5\n\n-5V\n\n-10V",
         "B": "10V\n\n5V\n\n10 \n15 \n20 \n25 \n\\) \\)\n\n-10V",
@@ -36,7 +36,7 @@
       "id": "ELEC-DAY5-3",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "During testing of an operational amplifier, signals of \nequal magnitude are applied to the two terminals (i.e., \nVi= -v2). What gain is measured?",
+      "stem": "During testing of an operational amplifier, signals of \nequal magnitude are applied to the two terminals (i.e., \nVi= -v2). What gain is measured?\n\n![Circuit Diagram](/images/pdf_crops/auto_127_3.png)",
       "choices": {
         "A": "Acm",
         "B": "A;d",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY5-4",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "An ideal operational amplifier is shown. The voltage \nat the inverting terminal, Vi, is 0.002 V, and the voltage \nat the noninverting terminal, v1, is 0.001 V. The output\n\nvoltage is -10 V. Most nearly, what is the gain of the \noperational amplifier?",
+      "stem": "An ideal operational amplifier is shown. The voltage \nat the inverting terminal, Vi, is 0.002 V, and the voltage \nat the noninverting terminal, v1, is 0.001 V. The output\n\nvoltage is -10 V. Most nearly, what is the gain of the \noperational amplifier?\n\n![Circuit Diagram](/images/pdf_crops/auto_152_33.png)",
       "choices": {
         "A": "1000",
         "B": "10,000",
@@ -66,7 +66,7 @@
       "id": "ELEC-DAY5-5",
       "subtopic": "Amplifiers",
       "difficulty": "medium",
-      "stem": "An ideal operational amplifier is used in a voltage \namplification circuit as shown.\n\n40.!l\n\n80.!l\n\n+\n\n10V\n\nMost nearly, what is the output voltage?",
+      "stem": "An ideal operational amplifier is used in a voltage \namplification circuit as shown.\n\n40.!l\n\n80.!l\n\n+\n\n10V\n\nMost nearly, what is the output voltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_153_36.png)",
       "choices": {
         "A": "-14 V",
         "B": "-11 V",

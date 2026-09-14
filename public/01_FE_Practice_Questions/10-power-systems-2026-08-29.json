@@ -8,22 +8,22 @@
       "id": "PWR-REV-1",
       "subtopic": "Full Topic Review",
       "difficulty": "medium",
-      "stem": "A balanced, three-phase, delta-connected system has three identical loads of 4 Ω − j3 Ω. The line-to-line voltage is 120 V. Most nearly, the total apparent power in polar form is:",
+      "stem": "A balanced, three-phase, delta-connected system has three identical loads of 4 \u03a9 \u2212 j3 \u03a9. The line-to-line voltage is 120 V. Most nearly, the total apparent power in polar form is:",
       "choices": {
-        "A": "2880 VA ∠−36.87°",
-        "B": "2880 VA ∠36.87°",
-        "C": "8640 VA ∠−36.87°",
-        "D": "8640 VA ∠36.87°"
+        "A": "2880 VA \u2220\u221236.87\u00b0",
+        "B": "2880 VA \u222036.87\u00b0",
+        "C": "8640 VA \u2220\u221236.87\u00b0",
+        "D": "8640 VA \u222036.87\u00b0"
       },
       "correct_answer": "C",
-      "explanation": "For a delta load: V_phase = V_line = 120 V. |Z| = √(4²+3²) = 5 Ω. I_phase = 120/5 = 24 A. S_per_phase = V_phase × I_phase* = (120)(24) ∠θ where θ = −arctan(3/4) = −36.87° (capacitive/lagging in Z). S_total = 3 × S_phase = 3 × 120 × 24 = 8640 VA ∠−36.87°. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Three-Phase Circuits"
+      "explanation": "For a delta load: V_phase = V_line = 120 V. |Z| = \u221a(4\u00b2+3\u00b2) = 5 \u03a9. I_phase = 120/5 = 24 A. S_per_phase = V_phase \u00d7 I_phase* = (120)(24) \u2220\u03b8 where \u03b8 = \u2212arctan(3/4) = \u221236.87\u00b0 (capacitive/lagging in Z). S_total = 3 \u00d7 S_phase = 3 \u00d7 120 \u00d7 24 = 8640 VA \u2220\u221236.87\u00b0. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Three-Phase Circuits"
     },
     {
       "id": "PWR-REV-2",
       "subtopic": "Full Topic Review",
       "difficulty": "easy",
-      "stem": "Which of these statements concerning transmission lines is FALSE?",
+      "stem": "Which of these statements concerning transmission lines is FALSE?\n\n![Circuit Diagram](/images/pdf_crops/auto_130_4.png)",
       "choices": {
         "A": "A standing wave is the sum of the incident and reflected waves.",
         "B": "The reflection coefficient is the ratio of the reflected wave voltage to the incident wave voltage.",
@@ -31,14 +31,14 @@
         "D": "The standing wave ratio is the ratio of the maximum and minimum current magnitudes of a standing wave."
       },
       "correct_answer": "C",
-      "explanation": "A standing wave is formed by the superposition of incident and reflected waves (A is TRUE). The reflection coefficient Γ = V_reflected / V_incident (B is TRUE). The SWR is the ratio of maximum to minimum current (or voltage) magnitudes (D is TRUE). However, the magnitude of a standing wave at a given position is NOT constant — it varies sinusoidally in time (C is FALSE). The amplitude envelope of a standing wave is constant at each spatial position, but the instantaneous magnitude oscillates. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "A standing wave is formed by the superposition of incident and reflected waves (A is TRUE). The reflection coefficient \u0393 = V_reflected / V_incident (B is TRUE). The SWR is the ratio of maximum to minimum current (or voltage) magnitudes (D is TRUE). However, the magnitude of a standing wave at a given position is NOT constant \u2014 it varies sinusoidally in time (C is FALSE). The amplitude envelope of a standing wave is constant at each spatial position, but the instantaneous magnitude oscillates. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     },
     {
       "id": "PWR-REV-3",
       "subtopic": "Full Topic Review",
       "difficulty": "easy",
-      "stem": "A step-up transformer is used to connect a large generating plant to the electric grid. Which of the following is TRUE about backup generation in a simple radial distribution system?",
+      "stem": "A step-up transformer is used to connect a large generating plant to the electric grid. Which of the following is TRUE about backup generation in a simple radial distribution system?\n\n![Circuit Diagram](/images/pdf_crops/auto_135_17.png)",
       "choices": {
         "A": "Backup generation must be connected on the primary side of the supply transformer.",
         "B": "Backup generation can only be connected at the utility meter.",
@@ -46,8 +46,8 @@
         "D": "Backup generation requires a looped or networked distribution topology."
       },
       "correct_answer": "C",
-      "explanation": "In a simple radial distribution system, the loads are supplied through a single path from one transformer. While there is no inherent redundancy, with the proper controls and protection devices, backup generation can be connected on any of the consumer feeders — it does not need to be on the primary side. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Power Distribution"
+      "explanation": "In a simple radial distribution system, the loads are supplied through a single path from one transformer. While there is no inherent redundancy, with the proper controls and protection devices, backup generation can be connected on any of the consumer feeders \u2014 it does not need to be on the primary side. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Power Distribution"
     },
     {
       "id": "PWR-REV-4",
@@ -61,8 +61,8 @@
         "D": "1800 rpm"
       },
       "correct_answer": "C",
-      "explanation": "For a 4-pole motor: synchronous speed n_s = 120f/p = (120 × 60)/4 = 1800 rpm. Operating speed n = n_s × (1 − slip) = 1800 × (1 − 0.02) = 1800 × 0.98 = 1764 rpm ≈ 1760 rpm. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Motors & Generators"
+      "explanation": "For a 4-pole motor: synchronous speed n_s = 120f/p = (120 \u00d7 60)/4 = 1800 rpm. Operating speed n = n_s \u00d7 (1 \u2212 slip) = 1800 \u00d7 (1 \u2212 0.02) = 1800 \u00d7 0.98 = 1764 rpm \u2248 1760 rpm. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
     },
     {
       "id": "PWR-REV-5",
@@ -76,8 +76,8 @@
         "D": "380 rad/s"
       },
       "correct_answer": "C",
-      "explanation": "For a synchronous motor, n_s is proportional to frequency: n_s2/n_s1 = f₂/f₁, so n_s2 = (50/60) × 1200 = 1000 rpm. Convert to angular velocity: ω = n_s2 × 2π/60 = 1000 × 2π/60 = 104.7 rad/s ≈ 100 rad/s. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Motors & Generators"
+      "explanation": "For a synchronous motor, n_s is proportional to frequency: n_s2/n_s1 = f\u2082/f\u2081, so n_s2 = (50/60) \u00d7 1200 = 1000 rpm. Convert to angular velocity: \u03c9 = n_s2 \u00d7 2\u03c0/60 = 1000 \u00d7 2\u03c0/60 = 104.7 rad/s \u2248 100 rad/s. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Motors & Generators"
     }
   ],
   "puzzle_slug": "wordle",

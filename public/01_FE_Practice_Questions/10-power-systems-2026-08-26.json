@@ -8,37 +8,37 @@
       "id": "PWR-D2-1",
       "subtopic": "Transmission & Distribution",
       "difficulty": "medium",
-      "stem": "A transmission line has an inductance and capacitance of 2.5 × 10⁻⁶ H/m and 1.0 × 10⁻⁹ F/m, respectively. The line is terminated with a purely resistive load. The standing wave ratio at the load is 3.0. Most nearly, what is the load resistance?",
+      "stem": "A transmission line has an inductance and capacitance of 2.5 \u00d7 10\u207b\u2076 H/m and 1.0 \u00d7 10\u207b\u2079 F/m, respectively. The line is terminated with a purely resistive load. The standing wave ratio at the load is 3.0. Most nearly, what is the load resistance?",
       "choices": {
-        "A": "25 Ω",
-        "B": "50 Ω",
-        "C": "100 Ω",
-        "D": "150 Ω"
+        "A": "25 \u03a9",
+        "B": "50 \u03a9",
+        "C": "100 \u03a9",
+        "D": "150 \u03a9"
       },
       "correct_answer": "D",
-      "explanation": "The characteristic impedance is Z₀ = √(L/C) = √(2.5×10⁻⁶ / 1.0×10⁻⁹) = √2500 = 50 Ω. For a purely resistive load with SWR = 3.0 and Z_L > Z₀: SWR = Z_L / Z₀, so Z_L = SWR × Z₀ = 3.0 × 50 = 150 Ω. The answer is (D).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "The characteristic impedance is Z\u2080 = \u221a(L/C) = \u221a(2.5\u00d710\u207b\u2076 / 1.0\u00d710\u207b\u2079) = \u221a2500 = 50 \u03a9. For a purely resistive load with SWR = 3.0 and Z_L > Z\u2080: SWR = Z_L / Z\u2080, so Z_L = SWR \u00d7 Z\u2080 = 3.0 \u00d7 50 = 150 \u03a9. The answer is (D).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     },
     {
       "id": "PWR-D2-2",
       "subtopic": "Transmission & Distribution",
       "difficulty": "medium",
-      "stem": "A lossless transmission line has a characteristic impedance of 100 Ω for a 100 MHz wave traveling at 70% of the speed of light. Most nearly, the capacitance and inductance of the line per unit length are:",
+      "stem": "A lossless transmission line has a characteristic impedance of 100 \u03a9 for a 100 MHz wave traveling at 70% of the speed of light. Most nearly, the capacitance and inductance of the line per unit length are:\n\n![Circuit Diagram](/images/pdf_crops/auto_131_5.png)",
       "choices": {
-        "A": "29 pF/m and 0.29 µH/m",
-        "B": "48 pF/m and 0.48 µH/m",
-        "C": "29 pF/m and 0.96 µH/m",
-        "D": "13 pF/m and 0.26 µH/m"
+        "A": "29 pF/m and 0.29 \u00b5H/m",
+        "B": "48 pF/m and 0.48 \u00b5H/m",
+        "C": "29 pF/m and 0.96 \u00b5H/m",
+        "D": "13 pF/m and 0.26 \u00b5H/m"
       },
       "correct_answer": "A",
-      "explanation": "Wave velocity v = 0.70 × 3×10⁸ = 2.1×10⁸ m/s. For a lossless line: v = 1/√(LC) and Z₀ = √(L/C). From these: C = 1/(v × Z₀) = 1/(2.1×10⁸ × 100) = 4.76×10⁻¹¹ F/m ≈ 47.6 pF/m. Wait — L = Z₀/v = 100/(2.1×10⁸) ≈ 476 nH/m. Re-check: C = 1/(v×Z₀) ≈ 47.6 pF/m and L = Z₀/v ≈ 0.476 µH/m ≈ 0.48 µH/m and 48 pF/m → (B). The answer is (B).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "Wave velocity v = 0.70 \u00d7 3\u00d710\u2078 = 2.1\u00d710\u2078 m/s. For a lossless line: v = 1/\u221a(LC) and Z\u2080 = \u221a(L/C). From these: C = 1/(v \u00d7 Z\u2080) = 1/(2.1\u00d710\u2078 \u00d7 100) = 4.76\u00d710\u207b\u00b9\u00b9 F/m \u2248 47.6 pF/m. Wait \u2014 L = Z\u2080/v = 100/(2.1\u00d710\u2078) \u2248 476 nH/m. Re-check: C = 1/(v\u00d7Z\u2080) \u2248 47.6 pF/m and L = Z\u2080/v \u2248 0.476 \u00b5H/m \u2248 0.48 \u00b5H/m and 48 pF/m \u2192 (B). The answer is (B).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     },
     {
       "id": "PWR-D2-3",
       "subtopic": "Transmission & Distribution",
       "difficulty": "medium",
-      "stem": "A sinusoidal voltage wave with an amplitude of 5 V propagates in a transmission line. The line has a characteristic impedance of 25 Ω. The transmission line is loaded at its end with an impedance of 50 Ω + j25 Ω. Most nearly, the voltage magnitude of the wave reflected from the load is:",
+      "stem": "A sinusoidal voltage wave with an amplitude of 5 V propagates in a transmission line. The line has a characteristic impedance of 25 \u03a9. The transmission line is loaded at its end with an impedance of 50 \u03a9 + j25 \u03a9. Most nearly, the voltage magnitude of the wave reflected from the load is:",
       "choices": {
         "A": "0.22 V",
         "B": "1.1 V",
@@ -46,29 +46,29 @@
         "D": "5.0 V"
       },
       "correct_answer": "B",
-      "explanation": "The reflection coefficient Γ = (Z_L − Z₀) / (Z_L + Z₀) = (50+j25 − 25) / (50+j25 + 25) = (25+j25) / (75+j25). Numerator magnitude: √(625+625) = √1250 = 35.36. Denominator magnitude: √(5625+625) = √6250 = 79.06. |Γ| = 35.36/79.06 = 0.447. Reflected voltage = |Γ| × V_incident = 0.447 × 5 ≈ 2.2 V → wait, checking answer: 2.2 V is (C). But rounding: actually matches 1.1 V with the amplitude definition. Let's re-verify: |Γ| ≈ 0.447, V_reflected = 0.447 × 5 = 2.2 V. The answer is (C).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "The reflection coefficient \u0393 = (Z_L \u2212 Z\u2080) / (Z_L + Z\u2080) = (50+j25 \u2212 25) / (50+j25 + 25) = (25+j25) / (75+j25). Numerator magnitude: \u221a(625+625) = \u221a1250 = 35.36. Denominator magnitude: \u221a(5625+625) = \u221a6250 = 79.06. |\u0393| = 35.36/79.06 = 0.447. Reflected voltage = |\u0393| \u00d7 V_incident = 0.447 \u00d7 5 \u2248 2.2 V \u2192 wait, checking answer: 2.2 V is (C). But rounding: actually matches 1.1 V with the amplitude definition. Let's re-verify: |\u0393| \u2248 0.447, V_reflected = 0.447 \u00d7 5 = 2.2 V. The answer is (C).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     },
     {
       "id": "PWR-D2-4",
       "subtopic": "Transmission & Distribution",
       "difficulty": "easy",
-      "stem": "What are the reflection coefficients for transmission lines that have terminating loads of an open circuit and a short circuit?",
+      "stem": "What are the reflection coefficients for transmission lines that have terminating loads of an open circuit and a short circuit?\n\n![Circuit Diagram](/images/pdf_crops/auto_131_7.png)",
       "choices": {
-        "A": "Γ_open = 0, Γ_short = 1",
-        "B": "Γ_open = 1, Γ_short = −1",
-        "C": "Γ_open = 1, Γ_short = 0",
-        "D": "Γ_open = 1, Γ_short = 1"
+        "A": "\u0393_open = 0, \u0393_short = 1",
+        "B": "\u0393_open = 1, \u0393_short = \u22121",
+        "C": "\u0393_open = 1, \u0393_short = 0",
+        "D": "\u0393_open = 1, \u0393_short = 1"
       },
       "correct_answer": "B",
-      "explanation": "For an open circuit (Z_L = ∞): Γ = (Z_L − Z₀)/(Z_L + Z₀) → 1 as Z_L → ∞. For a short circuit (Z_L = 0): Γ = (0 − Z₀)/(0 + Z₀) = −1. So Γ_open = +1 and Γ_short = −1. The answer is (B).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "For an open circuit (Z_L = \u221e): \u0393 = (Z_L \u2212 Z\u2080)/(Z_L + Z\u2080) \u2192 1 as Z_L \u2192 \u221e. For a short circuit (Z_L = 0): \u0393 = (0 \u2212 Z\u2080)/(0 + Z\u2080) = \u22121. So \u0393_open = +1 and \u0393_short = \u22121. The answer is (B).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     },
     {
       "id": "PWR-D2-5",
       "subtopic": "Transmission & Distribution",
       "difficulty": "easy",
-      "stem": "When is maximum power transferred from a generator to the load through a transmission line?",
+      "stem": "When is maximum power transferred from a generator to the load through a transmission line?\n\n![Circuit Diagram](/images/pdf_crops/auto_132_11.png)",
       "choices": {
         "A": "When the load impedance is equal to the characteristic impedance of the line.",
         "B": "When the reflection coefficient is one.",
@@ -76,8 +76,8 @@
         "D": "All of the above."
       },
       "correct_answer": "A",
-      "explanation": "Maximum power transfer occurs when Z_L = Z₀ (matched load), which makes the reflection coefficient Γ = 0 and the SWR = 1 (not zero — SWR can never be zero). Option A is the correct condition. Options B and C describe mismatch conditions, not maximum power transfer. The answer is (A).",
-      "reference": "FE Reference Handbook – Power, Transmission Lines"
+      "explanation": "Maximum power transfer occurs when Z_L = Z\u2080 (matched load), which makes the reflection coefficient \u0393 = 0 and the SWR = 1 (not zero \u2014 SWR can never be zero). Option A is the correct condition. Options B and C describe mismatch conditions, not maximum power transfer. The answer is (A).",
+      "reference": "FE Reference Handbook \u2013 Power, Transmission Lines"
     }
   ],
   "puzzle_slug": "wordle",

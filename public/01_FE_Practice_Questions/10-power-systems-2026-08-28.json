@@ -23,7 +23,7 @@
       "id": "PWR-D4-2",
       "subtopic": "Motors & Generators",
       "difficulty": "easy",
-      "stem": "A three-phase synchronous generator produces a 60 Hz waveform when operating at 1200 rpm. How many poles does the generator have?",
+      "stem": "A three-phase synchronous generator produces a 60 Hz waveform when operating at 1200 rpm. How many poles does the generator have?\n\n![Circuit Diagram](/images/pdf_crops/auto_138_18.png)",
       "choices": {
         "A": "3",
         "B": "4",
@@ -53,7 +53,7 @@
       "id": "PWR-D4-4",
       "subtopic": "Motors & Generators",
       "difficulty": "medium",
-      "stem": "A DC generator turns at 2000 rpm and has an output of 200 V. The armature constant is 0.5 V\u00b7min/Wb, and the field constant of the machine is 0.02 H. Most nearly, what is the field current produced by the generator?",
+      "stem": "A DC generator turns at 2000 rpm and has an output of 200 V. The armature constant is 0.5 V\u00b7min/Wb, and the field constant of the machine is 0.02 H. Most nearly, what is the field current produced by the generator?\n\n![Circuit Diagram](/images/pdf_crops/auto_155_39.png)",
       "choices": {
         "A": "4.0 A",
         "B": "10 A",
@@ -68,7 +68,7 @@
       "id": "PWR-D4-5",
       "subtopic": "Motors & Generators",
       "difficulty": "medium",
-      "stem": "A 10 hp DC motor draws 42 A. Most nearly, what is the armature voltage?",
+      "stem": "A 10 hp DC motor draws 42 A. Most nearly, what is the armature voltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_148_29.png)",
       "choices": {
         "A": "42 V",
         "B": "89 V",

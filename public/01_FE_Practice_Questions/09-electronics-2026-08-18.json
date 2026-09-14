@@ -6,7 +6,7 @@
       "id": "ELEC-DAY1-1",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "At an equilibrium temperature of 50\u00b0C, the contact \npotential of a pn junction is 0.6 V. The intrinsic carrier \nconcentration is n; = 1.5 x 1010 1 / cm3, and the donor con-\ncentration in the n-type material is 7.0 x 1017 1/cm3. \nThe acceptor concentration is most nearly",
+      "stem": "At an equilibrium temperature of 50\u00b0C, the contact \npotential of a pn junction is 0.6 V. The intrinsic carrier \nconcentration is n; = 1.5 x 1010 1 / cm3, and the donor con-\ncentration in the n-type material is 7.0 x 1017 1/cm3. \nThe acceptor concentration is most nearly\n\n![Circuit Diagram](/images/pdf_crops/auto_132_10.png)",
       "choices": {
         "A": "7.0 x 1010 1/cm3",
         "B": "1.0 x 1011 1/cm3",
@@ -36,7 +36,7 @@
       "id": "ELEC-DAY1-3",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "An ideal diode and two resistors are arranged in a series \ncircuit as shown. The load resistor, RL, dissipates 25 W.\n\nR5 = 20 n\n\nRL = 200 fl\n\nMost nearly, what is the magnitude, Vm, of the supply \nvoltage?",
+      "stem": "An ideal diode and two resistors are arranged in a series \ncircuit as shown. The load resistor, RL, dissipates 25 W.\n\nR5 = 20 n\n\nRL = 200 fl\n\nMost nearly, what is the magnitude, Vm, of the supply \nvoltage?\n\n![Circuit Diagram](/images/pdf_crops/auto_142_19.png)",
       "choices": {
         "A": "100 V",
         "B": "110 V",
@@ -51,7 +51,7 @@
       "id": "ELEC-DAY1-4",
       "subtopic": "Semiconductor Devices",
       "difficulty": "medium",
-      "stem": "A JFET is used in an amplifier circuit. The JFET \noperates in the saturation region. The conductivity\n\nfactor is 6.5 x 10- 4 A/V2, and the transconductance is \n2 X 10-3 S.\n\nMost nearly, the drain current is",
+      "stem": "A JFET is used in an amplifier circuit. The JFET \noperates in the saturation region. The conductivity\n\nfactor is 6.5 x 10- 4 A/V2, and the transconductance is \n2 X 10-3 S.\n\nMost nearly, the drain current is\n\n![Circuit Diagram](/images/pdf_crops/auto_149_31.png)",
       "choices": {
         "A": "0.5 mA",
         "B": "1.0 mA",
