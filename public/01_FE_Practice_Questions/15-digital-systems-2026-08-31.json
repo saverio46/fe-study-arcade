@@ -1,0 +1,136 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-DigitalLogic-1",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_1.png)",
+      "choices": {
+        "A": "A =0, B=O",
+        "B": "A = O, B= 1",
+        "C": "A=l, B=O",
+        "D": "A=l,B=l"
+      },
+      "correct_answer": "",
+      "explanation": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l"
+    },
+    {
+      "id": "DS-DigitalLogic-2",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "What is the output of the following logic circuit? out ground\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_2.png)",
+      "choices": {
+        "A": "A \u00b7 B \u00b7 C",
+        "B": "A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C",
+        "D": "A. B \u00b7 C"
+      },
+      "correct_answer": "",
+      "explanation": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out"
+    },
+    {
+      "id": "DS-DigitalLogic-3",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "Which column of the truth table corresponds to the logic circuit shown? A out C C D D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_3.png)",
+      "choices": {
+        "A": "column I",
+        "B": "column II",
+        "C": "column III",
+        "D": "column IV PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+      },
+      "correct_answer": "",
+      "explanation": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+    },
+    {
+      "id": "DS-DigitalLogic-4",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B out A B C What is the output of the AND gate?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_4.png)",
+      "choices": {
+        "A": "0",
+        "B": "(A+ B) \u00b7(A\u00b7 B\u00b7 C)",
+        "C": "(A. C) + (B. C)",
+        "D": "X.ff.c"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Format",
+        "items": [
+          "Binary",
+          "Octal",
+          "Hexadecimal"
+        ]
+      },
+      {
+        "name": "Base",
+        "items": [
+          "Base 2",
+          "Base 8",
+          "Base 16"
+        ]
+      },
+      {
+        "name": "Digits",
+        "items": [
+          "0-1",
+          "0-7",
+          "0-F"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "Binary",
+        "categoryB": "Base 2",
+        "categoryC": "0-1"
+      },
+      {
+        "categoryA": "Octal",
+        "categoryB": "Base 8",
+        "categoryC": "0-7"
+      },
+      {
+        "categoryA": "Hexadecimal",
+        "categoryB": "Base 16",
+        "categoryC": "0-F"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "The format that uses Digits 0-F is Base 16."
+      },
+      {
+        "type": "negative",
+        "text": "Octal does not use Base 2 or Digits 0-F."
+      },
+      {
+        "type": "direct",
+        "text": "Binary is associated with Digits 0-1."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

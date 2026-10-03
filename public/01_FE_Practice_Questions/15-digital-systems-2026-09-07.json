@@ -1,0 +1,137 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-SequentialNetworks-4",
+      "subtopic": "Sequential Networks",
+      "difficulty": "medium",
+      "stem": "The sequential network circuit in the following dia- gram starts with all bits equal to 0. Bit O is the least sig- nificant bit and bit 1 is the most significant bit. After four clock pulses, what is the count on the circuit (in the sequence bit 0, bit 1)? bit 1 bit 0 Jo Oo 1--....... --1 J, a, CLK CLK Ko Do K, a, input --+---------'\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_4.png)",
+      "choices": {
+        "A": "00",
+        "B": "01",
+        "C": "10",
+        "D": "11 PPI \u2022 ppi2pass . com . 39-2 F E E L EC T R I C A L A N D C O M P U T E R P R AC T I C E PR O B L E M S"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out"
+    },
+    {
+      "id": "DS-SequentialNetworks-5",
+      "subtopic": "Sequential Networks",
+      "difficulty": "medium",
+      "stem": "The sequential network circuit shown starts with flip-flop O equal to 1 and flip-flop 1 equal to l. Bit O is the least significant bit and bit 1 is the most significant bit. After one clock pulse, what is the count on the cir- cuit (in the sequence bit 0, bit l)? bit 0 bit 1 Jo Do J, a, CLK CLK Ko Do K, a, input\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_5.png)",
+      "choices": {
+        "A": "00",
+        "B": "01",
+        "C": "10",
+        "D": "11 PPI \u2022 ppi2pass.com"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    },
+    {
+      "id": "DS-SequentialNetworks-6",
+      "subtopic": "Sequential Networks",
+      "difficulty": "medium",
+      "stem": "The sequential network circuit in the following dia- gram starts with flip-flop O equal to 1, flip-flop 1 equal to 1, and flip-flop 2 equal to 0. Bit O is the least signifi- cant bit and bit 2 is the most significant bit. After one clock pulse, what is the output count on the circuit (in the sequence bit 0, bit 1, bit 2)? D2 02 b2 (MSB) CLK 02 D, a, b, CLK Do Do CLK Clo input---~ Adapted from Computer Engineering Reference Manual for the Electrical and Computer PE Exam, by John A. Camara, PE, copyright \u00a9 2010, by Professional Publications, Inc.\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_6.png)",
+      "choices": {
+        "A": "001",
+        "B": "100",
+        "C": "110",
+        "D": "111"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS"
+    },
+    {
+      "id": "DS-DigitalSystems-1",
+      "subtopic": "Digital Systems",
+      "difficulty": "medium",
+      "stem": "A 24 kHz, 16-bit, analog-to-digital converter samples an analog signal. The voltage resolution is 1 m V, and the low end of the voltage range is O V. Most nearly, the high end of the voltage range that can be measured is",
+      "choices": {
+        "A": "18 V",
+        "B": "44 V",
+        "C": "66 V",
+        "D": "120 V"
+      },
+      "correct_answer": "",
+      "explanation": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Type",
+        "items": [
+          "D Flip-Flop",
+          "T Flip-Flop",
+          "JK Flip-Flop"
+        ]
+      },
+      {
+        "name": "Next State",
+        "items": [
+          "Q* = D",
+          "Q* = T\u2295Q",
+          "Q* = JQ' + K'Q"
+        ]
+      },
+      {
+        "name": "Primary Use",
+        "items": [
+          "Data Storage",
+          "Toggle Counter",
+          "Universal Use"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "D Flip-Flop",
+        "categoryB": "Q* = D",
+        "categoryC": "Data Storage"
+      },
+      {
+        "categoryA": "T Flip-Flop",
+        "categoryB": "Q* = T\u2295Q",
+        "categoryC": "Toggle Counter"
+      },
+      {
+        "categoryA": "JK Flip-Flop",
+        "categoryB": "Q* = JQ' + K'Q",
+        "categoryC": "Universal Use"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "The JK Flip-Flop has the Next State Q* = JQ' + K'Q."
+      },
+      {
+        "type": "negative",
+        "text": "The T Flip-Flop is not used for Data Storage."
+      },
+      {
+        "type": "sameAs",
+        "text": "The flip-flop with Next State Q* = D is used for Data Storage."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

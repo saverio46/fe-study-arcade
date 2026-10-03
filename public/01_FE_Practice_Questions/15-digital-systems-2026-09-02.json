@@ -1,0 +1,127 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-DigitalLogic-5",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "The outputs from the three NOR gates from top to bottom are A+B+C A+B+C A +B+D The output from the NAND gate is Z =(A+ B+ C) \u00b7 (A+ B+ C) \u00b7 (A+ B + D) Applying De Morgan's second theorem gives Z = (A+B+ C)+(A+B+ C)+(A +B+D) = ( A + B + C) + ( A + B + C) + (A+ B + D) =1 The answer is (B).",
+      "choices": {},
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    },
+    {
+      "id": "DS-DigitalLogic-6",
+      "subtopic": "Digital Logic",
+      "difficulty": "medium",
+      "stem": "The Boolean expression for the circuit is out = A EBB+ B + C Applying De Morgan's first theorem gives out = (A EBB)\u00b7 (B+ C) = (A EBB) \u00b7 (B+ C) The result of the EXCLUSIVE-OR is true when the inputs are different. AEBB = A-ff +A \u00b7B =A-ff+A\u00b7B The negation of the EXCLUSIVE-OR is AEBB =A\u00b7B+A \u00b7 B PPI \u2022 ppi2pass.com.",
+      "choices": {},
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-1",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "The following Boolean function is in sum-of-products (SOP) form. Y= A-B\u00b7 C+A-ff - C+A\u00b7 ff. C+A\u00b7 ff. C Which of these represents the same function in product- of-sums (POS) form?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_1.png)",
+      "choices": {
+        "A": "Y = (A+ ff+ C). (A+ ff). (ff+ C)",
+        "B": "Y=(A+B+C) -(A+B)",
+        "C": "Y= (A +B+ C). (A+B). (A +ff+ C)",
+        "D": "Y = ( A + B + C) \u00b7 ( A + ff+ C) \u00b7 ( B + C)"
+      },
+      "correct_answer": "",
+      "explanation": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-2",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "What terms are essential prime implicants in the given Karnaugh map? AB C D 00 01 11 10 00 0 0 0 0 X 0 01 0 0 11 0 0 0 0 X 1 10 0 1\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_2.png)",
+      "choices": {
+        "A": "A \u00b7 C \u00b7 D only",
+        "B": "B \u00b7 C\u00b7 15 only",
+        "C": "A\u00b7 C\u00b7 15 and B\u00b7 C\u00b7 15 only",
+        "D": "A\u00b7 B\u00b7 C, A\u00b7 C- 15, and B\u00b7 C\u00b7 15 only"
+      },
+      "correct_answer": "",
+      "explanation": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Gate",
+        "items": [
+          "AND",
+          "OR",
+          "XOR"
+        ]
+      },
+      {
+        "name": "Boolean",
+        "items": [
+          "A * B",
+          "A + B",
+          "A \u2295 B"
+        ]
+      },
+      {
+        "name": "Truth (Both 1s)",
+        "items": [
+          "Output 1",
+          "Output 1 (Any)",
+          "Output 0"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "AND",
+        "categoryB": "A * B",
+        "categoryC": "Output 1"
+      },
+      {
+        "categoryA": "OR",
+        "categoryB": "A + B",
+        "categoryC": "Output 1 (Any)"
+      },
+      {
+        "categoryA": "XOR",
+        "categoryB": "A \u2295 B",
+        "categoryC": "Output 0"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "The XOR gate has an Output of 0 when both inputs are 1."
+      },
+      {
+        "type": "negative",
+        "text": "The AND gate does not use the Boolean expression A + B or A \u2295 B."
+      },
+      {
+        "type": "sameAs",
+        "text": "The gate with expression A + B outputs 1 if any input is 1."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

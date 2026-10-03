@@ -1,0 +1,95 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-DigitalSystems-6",
+      "subtopic": "Digital Systems",
+      "difficulty": "medium",
+      "stem": "A resistance temperature detector (RTD) transducer is to be chosen such that the analog-to-digital conver- sion will have a resolution of 0.001 \u00b0C. The conversion uses 16 bits. The RTD will be in a circuit with a lower voltage of -0.150 Vat the lowest temperature extreme and an upper voltage of 0.300 Vat the highest tempera- ture extreme. The RTD will have an output of 0.000 V at 0.000\u00b0C. What is most nearly the sensitivity of the RTD, and what is most nearly the temperature range that the analog-to-digital conversion can represent?",
+      "choices": {
+        "A": "96.0 \u00b0C/V, -43.9\u00b0C to 98.6\u00b0C",
+        "B": "146 \u00b0C/V, -21.9\u00b0C to 43.7\u00b0C",
+        "C": "160 \u00b0C/V, -ll.7\u00b0C to 38.8\u00b0C",
+        "D": "222 \u00b0C/V, l.90\u00b0C to 78.7\u00b0C PPI \u2022 ppi2pass . com 40-2 FE E L EC T R I C A L A N D C O M P U T E R P A AC T IC E P RO B L EM S"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Term",
+        "items": [
+          "Setup Time",
+          "Hold Time",
+          "Prop Delay"
+        ]
+      },
+      {
+        "name": "Definition",
+        "items": [
+          "Stable BEFORE clock",
+          "Stable AFTER clock",
+          "In-to-Out Time"
+        ]
+      },
+      {
+        "name": "Symbol",
+        "items": [
+          "t_su",
+          "t_h",
+          "t_pd"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "Setup Time",
+        "categoryB": "Stable BEFORE clock",
+        "categoryC": "t_su"
+      },
+      {
+        "categoryA": "Hold Time",
+        "categoryB": "Stable AFTER clock",
+        "categoryC": "t_h"
+      },
+      {
+        "categoryA": "Prop Delay",
+        "categoryB": "In-to-Out Time",
+        "categoryC": "t_pd"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "Hold Time uses the symbol t_h."
+      },
+      {
+        "type": "sameAs",
+        "text": "The term meaning 'Stable BEFORE clock' uses the symbol t_su."
+      },
+      {
+        "type": "negative",
+        "text": "Prop Delay does not mean Stable AFTER clock or use t_su."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

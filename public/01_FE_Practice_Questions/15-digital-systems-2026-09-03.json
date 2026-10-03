@@ -1,0 +1,137 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-LogicNetworkDesign-3",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "This Boolean expression for F cannot be further simplified. F= A.ff. C+A - ff- C+A \u00b7B\u00b7 C\u00b7 D Which terms in the expression are the essential prime implicants of F?",
+      "choices": {
+        "A": "A\u00b7 B \u00b7 C only",
+        "B": "A\u00b7 B \u00b7 C\u00b7 D only",
+        "C": "A. ff. C and A\u00b7 ff\u00b7 C only",
+        "D": "if.ff. C, A-ff- C, and A - B\u00b7 C-D"
+      },
+      "correct_answer": "",
+      "explanation": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-4",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "Fis a Boolean function. F(A,B, C) =(A\u00b7B\u00b7C)+(A+C)+A \u00b7 B+B Which of the following is a maxterm of F?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_4.png)",
+      "choices": {
+        "A": "A+ ff",
+        "B": "A\u00b7 C",
+        "C": "A+B+C",
+        "D": "A. ff. C"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-5",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "Fis a Boolean function. F = ( A- B \u00b7 C) + ( A + C) + A \u00b7 B + B Which of the following is a min term of F?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_5.png)",
+      "choices": {
+        "A": "A+ ff",
+        "B": "A- C",
+        "C": "A+ B+ C",
+        "D": "A. ff. C"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-6",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "How many prime implicants does the following logic expression have?",
+      "choices": {
+        "A": "3",
+        "B": "4",
+        "C": "7",
+        "D": "16 PPI \u2022 ppi2pass.com 38-2 F E E L E C T R I CA L A N D CO M P U T E R PR AC T I C E P R O B L E M S"
+      },
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Gate",
+        "items": [
+          "NAND",
+          "NOR",
+          "XNOR"
+        ]
+      },
+      {
+        "name": "DeMorgan",
+        "items": [
+          "A' + B'",
+          "A' * B'",
+          "A*B + A'*B'"
+        ]
+      },
+      {
+        "name": "Equivalent",
+        "items": [
+          "Bubbled OR",
+          "Bubbled AND",
+          "Equality"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "NAND",
+        "categoryB": "A' + B'",
+        "categoryC": "Bubbled OR"
+      },
+      {
+        "categoryA": "NOR",
+        "categoryB": "A' * B'",
+        "categoryC": "Bubbled AND"
+      },
+      {
+        "categoryA": "XNOR",
+        "categoryB": "A*B + A'*B'",
+        "categoryC": "Equality"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "XNOR is the Equality detector."
+      },
+      {
+        "type": "negative",
+        "text": "NAND's DeMorgan equivalent is not A' * B'."
+      },
+      {
+        "type": "sameAs",
+        "text": "The gate that is equivalent to a Bubbled AND has the DeMorgan expression A' * B'."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

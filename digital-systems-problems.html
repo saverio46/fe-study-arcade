@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Systems Problems - FE Study Arcade</title>
+  <meta name="description" content="Interactive FE Electrical and Computer Exam Circuit Analysis Practice Problems covering DC Circuits, AC Circuits, and Transient Circuits with step-by-step solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #0a0a12; --panel: #12121f; --panel-2: #1a1a2e; --grid-line: #23233a;
+      --text: #eef0f7; --text-dim: #8a8aa8; --neon-cyan: #2de2ff; --neon-pink: #ff3d81;
+      --neon-yellow: #f9e94e; --neon-green: #3dff88; --neon-orange: #ff6a1a;
+      --font-display: 'Press Start 2P', monospace; --font-ui: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif; --font-mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--font-body); display: flex; min-height: 100vh; line-height: 1.5; }
+    nav.sidebar { width: 280px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--grid-line); padding: 22px 18px; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 10; }
+    nav.sidebar .brand { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-yellow); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; line-height: 1.4; }
+    nav.sidebar .nav-group { margin-bottom: 20px; }
+    nav.sidebar .nav-header { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--neon-cyan); margin-bottom: 8px; padding-left: 6px; }
+    nav.sidebar ul { list-style: none; }
+    nav.sidebar li a { display: block; padding: 8px 10px; margin-bottom: 3px; border-radius: 4px; border-left: 3px solid transparent; text-decoration: none; color: var(--text); font-family: var(--font-ui); font-size: 0.82rem; transition: background 120ms var(--ease-out), border-color 120ms var(--ease-out); }
+    nav.sidebar li a:hover, nav.sidebar li a.active { background: var(--panel-2); border-left-color: var(--neon-cyan); color: #fff; }
+    .main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .top-hud { background: var(--panel); border-bottom: 1px solid var(--grid-line); padding: 16px 28px; position: sticky; top: 0; z-index: 50; display: flex; flex-direction: column; gap: 12px; }
+    .hud-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .page-title { font-family: var(--font-display); font-size: 1rem; color: var(--neon-orange); text-shadow: 0 0 8px var(--neon-orange); }
+    .hud-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hud-stat { display: flex; align-items: center; gap: 6px; font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hud-stat .label { color: var(--text-dim); }
+    .hud-stat .value { font-family: var(--font-display); font-size: 0.8rem; color: var(--neon-orange); text-shadow: 0 0 4px var(--neon-orange); }
+    .hud-stat .value.green { color: var(--neon-green); text-shadow: 0 0 4px var(--neon-green); }
+    .progress-track { width: 100%; height: 4px; background: var(--panel-2); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow)); border-radius: 2px; transition: width 0.5s var(--ease-out); box-shadow: 0 0 6px var(--neon-orange); }
+    .controls-bar { padding: 12px 28px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--grid-line); background: var(--void); }
+    .search-box { flex: 1; min-width: 180px; position: relative; }
+    .search-box input { width: 100%; padding: 8px 12px 8px 34px; background: var(--panel); border: 1px solid var(--grid-line); border-radius: 4px; color: var(--text); font-size: 0.85rem; font-family: var(--font-body); transition: border-color 0.2s; }
+    .search-box input:focus { outline: none; border-color: var(--neon-orange); box-shadow: 0 0 6px rgba(255,106,26,0.2); }
+    .search-box::before { content: '\1F50D'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; pointer-events: none; }
+    .ctrl-btn { font-family: var(--font-ui); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 14px; border: 1.5px solid var(--grid-line); background: transparent; color: var(--text-dim); cursor: pointer; border-radius: 4px; transition: all 120ms var(--ease-out); white-space: nowrap; }
+    .ctrl-btn:hover { border-color: var(--neon-orange); color: var(--neon-orange); }
+    .ctrl-btn.active { border-color: var(--neon-orange); color: var(--neon-orange); background: rgba(255,106,26,0.08); }
+    .ctrl-btn.accent { border-color: var(--neon-yellow); color: var(--neon-yellow); background: rgba(249,233,78,0.06); }
+    .ctrl-btn.accent:hover { background: rgba(249,233,78,0.15); box-shadow: 0 0 8px rgba(249,233,78,0.3); }
+    .ctrl-btn.danger { border-color: var(--neon-pink); color: var(--neon-pink); }
+    .ctrl-btn.danger:hover { background: rgba(255,61,129,0.1); }
+    .content-area { flex: 1; overflow-y: auto; display: flex; }
+    .chapter-sidebar { width: 200px; flex-shrink: 0; padding: 16px 12px; border-right: 1px solid var(--grid-line); overflow-y: auto; background: var(--panel); }
+    .ch-sidebar-title { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--neon-orange); margin-bottom: 8px; padding-left: 4px; }
+    .ch-link { display: flex; align-items: center; justify-content: space-between; padding: 7px 8px; border-radius: 4px; cursor: pointer; color: var(--text-dim); font-size: 0.78rem; margin-bottom: 2px; transition: all 0.12s; text-decoration: none; }
+    .ch-link:hover { background: var(--panel-2); color: var(--text); }
+    .ch-link.active { background: rgba(255,106,26,0.1); color: var(--neon-orange); font-weight: 600; }
+    .ch-count { font-size: 0.6rem; font-family: var(--font-mono); background: var(--panel-2); padding: 1px 6px; border-radius: 99px; color: var(--text-dim); }
+    .problems-list { flex: 1; padding: 20px 28px; overflow-y: auto; }
+    .problem-card { background: var(--panel); border: 1.5px solid var(--grid-line); border-radius: 6px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+    .problem-card:hover { border-color: rgba(255,106,26,0.3); box-shadow: 0 0 12px rgba(255,106,26,0.1); }
+    .problem-card.answered-correct { border-color: rgba(61,255,136,0.4); }
+    .card-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--grid-line); flex-wrap: wrap; gap: 6px; }
+    .card-badge { display: flex; align-items: center; gap: 8px; }
+    .badge-ch { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 99px; background: rgba(255,106,26,0.1); color: var(--neon-orange); border: 1px solid rgba(255,106,26,0.2); }
+    .badge-num { font-size: 0.78rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); }
+    .reset-btn { width: 28px; height: 28px; border-radius: 4px; background: transparent; border: 1px solid var(--grid-line); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.12s; }
+    .reset-btn:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+    .card-body { padding: 16px; }
+    .problem-text { font-size: 0.9rem; line-height: 1.75; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .problem-text[contenteditable="true"] { outline: none; border: 1px dashed transparent; padding: 6px; border-radius: 4px; transition: border-color 0.2s, background 0.2s; }
+    .problem-text[contenteditable="true"]:focus { border-color: var(--neon-yellow); background: rgba(249,233,78,0.03); }
+    .choices { margin-top: 12px; display: grid; gap: 6px; }
+    .choice-btn { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 4px; background: rgba(255,255,255,0.02); border: 1.5px solid var(--grid-line); cursor: pointer; transition: all 0.15s; text-align: left; font-family: inherit; }
+    .choice-btn:hover { border-color: var(--neon-orange); background: rgba(255,106,26,0.04); }
+    .choice-btn.selected { border-color: var(--neon-orange); background: rgba(255,106,26,0.08); }
+    .choice-btn.correct { border-color: var(--neon-green); background: rgba(61,255,136,0.08); }
+    .choice-btn.incorrect { border-color: var(--neon-pink); background: rgba(255,61,129,0.06); }
+    .choice-letter { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; font-family: var(--font-ui); background: var(--panel-2); color: var(--text-dim); border: 1.5px solid var(--grid-line); transition: all 0.15s; }
+    .choice-btn.selected .choice-letter { background: var(--neon-orange); color: var(--void); border-color: var(--neon-orange); }
+    .choice-btn.correct .choice-letter { background: var(--neon-green); color: var(--void); border-color: var(--neon-green); }
+    .choice-btn.incorrect .choice-letter { background: var(--neon-pink); color: var(--void); border-color: var(--neon-pink); }
+    .choice-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; padding-top: 2px; }
+    .solution-toggle { margin-top: 12px; padding: 7px 14px; border-radius: 4px; background: transparent; border: 1.5px solid var(--grid-line); color: var(--text-dim); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: var(--font-ui); letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; }
+    .solution-toggle:hover { border-color: var(--neon-green); color: var(--neon-green); }
+    .solution-panel { margin-top: 10px; padding: 16px; background: rgba(61,255,136,0.03); border: 1px solid rgba(61,255,136,0.15); border-radius: 4px; display: none; }
+    .solution-panel.visible { display: block; animation: slideDown 0.25s var(--ease-out); }
+    .solution-label { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--neon-green); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .solution-text { font-size: 0.85rem; line-height: 1.75; color: var(--text-dim); white-space: pre-wrap; word-break: break-word; }
+    .solution-text[contenteditable="true"] { outline: none; border: 1px dashed transparent; padding: 6px; border-radius: 4px; }
+    .solution-text[contenteditable="true"]:focus { border-color: var(--neon-green); background: rgba(61,255,136,0.03); }
+    .correct-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; background: rgba(61,255,136,0.08); border: 1px solid rgba(61,255,136,0.25); font-size: 0.7rem; font-weight: 700; color: var(--neon-green); font-family: var(--font-mono); margin-top: 10px; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 1000; padding: 10px 18px; border-radius: 4px; background: var(--panel-2); border: 1.5px solid var(--neon-green); color: var(--neon-green); font-size: 0.82rem; font-weight: 600; font-family: var(--font-ui); letter-spacing: 0.04em; box-shadow: 0 0 12px rgba(61,255,136,0.3); opacity: 0; transform: translateY(8px); transition: all 0.3s var(--ease-out); }
+    .toast.error { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 12px rgba(255,61,129,0.3); }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+    .edit-indicator { position: fixed; bottom: 24px; left: 24px; z-index: 100; padding: 6px 14px; border-radius: 99px; background: rgba(249,233,78,0.1); border: 1px solid rgba(249,233,78,0.3); color: var(--neon-yellow); font-size: 0.72rem; font-weight: 600; font-family: var(--font-ui); display: none; align-items: center; gap: 5px; }
+    .edit-indicator.visible { display: flex; }
+    .empty-state { text-align: center; padding: 60px 24px; color: var(--text-dim); }
+    .empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.9rem; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--grid-line); border-radius: 3px; } ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+    @media (max-width: 1024px) { .chapter-sidebar { display: none; } }
+    @media (max-width: 768px) { nav.sidebar { display: none; } .problems-list { padding: 16px; } .top-hud { padding: 12px 16px; } .controls-bar { padding: 10px 16px; } }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="brand">&#9889; FE STUDY ARCADE</div>
+    <div class="nav-group">
+      <div class="nav-header">Foundations</div>
+      <ul>
+        <li><a href="00_Generic_Templates/neo-arcade-design-system.html">Neo-Arcade Design System</a></li>
+        <li><a href="00_Generic_Templates/arcade-design-language.html">Arcade Design Language</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Study Content</div>
+      <ul>
+        <li><a href="notebook.html">Study Notebook</a></li>
+        <li><a href="fe-arcade-adaptation-map.html">FE Arcade Adaptation Map</a></li>
+        <li><a href="index.html">Pac-Man Calendar (Home)</a></li>
+        <li><a href="math-practice-problems.html">Math Practice Problems</a></li>
+        <li><a href="circuit-analysis-problems.html">Circuit Analysis Problems</a></li>
+        <li><a href="electronics-problems.html" class="active" aria-current="page">Digital Systems Problems</a></li>
+        <li><a href="power-systems-problems.html">Power Systems Problems</a></li>
+        <li><a href="digital-systems-problems.html" class="active" aria-current="page">Digital Systems Problems</a></li>
+        <li><a href="ethics-problems.html">Ethics & Professional Practice</a></li>
+        <li><a href="ethics-puzzles.html">Ethics Puzzles</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <div class="nav-header">Puzzle Engine</div>
+      <ul>
+        <li><a href="puzzle-engine-reference.html">Puzzle Engine Reference</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="main-wrap">
+    <div class="top-hud">
+      <div class="hud-row">
+        <div class="page-title">&#9889; DIGITAL SYSTEMS PROBLEMS</div>
+        <div class="hud-stats">
+          <div class="hud-stat"><span class="label">PROBLEMS</span> <span class="value" id="totalCount">0</span></div>
+          <div class="hud-stat"><span class="label">ATTEMPTED</span> <span class="value" id="attemptedCount">0</span></div>
+          <div class="hud-stat"><span class="label">CORRECT</span> <span class="value green" id="correctCount">0</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div class="controls-bar">
+      <div class="search-box"><input type="text" id="searchInput" placeholder="Search problems..." aria-label="Search problems"></div>
+      <button class="ctrl-btn active" data-filter="all">All</button>
+      <button class="ctrl-btn" data-filter="unanswered">Unanswered</button>
+      <button class="ctrl-btn" data-filter="correct">Correct</button>
+      <button class="ctrl-btn" data-filter="incorrect">Incorrect</button>
+      <button class="ctrl-btn accent" id="editToggle">&#9999; EDIT</button>
+      <button class="ctrl-btn danger" id="resetBtn">&#8634; RESET</button>
+    </div>
+    <div class="content-area">
+      <div class="chapter-sidebar"><div class="ch-sidebar-title">Chapters</div><div id="chapterNav"></div></div>
+      <div class="problems-list" id="problemsContainer"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="edit-indicator" id="editIndicator">&#9999; EDIT MODE - Click text to modify</div>
+<script>
+const problems = [
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 1,
+    "problemText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_1.png)",
+    "choices": [
+      "(A) A =0, B=O",
+      "(B) A = O, B= 1",
+      "(C) A=l, B=O",
+      "(D) A=l,B=l"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "1 (Variant #1)",
+    "problemText": "[VARIANT #1] In the circuit shown, X = 0, Y = 1, and Z = 0. XYX YZ \\Vhat are the outputs, A and B?\n\n\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A = 1, B= 1",
+      "(B) A = 1, B= 0",
+      "(C) A= 0, B= 1",
+      "(D) A= 0,B= 0"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 2,
+    "problemText": "What is the output of the following logic circuit? out ground\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_2.png)",
+    "choices": [
+      "(A) A \u00b7 B \u00b7 C",
+      "(B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C",
+      "(C) ",
+      "(D) A. B \u00b7 C"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "2 (Variant #1)",
+    "problemText": "[VARIANT #1] What is the output of the following logic circuit? out ground\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A \u00b7 B \u00b7 C",
+      "(B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C",
+      "(C) ",
+      "(D) A. B \u00b7 C"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 3,
+    "problemText": "Which column of the truth table corresponds to the logic circuit shown? A out C C D D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_3.png)",
+    "choices": [
+      "(A) column I",
+      "(B) column II",
+      "(C) column III",
+      "(D) column IV PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "3 (Variant #1)",
+    "problemText": "[VARIANT #1] Which column of the truth table corresponds to the logic circuit shown? A out C C D D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) column I",
+      "(B) column II",
+      "(C) column III",
+      "(D) column IV PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 4,
+    "problemText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B out A B C What is the output of the AND gate?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_4.png)",
+    "choices": [
+      "(A) 0",
+      "(B) (A+ B) \u00b7(A\u00b7 B\u00b7 C)",
+      "(C) (A. C) + (B. C)",
+      "(D) X.ff.c"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B out A B C What is the output of the AND gate?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) (A+ B) \u00b7(A\u00b7 B\u00b7 C)",
+      "(C) (A. C) + (B. C)",
+      "(D) X.ff.c"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 5,
+    "problemText": "A logic circuit consists of five gates as shown. A B C A B c D- out A B l5 What is the output?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_5.png)",
+    "choices": [
+      "(A) 0",
+      "(B) 1",
+      "(C) A-B\u00b7 C+B+A\u00b7 C-D",
+      "(D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of five gates as shown. A B C A B c D- out A B l5 What is the output?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) 1",
+      "(C) A-B\u00b7 C+B+A\u00b7 C-D",
+      "(D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 6,
+    "problemText": "A logic circuit consists of four gates as shown. out What is the output?\n\n![diagram](/images/pdf_crops/digital_systems_auto/DigitalLogic_6.png)",
+    "choices": [
+      "(A) 0",
+      "(B) A- C+B\u00b7 C",
+      "(C) A- B. c+ A\u00b7 B",
+      "(D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com Substitute this result into the equation for the output and simplify. out = A- C\u00b7 (AEBB) = A- C \u00b7 ( A \u00b7 B + A \u00b7 ff) = A- c. A\u00b7 B+ A. C\u00b7 A \u00b7 JI =A\u00b7 A- B \u00b7 C+ A\u00b7 A\u00b7 ff \u00b7 C =A-B\u00b7C+O \u00b7 ff\u00b7C =A\u00b7B \u00b7 C The answer is (A)."
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of four gates as shown. out What is the output?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) A- C+B\u00b7 C",
+      "(C) A- B. c+ A\u00b7 B",
+      "(D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com Substitute this result into the equation for the output and simplify. out = A- C\u00b7 (AEBB) = A- C \u00b7 ( A \u00b7 B + A \u00b7 ff) = A- c. A\u00b7 B+ A. C\u00b7 A \u00b7 JI =A\u00b7 A- B \u00b7 C+ A\u00b7 A\u00b7 ff \u00b7 C =A-B\u00b7C+O \u00b7 ff\u00b7C =A\u00b7B \u00b7 C The answer is (A)."
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 3,
+    "problemText": "The Boolean equation for the system can be written from the diagram. out = (A+ A. B) \u00b7 (D + C\u00b7 C) \u00b7 ( C\u00b7 ( C+ D)) If A = 1, then A+ A\u00b7 B= 1 + 0 \u00b7 B= 1, regardless of the value of B. If A = 0, then A+ A \u00b7 B = 0 + 1 \u00b7 B = B. Therefore, A+ A \u00b7 B= A+ B. out = (A+ B) \u00b7 ( D + C \u00b7 C) \u00b7 ( C \u00b7 ( C + D)) C\u00b7 C=O,so out =(A+B)\u00b7(D+O)\u00b7(C\u00b7(C+D)) =(A+B)\u00b7D\u00b7(C\u00b7(C+D)) The last product, C \u00b7 ( C + D ), is equal to 1 when C = 1 and is equal to O when C = 0, regardless of the value of D, so out= (A+B)\u00b7D\u00b7 C The output is 1 only when C = 1, D = 0, and either A = 1 or B = 1; the output is O under all other conditions. Only column III shows this pattern. The answer is (C).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "3 (Variant #1)",
+    "problemText": "[VARIANT #1] Which column of the truth table corresponds to the logic circuit shown? A out C C D D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) column I",
+      "(B) column II",
+      "(C) column III",
+      "(D) column IV PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 4,
+    "problemText": "From De Morgan's second theorem, the output of the NAND gate is A\u00b7B =A+ff From De Morgan's first theorem, the output of the NOR gate is A+B+C =A-ff-C The output of the AND gate combines the output of the other two gates. out = ( A + ff) ( A \u00b7 ff . C) DIGITAL LOGIC 37-3 Use the distributive law. out = ( A . ( A \u00b7 ff . E)) + ( ff . ( A . ff . C)) = ((A. A). ff . c) +(A. (ff. ff). c) = (A-ff\u00b7 C)+(X-ff. C) =A-ff-C The answer is (D).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B out A B C What is the output of the AND gate?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) (A+ B) \u00b7(A\u00b7 B\u00b7 C)",
+      "(C) (A. C) + (B. C)",
+      "(D) X.ff.c"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 5,
+    "problemText": "The outputs from the three NOR gates from top to bottom are A+B+C A+B+C A +B+D The output from the NAND gate is Z =(A+ B+ C) \u00b7 (A+ B+ C) \u00b7 (A+ B + D) Applying De Morgan's second theorem gives Z = (A+B+ C)+(A+B+ C)+(A +B+D) = ( A + B + C) + ( A + B + C) + (A+ B + D) =1 The answer is (B).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of five gates as shown. A B C A B c D- out A B l5 What is the output?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) 1",
+      "(C) A-B\u00b7 C+B+A\u00b7 C-D",
+      "(D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": 6,
+    "problemText": "The Boolean expression for the circuit is out = A EBB+ B + C Applying De Morgan's first theorem gives out = (A EBB)\u00b7 (B+ C) = (A EBB) \u00b7 (B+ C) The result of the EXCLUSIVE-OR is true when the inputs are different. AEBB = A-ff +A \u00b7B =A-ff+A\u00b7B The negation of the EXCLUSIVE-OR is AEBB =A\u00b7B+A \u00b7 B PPI \u2022 ppi2pass.com.",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Logic",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] A logic circuit consists of four gates as shown. out What is the output?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0",
+      "(B) A- C+B\u00b7 C",
+      "(C) A- B. c+ A\u00b7 B",
+      "(D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com Substitute this result into the equation for the output and simplify. out = A- C\u00b7 (AEBB) = A- C \u00b7 ( A \u00b7 B + A \u00b7 ff) = A- c. A\u00b7 B+ A. C\u00b7 A \u00b7 JI =A\u00b7 A- B \u00b7 C+ A\u00b7 A\u00b7 ff \u00b7 C =A-B\u00b7C+O \u00b7 ff\u00b7C =A\u00b7B \u00b7 C The answer is (A)."
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 1,
+    "problemText": "The following Boolean function is in sum-of-products (SOP) form. Y= A-B\u00b7 C+A-ff - C+A\u00b7 ff. C+A\u00b7 ff. C Which of these represents the same function in product- of-sums (POS) form?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_1.png)",
+    "choices": [
+      "(A) Y = (A+ ff+ C). (A+ ff). (ff+ C)",
+      "(B) Y=(A+B+C) -(A+B)",
+      "(C) Y= (A +B+ C). (A+B). (A +ff+ C)",
+      "(D) Y = ( A + B + C) \u00b7 ( A + ff+ C) \u00b7 ( B + C)"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "1 (Variant #1)",
+    "problemText": "[VARIANT #1] The following Boolean function is in sum-of-products (SOP) form. Y= A-B\u00b7 C+A-ff - C+A\u00b7 ff. C+A\u00b7 ff. C Which of these represents the same function in product- of-sums (POS) form?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) Y = (A+ ff+ C). (A+ ff). (ff+ C)",
+      "(B) Y=(A+B+C) -(A+B)",
+      "(C) Y= (A +B+ C). (A+B). (A +ff+ C)",
+      "(D) Y = ( A + B + C) \u00b7 ( A + ff+ C) \u00b7 ( B + C)"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 2,
+    "problemText": "What terms are essential prime implicants in the given Karnaugh map? AB C D 00 01 11 10 00 0 0 0 0 X 0 01 0 0 11 0 0 0 0 X 1 10 0 1\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_2.png)",
+    "choices": [
+      "(A) A \u00b7 C \u00b7 D only",
+      "(B) B \u00b7 C\u00b7 15 only",
+      "(C) A\u00b7 C\u00b7 15 and B\u00b7 C\u00b7 15 only",
+      "(D) A\u00b7 B\u00b7 C, A\u00b7 C- 15, and B\u00b7 C\u00b7 15 only"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "2 (Variant #1)",
+    "problemText": "[VARIANT #1] What terms are essential prime implicants in the given Karnaugh map? AB C D 00 01 11 10 00 0 0 0 0 X 0 01 0 0 11 0 0 0 0 X 1 10 0 1\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A \u00b7 C \u00b7 D only",
+      "(B) B \u00b7 C\u00b7 15 only",
+      "(C) A\u00b7 C\u00b7 15 and B\u00b7 C\u00b7 15 only",
+      "(D) A\u00b7 B\u00b7 C, A\u00b7 C- 15, and B\u00b7 C\u00b7 15 only"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 3,
+    "problemText": "This Boolean expression for F cannot be further simplified. F= A.ff. C+A - ff- C+A \u00b7B\u00b7 C\u00b7 D Which terms in the expression are the essential prime implicants of F?",
+    "choices": [
+      "(A) A\u00b7 B \u00b7 C only",
+      "(B) A\u00b7 B \u00b7 C\u00b7 D only",
+      "(C) A. ff. C and A\u00b7 ff\u00b7 C only",
+      "(D) if.ff. C, A-ff- C, and A - B\u00b7 C-D"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "3 (Variant #1)",
+    "problemText": "[VARIANT #1] This Boolean expression for F cannot be further simplified. F= A.ff. C+A - ff- C+A \u00b7B\u00b7 C\u00b7 D Which terms in the expression are the essential prime implicants of F?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A\u00b7 B \u00b7 C only",
+      "(B) A\u00b7 B \u00b7 C\u00b7 D only",
+      "(C) A. ff. C and A\u00b7 ff\u00b7 C only",
+      "(D) if.ff. C, A-ff- C, and A - B\u00b7 C-D"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 4,
+    "problemText": "Fis a Boolean function. F(A,B, C) =(A\u00b7B\u00b7C)+(A+C)+A \u00b7 B+B Which of the following is a maxterm of F?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_4.png)",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A\u00b7 C",
+      "(C) A+B+C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] Fis a Boolean function. F(A,B, C) =(A\u00b7B\u00b7C)+(A+C)+A \u00b7 B+B Which of the following is a maxterm of F?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A\u00b7 C",
+      "(C) A+B+C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 5,
+    "problemText": "Fis a Boolean function. F = ( A- B \u00b7 C) + ( A + C) + A \u00b7 B + B Which of the following is a min term of F?\n\n![diagram](/images/pdf_crops/digital_systems_auto/LogicNetworkDesign_5.png)",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A- C",
+      "(C) A+ B+ C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] Fis a Boolean function. F = ( A- B \u00b7 C) + ( A + C) + A \u00b7 B + B Which of the following is a min term of F?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A- C",
+      "(C) A+ B+ C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 6,
+    "problemText": "How many prime implicants does the following logic expression have?",
+    "choices": [
+      "(A) 3",
+      "(B) 4",
+      "(C) 7",
+      "(D) 16 PPI \u2022 ppi2pass.com 38-2 F E E L E C T R I CA L A N D CO M P U T E R PR AC T I C E P R O B L E M S"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] How many prime implicants does the following logic expression have?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 3",
+      "(B) 4",
+      "(C) 7",
+      "(D) 16 PPI \u2022 ppi2pass.com 38-2 F E E L E C T R I CA L A N D CO M P U T E R PR AC T I C E P R O B L E M S"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 7,
+    "problemText": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit.",
+    "choices": [
+      "(A) (A\u00b7C)\u00b7(A-B)",
+      "(B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B)",
+      "(C) (A . C) \u00b7 (A\u00b7 B)",
+      "(D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com be part of the minimized expression. This can be visual- ized by mapping the implicants into a Karnaugh map. AB ABC C D oo I 01 11 10 r 1 ~ 00 I 0 0 0 01 I 1 I L---.J 0 0 0 r , r , 11 0 I 1 I 0 I 1 I L -,. J 0 \\ 1 .,r --- 10 0 1 I L---.J A \u00b7B\u00b7C \\ A\u00b7B\u00b7C\u00b7D The answer is (D)."
+    ],
+    "solutionText": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit. (A) (A\u00b7C)\u00b7(A-B) (B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B) (C) (A . C) \u00b7 (A\u00b7 B) (D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com SOLUTIONS \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7 .......................... .",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "7 (Variant #1)",
+    "problemText": "[VARIANT #1] Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit.\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) (A\u00b7C)\u00b7(A-B)",
+      "(B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B)",
+      "(C) (A . C) \u00b7 (A\u00b7 B)",
+      "(D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com be part of the minimized expression. This can be visual- ized by mapping the implicants into a Karnaugh map. AB ABC C D oo I 01 11 10 r 1 ~ 00 I 0 0 0 01 I 1 I L---.J 0 0 0 r , r , 11 0 I 1 I 0 I 1 I L -,. J 0 \\ 1 .,r --- 10 0 1 I L---.J A \u00b7B\u00b7C \\ A\u00b7B\u00b7C\u00b7D The answer is (D)."
+    ],
+    "solutionText": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit. (A) (A\u00b7C)\u00b7(A-B) (B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B) (C) (A . C) \u00b7 (A\u00b7 B) (D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com SOLUTIONS \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7 .......................... .",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 4,
+    "problemText": "By definition, a maxterm is a sum (OR) of all the variables in a function, with each variable used exactly once either directly or in negated form. Among the given options, A + B + C is the only maxterm. The answer is (C).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] Fis a Boolean function. F(A,B, C) =(A\u00b7B\u00b7C)+(A+C)+A \u00b7 B+B Which of the following is a maxterm of F?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A\u00b7 C",
+      "(C) A+B+C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 5,
+    "problemText": "By definition, a minterm is a product (AND) of all the variables in a function, with each variable used exactly once either directly or in negated form. Among the given options, A \u00b7 B \u00b7 C is the only minterm. The answer is (D).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] Fis a Boolean function. F = ( A- B \u00b7 C) + ( A + C) + A \u00b7 B + B Which of the following is a min term of F?\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) A+ ff",
+      "(B) A- C",
+      "(C) A+ B+ C",
+      "(D) A. ff. C"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 6,
+    "problemText": "Plot the expression on a Karnaugh map to aid in see- ing the prime implicants. A prime implicant is one that is not contained entirely within another implicant. AB C D 00 01 11 10 00 Mo M, M3 M2 r-- - - ,-::..--::..-::.._ - - - --, ----I 01 I M4 L M5 - M7 I Ms _; I I 11 M12 ~ M13 _ M15) M14 ---- 10 L_~a_J Mg M11 M,o A\u00b7 B , B \u00b7 D, and A \u00b7 B \u00b7 C\u00b7 Dare the prime implicants. The answer is (A).",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] How many prime implicants does the following logic expression have?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 3",
+      "(B) 4",
+      "(C) 7",
+      "(D) 16 PPI \u2022 ppi2pass.com 38-2 F E E L E C T R I CA L A N D CO M P U T E R PR AC T I C E P R O B L E M S"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": 7,
+    "problemText": "Draw the Karnaugh map to find the sum-of-products form with the smallest number of groups. AB C D 00 01 11 10 r I- , r , 00 I 1 1 I I 1 I L---- ____ .J I I I I 01 I 1 I L J F(A , B, C) =A\u00b7 C + A- B L O Q I C N E T W O R K D E S I G N 38-3 Use De Morgan's first theorem to express the result in terms of NAND gates. A\u00b7 C+A\u00b7B =A\u00b7 C+A\u00b7B = (A \u00b7 C) \u00b7 (A\u00b7 B) The answer is (C). PPI \u2022 ppi2pass.com",
+    "choices": [
+      "(A) ",
+      "(B) ",
+      "(C) ",
+      "(D) "
+    ],
+    "solutionText": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit. (A) (A\u00b7C)\u00b7(A-B) (B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B) (C) (A . C) \u00b7 (A\u00b7 B) (D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com SOLUTIONS \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7 .......................... .",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Logic Network Design",
+    "problemNumber": "7 (Variant #1)",
+    "problemText": "[VARIANT #1] Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit.\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) (A\u00b7C)\u00b7(A-B)",
+      "(B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B)",
+      "(C) (A . C) \u00b7 (A\u00b7 B)",
+      "(D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com be part of the minimized expression. This can be visual- ized by mapping the implicants into a Karnaugh map. AB ABC C D oo I 01 11 10 r 1 ~ 00 I 0 0 0 01 I 1 I L---.J 0 0 0 r , r , 11 0 I 1 I 0 I 1 I L -,. J 0 \\ 1 .,r --- 10 0 1 I L---.J A \u00b7B\u00b7C \\ A\u00b7B\u00b7C\u00b7D The answer is (D)."
+    ],
+    "solutionText": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit. (A) (A\u00b7C)\u00b7(A-B) (B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B) (C) (A . C) \u00b7 (A\u00b7 B) (D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com SOLUTIONS \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7 .......................... .",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 1,
+    "problemText": "Compared to an SR flip-flop, which additional func- tions does a JK flip-flop have?",
+    "choices": [
+      "(A) holding the current state",
+      "(B) asynchronous set and reset",
+      "(C) clock frequency division",
+      "(D) inverting the current state"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "1 (Variant #1)",
+    "problemText": "[VARIANT #1] Compared to an SR flip-flop, which additional func- tions does a JK flip-flop have?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) holding the current state",
+      "(B) asynchronous set and reset",
+      "(C) clock frequency division",
+      "(D) inverting the current state"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 2,
+    "problemText": "Which of the following statements about the use of SR flip-flops are true? I. They can store an input at a clock edge. II. They can set one bit of memory to 1. III. They can reset one bit of memory to 0.\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_2.png)",
+    "choices": [
+      "(A) I and II only",
+      "(B) I and III only",
+      "(C) II and III only",
+      "(D) I, II, and III"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "2 (Variant #1)",
+    "problemText": "[VARIANT #1] Which of the following statements about the use of SR flip-flops are true? I. They can store an input at a clock edge. II. They can set one bit of memory to 1. III. They can reset one bit of memory to 0.\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) I and II only",
+      "(B) I and III only",
+      "(C) II and III only",
+      "(D) I, II, and III"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 3,
+    "problemText": "The sequential network circuit in the following dia- gram starts with all bits equal to 0. The flip-flops are leading edge triggered (with a state transition initiated by a change from Oto 1 on the clock). The clock period is long compared to the flip-flop transition time. Bit O is the least significant bit, and bit 2 is the most significant bit. After three clock pulses, what is the count on the circuit (in the sequence bit 0, bit 1, bit 2)? D2 02 0 1 Q1 1--+-~CLK Do 0a 1--1---.CLK CLK a, input bit 0 bit 1 bit2",
+    "choices": [
+      "(A) 011",
+      "(B) 100",
+      "(C) 101",
+      "(D) 110"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "3 (Variant #1)",
+    "problemText": "[VARIANT #1] The sequential network circuit in the following dia- gram starts with all bits equal to 0. The flip-flops are leading edge triggered (with a state transition initiated by a change from Oto 1 on the clock). The clock period is long compared to the flip-flop transition time. Bit O is the least significant bit, and bit 2 is the most significant bit. After three clock pulses, what is the count on the circuit (in the sequence bit 0, bit 1, bit 2)? D2 02 0 1 Q1 1--+-~CLK Do 0a 1--1---.CLK CLK a, input bit 0 bit 1 bit2\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 011",
+      "(B) 100",
+      "(C) 101",
+      "(D) 110"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 4,
+    "problemText": "The sequential network circuit in the following dia- gram starts with all bits equal to 0. Bit O is the least sig- nificant bit and bit 1 is the most significant bit. After four clock pulses, what is the count on the circuit (in the sequence bit 0, bit 1)? bit 1 bit 0 Jo Oo 1--....... --1 J, a, CLK CLK Ko Do K, a, input --+---------'\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_4.png)",
+    "choices": [
+      "(A) 00",
+      "(B) 01",
+      "(C) 10",
+      "(D) 11 PPI \u2022 ppi2pass . com . 39-2 F E E L EC T R I C A L A N D C O M P U T E R P R AC T I C E PR O B L E M S"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] The sequential network circuit in the following dia- gram starts with all bits equal to 0. Bit O is the least sig- nificant bit and bit 1 is the most significant bit. After four clock pulses, what is the count on the circuit (in the sequence bit 0, bit 1)? bit 1 bit 0 Jo Oo 1--....... --1 J, a, CLK CLK Ko Do K, a, input --+---------'\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 00",
+      "(B) 01",
+      "(C) 10",
+      "(D) 11 PPI \u2022 ppi2pass . com . 39-2 F E E L EC T R I C A L A N D C O M P U T E R P R AC T I C E PR O B L E M S"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 5,
+    "problemText": "The sequential network circuit shown starts with flip-flop O equal to 1 and flip-flop 1 equal to l. Bit O is the least significant bit and bit 1 is the most significant bit. After one clock pulse, what is the count on the cir- cuit (in the sequence bit 0, bit l)? bit 0 bit 1 Jo Do J, a, CLK CLK Ko Do K, a, input\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_5.png)",
+    "choices": [
+      "(A) 00",
+      "(B) 01",
+      "(C) 10",
+      "(D) 11 PPI \u2022 ppi2pass.com"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] The sequential network circuit shown starts with flip-flop O equal to 1 and flip-flop 1 equal to l. Bit O is the least significant bit and bit 1 is the most significant bit. After one clock pulse, what is the count on the cir- cuit (in the sequence bit 0, bit l)? bit 0 bit 1 Jo Do J, a, CLK CLK Ko Do K, a, input\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 00",
+      "(B) 01",
+      "(C) 10",
+      "(D) 11 PPI \u2022 ppi2pass.com"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": 6,
+    "problemText": "The sequential network circuit in the following dia- gram starts with flip-flop O equal to 1, flip-flop 1 equal to 1, and flip-flop 2 equal to 0. Bit O is the least signifi- cant bit and bit 2 is the most significant bit. After one clock pulse, what is the output count on the circuit (in the sequence bit 0, bit 1, bit 2)? D2 02 b2 (MSB) CLK 02 D, a, b, CLK Do Do CLK Clo input---~ Adapted from Computer Engineering Reference Manual for the Electrical and Computer PE Exam, by John A. Camara, PE, copyright \u00a9 2010, by Professional Publications, Inc.\n\n![diagram](/images/pdf_crops/digital_systems_auto/SequentialNetworks_6.png)",
+    "choices": [
+      "(A) 001",
+      "(B) 100",
+      "(C) 110",
+      "(D) 111"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Sequential Networks",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] The sequential network circuit in the following dia- gram starts with flip-flop O equal to 1, flip-flop 1 equal to 1, and flip-flop 2 equal to 0. Bit O is the least signifi- cant bit and bit 2 is the most significant bit. After one clock pulse, what is the output count on the circuit (in the sequence bit 0, bit 1, bit 2)? D2 02 b2 (MSB) CLK 02 D, a, b, CLK Do Do CLK Clo input---~ Adapted from Computer Engineering Reference Manual for the Electrical and Computer PE Exam, by John A. Camara, PE, copyright \u00a9 2010, by Professional Publications, Inc.\n\n\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 001",
+      "(B) 100",
+      "(C) 110",
+      "(D) 111"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 1,
+    "problemText": "A 24 kHz, 16-bit, analog-to-digital converter samples an analog signal. The voltage resolution is 1 m V, and the low end of the voltage range is O V. Most nearly, the high end of the voltage range that can be measured is",
+    "choices": [
+      "(A) 18 V",
+      "(B) 44 V",
+      "(C) 66 V",
+      "(D) 120 V"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "1 (Variant #1)",
+    "problemText": "[VARIANT #1] A 24 kHz, 16-bit, analog-to-digital converter samples an analog signal. The voltage resolution is 1 m V, and the low end of the voltage range is O V. Most nearly, the high end of the voltage range that can be measured is\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 18 V",
+      "(B) 44 V",
+      "(C) 66 V",
+      "(D) 120 V"
+    ],
+    "solutionText": "In the circuit shown, X = 1, Y = 0, and Z = l. XYX YZ \\Vhat are the outputs, A and B? (A) A =0, B=O (B) A = O, B= 1 (C) A=l, B=O (D) A=l,B=l",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 2,
+    "problemText": "A 24 kHz, 16-bit, analog-to-digital converter samples an analog signal. The voltage resolution is 1 m V, and the low end of the voltage range is O V. Most nearly, an output of 1100100 from the converter represents a volt- age of",
+    "choices": [
+      "(A) 1 mV",
+      "(B) 10 mV",
+      "(C) 100 mV",
+      "(D) 1000 mV"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "2 (Variant #1)",
+    "problemText": "[VARIANT #1] A 24 kHz, 16-bit, analog-to-digital converter samples an analog signal. The voltage resolution is 1 m V, and the low end of the voltage range is O V. Most nearly, an output of 1100100 from the converter represents a volt- age of\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 1 mV",
+      "(B) 10 mV",
+      "(C) 100 mV",
+      "(D) 1000 mV"
+    ],
+    "solutionText": "What is the output of the following logic circuit? ground (A) A \u00b7 B \u00b7 C (B) A- B \u00b7 C+ A- C ( C) A . B. C + A \u00b7 B \u00b7 C + A \u00b7 B \u00b7 C + A- B \u00b7 C (D) A. B \u00b7 C out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 3,
+    "problemText": "An analog signal varying from O V to 10 V is sampled by an 8-bit analog-to-digital converter. Most nearly, the voltage resolution is",
+    "choices": [
+      "(A) 0.039 V",
+      "(B) 0.33 V",
+      "(C) 1.0 V",
+      "(D) 1.2 V"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "3 (Variant #1)",
+    "problemText": "[VARIANT #1] An analog signal varying from O V to 10 V is sampled by an 8-bit analog-to-digital converter. Most nearly, the voltage resolution is\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0.039 V",
+      "(B) 0.33 V",
+      "(C) 1.0 V",
+      "(D) 1.2 V"
+    ],
+    "solutionText": "Which column of the truth table corresponds to the logic circuit shown? A C A B 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 C D C 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 (A) column I (B) column II (C) column III (D) column IV out D I II III IV 0 1 0 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 1 1 1 0 1 0 0 PPI \u2022 ppi2pass.com 37-2 F E E L E C T R I C A L A N D C O M P U T E R P R A C T I C E P R O B L E M S",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 4,
+    "problemText": "An 8-bit programmable module will be used to con- trol temperature. If the temperature sensor's range is 0-300\u00b0F and the controller's range is 0-5 V oc, what is the resolution capacity of the controller?",
+    "choices": [
+      "(A) 0.02 \u00b0F /step",
+      "(B) 1.2 \u00b0F /step",
+      "(C) 2.3 \u00b0F /step",
+      "(D) 60 \u00b0F /step"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "4 (Variant #1)",
+    "problemText": "[VARIANT #1] An 8-bit programmable module will be used to con- trol temperature. If the temperature sensor's range is 0-300\u00b0F and the controller's range is 0-5 V oc, what is the resolution capacity of the controller?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 0.02 \u00b0F /step",
+      "(B) 1.2 \u00b0F /step",
+      "(C) 2.3 \u00b0F /step",
+      "(D) 60 \u00b0F /step"
+    ],
+    "solutionText": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 5,
+    "problemText": "An analog-to-digital converter has a range of -5 V to 5 V and an 8-bit output. Most nearly, an output of 01101100 from the converter corresponds to an input voltage of",
+    "choices": [
+      "(A) -0.82 V",
+      "(B) -0.78 V",
+      "(C) -0.64 V",
+      "(D) 0.039 V"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "5 (Variant #1)",
+    "problemText": "[VARIANT #1] An analog-to-digital converter has a range of -5 V to 5 V and an 8-bit output. Most nearly, an output of 01101100 from the converter corresponds to an input voltage of\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) -0.82 V",
+      "(B) -0.78 V",
+      "(C) -0.64 V",
+      "(D) 0.039 V"
+    ],
+    "solutionText": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": 6,
+    "problemText": "A resistance temperature detector (RTD) transducer is to be chosen such that the analog-to-digital conver- sion will have a resolution of 0.001 \u00b0C. The conversion uses 16 bits. The RTD will be in a circuit with a lower voltage of -0.150 Vat the lowest temperature extreme and an upper voltage of 0.300 Vat the highest tempera- ture extreme. The RTD will have an output of 0.000 V at 0.000\u00b0C. What is most nearly the sensitivity of the RTD, and what is most nearly the temperature range that the analog-to-digital conversion can represent?",
+    "choices": [
+      "(A) 96.0 \u00b0C/V, -43.9\u00b0C to 98.6\u00b0C",
+      "(B) 146 \u00b0C/V, -21.9\u00b0C to 43.7\u00b0C",
+      "(C) 160 \u00b0C/V, -ll.7\u00b0C to 38.8\u00b0C",
+      "(D) 222 \u00b0C/V, l.90\u00b0C to 78.7\u00b0C PPI \u2022 ppi2pass . com 40-2 FE E L EC T R I C A L A N D C O M P U T E R P A AC T IC E P RO B L EM S"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  },
+  {
+    "chapter": "Digital Systems",
+    "problemNumber": "6 (Variant #1)",
+    "problemText": "[VARIANT #1] A resistance temperature detector (RTD) transducer is to be chosen such that the analog-to-digital conver- sion will have a resolution of 0.001 \u00b0C. The conversion uses 16 bits. The RTD will be in a circuit with a lower voltage of -0.150 Vat the lowest temperature extreme and an upper voltage of 0.300 Vat the highest tempera- ture extreme. The RTD will have an output of 0.000 V at 0.000\u00b0C. What is most nearly the sensitivity of the RTD, and what is most nearly the temperature range that the analog-to-digital conversion can represent?\n\n**Variant Modification:** For this version, assume all input variables (A, B, C, X, Y, etc.) have been inverted (NOT'd) before entering the circuit or equation.\n\n*(Note: The original circuit diagram scan has been removed for this variant. Please solve based on the boolean algebra or conceptual rules provided.)*",
+    "choices": [
+      "(A) 96.0 \u00b0C/V, -43.9\u00b0C to 98.6\u00b0C",
+      "(B) 146 \u00b0C/V, -21.9\u00b0C to 43.7\u00b0C",
+      "(C) 160 \u00b0C/V, -ll.7\u00b0C to 38.8\u00b0C",
+      "(D) 222 \u00b0C/V, l.90\u00b0C to 78.7\u00b0C PPI \u2022 ppi2pass . com 40-2 FE E L EC T R I C A L A N D C O M P U T E R P A AC T IC E P RO B L EM S"
+    ],
+    "solutionText": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS",
+    "correctAnswer": ""
+  }
+];
+
+let editMode = false, activeChapter = 'all', activeFilter = 'all', searchQuery = '';
+const userAnswers = JSON.parse(localStorage.getItem('fe_electronics_answers') || '{}');
+const chapters = [...new Set(problems.map(p => p.chapter))];
+const letters = ['A','B','C','D'];
+
+function renderChapterNav() {
+  const nav = document.getElementById('chapterNav');
+  const counts = {}; chapters.forEach(ch => { counts[ch] = problems.filter(p => p.chapter === ch).length; });
+  let html = `<a class="ch-link ${activeChapter==='all'?'active':''}" data-ch="all"><span>All</span><span class="ch-count">${problems.length}</span></a>`;
+  chapters.forEach(ch => { html += `<a class="ch-link ${activeChapter===ch?'active':''}" data-ch="${ch}"><span>${ch}</span><span class="ch-count">${counts[ch]}</span></a>`; });
+  nav.innerHTML = html;
+  nav.querySelectorAll('.ch-link').forEach(l => l.addEventListener('click', () => { activeChapter = l.dataset.ch; renderChapterNav(); renderProblems(); }));
+}
+
+function getFiltered() {
+  let f = problems;
+  if (activeChapter !== 'all') f = f.filter(p => p.chapter === activeChapter);
+  if (activeFilter === 'unanswered') f = f.filter(p => !userAnswers[`${p.chapter}-${p.problemNumber}`]);
+  else if (activeFilter === 'correct') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] === p.correctAnswer; });
+  else if (activeFilter === 'incorrect') f = f.filter(p => { const k = `${p.chapter}-${p.problemNumber}`; return userAnswers[k] && userAnswers[k] !== p.correctAnswer; });
+  if (searchQuery) { const q = searchQuery.toLowerCase(); f = f.filter(p => p.problemText.toLowerCase().includes(q) || p.chapter.toLowerCase().includes(q) || p.solutionText.toLowerCase().includes(q)); }
+  return f;
+}
+
+function esc(t) { 
+  const d = document.createElement('div'); 
+  d.textContent = t; 
+  let html = d.innerHTML; 
+  html = html.replace(/\[VARIANT\]/g, '<span style="background: var(--neon-yellow); color: #000; padding: 2px 6px; border-radius: 3px; font-weight: bold; margin-bottom: 10px; display: inline-block; font-size: 0.8rem;">[VARIANT]</span><br><br>'); 
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%; border-radius:4px; margin-top:8px;">');
+  html = html.replace(/\^\^\^([\s\S]*?)\^\^\^/g, '<pre style="font-family:var(--font-mono); background:var(--panel-2); padding:10px; border-radius:4px; margin-top:8px;">$1</pre>');
+  return html;
+}
+
+function renderProblems() {
+  const c = document.getElementById('problemsContainer'), f = getFiltered();
+  if (!f.length) { c.innerHTML = `<div class="empty-state"><div class="emoji">&#9889;</div><p>No problems match your filters.</p></div>`; updateStats(); return; }
+  c.innerHTML = f.map(p => {
+    const k = `${p.chapter}-${p.problemNumber}`, ua = userAnswers[k], ok = ua === p.correctAnswer, done = !!ua;
+    return `<div class="problem-card ${done&&ok?'answered-correct':''}" id="card-${k}">
+      <div class="card-head"><div class="card-badge"><span class="badge-ch">${p.chapter}</span><span class="badge-num">#${p.problemNumber}</span></div><button class="reset-btn" title="Reset" onclick="resetP('${k}')">&#8634;</button></div>
+      <div class="card-body">
+        <div class="problem-text" ${editMode?'contenteditable="true"':''}>${esc(p.problemText)}</div>
+        <div class="choices">${p.choices.map((ch,i) => {
+          const l = letters[i]; let cls = 'choice-btn';
+          if (done) { if (l===p.correctAnswer) cls+=' correct'; else if (l===ua) cls+=' incorrect'; }
+          return `<button class="${cls}" data-k="${k}" data-l="${l}" ${done?'disabled':''}><span class="choice-letter">${l}</span><span class="choice-text" ${editMode?'contenteditable="true"':''}>${esc(ch)}</span></button>`;
+        }).join('')}</div>
+        <button class="solution-toggle" onclick="toggleSol('${k}')">&#128161; ${done?'VIEW':'SHOW'} SOLUTION</button>
+        <div class="solution-panel" id="sol-${k}"><div class="solution-label">&#9989; SOLUTION</div><div class="solution-text" ${editMode?'contenteditable="true"':''}>${esc(p.solutionText)}</div><div class="correct-tag">CORRECT: ${p.correctAnswer}</div></div>
+      </div></div>`;
+  }).join('');
+  c.querySelectorAll('.choice-btn:not([disabled])').forEach(b => b.addEventListener('click', () => selectAns(b.dataset.k, b.dataset.l)));
+  updateStats();
+}
+
+function selectAns(k, l) { userAnswers[k] = l; localStorage.setItem('fe_electronics_answers', JSON.stringify(userAnswers)); renderProblems(); const p = problems.find(x => `${x.chapter}-${x.problemNumber}`===k); toast(p&&l===p.correctAnswer ? '&#9989; CORRECT!' : '&#10060; INCORRECT', p&&l===p.correctAnswer ? '' : 'error'); }
+function toggleSol(k) { document.getElementById(`sol-${k}`).classList.toggle('visible'); }
+function resetP(k) { delete userAnswers[k]; localStorage.setItem('fe_electronics_answers', JSON.stringify(userAnswers)); renderProblems(); toast('RESET'); }
+
+function updateStats() {
+  const t = problems.length, a = Object.keys(userAnswers).length;
+  const correct = Object.entries(userAnswers).filter(([k,v]) => { const p = problems.find(x=>`${x.chapter}-${x.problemNumber}`===k); return p&&v===p.correctAnswer; }).length;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('attemptedCount').textContent = a;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('progressFill').style.width = `${(a/t)*100}%`;
+}
+
+function toast(msg, cls='') { const t = document.getElementById('toast'); t.innerHTML = msg; t.className = `toast ${cls}`; setTimeout(() => t.classList.add('visible'), 10); setTimeout(() => t.classList.remove('visible'), 2500); }
+
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderProblems(); });
+document.querySelectorAll('.ctrl-btn[data-filter]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.ctrl-btn[data-filter]').forEach(x => x.classList.remove('active')); b.classList.add('active'); activeFilter = b.dataset.filter; renderProblems(); }));
+document.getElementById('editToggle').addEventListener('click', () => { editMode = !editMode; document.getElementById('editIndicator').classList.toggle('visible', editMode); document.getElementById('editToggle').textContent = editMode ? '&#10003; DONE' : '&#9999; EDIT'; renderProblems(); });
+document.getElementById('resetBtn').addEventListener('click', () => { if (confirm('Reset all answers?')) { Object.keys(userAnswers).forEach(k => delete userAnswers[k]); localStorage.setItem('fe_electronics_answers', JSON.stringify(userAnswers)); renderProblems(); toast('ALL RESET'); }});
+
+renderChapterNav(); renderProblems();
+</script>
+</body>
+</html>

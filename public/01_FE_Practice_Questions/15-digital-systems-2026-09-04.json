@@ -1,0 +1,122 @@
+{
+  "topic_number": 15,
+  "topic_name": "Digital Systems",
+  "fe_priority": "high",
+  "fe_exam_weight": "8-12 of 110 questions",
+  "subtopics": [
+    "Number systems",
+    "Boolean logic",
+    "Logic gates and circuits",
+    "Logic minimization",
+    "Flip-flops and counters",
+    "Programmable logic devices and gate arrays",
+    "State machine design",
+    "Timing"
+  ],
+  "puzzle_slug": "logic-grid-puzzle",
+  "puzzle_category": "Grid & Spatial Logic",
+  "questions": [
+    {
+      "id": "DS-LogicNetworkDesign-7",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit.",
+      "choices": {
+        "A": "(A\u00b7C)\u00b7(A-B)",
+        "B": "(A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B)",
+        "C": "(A . C) \u00b7 (A\u00b7 B)",
+        "D": "(A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com be part of the minimized expression. This can be visual- ized by mapping the implicants into a Karnaugh map. AB ABC C D oo I 01 11 10 r 1 ~ 00 I 0 0 0 01 I 1 I L---.J 0 0 0 r , r , 11 0 I 1 I 0 I 1 I L -,. J 0 \\ 1 .,r --- 10 0 1 I L---.J A \u00b7B\u00b7C \\ A\u00b7B\u00b7C\u00b7D The answer is (D)."
+      },
+      "correct_answer": "",
+      "explanation": "Find the logic expression which implements the Boo- lean function F(A, B, C) = ;f.ff.c + B\u00b7C + A-B\u00b7C using a minimum number of N AND gates only, in a haz- ard-free circuit. (A) (A\u00b7C)\u00b7(A-B) (B) (A \u00b7 C) \u00b7 (B \u00b7 C) \u00b7 (A\u00b7 B) (C) (A . C) \u00b7 (A\u00b7 B) (D) (A\u00b7 C) + (B \u00b7 C) +(A \u00b7 B) PPI \u2022 ppi2pass.com SOLUTIONS \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7 .......................... ."
+    },
+    {
+      "id": "DS-LogicNetworkDesign-4",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "By definition, a maxterm is a sum (OR) of all the variables in a function, with each variable used exactly once either directly or in negated form. Among the given options, A + B + C is the only maxterm. The answer is (C).",
+      "choices": {},
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of an AND, NAND, and NOR gate, as shown. A B A B C What is the output of the AND gate? (A) 0 (B) (A+ B) \u00b7(A\u00b7 B\u00b7 C) (C) (A. C) + (B. C) (D) X.ff.c out"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-5",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "By definition, a minterm is a product (AND) of all the variables in a function, with each variable used exactly once either directly or in negated form. Among the given options, A \u00b7 B \u00b7 C is the only minterm. The answer is (D).",
+      "choices": {},
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of five gates as shown. A B C A B c A B l5 D- out What is the output? (A) 0 (B) 1 (C) A-B\u00b7 C+B+A\u00b7 C-D (D) A-B\u00b7 C+A\u00b7B\u00b7 c+A-B-D"
+    },
+    {
+      "id": "DS-LogicNetworkDesign-6",
+      "subtopic": "Logic Network Design",
+      "difficulty": "medium",
+      "stem": "Plot the expression on a Karnaugh map to aid in see- ing the prime implicants. A prime implicant is one that is not contained entirely within another implicant. AB C D 00 01 11 10 00 Mo M, M3 M2 r-- - - ,-::..--::..-::.._ - - - --, ----I 01 I M4 L M5 - M7 I Ms _; I I 11 M12 ~ M13 _ M15) M14 ---- 10 L_~a_J Mg M11 M,o A\u00b7 B , B \u00b7 D, and A \u00b7 B \u00b7 C\u00b7 Dare the prime implicants. The answer is (A).",
+      "choices": {},
+      "correct_answer": "",
+      "explanation": "A logic circuit consists of four gates as shown. What is the output? (A) 0 (B) A- C+B\u00b7 C (C) A- B. c+ A\u00b7 B (D) A . B + A \u00b7 B + B \u00b7 C PPI \u2022 ppi2pass.com out SOLUTIONS"
+    }
+  ],
+  "puzzle_instance": {
+    "puzzleType": "logicGrid",
+    "categories": [
+      {
+        "name": "Method",
+        "items": [
+          "SOP",
+          "POS",
+          "K-Map"
+        ]
+      },
+      {
+        "name": "Target",
+        "items": [
+          "Minterms (1s)",
+          "Maxterms (0s)",
+          "Adjacent Cells"
+        ]
+      },
+      {
+        "name": "Result",
+        "items": [
+          "Sum of Products",
+          "Product of Sums",
+          "Minimized Form"
+        ]
+      }
+    ],
+    "solution": [
+      {
+        "categoryA": "SOP",
+        "categoryB": "Minterms (1s)",
+        "categoryC": "Sum of Products"
+      },
+      {
+        "categoryA": "POS",
+        "categoryB": "Maxterms (0s)",
+        "categoryC": "Product of Sums"
+      },
+      {
+        "categoryA": "K-Map",
+        "categoryB": "Adjacent Cells",
+        "categoryC": "Minimized Form"
+      }
+    ],
+    "clues": [
+      {
+        "type": "direct",
+        "text": "POS targets Maxterms (0s)."
+      },
+      {
+        "type": "negative",
+        "text": "SOP does not result in a Product of Sums or target Adjacent Cells."
+      },
+      {
+        "type": "sameAs",
+        "text": "The method that results in a Minimized Form targets Adjacent Cells."
+      }
+    ]
+  },
+  "theory_html": "\n<div class=\"ds-theory\">\n  <h3>1. Number Systems & Codes</h3>\n  <p><strong>Base Conversions:</strong> Binary (Base 2), Octal (Base 8, groups of 3 bits), Hexadecimal (Base 16, groups of 4 bits).</p>\n  <p><strong>Signed Numbers (2's Complement):</strong> To find the negative, invert all bits and add 1 to the LSB. MSB is the sign bit (0 = pos, 1 = neg).</p>\n  \n  <h3>2. Boolean Algebra</h3>\n  <p><strong>Identity:</strong> A + 0 = A, A &middot; 1 = A</p>\n  <p><strong>Null (Dominance):</strong> A + 1 = 1, A &middot; 0 = 0</p>\n  <p><strong>Idempotent:</strong> A + A = A, A &middot; A = A</p>\n  <p><strong>Inverse (Complement):</strong> A + A' = 1, A &middot; A' = 0</p>\n  <p><strong>De Morgan's Laws:</strong> (A + B)' = A' &middot; B' (NOR), (A &middot; B)' = A' + B' (NAND)</p>\n  \n  <h3>3. Logic Gates</h3>\n  <ul>\n    <li><strong>AND:</strong> Y = A &middot; B (1 only if A=1 and B=1)</li>\n    <li><strong>OR:</strong> Y = A + B (0 only if A=0 and B=0)</li>\n    <li><strong>NOT:</strong> Y = A' (Inverts input)</li>\n    <li><strong>NAND:</strong> Y = (A &middot; B)' (0 only if A=1 and B=1)</li>\n    <li><strong>NOR:</strong> Y = (A + B)' (1 only if A=0 and B=0)</li>\n    <li><strong>XOR:</strong> Y = A &oplus; B (1 if A &ne; B)</li>\n    <li><strong>XNOR:</strong> Y = (A &oplus; B)' (1 if A = B)</li>\n  </ul>\n  \n  <h3>4. Logic Minimization (Karnaugh Maps)</h3>\n  <p><strong>Grouping Rules:</strong> Group adjacent 1s in powers of 2. Groups can overlap and wrap around edges. Don't Cares (X) can be 1 or 0 to make the largest group.</p>\n  <p><strong>Essential Prime Implicant:</strong> A group covering at least one '1' not covered by any other group.</p>\n  \n  <h3>5. Sequential Logic & Flip-Flops</h3>\n  <ul>\n    <li><strong>D Flip-Flop:</strong> Q_next = D (Stores data at clock edge)</li>\n    <li><strong>T Flip-Flop:</strong> Q_next = T &oplus; Q (Toggles if T=1, holds if T=0)</li>\n    <li><strong>SR Flip-Flop:</strong> Q_next = S + R' &middot; Q (S&middot;R=0)</li>\n    <li><strong>JK Flip-Flop:</strong> Q_next = J &middot; Q' + K' &middot; Q (J=K=1 toggles)</li>\n  </ul>\n  <p><strong>Setup/Hold Time:</strong> Setup (t_su) is minimum time data must be stable before edge. Hold (t_h) is after edge.</p>\n  \n  <h3>6. State Machine Design</h3>\n  <p><strong>Moore Machine:</strong> Outputs depend ONLY on current state.</p>\n  <p><strong>Mealy Machine:</strong> Outputs depend on current state AND current inputs.</p>\n</div>\n"
+}

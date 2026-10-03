@@ -938,6 +938,11 @@
         intro.innerHTML = `<strong>${escapeHtml(topicData.topic_name)}</strong> — official NCEES weight: ${escapeHtml(topicData.fe_exam_weight)}.`;
         theoryEl.appendChild(intro);
 
+        if (topicData.theory_html) {
+          const customTheory = document.createElement('div');
+          customTheory.innerHTML = topicData.theory_html;
+          theoryEl.appendChild(customTheory);
+        } else {
         const refIntro = document.createElement('p');
         refIntro.textContent = 'Grounded in the FE Reference Handbook, per the questions on the right:';
         theoryEl.appendChild(refIntro);
@@ -954,6 +959,7 @@
           }
         });
         theoryEl.appendChild(list);
+      }
       }
 
       function renderSpecialDay(item) {
@@ -2217,6 +2223,342 @@
         }
       }
 
+      
+      function renderLogicGridPuzzle(puzzleData, container) {
+        container.innerHTML = `
+          <div class="logic-grid-wrapper" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+            <div class="logic-clues" style="flex: 1; min-width: 250px; background: var(--panel-2); padding: 15px; border-radius: 6px; border: 1px solid var(--grid-line);">
+              <h3 style="margin-top: 0; font-size: 1.2rem; color: var(--neon-yellow);">CLUES</h3>
+              <ul style="list-style: none; padding: 0; font-size: 1rem; line-height: 1.6; color: var(--text-dim);" id="lg-clues"></ul>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">* Click a clue to cross it off</div>
+            </div>
+            
+            <div class="logic-board" style="flex: 0 0 auto; overflow-x: auto;">
+              <div id="lg-grid-container"></div>
+              <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
+                <button id="lg-check-btn" class="ctrl-btn" style="background: var(--neon-cyan); color: #000; border: none;">VERIFY LOGIC</button>
+                <div id="lg-feedback" style="font-family: var(--font-ui); font-size: 0.7rem; font-weight: bold;"></div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        const cluesList = container.querySelector('#lg-clues');
+        puzzleData.clues.forEach(c => {
+          const li = document.createElement('li');
+          li.textContent = c.text;
+          li.style.marginBottom = '8px';
+          li.style.cursor = 'pointer';
+          li.onclick = () => { 
+            li.style.textDecoration = li.style.textDecoration === 'line-through' ? 'none' : 'line-through'; 
+            li.style.opacity = li.style.opacity === '0.5' ? '1' : '0.5'; 
+          };
+          const dot = document.createElement('span');
+          dot.textContent = '• ';
+          dot.style.color = 'var(--neon-cyan)';
+          li.prepend(dot);
+          cluesList.appendChild(li);
+        });
+        
+        let gridState = {};
+        
+        function cycleCell(id, el) {
+          gridState[id] = (gridState[id] || 0) + 1;
+          if (gridState[id] > 2) gridState[id] = 0;
+          el.textContent = '';
+          el.style.color = '';
+          el.style.background = 'rgba(255,255,255,0.02)';
+          if (gridState[id] === 1) { el.textContent = '✕'; el.style.color = 'var(--neon-pink)'; }
+          if (gridState[id] === 2) { el.textContent = '◯'; el.style.color = 'var(--neon-green)'; el.style.background = 'rgba(61,255,136,0.1)'; }
+        }
+        
+        function renderGrid() {
+          const catA = puzzleData.categories[0];
+          const catB = puzzleData.categories[1];
+          const catC = puzzleData.categories[2];
+          
+          let html = '<table style="border-collapse: collapse; text-align: center; font-size: 1rem; margin: 0 auto;">';
+          const tdStyle = 'border: 1px solid var(--grid-line); padding: 5px;';
+          const headH = 'background: rgba(255,255,255,0.05); color: var(--neon-cyan); font-weight: bold; font-family: var(--font-ui); font-size: 0.85rem;';
+          const headV_td = headH + ' vertical-align: middle; text-align: center; padding: 0;';
+          const headV_div = 'writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px; margin: 0 auto;';
+          const lblH = 'color: #94a3b8; padding: 5px 10px; text-align: right; background: rgba(0,0,0,0.2); white-space: nowrap;';
+          const lblV_td = 'background: rgba(0,0,0,0.2); height: 160px; vertical-align: bottom; padding: 0; text-align: center;';
+          const lblV_div = 'color: #94a3b8; writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 5px; white-space: nowrap; margin: 0 auto; display: inline-block;';
+          
+          html += '<tr><td colspan="2" rowspan="2" style="border:none;"></td>';
+          html += `<td colspan="3" style="${tdStyle} ${headH}">${catB.name}</td>`;
+          html += `<td colspan="3" style="${tdStyle} ${headH}">${catC.name}</td></tr><tr>`;
+          
+          catB.items.forEach(i => html += `<td style="${tdStyle} ${lblV_td}"><div style="${lblV_div}">${i}</div></td>`);
+          catC.items.forEach(i => html += `<td style="${tdStyle} ${lblV_td}"><div style="${lblV_div}">${i}</div></td>`);
+          html += '</tr>';
+          
+          catA.items.forEach((iA, r) => {
+            html += '<tr>';
+            if (r===0) html += `<td rowspan=\"3\" style=\"${tdStyle} ${headV_td}\"><div style=\"${headV_div}\">${catA.name}</div></td>`;
+            html += `<td style="${tdStyle} ${lblH}">${iA}</td>`;
+            catB.items.forEach(iB => html += `<td class="lg-cell" data-id="A|${iA}|B|${iB}" style="${tdStyle} width: 45px; height: 45px; cursor: pointer; font-weight: bold; font-size: 1.6rem; background: rgba(255,255,255,0.02);"></td>`);
+            catC.items.forEach(iC => html += `<td class="lg-cell" data-id="A|${iA}|C|${iC}" style="${tdStyle} width: 45px; height: 45px; cursor: pointer; font-weight: bold; font-size: 1.6rem; background: rgba(255,255,255,0.02);"></td>`);
+            html += '</tr>';
+          });
+          
+          catB.items.forEach((iB, r) => {
+            html += '<tr>';
+            if (r===0) html += `<td rowspan=\"3\" style=\"${tdStyle} ${headV_td}\"><div style=\"${headV_div}\">${catB.name}</div></td>`;
+            html += `<td style="${tdStyle} ${lblH}">${iB}</td>`;
+            html += '<td colspan="3" style="border:none;"></td>';
+            catC.items.forEach(iC => html += `<td class="lg-cell" data-id="B|${iB}|C|${iC}" style="${tdStyle} width: 45px; height: 45px; cursor: pointer; font-weight: bold; font-size: 1.6rem; background: rgba(255,255,255,0.02);"></td>`);
+            html += '</tr>';
+          });
+          
+          html += '</table>';
+          const gridEl = container.querySelector('#lg-grid-container');
+          gridEl.innerHTML = html;
+          
+          gridEl.querySelectorAll('.lg-cell').forEach(el => {
+            el.onclick = () => cycleCell(el.dataset.id, el);
+          });
+        }
+        
+        renderGrid();
+        
+        container.querySelector('#lg-check-btn').onclick = () => {
+          let allCorrect = true;
+          let filledO = 0;
+          let hasMistake = false;
+          
+          for(let k in gridState) {
+            if(gridState[k] === 2) {
+              filledO++;
+              const p = k.split('|');
+              const valid = puzzleData.solution.some(row => row['category'+p[0]] === p[1] && row['category'+p[2]] === p[3]);
+              if(!valid) {
+                hasMistake = true;
+                allCorrect = false;
+              }
+            }
+          }
+          
+          const fb = container.querySelector('#lg-feedback');
+          if(hasMistake) {
+            fb.textContent = "LOGIC ERROR: INCORRECT MATCH DETECTED";
+            fb.style.color = "var(--neon-pink)";
+            fb.style.textShadow = "none";
+          } else if(filledO < 9) {
+            fb.textContent = `INCOMPLETE: FOUND ${filledO}/9 MATCHES`;
+            fb.style.color = "var(--neon-yellow)";
+            fb.style.textShadow = "none";
+          } else {
+            fb.textContent = "SYSTEM OVERRIDDEN - PUZZLE SOLVED";
+            fb.style.color = "var(--neon-green)";
+            fb.style.textShadow = "0 0 8px var(--neon-green)";
+          }
+        };
+      }
+
+      
+      function renderSpotTheLiarPuzzle(puzzleData, container) {
+        container.innerHTML = `
+          <div class="spot-the-liar-wrapper" style="margin-top: 15px;">
+            <div style="font-family: var(--font-ui); font-size: 1.1rem; color: var(--neon-cyan); margin-bottom: 10px;">${puzzleData.title}</div>
+            <div style="color: var(--text-dim); margin-bottom: 20px; font-style: italic; font-size: 0.95rem; line-height: 1.6;">${puzzleData.scenario}</div>
+            <div class="speaker-grid" id="stl-grid" style="display: grid; gap: 12px; margin-bottom: 20px;">
+              ${puzzleData.speakers.map((sp, idx) => `
+                <button class="speaker-btn" id="stl-btn-${idx}" style="display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,0.03); border: 1.5px solid var(--grid-line); border-radius: 6px; padding: 16px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%;">
+                  <div class="speaker-avatar" id="stl-avatar-${idx}" style="width: 40px; height: 40px; border-radius: 50%; background: var(--panel-2); border: 2px solid var(--grid-line); display: flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-weight: bold; color: var(--text); flex-shrink: 0;">${sp.id.charAt(0)}</div>
+                  <div class="speaker-content" style="flex: 1;">
+                    <div class="speaker-name" style="font-family: var(--font-ui); font-size: 0.85rem; color: var(--neon-yellow); margin-bottom: 4px;">${sp.id}</div>
+                    <div class="speaker-statement" style="font-size: 0.9rem; color: var(--text); line-height: 1.5;">"${sp.statement}"</div>
+                  </div>
+                </button>
+              `).join('')}
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+              <button id="stl-check-btn" class="ctrl-btn" style="background: var(--neon-orange); color: #000; border: none; padding: 10px 20px;" disabled>J'ACCUSE!</button>
+            </div>
+            <div id="stl-feedback-panel" style="margin-top: 16px; padding: 16px; border-radius: 6px; display: none;">
+              <div id="stl-feedback-title" style="font-family: var(--font-ui); font-weight: bold; margin-bottom: 8px;"></div>
+              <div id="stl-feedback-desc" style="color: var(--text-dim);"></div>
+            </div>
+          </div>
+        `;
+        
+        let selectedIndex = -1;
+        
+        const grid = container.querySelector('#stl-grid');
+        const checkBtn = container.querySelector('#stl-check-btn');
+        const feedbackPanel = container.querySelector('#stl-feedback-panel');
+        const feedbackTitle = container.querySelector('#stl-feedback-title');
+        const feedbackDesc = container.querySelector('#stl-feedback-desc');
+        
+        puzzleData.speakers.forEach((sp, idx) => {
+          const btn = container.querySelector(`#stl-btn-${idx}`);
+          const avatar = container.querySelector(`#stl-avatar-${idx}`);
+          
+          btn.addEventListener('click', () => {
+            selectedIndex = idx;
+            // reset all
+            puzzleData.speakers.forEach((_, i) => {
+              const b = container.querySelector(`#stl-btn-${i}`);
+              const a = container.querySelector(`#stl-avatar-${i}`);
+              b.style.borderColor = 'var(--grid-line)';
+              b.style.background = 'rgba(255,255,255,0.03)';
+              a.style.borderColor = 'var(--grid-line)';
+              a.style.color = 'var(--text)';
+            });
+            // highlight selected
+            btn.style.borderColor = 'var(--neon-orange)';
+            btn.style.background = 'rgba(255,106,26,0.1)';
+            avatar.style.borderColor = 'var(--neon-orange)';
+            avatar.style.color = 'var(--neon-orange)';
+            
+            checkBtn.disabled = false;
+            feedbackPanel.style.display = 'none';
+          });
+        });
+        
+        checkBtn.addEventListener('click', () => {
+          if (selectedIndex === -1) return;
+          const sp = puzzleData.speakers[selectedIndex];
+          const isCorrect = sp.id === puzzleData.solution;
+          
+          const btn = container.querySelector(`#stl-btn-${selectedIndex}`);
+          const avatar = container.querySelector(`#stl-avatar-${selectedIndex}`);
+          
+          feedbackPanel.style.display = 'block';
+          
+          if (isCorrect) {
+            btn.style.borderColor = 'var(--neon-green)';
+            btn.style.background = 'rgba(61,255,136,0.1)';
+            avatar.style.borderColor = 'var(--neon-green)';
+            avatar.style.color = 'var(--neon-green)';
+            
+            feedbackPanel.style.background = 'rgba(61,255,136,0.1)';
+            feedbackPanel.style.border = '1px solid var(--neon-green)';
+            feedbackTitle.innerHTML = '&#10003; Spot On!';
+            feedbackTitle.style.color = 'var(--neon-green)';
+            feedbackDesc.textContent = puzzleData.explanation;
+          } else {
+            btn.style.borderColor = 'var(--neon-pink)';
+            btn.style.background = 'rgba(255,61,129,0.1)';
+            avatar.style.borderColor = 'var(--neon-pink)';
+            avatar.style.color = 'var(--neon-pink)';
+            
+            feedbackPanel.style.background = 'rgba(255,61,129,0.1)';
+            feedbackPanel.style.border = '1px solid var(--neon-pink)';
+            feedbackTitle.innerHTML = '&#10007; False Accusation';
+            feedbackTitle.style.color = 'var(--neon-pink)';
+            feedbackDesc.textContent = `${sp.id} is actually telling the truth. The liar is still out there.`;
+          }
+        });
+      }
+
+      
+      function renderCoinBreakdownPuzzle(puzzleData, container) {
+        container.innerHTML = `
+          <div class="puzzle-container coin-breakdown-puzzle" style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div style="font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Target Value</div>
+              <div id="cb-target" style="font-size: 3rem; font-weight: bold; color: var(--neon-pink); font-family: var(--font-mono); text-shadow: 0 0 10px rgba(255,61,129,0.5);">${puzzleData.target}</div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;" id="cb-coins">
+              ${puzzleData.denominations.map((denom, idx) => `
+                <button class="cb-coin-btn" data-val="${denom.value}" style="
+                  width: 80px; height: 80px; border-radius: 50%;
+                  background-image: url('./public/images/arcade_coin.jpg');
+                  background-size: 200%; background-position: center;
+                  display: flex; flex-direction: column; align-items: center; justify-content: center;
+                  box-shadow: 0 0 10px rgba(255, 106, 26, 0.4), inset 0 0 15px rgba(0,0,0,0.8);
+                  border: 2px solid #ffcc00; cursor: pointer; transition: transform 0.1s;
+                ">
+                  <div style="font-size: 1.8rem; font-weight: bold; color: #fff; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 0 0 10px #ffcc00; font-family: var(--font-mono); z-index: 2; pointer-events: none;">${denom.value}</div>
+                </button>
+              `).join('')}
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 15px;">
+              <div style="color: var(--neon-cyan); font-family: var(--font-mono); font-size: 1.2rem;">Current Sum: <span id="cb-current-sum" style="font-weight: bold;">0</span></div>
+              <div style="color: var(--neon-yellow); font-family: var(--font-mono); font-size: 1rem; margin-top: 5px;">Coins Used: <span id="cb-coins-used" style="font-weight: bold;">0</span></div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+              <button id="cb-reset-btn" class="ctrl-btn" style="background: transparent; border: 1px solid var(--neon-orange); color: var(--neon-orange); padding: 8px 16px;">RESET</button>
+              <button id="cb-submit-btn" class="ctrl-btn" style="background: var(--neon-green); color: #000; border: none; padding: 8px 16px;" disabled>SUBMIT</button>
+            </div>
+            
+            <div id="cb-feedback" style="margin-top: 20px; padding: 15px; border-radius: 6px; display: none; text-align: center; font-family: var(--font-mono);"></div>
+          </div>
+        `;
+        
+        let currentSum = 0;
+        let coinsUsed = 0;
+        const target = puzzleData.target;
+        
+        const sumEl = container.querySelector('#cb-current-sum');
+        const countEl = container.querySelector('#cb-coins-used');
+        const feedbackEl = container.querySelector('#cb-feedback');
+        const submitBtn = container.querySelector('#cb-submit-btn');
+        
+        // DP to find optimal min coins
+        const minCoins = new Array(target + 1).fill(Infinity);
+        minCoins[0] = 0;
+        for (let i = 1; i <= target; i++) {
+          for (const d of puzzleData.denominations) {
+            if (i - d.value >= 0) {
+              minCoins[i] = Math.min(minCoins[i], minCoins[i - d.value] + 1);
+            }
+          }
+        }
+        const optimalCoins = minCoins[target];
+        
+        container.querySelectorAll('.cb-coin-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const val = parseInt(e.currentTarget.getAttribute('data-val'));
+            currentSum += val;
+            coinsUsed += 1;
+            sumEl.textContent = currentSum;
+            countEl.textContent = coinsUsed;
+            
+            if (currentSum === target) {
+              submitBtn.disabled = false;
+            } else {
+              submitBtn.disabled = true;
+            }
+            feedbackEl.style.display = 'none';
+            
+            // Animation
+            e.currentTarget.style.transform = 'scale(0.9)';
+            setTimeout(() => e.currentTarget.style.transform = 'scale(1)', 100);
+          });
+        });
+        
+        container.querySelector('#cb-reset-btn').addEventListener('click', () => {
+          currentSum = 0;
+          coinsUsed = 0;
+          sumEl.textContent = currentSum;
+          countEl.textContent = coinsUsed;
+          submitBtn.disabled = true;
+          feedbackEl.style.display = 'none';
+        });
+        
+        submitBtn.addEventListener('click', () => {
+          feedbackEl.style.display = 'block';
+          if (coinsUsed === optimalCoins) {
+            feedbackEl.style.background = 'rgba(61,255,136,0.1)';
+            feedbackEl.style.border = '1px solid var(--neon-green)';
+            feedbackEl.style.color = 'var(--neon-green)';
+            feedbackEl.innerHTML = `SUCCESS! You hit ${target} using the absolute minimum of ${optimalCoins} coins.`;
+          } else {
+            feedbackEl.style.background = 'rgba(255,106,26,0.1)';
+            feedbackEl.style.border = '1px solid var(--neon-orange)';
+            feedbackEl.style.color = 'var(--neon-orange)';
+            feedbackEl.innerHTML = `You hit ${target}, but you used ${coinsUsed} coins. The optimal solution uses ${optimalCoins} coins! Try again.`;
+          }
+        });
+      }
+
       function renderPuzzle(slug, puzzleData, containerEl) {
         if (!puzzleData) {
           containerEl.innerHTML = '<p class="empty-note">No puzzle instance configured for today.</p>';
@@ -2230,6 +2572,12 @@
           renderWordlePuzzle(puzzleData, containerEl);
         } else if (slug === 'system-of-equations') {
           renderSystemOfEquationsPuzzle(puzzleData, containerEl);
+        } else if (slug === 'spot-the-liar') {
+          renderSpotTheLiarPuzzle(puzzleData, containerEl);
+        } else if (slug === 'logic-grid-puzzle') {
+          renderLogicGridPuzzle(puzzleData, containerEl);
+        } else if (slug === 'coin-breakdown') {
+          renderCoinBreakdownPuzzle(puzzleData, containerEl);
         } else {
           containerEl.innerHTML = `<p class="empty-note">Renderer for puzzle type "${escapeHtml(slug)}" is coming soon.</p>`;
         }
